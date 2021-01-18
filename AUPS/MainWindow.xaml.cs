@@ -64,6 +64,14 @@ namespace AUPS
         private void FillTableWithData()
         {
             GetAllFromRadnoMesto();
+            GetAllFromOperacija();
+            GetAllFromPredmetRada();
+            GetAllFromRadnaLista();
+            GetAllFromRadniNalog();
+            GetAllFromRadnikProizvodnja();
+            GetAllFromTehnoloskiPostupak();
+            GetAllFromTrebovanje();
+
         }
 
         private void GetAllFromRadnoMesto()
@@ -82,11 +90,100 @@ namespace AUPS
 
         private void GetAllFromOperacija()
         {
-            //komentar
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
 
-            //novi novi novi
+                NpgsqlCommand cmd = new NpgsqlCommand(GET_ALL_RECORDS_FROM_OPERACIJA, sqlConnection);
 
-            //novi komentar
+                dataTable.Load(cmd.ExecuteReader());
+            }
+
+            myDataGrid.ItemsSource = dataTable.DefaultView;
+        }
+
+        private void GetAllFromPredmetRada()
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(GET_ALL_RECORDS_FROM_PREDMET_RADA, sqlConnection);
+
+                dataTable.Load(cmd.ExecuteReader());
+            }
+
+            myDataGrid.ItemsSource = dataTable.DefaultView;
+        }
+
+        private void GetAllFromRadnaLista()
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(GET_ALL_RECORDS_FROM_RADNA_LISTA, sqlConnection);
+
+                dataTable.Load(cmd.ExecuteReader());
+            }
+
+            myDataGrid.ItemsSource = dataTable.DefaultView;
+        }
+
+        private void GetAllFromRadniNalog()
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(GET_ALL_RECORDS_FROM_RADNI_NALOG, sqlConnection);
+
+                dataTable.Load(cmd.ExecuteReader());
+            }
+
+            myDataGrid.ItemsSource = dataTable.DefaultView;
+        }
+
+        private void GetAllFromRadnikProizvodnja()
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(GET_ALL_RECORDS_FROM_RADNIK_PROIZVODNJA, sqlConnection);
+
+                dataTable.Load(cmd.ExecuteReader());
+            }
+
+            myDataGrid.ItemsSource = dataTable.DefaultView;
+        }
+
+        private void GetAllFromTehnoloskiPostupak()
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(GET_ALL_RECORDS_FROM_TEHNOLOSKI_POSTUPAK, sqlConnection);
+
+                dataTable.Load(cmd.ExecuteReader());
+            }
+
+            myDataGrid.ItemsSource = dataTable.DefaultView;
+        }
+
+        private void GetAllFromTrebovanje()
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(GET_ALL_RECORDS_FROM_TREBOVANJE, sqlConnection);
+
+                dataTable.Load(cmd.ExecuteReader());
+            }
+
+            myDataGrid.ItemsSource = dataTable.DefaultView;
         }
     }
 }
