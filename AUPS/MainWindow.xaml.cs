@@ -82,7 +82,7 @@ namespace AUPS
 
         private void GetAllFromOperacija()
         {
-
+            //komentar
         }
     }
 }
