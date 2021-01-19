@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:AUPS"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <DataGrid x:Name="myDataGrid" HorizontalAlignment="Left" Height="399" Margin="10,10,0,0" VerticalAlignment="Top" Width="772"/>
 
+    <Grid>
+        <DataGrid ItemsSource="{Binding DataTable}" x:Name="myDataGrid" HorizontalAlignment="Left" Height="399" Margin="10,10,0,0" VerticalAlignment="Top" Width="772"/>
+        
     </Grid>
 </Window>
