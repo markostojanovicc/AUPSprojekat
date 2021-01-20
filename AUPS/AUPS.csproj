@@ -100,6 +100,9 @@
     </ApplicationDefinition>
     <Compile Include="Bindings.cs" />
     <Compile Include="ConnectionCreator.cs" />
+    <Compile Include="LogInWindow.xaml.cs">
+      <DependentUpon>LogInWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SqlProviders\Interfaces\IOperacijaSqlProvider.cs" />
     <Compile Include="SqlProviders\Interfaces\IPredmetRadaSqlProvider.cs" />
     <Compile Include="SqlProviders\Interfaces\IRadnaListaSqlProvider.cs" />
@@ -117,7 +120,12 @@
     <Compile Include="SqlProviders\TehnoloskiPostupakSqlProvider.cs" />
     <Compile Include="SqlProviders\TrebovanjeSqlProvider.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Page Include="LogInWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

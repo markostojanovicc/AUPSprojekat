@@ -1,0 +1,68 @@
+﻿<Window x:Class="AUPS.LogInWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AUPS"
+        mc:Ignorable="d"
+        Title="Log In Window" Height="410" Width="525">
+
+    <Window.Resources>
+
+        <SolidColorBrush x:Key="brushWatermarkBackground" Color="White" />
+        <SolidColorBrush x:Key="brushWatermarkForeground" Color="LightSteelBlue" />
+        <SolidColorBrush x:Key="brushWatermarkBorder" Color="Indigo" />
+
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <Style x:Key="EntryFieldStyle" TargetType="Grid" >
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,0" />
+        </Style>
+
+        <Style x:Key="loginbtnstyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" BorderThickness="1" BorderBrush="Green" Background="#64eb34">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White">
+                                
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="354" Margin="22,16,17,9" Width="478">
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Please Log In" VerticalAlignment="Top" Height="54" Width="225" FontSize="34" FontWeight="Bold" RenderTransformOrigin="0.744,0.343" Grid.Column="1"/>
+        <Button Grid.Row="1" Content="New user? Create an account" HorizontalAlignment="Center" VerticalAlignment="Top" Width="183" Height="27" Background="Transparent" BorderBrush="White" Cursor="Hand" Grid.Column="1"/>
+
+        <Grid Grid.Row="2" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
+            <TextBlock Margin="5,2" Text="Enter email..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
+                       Visibility="{Binding ElementName=txtUserEntry, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <TextBox Height="30" Name="txtUserEntry" Background="Transparent" FontSize="25"/>
+        </Grid>
+
+        <Grid Grid.Row="3" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
+            <TextBlock Margin="5,2" Text="Enter password..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
+                       Visibility="{Binding ElementName=txtUserEntry1, Path=Password.Length, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <PasswordBox Height="30" Name="txtUserEntry1" Background="Transparent" FontSize="25"/>
+        </Grid>
+
+
+        <Button Style="{StaticResource loginbtnstyle}" Grid.Row="4" Content="Log In" FontSize="23" HorizontalAlignment="Center" VerticalAlignment="Center" Width="307" Height="38" Cursor="Hand" Grid.Column="1"/>
+
+    </Grid>
+</Window>

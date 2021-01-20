@@ -28,7 +28,7 @@ namespace AUPS
         private void ShowAppWindow()
         {
             Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-            Current.MainWindow = this.container.Get<MainWindow>();
+            Current.MainWindow = this.container.Get<LogInWindow>();
             Current.MainWindow.Show();
         }
 
