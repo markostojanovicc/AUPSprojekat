@@ -17,15 +17,15 @@ using System.Windows.Shapes;
 namespace AUPS
 {
     /// <summary>
-    /// Interaction logic for LogInWindow.xaml
+    /// Interaction logic for RegistrationWindow.xaml
     /// </summary>
-    public partial class LogInWindow : Window
+    public partial class RegistrationWindow : Window
     {
-        public LogInWindow(IUserSqlProvider userSqlProvider)
+        public RegistrationWindow(IUserSqlProvider userSqlProvider)
         {
             InitializeComponent();
 
-            DataContext = new LogInViewModel(userSqlProvider);
+            DataContext = new RegistrationViewModel(userSqlProvider);
         }
 
         
