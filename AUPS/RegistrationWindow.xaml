@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AUPS"
+        xmlns:helpers="clr-namespace:AUPS.Helpers"
         mc:Ignorable="d"
         Title="Registration" Height="550" Width="800">
     <Grid>
@@ -45,11 +46,12 @@
 
         <Grid Grid.Row="5" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
             <TextBlock Margin="100 0 100 0" Text="Enter Password..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
-                       Visibility="{Binding ElementName=txtName, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <PasswordBox Height="30" Name="txtPassword" Margin="100 0 100 0" Background="Transparent" FontSize="25"/>
+                       Visibility="{Binding ShowPasswordTextBlock, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <PasswordBox Height="30" x:Name="txtPasswordBox" helpers:PasswordBoxHelper.BindPassword="true" Background="Transparent"  
+                         FontSize="25" Margin="100 0 100 0" helpers:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
-        <Button IsEnabled="{Binding CanSubmit}" Grid.Row ="6" Name="submitBtn" Style="{StaticResource loginbtnstyle}" Height="40" Width="240" Content="Submit"/>
+        <Button IsEnabled="{Binding CanSubmit}" Grid.Row ="6" Name="submitBtn" Style="{StaticResource loginbtnstyle}" Height="40" Width="240" Content="Submit" Command="{Binding SubmitButtonCommand}"/>
 
     </Grid>
 </Window>

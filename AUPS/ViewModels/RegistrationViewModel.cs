@@ -1,4 +1,5 @@
-﻿using AUPS.Models;
+﻿using AUPS.Commands;
+using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace AUPS.ViewModels
 {
@@ -18,6 +20,7 @@ namespace AUPS.ViewModels
         private string _name;
         private string _lastName;
         private string _username;
+        private ICommand submitButtonCommand;
         IUserSqlProvider _userSqlProvider;
         #endregion
 
@@ -38,12 +41,29 @@ namespace AUPS.ViewModels
             }
         }
 
-        public RegistrationViewModel(IUserSqlProvider userSqlProvider)
+        public bool ShowPasswordTextBlock
         {
-            _userSqlProvider = userSqlProvider;
+            get
+            {
+                return string.IsNullOrEmpty(Password);
+            }
         }
 
-        private void submitBtn_Click(object sender, RoutedEventArgs e)
+        public ICommand SubmitButtonCommand
+        {
+            get
+            {
+                if (submitButtonCommand == null)
+                {
+                    this.submitButtonCommand = new RelayCommand(
+                        param => SubmitButtonCommandExecute(param));
+                }
+
+                return submitButtonCommand;
+            }
+        }
+
+        private void SubmitButtonCommandExecute(object param)
         {
             User newUser = new User
             {
@@ -55,7 +75,20 @@ namespace AUPS.ViewModels
             };
 
             bool isUserCreated = _userSqlProvider.CreateUser(newUser);
+
+            if (isUserCreated)
+            {
+                
+            }
+            else
+            {
+                
+            }
         }
 
+        public RegistrationViewModel(IUserSqlProvider userSqlProvider)
+        {
+            _userSqlProvider = userSqlProvider;
+        }
     }
 }
