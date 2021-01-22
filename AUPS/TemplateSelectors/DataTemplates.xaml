@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:AUPS.TemplateSelectors"
+                    xmlns:controls="clr-namespace:AUPS.Controls">
+
+    <DataTemplate x:Key="LogInContentTemplate">
+        <controls:LogInControl/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RadnoMestoTemplate">
+        <controls:RadnoMestoControl/>
+    </DataTemplate>
+
+</ResourceDictionary>

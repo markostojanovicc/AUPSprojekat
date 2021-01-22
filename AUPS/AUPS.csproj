@@ -98,15 +98,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationMainWindow.xaml.cs">
+      <DependentUpon>ApplicationMainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Bindings.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ConnectionCreator.cs" />
+    <Compile Include="Controls\LogInControl.xaml.cs">
+      <DependentUpon>LogInControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RadnoMestoControl.xaml.cs">
+      <DependentUpon>RadnoMestoControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\IntToVisibilityConverter.cs" />
     <Compile Include="Helpers\DialogCloser.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
-    <Compile Include="LogInWindow.xaml.cs">
-      <DependentUpon>LogInWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models\User.cs" />
     <Compile Include="RegistrationWindow.xaml.cs">
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
@@ -129,27 +135,33 @@
     <Compile Include="SqlProviders\TehnoloskiPostupakSqlProvider.cs" />
     <Compile Include="SqlProviders\TrebovanjeSqlProvider.cs" />
     <Compile Include="SqlProviders\UserSqlProvider.cs" />
+    <Compile Include="TemplateSelectors\ApplicationMainWindowTemplateSelector.cs" />
+    <Compile Include="ViewModels\ApplictionMainWindowViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\RadnoMestoViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
-    <Page Include="LogInWindow.xaml">
+    <Page Include="ApplicationMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="Controls\LogInControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RadnoMestoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RegistrationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateSelectors\DataTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,5 +1,6 @@
 ﻿using AUPS.SqlProviders;
 using AUPS.SqlProviders.Interfaces;
+using AUPS.ViewModels;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,9 @@ namespace AUPS
         private void ShowAppWindow()
         {
             Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-            Current.MainWindow = this.container.Get<LogInWindow>();
+            Current.MainWindow = this.container.Get<ApplicationMainWindow>();
+            Current.MainWindow.ResizeMode = ResizeMode.NoResize;
+            (Current.MainWindow.DataContext as ApplictionMainWindowViewModel).Init();
             Current.MainWindow.Show();
         }
 

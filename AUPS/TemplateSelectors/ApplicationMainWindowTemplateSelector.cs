@@ -1,0 +1,31 @@
+﻿using AUPS.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+
+namespace AUPS.TemplateSelectors
+{
+    public class ApplicationMainWindowTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate RadnoMestoContentDataTemplate { get; set; }
+
+        public DataTemplate LogInContentDataTemplate { get; set; }
+
+        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        {
+            if(item is LogInViewModel)
+            {
+                return LogInContentDataTemplate;
+            }
+            else if(item is RadnoMestoViewModel)
+            {
+                return RadnoMestoContentDataTemplate;
+            }
+            return null;
+        }
+    }
+}

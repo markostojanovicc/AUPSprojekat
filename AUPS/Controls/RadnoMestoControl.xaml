@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="AUPS.Controls.RadnoMestoControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AUPS.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="1400" d:DesignWidth="2000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" SelectedIndex="{Binding SelectedTabIndex}">
+            <TabItem Header="Radno mesto"/>
+            <TabItem Header="Operacija"/>
+            <TabItem Header="Predmet rada"/>
+            <TabItem Header="Radna lista"/>
+            <TabItem Header="Radnik-Proizvodnja"/>
+            <TabItem Header="Radni nalog"/>
+            <TabItem Header="Radno mesto"/>
+            <TabItem Header="Tehnoloski postupak"/>
+            <TabItem Header="Trebovanje"/>
+        </TabControl>
+        <DataGrid AutoGenerateColumns="True" Grid.Row="1" Grid.Column="1"  ItemsSource="{Binding DataTable}" x:Name="myDataGrid" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="400" Width="720"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
+            <Button Content="Add" Margin="0 120 0 0"/>
+            <Button Content="Delete" Margin=" 0 20 0 0"/>
+            <Button Content="Update" Margin="0 20 0 0"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

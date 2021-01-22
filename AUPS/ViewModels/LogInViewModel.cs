@@ -23,6 +23,9 @@ namespace AUPS.ViewModels
         private string _email;
         private string _password;
         private bool _canLogIn;
+
+        public delegate void LogInSuccededEventHandler(object source, EventArgs args);
+        public event LogInSuccededEventHandler LogInSucceded;
         public string Email
         {
             get
@@ -128,10 +131,9 @@ namespace AUPS.ViewModels
 
         private void RegistrationButtonCommandExecute(object param)
         {
-            
-            
-            RegistrationWindow registrationWindow = new RegistrationWindow(_userSqlProvider);
-            registrationWindow.Show();
+            OnLogInSucceded();
+            //RegistrationWindow registrationWindow = new RegistrationWindow(_userSqlProvider);
+            //registrationWindow.Show();
         }
 
         private bool CanExecuteLoginButtonCommand()
@@ -153,6 +155,7 @@ namespace AUPS.ViewModels
             if(user != null)
             {
                 DialogResult = true;
+                OnLogInSucceded();
             }
             else
             {
@@ -160,6 +163,12 @@ namespace AUPS.ViewModels
                 Email = string.Empty;
                 Password = string.Empty;
             }
+        }
+
+        protected virtual void OnLogInSucceded()
+        {
+            if (LogInSucceded != null)
+                LogInSucceded(this, EventArgs.Empty);
         }
     }
 }

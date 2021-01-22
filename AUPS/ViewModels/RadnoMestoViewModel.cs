@@ -9,15 +9,23 @@ using System.Threading.Tasks;
 
 namespace AUPS
 {
-    public class MainWindowViewModel : BaseViewModel
+    public class RadnoMestoViewModel : BaseViewModel
     {
         private IRadnoMestoSqlProvider _radnoMestoSqlProvider;
+        private int _selectedTabIndex;
 
         private DataTable _dataTable = new DataTable();
 
         public DataTable DataTable { get { return _dataTable; } }
 
-        public MainWindowViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider)
+        public int SelectedTabIndex
+        {
+            get { return _selectedTabIndex; }
+            set { _selectedTabIndex = value; }
+        }
+
+
+        public RadnoMestoViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider)
         {
             _radnoMestoSqlProvider = radnoMestoSqlProvider;
             FillTableWithData();

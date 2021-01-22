@@ -12,22 +12,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AUPS
+namespace AUPS.Controls
 {
     /// <summary>
-    /// Interaction logic for LogInWindow.xaml
+    /// Interaction logic for LogInControl.xaml
     /// </summary>
-    public partial class LogInWindow : Window
+    public partial class LogInControl : UserControl
     {
-        public LogInWindow(IUserSqlProvider userSqlProvider)
+        public LogInControl()
         {
             InitializeComponent();
-
-            DataContext = new LogInViewModel(userSqlProvider);
         }
-
-        
     }
 }
