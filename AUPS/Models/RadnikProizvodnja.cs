@@ -18,6 +18,7 @@ namespace AUPS.Models
         public string ImeRadnika { get; set; }
         public string PrezimeRadnika { get; set; }
         public string Pol { get; set; }
+        public int IDRadnoMesto { get; set; }
 
     }
 }

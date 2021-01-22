@@ -17,6 +17,7 @@ namespace AUPS.Models
         public string TipPredmetRada { get; set; }
         public string NazivPR { get; set; }
         public string JedMerePR { get; set; }
+        public int Cena { get; set; }
 
 
     }
