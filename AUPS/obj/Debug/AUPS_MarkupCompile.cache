@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Admin\source\repos\AUPS\AUPS\obj\Debug\
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\
 AUPS
 none
 false
 DEBUG;TRACE
-C:\Users\Admin\source\repos\AUPS\AUPS\App.xaml
-11151548125
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\App.xaml
+14806400501
 
-9138204154
-1301881126948
-MainWindow.xaml;
+64679338303
+130-1446869699
+ApplicationMainWindow.xaml;Controls\LogInControl.xaml;Controls\MainContentControl.xaml;Controls\MainContentUserControls\OperacijaControl.xaml;Controls\MainContentUserControls\PredmetRadaControl.xaml;Controls\MainContentUserControls\RadnaListaControl.xaml;Controls\MainContentUserControls\RadnikProizvodnjaControl.xaml;Controls\MainContentUserControls\RadniNalogControl.xaml;Controls\MainContentUserControls\RadnoMestoControl.xaml;Controls\MainContentUserControls\TehnoloskiPostupakControl.xaml;Controls\MainContentUserControls\TrebovanjeControl.xaml;RegistrationWindow.xaml;Resources\DataTemplates.xaml;Resources\Styles.xaml;
 
 False
 

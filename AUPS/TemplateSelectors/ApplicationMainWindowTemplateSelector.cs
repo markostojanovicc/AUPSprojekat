@@ -11,7 +11,7 @@ namespace AUPS.TemplateSelectors
 {
     public class ApplicationMainWindowTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate RadnoMestoContentDataTemplate { get; set; }
+        public DataTemplate MainContentDataTemplate { get; set; }
 
         public DataTemplate LogInContentDataTemplate { get; set; }
 
@@ -21,9 +21,9 @@ namespace AUPS.TemplateSelectors
             {
                 return LogInContentDataTemplate;
             }
-            else if(item is RadnoMestoViewModel)
+            else if(item is MainContentViewModel)
             {
-                return RadnoMestoContentDataTemplate;
+                return MainContentDataTemplate;
             }
             return null;
         }

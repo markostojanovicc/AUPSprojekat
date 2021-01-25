@@ -21,12 +21,16 @@ namespace AUPS
     /// </summary>
     public partial class ApplicationMainWindow : Window
     {
-        public ApplicationMainWindow(IUserSqlProvider userSqlProvider,
-            IRadnoMestoSqlProvider radnoMestoSqlProvider)
+        public ApplicationMainWindow(IUserSqlProvider userSqlProvider
+                                    , IRadnoMestoSqlProvider radnoMestoSqlProvider, IOperacijaSqlProvider operacijaSqlProvider
+                                    , IPredmetRadaSqlProvider predmetRadaSqlProvider, IRadnaListaSqlProvider radnaListaSqlProvider
+                                    , IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, IRadniNalogSqlProvider radniNalogSqlProvider
+                                    , ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ITrebovanjeSqlProvider trebovanjeSqlProvider)
         {
             InitializeComponent();
 
-            DataContext = new ApplictionMainWindowViewModel(userSqlProvider, radnoMestoSqlProvider);
+            DataContext = new ApplictionMainWindowViewModel(radnoMestoSqlProvider, operacijaSqlProvider, predmetRadaSqlProvider, radnaListaSqlProvider,
+                radnikProizvodnjaSqlProvider, radniNalogSqlProvider, tehnoloskiPostupakSqlProvider, trebovanjeSqlProvider, userSqlProvider);
         }
     }
 }

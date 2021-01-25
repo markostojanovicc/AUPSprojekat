@@ -107,12 +107,44 @@
     <Compile Include="Controls\LogInControl.xaml.cs">
       <DependentUpon>LogInControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RadnoMestoControl.xaml.cs">
+    <Compile Include="Controls\MainContentControl.xaml.cs">
+      <DependentUpon>MainContentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainContentUserControls\OperacijaControl.xaml.cs">
+      <DependentUpon>OperacijaControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainContentUserControls\PredmetRadaControl.xaml.cs">
+      <DependentUpon>PredmetRadaControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainContentUserControls\RadnaListaControl.xaml.cs">
+      <DependentUpon>RadnaListaControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainContentUserControls\RadnikProizvodnjaControl.xaml.cs">
+      <DependentUpon>RadnikProizvodnjaControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainContentUserControls\RadniNalogControl.xaml.cs">
+      <DependentUpon>RadniNalogControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainContentUserControls\RadnoMestoControl.xaml.cs">
       <DependentUpon>RadnoMestoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainContentUserControls\TehnoloskiPostupakControl.xaml.cs">
+      <DependentUpon>TehnoloskiPostupakControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainContentUserControls\TrebovanjeControl.xaml.cs">
+      <DependentUpon>TrebovanjeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\IntToVisibilityConverter.cs" />
     <Compile Include="Helpers\DialogCloser.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
+    <Compile Include="Models\Operacija.cs" />
+    <Compile Include="Models\PredmetRada.cs" />
+    <Compile Include="Models\RadnaLista.cs" />
+    <Compile Include="Models\RadnikProizvodnja.cs" />
+    <Compile Include="Models\RadniNalog.cs" />
+    <Compile Include="Models\RadnoMesto.cs" />
+    <Compile Include="Models\TehnoloskiPostupak.cs" />
+    <Compile Include="Models\Trebovanje.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="RegistrationWindow.xaml.cs">
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
@@ -136,10 +168,19 @@
     <Compile Include="SqlProviders\TrebovanjeSqlProvider.cs" />
     <Compile Include="SqlProviders\UserSqlProvider.cs" />
     <Compile Include="TemplateSelectors\ApplicationMainWindowTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\DataGridTemplateSelector.cs" />
     <Compile Include="ViewModels\ApplictionMainWindowViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
-    <Compile Include="ViewModels\RadnoMestoViewModel.cs" />
+    <Compile Include="ViewModels\MainContentViewModel.cs" />
+    <Compile Include="ViewModels\MainContentViewModels\OperacijaViewModel.cs" />
+    <Compile Include="ViewModels\MainContentViewModels\PredmetRadaViewModel.cs" />
+    <Compile Include="ViewModels\MainContentViewModels\RadnaListaViewModel.cs" />
+    <Compile Include="ViewModels\MainContentViewModels\RadnikProizvodnjaViewModel.cs" />
+    <Compile Include="ViewModels\MainContentViewModels\RadniNalogViewModel.cs" />
+    <Compile Include="ViewModels\MainContentViewModels\RadnoMestoViewModel.cs" />
+    <Compile Include="ViewModels\MainContentViewModels\TehnoloskiPostupakViewModel.cs" />
+    <Compile Include="ViewModels\MainContentViewModels\TrebovanjeViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Page Include="ApplicationMainWindow.xaml">
       <SubType>Designer</SubType>
@@ -153,7 +194,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\RadnoMestoControl.xaml">
+    <Page Include="Controls\MainContentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainContentUserControls\OperacijaControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainContentUserControls\PredmetRadaControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainContentUserControls\RadnaListaControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainContentUserControls\RadnikProizvodnjaControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainContentUserControls\RadniNalogControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainContentUserControls\RadnoMestoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainContentUserControls\TehnoloskiPostupakControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainContentUserControls\TrebovanjeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,7 +234,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TemplateSelectors\DataTemplates.xaml">
+    <Page Include="Resources\DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

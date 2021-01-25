@@ -1,5 +1,4 @@
-﻿using AUPS.SqlProviders.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AUPS.Controls
+namespace AUPS.Controls.MainContentUserControls
 {
     /// <summary>
-    /// Interaction logic for RadnoMestoControl.xaml
+    /// Interaction logic for OperacijaControl.xaml
     /// </summary>
-    public partial class RadnoMestoControl : UserControl
+    public partial class OperacijaControl : UserControl
     {
-        public RadnoMestoControl() 
+        public OperacijaControl()
         {
             InitializeComponent();
         }

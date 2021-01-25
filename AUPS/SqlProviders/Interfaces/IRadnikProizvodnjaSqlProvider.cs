@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AUPS.SqlProviders.Interfaces
 {
-    interface IRadnikProizvodnjaSqlProvider
+    public interface IRadnikProizvodnjaSqlProvider
     {
         void GetAllFromRadnikProizvodnja(ref DataTable dataTable);
     }

@@ -1,9 +1,11 @@
-﻿using System.Data;
+﻿using AUPS.Models;
+using System.Collections.ObjectModel;
+using System.Data;
 
 namespace AUPS.SqlProviders.Interfaces
 {
     public interface IOperacijaSqlProvider
     {
-        void GetAllFromOperacija(ref DataTable dataTable);
+        ObservableCollection<Operacija> GetAllFromOperacija();
     }
 }

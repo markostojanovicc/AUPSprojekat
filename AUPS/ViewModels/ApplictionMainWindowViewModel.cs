@@ -16,6 +16,13 @@ namespace AUPS.ViewModels
         private object _contentMainScreen;
         private IUserSqlProvider _userSqlProvider;
         private IRadnoMestoSqlProvider _radnoMestoSqlProvider;
+        private IOperacijaSqlProvider _operacijaSqlProvider;
+        private IPredmetRadaSqlProvider _predmetRadaSqlProvider;
+        private IRadnaListaSqlProvider _radnaListaSqlProvider;
+        private IRadnikProizvodnjaSqlProvider _radnikProizvodnjaSqlProvider;
+        private IRadniNalogSqlProvider _radniNalogSqlProvider;
+        private ITehnoloskiPostupakSqlProvider _tehnoloskiPostupakSqlProvider;
+        private ITrebovanjeSqlProvider _trebovanjeSqlProvider;
 
         public Object ContentMainScreen
         {
@@ -30,10 +37,21 @@ namespace AUPS.ViewModels
             }
         }
 
-        public ApplictionMainWindowViewModel(IUserSqlProvider userSqlProvider, IRadnoMestoSqlProvider radnoMestoSqlProvider)
+        public ApplictionMainWindowViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider, IOperacijaSqlProvider operacijaSqlProvider
+                                    , IPredmetRadaSqlProvider predmetRadaSqlProvider, IRadnaListaSqlProvider radnaListaSqlProvider
+                                    , IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, IRadniNalogSqlProvider radniNalogSqlProvider
+                                    , ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ITrebovanjeSqlProvider trebovanjeSqlProvider
+                                    , IUserSqlProvider userSqlProvider)
         {
             _userSqlProvider = userSqlProvider;
             _radnoMestoSqlProvider = radnoMestoSqlProvider;
+            _operacijaSqlProvider = operacijaSqlProvider;
+            _predmetRadaSqlProvider = predmetRadaSqlProvider;
+            _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
+            _radniNalogSqlProvider = radniNalogSqlProvider;
+            _radnaListaSqlProvider = radnaListaSqlProvider;
+            _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
+            _trebovanjeSqlProvider = trebovanjeSqlProvider;
         }
 
         public void Init()
@@ -45,7 +63,9 @@ namespace AUPS.ViewModels
 
         private void LogInViewModel_LogInSucceded(object source, EventArgs args)
         {
-            ContentMainScreen = new RadnoMestoViewModel(_radnoMestoSqlProvider);
+            ContentMainScreen = new MainContentViewModel(_radnoMestoSqlProvider, _operacijaSqlProvider, _predmetRadaSqlProvider,
+                _radnaListaSqlProvider, _radnikProizvodnjaSqlProvider, _radniNalogSqlProvider, _tehnoloskiPostupakSqlProvider,
+                _trebovanjeSqlProvider);
         }
     }
 }

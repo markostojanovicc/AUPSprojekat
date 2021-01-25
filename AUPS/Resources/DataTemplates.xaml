@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:contentControls="clr-namespace:AUPS.Controls.MainContentUserControls"
+                    xmlns:templateSelector="clr-namespace:AUPS.TemplateSelectors"
+                    xmlns:local="clr-namespace:AUPS.Resources">
+
+    <DataTemplate x:Key="OperacijaContentTemplate">
+        <contentControls:OperacijaControl/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PredmetRadaContentTemplate">
+        <contentControls:PredmetRadaControl/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RadnaListaContentTemplate">
+        <contentControls:RadnaListaControl/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RadnikProizvodnjaContentTemplate">
+        <contentControls:RadnikProizvodnjaControl/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RadniNalogContentTemplate">
+        <contentControls:RadniNalogControl/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RadnoMestoContentTemplate">
+        <contentControls:RadnoMestoControl/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TehnoloskiPostupakTemplate">
+        <contentControls:TehnoloskiPostupakControl/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TrebovanjeContentTemplate">
+        <contentControls:TrebovanjeControl/>
+    </DataTemplate>
+
+    <templateSelector:DataGridTemplateSelector x:Key="MainContentTemplateSelector"
+                TrebovanjeContentDataTemplate="{StaticResource TrebovanjeContentTemplate}"
+                TehnoloskiPostupakContentDataTemplate="{StaticResource TehnoloskiPostupakTemplate}"
+                RadnoMestoContentDataTemplate="{StaticResource RadnoMestoContentTemplate}"
+                RadniNalogContentDataTemplate="{StaticResource RadniNalogContentTemplate}"
+                RadnikProizvodnjaContentDataTemplate="{StaticResource RadnikProizvodnjaContentTemplate}"
+                RadnaListaContentDataTemplate="{StaticResource RadnaListaContentTemplate}"
+                PredmetRadaContentDataTemplate="{StaticResource PredmetRadaContentTemplate}"
+                OperacijaContentDataTemplate="{StaticResource OperacijaContentTemplate}"/>
+
+</ResourceDictionary>
