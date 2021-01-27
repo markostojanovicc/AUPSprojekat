@@ -23,6 +23,7 @@ namespace AUPS.ViewModels.MainContentViewModels
                 OnPropertyChanged(nameof(Operacija));
             }
         }
+
         public OperacijaViewModel(IOperacijaSqlProvider operacijaSqlProvider)
         {
             _operacijaSqlProvider = operacijaSqlProvider;

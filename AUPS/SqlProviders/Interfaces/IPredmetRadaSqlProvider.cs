@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AUPS.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -9,6 +11,6 @@ namespace AUPS.SqlProviders.Interfaces
 {
     public interface IPredmetRadaSqlProvider
     {
-        void GetAllFromPredmetRada(ref DataTable dataTable);
+        ObservableCollection<PredmetRada> GetAllFromPredmetRada();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AUPS.Models;
+using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace AUPS.ViewModels.MainContentViewModels
     public class PredmetRadaViewModel : BaseViewModel
     {
         private ObservableCollection<PredmetRada> _predmetRadaList;
+        private IPredmetRadaSqlProvider _predmetRadaSqlProvider;
         public ObservableCollection<PredmetRada> PredmetRadaList
         {
             get { return _predmetRadaList; }
@@ -22,9 +24,15 @@ namespace AUPS.ViewModels.MainContentViewModels
             }
         }
 
-        public PredmetRadaViewModel()
+        public PredmetRadaViewModel(IPredmetRadaSqlProvider predmetRadaSqlProvider)
         {
+            _predmetRadaSqlProvider = predmetRadaSqlProvider;
+            FillTableWithData();
+        }
 
+        private void FillTableWithData()
+        {
+            PredmetRadaList = _predmetRadaSqlProvider.GetAllFromPredmetRada();
         }
     }
 }

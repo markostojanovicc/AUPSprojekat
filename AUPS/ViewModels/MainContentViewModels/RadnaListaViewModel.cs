@@ -1,4 +1,5 @@
 ﻿using AUPS.Models;
+using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace AUPS.ViewModels.MainContentViewModels
     public class RadnaListaViewModel : BaseViewModel
     {
         private ObservableCollection<RadnaLista> _radnaListaList;
+        private IRadnaListaSqlProvider _radnaListaSqlProvider;
         public ObservableCollection<RadnaLista> RadnaListaList
         {
             get { return _radnaListaList; }
@@ -22,9 +24,15 @@ namespace AUPS.ViewModels.MainContentViewModels
             }
         }
 
-        public RadnaListaViewModel()
+        public RadnaListaViewModel(IRadnaListaSqlProvider radnaListaSqlProvider)
         {
+            _radnaListaSqlProvider = radnaListaSqlProvider;
+            FillTableWithData();
+        }
 
+        private void FillTableWithData()
+        {
+            RadnaListaList = _radnaListaSqlProvider.GetAllFromRadnaLista();
         }
     }
 }

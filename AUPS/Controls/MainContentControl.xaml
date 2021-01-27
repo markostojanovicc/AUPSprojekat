@@ -23,7 +23,6 @@
             <TabItem Header="Radna lista"/>
             <TabItem Header="Radnik-Proizvodnja"/>
             <TabItem Header="Radni nalog"/>
-            <TabItem Header="Radno mesto"/>
             <TabItem Header="Tehnoloski postupak"/>
             <TabItem Header="Trebovanje"/>
         </TabControl>

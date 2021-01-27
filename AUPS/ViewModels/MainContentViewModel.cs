@@ -61,24 +61,21 @@ namespace AUPS
                             ContentMainScreen = new OperacijaViewModel(_operacijaSqlProvider);
                             break;
                         case 2:
-                            ContentMainScreen = new PredmetRadaViewModel();
+                            ContentMainScreen = new PredmetRadaViewModel(_predmetRadaSqlProvider);
                             break;
                         case 3:
-                            ContentMainScreen = new RadnaListaViewModel();
+                            ContentMainScreen = new RadnaListaViewModel(_radnaListaSqlProvider);
                             break;
                         case 4:
-                            ContentMainScreen = new RadnikProizvodnjaViewModel();
+                            ContentMainScreen = new RadnikProizvodnjaViewModel(_radnikProizvodnjaSqlProvider);
                             break;
                         case 5:
-                            ContentMainScreen = new RadniNalogViewModel();
+                            ContentMainScreen = new RadniNalogViewModel(_radniNalogSqlProvider);
                             break;
                         case 6:
-                            ContentMainScreen = new TehnoloskiPostupakViewModel();
+                            ContentMainScreen = new TehnoloskiPostupakViewModel(_tehnoloskiPostupakSqlProvider);
                             break;
                         case 7:
-                            ContentMainScreen = new TehnoloskiPostupakViewModel();
-                            break;
-                        case 8:
                             ContentMainScreen = new TrebovanjeViewModel();
                             break;
                     }
