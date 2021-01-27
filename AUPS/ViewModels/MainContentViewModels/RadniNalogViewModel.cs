@@ -13,6 +13,7 @@ namespace AUPS.ViewModels.MainContentViewModels
     public class RadniNalogViewModel : BaseViewModel
     {
         private ObservableCollection<RadniNalog> _radniNalogList;
+        private IRadniNalogSqlProvider _radniNalogSqlProvider;
         public ObservableCollection<RadniNalog> RadniNalogList
         {
             get { return _radniNalogList; }
@@ -36,6 +37,12 @@ namespace AUPS.ViewModels.MainContentViewModels
         public RadniNalogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider)
         {
             _radniNalogSqlProvider = radniNalogSqlProvider;
+            FillTableWithData();
+        }
+
+        private void FillTableWithData()
+        {
+            RadniNalogList = _radniNalogSqlProvider.GetAllFromRadniNalog();
         }
     }
 }

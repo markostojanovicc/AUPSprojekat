@@ -13,6 +13,7 @@ namespace AUPS.ViewModels.MainContentViewModels
     public class RadnikProizvodnjaViewModel : BaseViewModel
     {
         private ObservableCollection<RadnikProizvodnja> _radnikProizvodnjaList;
+        private IRadnikProizvodnjaSqlProvider _radnikProizvodnjaSqlProvider;
         public ObservableCollection<RadnikProizvodnja> RadnikProizvodnjaList
         {
             get { return _radnikProizvodnjaList; }
@@ -36,6 +37,12 @@ namespace AUPS.ViewModels.MainContentViewModels
         public RadnikProizvodnjaViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider)
         {
             _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
+            FillTableWithData();
+        }
+
+        private void FillTableWithData()
+        {
+            RadnikProizvodnjaList = _radnikProizvodnjaSqlProvider.GetAllFromRadnikProizvodnja();
         }
     }
 }

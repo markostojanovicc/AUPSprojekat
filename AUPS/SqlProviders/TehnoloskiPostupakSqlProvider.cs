@@ -1,7 +1,9 @@
-﻿using AUPS.SqlProviders.Interfaces;
+﻿using AUPS.Models;
+using AUPS.SqlProviders.Interfaces;
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -21,16 +23,32 @@ namespace AUPS.SqlProviders
         
         #endregion
 
-        public void GetAllFromTehnoloskiPostupak(ref DataTable dataTable) 
+        public ObservableCollection<TehnoloskiPostupak> GetAllFromTehnoloskiPostupak() 
         {
+            ObservableCollection<TehnoloskiPostupak> tehnoloskiPostupakList = new ObservableCollection<TehnoloskiPostupak>();
+
             using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
             {
                 sqlConnection.Open();
 
                 NpgsqlCommand cmd = new NpgsqlCommand(GET_ALL_RECORDS_FROM_TEHNOLOSKI_POSTUPAK, sqlConnection);
 
-                dataTable.Load(cmd.ExecuteReader());
+                NpgsqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    TehnoloskiPostupak tehnoloskiPostupak = new TehnoloskiPostupak();
+                    tehnoloskiPostupak.IDTehPostupak = rdr.GetInt32(0);
+                    tehnoloskiPostupak.TipTehPostupak = rdr.GetString(1);
+                    tehnoloskiPostupak.VremeIzrade = rdr.GetInt32(2);
+                    tehnoloskiPostupak.SerijaKom = rdr.GetInt32(3);
+                    tehnoloskiPostupak.BrKomada = rdr.GetInt32(4);
+                    tehnoloskiPostupak.IDOperacija = rdr.GetInt32(5);
+                    tehnoloskiPostupakList.Add(tehnoloskiPostupak);
+                }
             }
+
+            return tehnoloskiPostupakList;
 
         }
 

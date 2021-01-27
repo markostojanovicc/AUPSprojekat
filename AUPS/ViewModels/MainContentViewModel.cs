@@ -217,7 +217,7 @@ namespace AUPS
                         case 6:
                             ContentMainScreen = new TehnoloskiPostupakViewModel(_tehnoloskiPostupakSqlProvider);
                             break;
-                        case 8:
+                        case 7:
                             ContentMainScreen = new TrebovanjeViewModel(_trebovanjeSqlProvider);
                             break;
                     }

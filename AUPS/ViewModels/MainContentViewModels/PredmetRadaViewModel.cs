@@ -13,6 +13,7 @@ namespace AUPS.ViewModels.MainContentViewModels
     public class PredmetRadaViewModel : BaseViewModel
     {
         private ObservableCollection<PredmetRada> _predmetRadaList;
+        private IPredmetRadaSqlProvider _predmetRadaSqlProvider;
         public ObservableCollection<PredmetRada> PredmetRadaList
         {
             get { return _predmetRadaList; }

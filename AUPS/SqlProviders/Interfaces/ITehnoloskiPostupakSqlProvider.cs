@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AUPS.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -9,7 +11,7 @@ namespace AUPS.SqlProviders.Interfaces
 {
     public interface ITehnoloskiPostupakSqlProvider
     {
-        void GetAllFromTehnoloskiPostupak(ref DataTable dataTable);
+        ObservableCollection<TehnoloskiPostupak> GetAllFromTehnoloskiPostupak();
         bool DeleteFromTehnoloskiPostupakById(int iDTehPostupak);
     }
 }
