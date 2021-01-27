@@ -28,6 +28,7 @@ namespace AUPS
         private ITrebovanjeSqlProvider _trebovanjeSqlProvider;
         private object _contentMainScreen;
         private ICommand _addButtonCommand;
+        private ICommand _deleteButtonCommand;
 
         private int _selectedTabIndex = 0;
 
@@ -42,6 +43,20 @@ namespace AUPS
                 }
 
                 return _addButtonCommand;
+            }
+        }
+
+        public ICommand DeleteButtonCommand
+        {
+            get
+            {
+                if (_deleteButtonCommand == null)
+                {
+                    this._deleteButtonCommand = new RelayCommand(
+                        param => DeleteButtonCommandExecute(param));
+                }
+
+                return _deleteButtonCommand;
             }
         }
 

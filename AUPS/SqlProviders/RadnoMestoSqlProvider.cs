@@ -25,6 +25,12 @@ namespace AUPS.SqlProviders
                   DELETE FROM radnomesto WHERE idradnomesto = @Id
             ";
 
+        private const string UPDATE_RADNO_MESTO_BY_ID =
+            @"
+                  UPDATE radnomesto SET nazivradnomesto = @NazivRadnogMesta, strucnasprema = @StrucnaSprema
+                  WHERE idradnomesto = @Id
+            ";
+
 
         #endregion
 
@@ -62,6 +68,24 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(DELETE_FROM_RADNO_MESTO_BY_ID, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, iDRadnoMesto);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool UpdateRadnoMestoById(RadnoMesto radnoMestoNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_RADNO_MESTO_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, radnoMestoNew.IDRadnoMesto);
+                cmd.Parameters.AddWithValue("@NazivRadnogMesta", NpgsqlDbType.Varchar, radnoMestoNew.NazivRadnoMesto);
+                cmd.Parameters.AddWithValue("@StrucnaSprema", NpgsqlDbType.Varchar, radnoMestoNew.StrucnaSprema);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
