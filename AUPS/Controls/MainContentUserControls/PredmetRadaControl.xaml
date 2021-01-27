@@ -7,6 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DataGrid AutoGenerateColumns="True" Grid.Row="1" Grid.Column="1"  ItemsSource="{Binding PredmetRadaList}" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="400" Width="720"/>
+        <DataGrid AutoGenerateColumns="False" Grid.Row="1" Grid.Column="1"  ItemsSource="{Binding PredmetRadaList}" HorizontalAlignment="Stretch" Margin="10,10,100,0" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding IDPredmetRada}" Width="*"/>
+                <DataGridTextColumn Header="Tip predmeta rada" Binding="{Binding TipPredmetRada}" Width="*"/>
+                <DataGridTextColumn Header="Naziv predmeta rada" Binding="{Binding NazivPR}"  Width="*"/>
+                <DataGridTextColumn Header="Jedinica mere" Binding="{Binding JedMerePR}" Width="*" />
+                <DataGridTextColumn Header="Cena" Binding="{Binding Cena}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

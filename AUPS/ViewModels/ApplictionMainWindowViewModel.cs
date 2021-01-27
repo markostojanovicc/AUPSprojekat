@@ -63,6 +63,7 @@ namespace AUPS.ViewModels
 
         private void LogInViewModel_LogInSucceded(object source, EventArgs args)
         {
+            App.Current.MainWindow.WindowState = WindowState.Maximized;
             ContentMainScreen = new MainContentViewModel(_radnoMestoSqlProvider, _operacijaSqlProvider, _predmetRadaSqlProvider,
                 _radnaListaSqlProvider, _radnikProizvodnjaSqlProvider, _radniNalogSqlProvider, _tehnoloskiPostupakSqlProvider,
                 _trebovanjeSqlProvider);
