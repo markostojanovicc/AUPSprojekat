@@ -8,7 +8,7 @@ namespace AUPS.Models
 {
     public class TehnoloskiPostupak
     {
-        TehnoloskiPostupak()
+        public TehnoloskiPostupak()
         {
 
         }
@@ -19,9 +19,5 @@ namespace AUPS.Models
         public int SerijaKom { get; set; }
         public int BrKomada { get; set; }
         public int IDOperacija { get; set; }
-
-
     }
-
-
 }

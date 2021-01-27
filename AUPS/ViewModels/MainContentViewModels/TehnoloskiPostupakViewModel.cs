@@ -27,8 +27,6 @@ namespace AUPS.ViewModels.MainContentViewModels
             set { _itemSelected = value; }
         }
 
-        private ITehnoloskiPostupakSqlProvider _tehnoloskiPostupakSqlProvider;
-
         public TehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider)
         {
             _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;

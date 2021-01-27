@@ -32,8 +32,6 @@ namespace AUPS.ViewModels.MainContentViewModels
             set { _itemSelected = value; }
         }
 
-        private IRadniNalogSqlProvider _radniNalogSqlProvider;
-
         public RadniNalogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider)
         {
             _radniNalogSqlProvider = radniNalogSqlProvider;

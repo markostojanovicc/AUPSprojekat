@@ -32,8 +32,6 @@ namespace AUPS.ViewModels.MainContentViewModels
             set { _itemSelected = value; }
         }
 
-        private IRadnaListaSqlProvider _radnaListaSqlProvider;
-
         public RadnaListaViewModel(IRadnaListaSqlProvider radnaListaSqlProvider)
         {
             _radnaListaSqlProvider = radnaListaSqlProvider;
