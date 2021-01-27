@@ -32,8 +32,6 @@ namespace AUPS.ViewModels.MainContentViewModels
             set { _itemSelected = value; }
         }
 
-        private IPredmetRadaSqlProvider _predmetRadaSqlProvider;
-
         public PredmetRadaViewModel(IPredmetRadaSqlProvider predmetRadaSqlProvider)
         {
             _predmetRadaSqlProvider = predmetRadaSqlProvider;
