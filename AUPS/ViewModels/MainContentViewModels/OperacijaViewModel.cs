@@ -23,6 +23,15 @@ namespace AUPS.ViewModels.MainContentViewModels
                 OnPropertyChanged(nameof(Operacija));
             }
         }
+
+        private Operacija _itemSelected;
+
+        public Operacija ItemSelected
+        {
+            get { return _itemSelected; }
+            set { _itemSelected = value; }
+        }
+
         public OperacijaViewModel(IOperacijaSqlProvider operacijaSqlProvider)
         {
             _operacijaSqlProvider = operacijaSqlProvider;

@@ -10,5 +10,6 @@ namespace AUPS.SqlProviders.Interfaces
     public interface IRadnikProizvodnjaSqlProvider
     {
         void GetAllFromRadnikProizvodnja(ref DataTable dataTable);
+        bool DeleteFromRadnikProizvodnjaById(int iDRadnik);
     }
 }

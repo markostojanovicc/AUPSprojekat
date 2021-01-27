@@ -17,6 +17,8 @@ namespace AUPS.SqlProviders
             @"
                   SELECT * FROM tehnoloskipostupak;
             ";
+
+        
         #endregion
 
         public void GetAllFromTehnoloskiPostupak(ref DataTable dataTable) 
@@ -30,6 +32,11 @@ namespace AUPS.SqlProviders
                 dataTable.Load(cmd.ExecuteReader());
             }
 
+        }
+
+        public bool DeleteFromTehnoloskiPostupakById(int iDTehPostupak)
+        {
+            throw new NotImplementedException();
         }
     }
 }

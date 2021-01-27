@@ -29,5 +29,10 @@ namespace AUPS.SqlProviders
                 dataTable.Load(cmd.ExecuteReader());
             }
         }
+
+        public bool DeleteFromPredmetRadaById(int iDPredmetRada)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

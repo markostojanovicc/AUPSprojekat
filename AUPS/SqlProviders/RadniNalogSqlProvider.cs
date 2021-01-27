@@ -17,6 +17,8 @@ namespace AUPS.SqlProviders
             @"
                   SELECT * FROM radninalog;
             ";
+
+        
         #endregion
 
         public void GetAllFromRadniNalog(ref DataTable dataTable)
@@ -29,6 +31,11 @@ namespace AUPS.SqlProviders
 
                 dataTable.Load(cmd.ExecuteReader());
             }
+        }
+
+        public bool DeleteFromRadniNalogById(int iDRadniNalog)
+        {
+            throw new NotImplementedException();
         }
     }
 }

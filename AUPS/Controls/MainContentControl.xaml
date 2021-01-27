@@ -23,7 +23,6 @@
             <TabItem Header="Radna lista"/>
             <TabItem Header="Radnik-Proizvodnja"/>
             <TabItem Header="Radni nalog"/>
-            <TabItem Header="Radno mesto"/>
             <TabItem Header="Tehnoloski postupak"/>
             <TabItem Header="Trebovanje"/>
         </TabControl>
@@ -33,8 +32,8 @@
             ContentTemplateSelector="{StaticResource MainContentTemplateSelector}"
             />
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
-            <Button Content="Add" Margin="0 120 0 0"/>
-            <Button Content="Delete" Margin=" 0 20 0 0"/>
+            <Button Content="Add" Command="{Binding AddButtonCommand}" Margin="0 120 0 0"/>
+            <Button Content="Delete" Command="{Binding DeleteButtonCommand}" Margin=" 0 20 0 0"/>
             <Button Content="Update" Margin="0 20 0 0"/>
         </StackPanel>
     </Grid>

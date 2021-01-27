@@ -10,5 +10,6 @@ namespace AUPS.SqlProviders.Interfaces
     public interface ITehnoloskiPostupakSqlProvider
     {
         void GetAllFromTehnoloskiPostupak(ref DataTable dataTable);
+        bool DeleteFromTehnoloskiPostupakById(int iDTehPostupak);
     }
 }

@@ -17,6 +17,11 @@ namespace AUPS.SqlProviders
             @"
                   SELECT * FROM trebovanje;
             ";
+
+        public bool DeleteFromTrebovanjeById(int iDTehPostupak)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         public void GetAllFromTrebovanje(ref DataTable dataTable)

@@ -1,4 +1,5 @@
 ﻿using AUPS.Models;
+using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System.Collections.ObjectModel;
 
@@ -17,9 +18,19 @@ namespace AUPS.ViewModels.MainContentViewModels
             }
         }
 
-        public TehnoloskiPostupakViewModel()
-        {
+        private TehnoloskiPostupak _itemSelected;
 
+        public TehnoloskiPostupak ItemSelected
+        {
+            get { return _itemSelected; }
+            set { _itemSelected = value; }
+        }
+
+        private ITehnoloskiPostupakSqlProvider _tehnoloskiPostupakSqlProvider;
+
+        public TehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider)
+        {
+            _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
         }
     }
 }

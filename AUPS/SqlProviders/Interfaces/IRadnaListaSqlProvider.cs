@@ -10,5 +10,6 @@ namespace AUPS.SqlProviders.Interfaces
     public interface IRadnaListaSqlProvider
     {
         void GetAllFromRadnaLista(ref DataTable dataTable);
+        bool DeleteFromRadnaListaById(int iDRadnaLista);
     }
 }

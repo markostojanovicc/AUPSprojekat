@@ -10,5 +10,6 @@ namespace AUPS.SqlProviders.Interfaces
     public interface IRadniNalogSqlProvider
     {
         void GetAllFromRadniNalog(ref DataTable dataTable);
+        bool DeleteFromRadniNalogById(int iDRadniNalog);
     }
 }

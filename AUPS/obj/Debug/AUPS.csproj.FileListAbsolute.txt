@@ -105,3 +105,6 @@ C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\AUPS.exe
 C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\AUPS.pdb
 C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Resources\DataTemplates.baml
 C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Resources\Styles.baml
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\AUPS.csprojAssemblyReference.cache
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\RadnoMesto\CreateRadnoMestoDialog.g.cs
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\RadnoMesto\CreateRadnoMestoDialog.baml

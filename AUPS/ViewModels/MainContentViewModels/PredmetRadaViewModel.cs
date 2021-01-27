@@ -1,4 +1,5 @@
 ﻿using AUPS.Models;
+using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,25 @@ namespace AUPS.ViewModels.MainContentViewModels
             }
         }
 
-        public PredmetRadaViewModel()
-        {
+        private PredmetRada _itemSelected;
 
+        public PredmetRada ItemSelected
+        {
+            get { return _itemSelected; }
+            set { _itemSelected = value; }
+        }
+
+        private IPredmetRadaSqlProvider _predmetRadaSqlProvider;
+
+        public PredmetRadaViewModel(IPredmetRadaSqlProvider predmetRadaSqlProvider)
+        {
+            _predmetRadaSqlProvider = predmetRadaSqlProvider;
+            FillTableWithData();
+        }
+
+        private void FillTableWithData()
+        {
+            PredmetRadaList = _predmetRadaSqlProvider.GetAllFromPredmetRada();
         }
     }
 }

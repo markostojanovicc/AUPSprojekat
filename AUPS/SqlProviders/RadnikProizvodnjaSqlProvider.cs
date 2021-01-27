@@ -17,6 +17,8 @@ namespace AUPS.SqlProviders
             @"
                   SELECT * FROM radnikproizvodnja;
             ";
+
+        
         #endregion
 
         public void GetAllFromRadnikProizvodnja(ref DataTable dataTable)
@@ -29,6 +31,11 @@ namespace AUPS.SqlProviders
 
                 dataTable.Load(cmd.ExecuteReader());
             }
+        }
+
+        public bool DeleteFromRadnikProizvodnjaById(int iDRadnik)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AUPS.Models;
+using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,19 @@ namespace AUPS.ViewModels.MainContentViewModels
             }
         }
 
-        public RadnaListaViewModel()
-        {
+        private RadnaLista _itemSelected;
 
+        public RadnaLista ItemSelected
+        {
+            get { return _itemSelected; }
+            set { _itemSelected = value; }
+        }
+
+        private IRadnaListaSqlProvider _radnaListaSqlProvider;
+
+        public RadnaListaViewModel(IRadnaListaSqlProvider radnaListaSqlProvider)
+        {
+            _radnaListaSqlProvider = radnaListaSqlProvider;
         }
     }
 }

@@ -47,5 +47,10 @@ namespace AUPS.SqlProviders
 
             return operacijaList;
         }
+
+        public bool DeleteFromOperacijaById(int iDOperacija)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

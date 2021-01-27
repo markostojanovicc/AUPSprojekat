@@ -1,4 +1,5 @@
 ﻿using AUPS.Models;
+using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,19 @@ namespace AUPS.ViewModels.MainContentViewModels
             }
         }
 
-        public RadnikProizvodnjaViewModel()
-        {
+        private RadnikProizvodnja _itemSelected;
 
+        public RadnikProizvodnja ItemSelected
+        {
+            get { return _itemSelected; }
+            set { _itemSelected = value; }
+        }
+
+        private IRadnikProizvodnjaSqlProvider _radnikProizvodnjaSqlProvider;
+
+        public RadnikProizvodnjaViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider)
+        {
+            _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
         }
     }
 }

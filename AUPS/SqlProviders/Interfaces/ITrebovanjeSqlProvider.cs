@@ -10,5 +10,6 @@ namespace AUPS.SqlProviders.Interfaces
     public interface ITrebovanjeSqlProvider
     {
         void GetAllFromTrebovanje(ref DataTable dataTable);
+        bool DeleteFromTrebovanjeById(int iDTehPostupak);
     }
 }

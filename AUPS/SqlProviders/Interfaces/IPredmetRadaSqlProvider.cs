@@ -10,5 +10,6 @@ namespace AUPS.SqlProviders.Interfaces
     public interface IPredmetRadaSqlProvider
     {
         void GetAllFromPredmetRada(ref DataTable dataTable);
+        bool DeleteFromPredmetRadaById(int iDPredmetRada);
     }
 }
