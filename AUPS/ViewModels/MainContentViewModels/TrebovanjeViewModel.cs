@@ -7,8 +7,9 @@ namespace AUPS.ViewModels.MainContentViewModels
 {
     public class TrebovanjeViewModel : BaseViewModel
     {
-        private ITrebovanjeSqlProvider _trebovanjeSqlProvider;
         private ObservableCollection<Trebovanje> _trebovanjeList;
+        private ITrebovanjeSqlProvider _trebovanjeSqlProvider;
+
         public ObservableCollection<Trebovanje> TrebovanjeList
         {
             get { return _trebovanjeList; }
@@ -30,6 +31,12 @@ namespace AUPS.ViewModels.MainContentViewModels
         public TrebovanjeViewModel(ITrebovanjeSqlProvider trebovanjeSqlProvider)
         {
             _trebovanjeSqlProvider = trebovanjeSqlProvider;
+            FillTableWithData();
+        }
+
+        private void FillTableWithData()
+        {
+            TrebovanjeList = _trebovanjeSqlProvider.GetAllFromTrebovanje();
         }
     }
 }

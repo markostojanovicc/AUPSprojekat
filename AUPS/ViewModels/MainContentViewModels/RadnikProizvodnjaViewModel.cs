@@ -14,6 +14,7 @@ namespace AUPS.ViewModels.MainContentViewModels
     {
         private ObservableCollection<RadnikProizvodnja> _radnikProizvodnjaList;
         private IRadnikProizvodnjaSqlProvider _radnikProizvodnjaSqlProvider;
+
         public ObservableCollection<RadnikProizvodnja> RadnikProizvodnjaList
         {
             get { return _radnikProizvodnjaList; }

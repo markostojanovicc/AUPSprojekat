@@ -1,6 +1,7 @@
 ﻿using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,8 +20,18 @@ namespace AUPS.SqlProviders
             @"
                   SELECT * FROM radninalog;
             ";
+        private const string DELETE_FROM_RADNI_NALOG_BY_ID =
+            @"
+                  DELETE FROM radninalog WHERE idradninalog = @Id
+            ";
 
-        
+        private const string UPDATE_RADNI_NALOG_BY_ID =
+            @"
+                  UPDATE radninalog SET datumulaz = @DatumUlaz, datumizlaz = @DatumIzlaz kolicinaproizvoda = @KolicinaProizvoda, idpredmetrada= @IDPredmetRada
+                  WHERE idradninalog = @Id
+            ";
+
+
         #endregion
         public ObservableCollection<RadniNalog> GetAllFromRadniNalog()
         {
@@ -51,7 +62,18 @@ namespace AUPS.SqlProviders
 
         public bool DeleteFromRadniNalogById(int iDRadniNalog)
         {
-            throw new NotImplementedException();
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(DELETE_FROM_RADNI_NALOG_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, iDRadniNalog);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
         }
     }
 }
