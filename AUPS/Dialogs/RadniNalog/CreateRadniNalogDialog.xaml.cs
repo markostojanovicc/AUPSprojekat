@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AUPS.SqlProviders.Interfaces;
+using AUPS.ViewModels.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,10 @@ namespace AUPS.Dialogs.RadniNalog
     /// </summary>
     public partial class CreateRadniNalogDialog : Window
     {
-        public CreateRadniNalogDialog()
+        public CreateRadniNalogDialog(IRadniNalogSqlProvider _radniNalogSqlProvider)
         {
             InitializeComponent();
+            DataContext = new CreateRadniNalogDialogViewModel(_radniNalogSqlProvider);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AUPS.SqlProviders.Interfaces;
+using AUPS.ViewModels.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,10 @@ namespace AUPS.Dialogs.Trebovanje
     /// </summary>
     public partial class CreateTrebovanjeDialog : Window
     {
-        public CreateTrebovanjeDialog()
+        public CreateTrebovanjeDialog(ITrebovanjeSqlProvider _trebovanjeSqlProvider)
         {
             InitializeComponent();
+            DataContext = new CreateTrebovanjeDialogViewModel(_trebovanjeSqlProvider);
         }
     }
 }

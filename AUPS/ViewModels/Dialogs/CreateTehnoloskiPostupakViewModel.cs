@@ -1,4 +1,4 @@
-﻿using AUPS.Enums;
+﻿using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
@@ -9,31 +9,12 @@ using System.Threading.Tasks;
 
 namespace AUPS.ViewModels.Dialogs
 {
-    public class CreateRadnikProizvodnjaDialogViewModel : BaseViewModel
+    public class CreateTehnoloskiPostupakViewModel : BaseViewModel
     {
-        private List<Pol> _polovi = new List<Pol>() { Pol.Musko, Pol.Zensko };
-        private IRadnikProizvodnjaSqlProvider _radnikProizvodnjaSqlProvider;
-        private string _title = "Dijalog za kreiranje radnika";
+        private ITehnoloskiPostupakSqlProvider _tehnoloskiPostupakSqlProvider;
+        private string _title = "Dijalog za kreiranje tehnoloskog postupka";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
-
-        public List<Pol> Polovi
-        {
-            get { return _polovi; }
-            set { }
-        }
-
-        private Pol _selectedType;
-
-        public Pol SelectedType
-        {
-            get { return _selectedType; }
-            set
-            {
-                _selectedType = value;
-                OnPropertyChanged(nameof(Polovi));
-            }
-        }
 
         public bool IsUpdateBtnVisible
         {
@@ -55,17 +36,16 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public CreateRadnikProizvodnjaDialogViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider)
+        public CreateTehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider)
         {
-            _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
+            _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
         }
 
         public void SetViewForUpdateDialog()
         {
-            Title = "Dijalog za izmenu radnika";
+            Title = "Dijalog za izmenu tehnoloski postupak";
             IsCreateButtonVisible = false;
             IsUpdateBtnVisible = true;
         }
-
     }
 }

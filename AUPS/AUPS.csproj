@@ -196,7 +196,14 @@
     <Compile Include="TemplateSelectors\DataGridTemplateSelector.cs" />
     <Compile Include="ViewModels\ApplictionMainWindowViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\CreateOperacijaDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\CreatePredmetRadaDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\CreateRadnaListaDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\CreateRadnikProizvodnjaDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\CreateRadniNalogDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\CreateRadnoMestoDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\CreateTehnoloskiPostupakViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\CreateTrebovanjeDialogViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModels\OperacijaViewModel.cs" />

@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AUPS.Dialogs.RadnoMesto"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Dodavanje Radnog mesta" Height="350" Width="450">
+        Title="{Binding Title}" Height="350" Width="450">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -26,6 +25,7 @@
             <TextBox Height="30" Name="txtStrucnaSprema" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
         </Grid>
 
-        <Button Style="{StaticResource loginbtnstyle}"  x:Name="btnOk" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
+        <Button Visibility="{Binding IsCreateBtnVisible}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
+        <Button Visibility="{Binding IsUpdateBtnVisible}" Style="{StaticResource loginbtnstyle}"  x:Name="btnUpdate" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Potvrdi Izmene" Height="35" Width="160" />
     </Grid>
 </Window>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AUPS.Dialogs.RadniNalog"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="CreateRadniNalogDialog" Height="450" Width="800">
+        Title="{Binding Title}" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -32,6 +32,7 @@
             <TextBox Height="30" Name="txtIdPredmetaRada" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
         </Grid>
 
-        <Button Style="{StaticResource loginbtnstyle}"  x:Name="btnOk" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
+        <Button Visibility="{Binding IsCreateBtnVisible}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
+        <Button Visibility="{Binding IsUpdateBtnVisible}" Style="{StaticResource loginbtnstyle}"  x:Name="btnUpdate" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Potvrdi Izmene" Height="35" Width="160" />
     </Grid>
 </Window>

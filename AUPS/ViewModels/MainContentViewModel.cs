@@ -10,6 +10,7 @@ using AUPS.Dialogs.Trebovanje;
 using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using AUPS.ViewModels;
+using AUPS.ViewModels.Dialogs;
 using AUPS.ViewModels.MainContentViewModels;
 using ChatApp;
 using System;
@@ -36,6 +37,7 @@ namespace AUPS
         private object _contentMainScreen;
         private ICommand _addButtonCommand;
         private ICommand _deleteButtonCommand;
+        private ICommand _updateButtonCommand;
 
         private int _selectedTabIndex = 0;
 
@@ -53,6 +55,20 @@ namespace AUPS
             }
         }
 
+        public ICommand UpdateButtonCommand
+        {
+            get
+            {
+                if (_updateButtonCommand == null)
+                {
+                    this._updateButtonCommand = new RelayCommand(
+                        param => UpdateButtonCommandExecute(param));
+                }
+
+                return _updateButtonCommand;
+            }
+        }
+
         public ICommand DeleteButtonCommand
         {
             get
@@ -67,40 +83,95 @@ namespace AUPS
             }
         }
 
+        private void UpdateButtonCommandExecute(object param)
+        {
+            switch (_selectedTabIndex)
+            {
+                case 0:
+                    CreateRadnoMestoDialog updateRadnoMestoDialog = new CreateRadnoMestoDialog(_radnoMestoSqlProvider);
+                    CreateRadnoMestoDialogViewModel viewModelRadnoMesto = (CreateRadnoMestoDialogViewModel)updateRadnoMestoDialog.DataContext;
+                    viewModelRadnoMesto.SetViewForUpdateDialog();
+                    updateRadnoMestoDialog.Show();
+                    break;
+                case 1:
+                    CreateOperacijaDialog updateOperacijaDialog = new CreateOperacijaDialog(_operacijaSqlProvider);
+                    CreateOperacijaDialogViewModel viewModelOperacija = (CreateOperacijaDialogViewModel)updateOperacijaDialog.DataContext;
+                    viewModelOperacija.SetViewForUpdateDialog();
+                    updateOperacijaDialog.Show();
+                    break;
+                case 2:
+                    CreatePredmetRadaDialog updatePredmetRadaDialog = new CreatePredmetRadaDialog(_predmetRadaSqlProvider);
+                    CreatePredmetRadaDialogViewModel viewModelPredmetRada = (CreatePredmetRadaDialogViewModel)updatePredmetRadaDialog.DataContext;
+                    viewModelPredmetRada.SetViewForUpdateDialog();
+                    updatePredmetRadaDialog.Show();
+                    break;
+                case 3:
+                    CreateRadnaListaDialog updateRadnaListaDialog = new CreateRadnaListaDialog(_radnaListaSqlProvider);
+                    CreateRadnaListaDialogViewModel viewModelRadnaLista = (CreateRadnaListaDialogViewModel)updateRadnaListaDialog.DataContext;
+                    viewModelRadnaLista.SetViewForUpdateDialog();
+                    updateRadnaListaDialog.Show();
+                    break;
+                case 4:
+                    CreateRadnikProizvodnjaDialog udpateRadnikProizvodnjaDialog = new CreateRadnikProizvodnjaDialog(_radnikProizvodnjaSqlProvider);
+                    CreateRadnikProizvodnjaDialogViewModel viewModelRadnik = (CreateRadnikProizvodnjaDialogViewModel)udpateRadnikProizvodnjaDialog.DataContext;
+                    viewModelRadnik.SetViewForUpdateDialog();
+                    udpateRadnikProizvodnjaDialog.Show();
+                    break;
+                case 5:
+                    CreateRadniNalogDialog updateRadniNalogDialog = new CreateRadniNalogDialog(_radniNalogSqlProvider);
+                    CreateRadniNalogDialogViewModel viewModelRadniNalog = (CreateRadniNalogDialogViewModel)updateRadniNalogDialog.DataContext;
+                    viewModelRadniNalog.SetViewForUpdateDialog();
+                    updateRadniNalogDialog.Show();
+                    break;
+                case 6:
+                    CreateTehnoloskiPostupakDialog updateTehnoloskiPostupakDialog = new CreateTehnoloskiPostupakDialog(_tehnoloskiPostupakSqlProvider);
+                    CreateTehnoloskiPostupakViewModel viewModelTehnoloskiPostupak = (CreateTehnoloskiPostupakViewModel)updateTehnoloskiPostupakDialog.DataContext;
+                    viewModelTehnoloskiPostupak.SetViewForUpdateDialog();
+                    updateTehnoloskiPostupakDialog.Show();
+                    break;
+                case 7:
+                    CreateTrebovanjeDialog updateTrebovanjeDialog = new CreateTrebovanjeDialog(_trebovanjeSqlProvider);
+                    CreateTrebovanjeDialogViewModel viewModelTrebovanje = (CreateTrebovanjeDialogViewModel)updateTrebovanjeDialog.DataContext;
+                    viewModelTrebovanje.SetViewForUpdateDialog();
+                    updateTrebovanjeDialog.Show();
+                    break;
+            }
+        }
+
         private void AddButtonCommandExecute(object param)
         {
             switch (_selectedTabIndex)
             {
                 case 0:
-                    CreateRadnoMestoDialog createRadnoMestoDialog = new CreateRadnoMestoDialog();
+                    CreateRadnoMestoDialog createRadnoMestoDialog = new CreateRadnoMestoDialog(_radnoMestoSqlProvider);
                     createRadnoMestoDialog.Show();
                     break;
                 case 1:
-                    CreateOperacijaDialog createOperacijaDialog = new CreateOperacijaDialog();
+                    CreateOperacijaDialog createOperacijaDialog = new CreateOperacijaDialog(_operacijaSqlProvider);
                     createOperacijaDialog.Show();
                     break;
                 case 2:
-                    CreatePredmetRadaDialog createPredmetRadaDialog = new CreatePredmetRadaDialog();
+                    CreatePredmetRadaDialog createPredmetRadaDialog = new CreatePredmetRadaDialog(_predmetRadaSqlProvider);
                     createPredmetRadaDialog.Show();
                     break;
                 case 3:
-                    CreateRadnaListaDialog createRadnaListaDialog = new CreateRadnaListaDialog();
+                    CreateRadnaListaDialog createRadnaListaDialog = new CreateRadnaListaDialog(_radnaListaSqlProvider);
                     createRadnaListaDialog.Show();
                     break;
                 case 4:
-                    CreateRadnikProizvodnjaDialog createRadnikProizvodnjaDialog = new CreateRadnikProizvodnjaDialog();
+                    CreateRadnikProizvodnjaDialog createRadnikProizvodnjaDialog = new CreateRadnikProizvodnjaDialog(_radnikProizvodnjaSqlProvider);
                     createRadnikProizvodnjaDialog.Show();
                     break;
                 case 5:
-                    CreateRadniNalogDialog createRadniNalogDialog = new CreateRadniNalogDialog();
+                    CreateRadniNalogDialog createRadniNalogDialog = new CreateRadniNalogDialog(_radniNalogSqlProvider);
                     createRadniNalogDialog.Show();
                     break;
                 case 6:
-                    CreateTehnoloskiPostupakDialog createTehnoloskiPostupakDialog = new CreateTehnoloskiPostupakDialog();
+                    CreateTehnoloskiPostupakDialog createTehnoloskiPostupakDialog = new CreateTehnoloskiPostupakDialog(_tehnoloskiPostupakSqlProvider);
                     createTehnoloskiPostupakDialog.Show();
                     break;
                 case 7:
-                    CreateTrebovanjeDialog createTrebovanjeDialog = new CreateTrebovanjeDialog();
+                    CreateTrebovanjeDialog createTrebovanjeDialog = new CreateTrebovanjeDialog(_trebovanjeSqlProvider);
                     createTrebovanjeDialog.Show();
                     break;
             }
