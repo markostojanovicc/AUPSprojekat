@@ -13,5 +13,7 @@ namespace AUPS.SqlProviders.Interfaces
     {
         ObservableCollection<RadnaLista> GetAllFromRadnaLista();
         bool DeleteFromRadnaListaById(int iDRadnaLista);
+
+        bool UpdateRadnaListaById(RadnaLista radnaLista);
     }
 }

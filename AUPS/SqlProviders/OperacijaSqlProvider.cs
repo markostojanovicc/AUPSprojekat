@@ -75,5 +75,26 @@ namespace AUPS.SqlProviders
                 return rowsAffected == 1;
             }
         }
+
+        public bool UpdateOperacijaById(Operacija operacijaNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_OPERACIJA_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, operacijaNew.IDOperacija);
+                cmd.Parameters.AddWithValue("@NazivOperacije", NpgsqlDbType.Varchar, operacijaNew.NazivOperacije);
+                cmd.Parameters.AddWithValue("@OsnovnoVreme", NpgsqlDbType.Varchar, operacijaNew.OsnovnoVreme);
+                cmd.Parameters.AddWithValue("@PomocnoVreme", NpgsqlDbType.Integer, operacijaNew.PomocnoVreme);
+                cmd.Parameters.AddWithValue("@DodatnoVreme", NpgsqlDbType.Varchar, operacijaNew.DodatnoVreme);
+                cmd.Parameters.AddWithValue("@OznakaMasine", NpgsqlDbType.Varchar, operacijaNew.OznakaMasine);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
     }
 }

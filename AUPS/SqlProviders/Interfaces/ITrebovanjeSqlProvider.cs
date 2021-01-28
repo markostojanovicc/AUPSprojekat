@@ -13,5 +13,7 @@ namespace AUPS.SqlProviders.Interfaces
     {
         ObservableCollection<Trebovanje> GetAllFromTrebovanje();
         bool DeleteFromTrebovanjeById(int iDTrebovanje);
+
+        bool UpdateTrebovanjeById(Trebovanje trebovanje);
     }
 }

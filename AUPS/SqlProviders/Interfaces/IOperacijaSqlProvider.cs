@@ -8,5 +8,7 @@ namespace AUPS.SqlProviders.Interfaces
     {
         ObservableCollection<Operacija> GetAllFromOperacija();
         bool DeleteFromOperacijaById(int iDOperacija);
+
+        bool UpdateOperacijaById(Operacija operacija);
     }
 }

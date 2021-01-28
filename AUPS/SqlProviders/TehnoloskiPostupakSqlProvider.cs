@@ -78,5 +78,26 @@ namespace AUPS.SqlProviders
                 return rowsAffected == 1;
             }
         }
+
+        public bool UpdateTehnoloskiPostupakById(TehnoloskiPostupak tehnoloskiPostupakNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_TEHNOLOSKI_POSTUPAK_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, tehnoloskiPostupakNew.IDTehPostupak);
+                cmd.Parameters.AddWithValue("@TipTehPostupak", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.TipTehPostupak);
+                cmd.Parameters.AddWithValue("@VremeIzrade", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.VremeIzrade);
+                cmd.Parameters.AddWithValue("@SerijaKom", NpgsqlDbType.Integer, tehnoloskiPostupakNew.SerijaKom);
+                cmd.Parameters.AddWithValue("@BrKomada", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.BrKomada);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.IDOperacija);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
     }
 }

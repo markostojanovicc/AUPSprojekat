@@ -79,5 +79,25 @@ namespace AUPS.SqlProviders
                 return rowsAffected == 1;
             }
         }
+
+        public bool UpdateRadnaListaById(RadnaLista radnaListaNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_RADNA_LISTA_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, radnaListaNew.IDRadnaLista);
+                cmd.Parameters.AddWithValue("@Datum", NpgsqlDbType.Varchar, radnaListaNew.Datum);
+                cmd.Parameters.AddWithValue("@Kolicina", NpgsqlDbType.Varchar, radnaListaNew.Kolicina);
+                cmd.Parameters.AddWithValue("@IDRadnik", NpgsqlDbType.Integer, radnaListaNew.IDRadnik);
+                cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Varchar, radnaListaNew.IDRadniNalog);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Varchar, radnaListaNew.IDOperacija);
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
     }
 }

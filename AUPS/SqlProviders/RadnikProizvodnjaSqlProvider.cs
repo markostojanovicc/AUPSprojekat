@@ -26,7 +26,7 @@ namespace AUPS.SqlProviders
                   DELETE FROM radnikproizvodnja WHERE idradnik = @Id
             ";
 
-        private const string UPDATE_RADNA_LISTA_BY_ID =
+        private const string UPDATE_RADNIK_PROIZVODNJA_BY_ID =
             @"
                   UPDATE radnik SET imeradnika = @ImeRadnika, prezimeradnika = @PrezimeRadnika, pol = @Pol, idradnomesto = @IDRadnoMesto
                   WHERE idradnik= @Id
@@ -71,6 +71,25 @@ namespace AUPS.SqlProviders
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, iDRadnik);
 
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool UpdateRadnikProizvodnjaById(RadnikProizvodnja radnikProizvodnjaNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_RADNIK_PROIZVODNJA_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, radnikProizvodnjaNew.IDRadnik);
+                cmd.Parameters.AddWithValue("@ImeRadnika", NpgsqlDbType.Varchar, radnikProizvodnjaNew.ImeRadnika);
+                cmd.Parameters.AddWithValue("@PrezimeRadnika", NpgsqlDbType.Varchar, radnikProizvodnjaNew.PrezimeRadnika);
+                cmd.Parameters.AddWithValue("@Pol", NpgsqlDbType.Varchar, radnikProizvodnjaNew.Pol);
+                cmd.Parameters.AddWithValue("@IDRadnoMesto", NpgsqlDbType.Varchar, radnikProizvodnjaNew.IDRadnoMesto);
                 int rowsAffected = cmd.ExecuteNonQuery();
 
                 return rowsAffected == 1;

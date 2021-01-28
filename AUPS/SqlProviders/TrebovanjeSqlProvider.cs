@@ -74,5 +74,25 @@ namespace AUPS.SqlProviders
                 return rowsAffected == 1;
             }
         }
+
+        public bool UpdateTrebovanjeById(Trebovanje trebovanjeNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_TREBOVANJE_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, trebovanjeNew.IDTrebovanje);
+                cmd.Parameters.AddWithValue("@TipTrebovanja", NpgsqlDbType.Varchar, trebovanjeNew.TipTrebovanja);
+                cmd.Parameters.AddWithValue("@JedMere", NpgsqlDbType.Varchar, trebovanjeNew.JedMere);
+                cmd.Parameters.AddWithValue("@KolicinaRobe", NpgsqlDbType.Varchar, trebovanjeNew.KolicinaRobe);
+                cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Varchar, trebovanjeNew.IDRadniNalog);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
     }
 }

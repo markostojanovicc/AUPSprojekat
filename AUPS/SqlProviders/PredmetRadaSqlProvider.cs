@@ -75,5 +75,25 @@ namespace AUPS.SqlProviders
                 return rowsAffected == 1;
             }
         }
+
+        public bool UpdatePredmetRadaById(PredmetRada predmetRadaNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_PREDMET_RADA_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, predmetRadaNew.IDPredmetRada);
+                cmd.Parameters.AddWithValue("@TipPredmetRada", NpgsqlDbType.Varchar, predmetRadaNew.TipPredmetRada);
+                cmd.Parameters.AddWithValue("@NazivPR", NpgsqlDbType.Varchar, predmetRadaNew.NazivPR);
+                cmd.Parameters.AddWithValue("@JedMerePR", NpgsqlDbType.Varchar, predmetRadaNew.JedMerePR);
+                cmd.Parameters.AddWithValue("@Cena", NpgsqlDbType.Varchar, predmetRadaNew.Cena);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
     }
 }

@@ -13,5 +13,7 @@ namespace AUPS.SqlProviders.Interfaces
     {
         ObservableCollection<TehnoloskiPostupak> GetAllFromTehnoloskiPostupak();
         bool DeleteFromTehnoloskiPostupakById(int iDTehPostupak);
+
+        bool UpdateTehnoloskiPostupakById(TehnoloskiPostupak tehnoloskiPostupak);
     }
 }
