@@ -8,9 +8,15 @@ namespace AUPS.ViewModels.MainContentViewModels
 {
     public class RadnoMestoViewModel : BaseViewModel
     {
-        private ObservableCollection<RadnoMesto> _radnoMestoList;
-        private IRadnoMestoSqlProvider _radnoMestoSqlProvider;
+        private RadnoMesto _itemSelected;
 
+        public RadnoMesto ItemSelected
+        {
+            get { return _itemSelected; }
+            set { _itemSelected = value; }
+        }
+
+        private ObservableCollection<RadnoMesto> _radnoMestoList;
         public ObservableCollection<RadnoMesto> RadnoMestoList
         {
             get { return _radnoMestoList; }
@@ -20,6 +26,10 @@ namespace AUPS.ViewModels.MainContentViewModels
                 OnPropertyChanged(nameof(RadnoMestoList));
             }
         }
+
+        private IRadnoMestoSqlProvider _radnoMestoSqlProvider;
+
+       
 
         public RadnoMestoViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider)
         {

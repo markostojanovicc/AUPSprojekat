@@ -14,6 +14,7 @@ namespace AUPS.ViewModels.MainContentViewModels
     {
         private ObservableCollection<RadniNalog> _radniNalogList;
         private IRadniNalogSqlProvider _radniNalogSqlProvider;
+
         public ObservableCollection<RadniNalog> RadniNalogList
         {
             get { return _radniNalogList; }
@@ -22,6 +23,14 @@ namespace AUPS.ViewModels.MainContentViewModels
                 _radniNalogList = value;
                 OnPropertyChanged(nameof(RadniNalogList));
             }
+        }
+
+        private RadniNalog _itemSelected;
+
+        public RadniNalog ItemSelected
+        {
+            get { return _itemSelected; }
+            set { _itemSelected = value; }
         }
 
         public RadniNalogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider)

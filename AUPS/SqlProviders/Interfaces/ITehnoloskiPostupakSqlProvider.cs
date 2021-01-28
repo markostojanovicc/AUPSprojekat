@@ -12,5 +12,6 @@ namespace AUPS.SqlProviders.Interfaces
     public interface ITehnoloskiPostupakSqlProvider
     {
         ObservableCollection<TehnoloskiPostupak> GetAllFromTehnoloskiPostupak();
+        bool DeleteFromTehnoloskiPostupakById(int iDTehPostupak);
     }
 }

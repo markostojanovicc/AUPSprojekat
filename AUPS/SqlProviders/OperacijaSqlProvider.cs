@@ -1,6 +1,7 @@
 ﻿using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +18,17 @@ namespace AUPS.SqlProviders
         private const string GET_ALL_RECORDS_FROM_OPERACIJA =
             @"
                   SELECT * FROM operacija;
+            ";
+
+        private const string DELETE_FROM_OPERACIJA_BY_ID =
+            @"
+                  DELETE FROM operacija WHERE idoperacija = @Id
+            ";
+
+        private const string UPDATE_OPERACIJA_BY_ID =
+            @"
+                  UPDATE operacija SET nazivoperacije = @NazivOperacije, osnovnovreme = @OsnovnoVreme, pomocnovreme = @PomocnoVreme, dodatnovreme = @DodatnoVreme, oznakamasine = @OznakaMasine
+                  WHERE idoperacija = @Id
             ";
         #endregion
 
@@ -46,6 +58,22 @@ namespace AUPS.SqlProviders
             }
 
             return operacijaList;
+        }
+
+        public bool DeleteFromOperacijaById(int iDOperacija)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(DELETE_FROM_OPERACIJA_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, iDOperacija);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
         }
     }
 }

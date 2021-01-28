@@ -9,6 +9,7 @@ namespace AUPS.ViewModels.MainContentViewModels
     {
         private ObservableCollection<TehnoloskiPostupak> _tehnoloskiPostupakList;
         private ITehnoloskiPostupakSqlProvider _tehnoloskiPostupakSqlProvider;
+
         public ObservableCollection<TehnoloskiPostupak> TehnoloskiPostupakList
         {
             get { return _tehnoloskiPostupakList; }
@@ -17,6 +18,14 @@ namespace AUPS.ViewModels.MainContentViewModels
                 _tehnoloskiPostupakList= value;
                 OnPropertyChanged(nameof(TehnoloskiPostupak));
             }
+        }
+
+        private TehnoloskiPostupak _itemSelected;
+
+        public TehnoloskiPostupak ItemSelected
+        {
+            get { return _itemSelected; }
+            set { _itemSelected = value; }
         }
 
         public TehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider)

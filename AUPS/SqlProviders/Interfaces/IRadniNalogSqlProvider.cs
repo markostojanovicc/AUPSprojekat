@@ -12,5 +12,6 @@ namespace AUPS.SqlProviders.Interfaces
     public interface IRadniNalogSqlProvider
     {
         ObservableCollection<RadniNalog> GetAllFromRadniNalog();
+        bool DeleteFromRadniNalogById(int iDRadniNalog);
     }
 }

@@ -12,6 +12,7 @@ namespace AUPS.SqlProviders.Interfaces
     public interface IRadnoMestoSqlProvider
     {
         ObservableCollection<RadnoMesto> GetAllFromRadnoMesto();
-
+        bool DeleteFromRadnoMestoById(int iDRadnoMesto);
+        bool UpdateRadnoMestoById(RadnoMesto radnoMestoNew);
     }
 }

@@ -14,6 +14,7 @@ namespace AUPS.ViewModels.MainContentViewModels
     {
         private ObservableCollection<RadnaLista> _radnaListaList;
         private IRadnaListaSqlProvider _radnaListaSqlProvider;
+
         public ObservableCollection<RadnaLista> RadnaListaList
         {
             get { return _radnaListaList; }
@@ -22,6 +23,14 @@ namespace AUPS.ViewModels.MainContentViewModels
                 _radnaListaList = value;
                 OnPropertyChanged(nameof(RadnaListaList));
             }
+        }
+
+        private RadnaLista _itemSelected;
+
+        public RadnaLista ItemSelected
+        {
+            get { return _itemSelected; }
+            set { _itemSelected = value; }
         }
 
         public RadnaListaViewModel(IRadnaListaSqlProvider radnaListaSqlProvider)

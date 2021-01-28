@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AUPS.Models;
 using System.Collections.ObjectModel;
+using NpgsqlTypes;
 
 namespace AUPS.SqlProviders
 {
@@ -17,6 +18,17 @@ namespace AUPS.SqlProviders
         private const string GET_ALL_RECORDS_FROM_PREDMET_RADA =
             @"
                   SELECT * FROM predmetrada;
+            ";
+
+        private const string DELETE_FROM_PREDMET_RADA_BY_ID =
+            @"
+                  DELETE FROM predmetrada WHERE idpredmetrada = @Id
+            ";
+
+        private const string UPDATE_PREDMET_RADA_BY_ID =
+            @"
+                  UPDATE predmetrada SET tippredmetrada = @TipPredmetRada, nazivpr = @NazivPR, jedmerepr = @JedMerePR, cena = @Cena
+                  WHERE idpredmetrada = @Id
             ";
         #endregion
 
@@ -48,5 +60,20 @@ namespace AUPS.SqlProviders
 
         }
 
+        public bool DeleteFromPredmetRadaById(int iDPredmetRada)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(DELETE_FROM_PREDMET_RADA_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, iDPredmetRada);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
     }
 }

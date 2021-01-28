@@ -14,6 +14,7 @@ namespace AUPS.ViewModels.MainContentViewModels
     {
         private ObservableCollection<RadnikProizvodnja> _radnikProizvodnjaList;
         private IRadnikProizvodnjaSqlProvider _radnikProizvodnjaSqlProvider;
+
         public ObservableCollection<RadnikProizvodnja> RadnikProizvodnjaList
         {
             get { return _radnikProizvodnjaList; }
@@ -22,6 +23,14 @@ namespace AUPS.ViewModels.MainContentViewModels
                 _radnikProizvodnjaList = value;
                 OnPropertyChanged(nameof(RadnikProizvodnjaList));
             }
+        }
+
+        private RadnikProizvodnja _itemSelected;
+
+        public RadnikProizvodnja ItemSelected
+        {
+            get { return _itemSelected; }
+            set { _itemSelected = value; }
         }
 
         public RadnikProizvodnjaViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider)

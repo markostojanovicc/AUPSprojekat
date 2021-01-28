@@ -14,6 +14,7 @@ namespace AUPS.ViewModels.MainContentViewModels
     {
         private ObservableCollection<PredmetRada> _predmetRadaList;
         private IPredmetRadaSqlProvider _predmetRadaSqlProvider;
+
         public ObservableCollection<PredmetRada> PredmetRadaList
         {
             get { return _predmetRadaList; }
@@ -22,6 +23,14 @@ namespace AUPS.ViewModels.MainContentViewModels
                 _predmetRadaList = value;
                 OnPropertyChanged(nameof(PredmetRada));
             }
+        }
+
+        private PredmetRada _itemSelected;
+
+        public PredmetRada ItemSelected
+        {
+            get { return _itemSelected; }
+            set { _itemSelected = value; }
         }
 
         public PredmetRadaViewModel(IPredmetRadaSqlProvider predmetRadaSqlProvider)

@@ -12,5 +12,6 @@ namespace AUPS.SqlProviders.Interfaces
     public interface IRadnikProizvodnjaSqlProvider
     {
         ObservableCollection<RadnikProizvodnja> GetAllFromRadnikProizvodnja();
+        bool DeleteFromRadnikProizvodnjaById(int iDRadnik);
     }
 }

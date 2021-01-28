@@ -12,5 +12,6 @@ namespace AUPS.SqlProviders.Interfaces
     public interface IPredmetRadaSqlProvider
     {
         ObservableCollection<PredmetRada> GetAllFromPredmetRada();
+        bool DeleteFromPredmetRadaById(int iDPredmetRada);
     }
 }
