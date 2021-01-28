@@ -9,6 +9,7 @@ namespace AUPS.ViewModels.MainContentViewModels
     {
         private ObservableCollection<TehnoloskiPostupak> _tehnoloskiPostupakList;
         private ITehnoloskiPostupakSqlProvider _tehnoloskiPostupakSqlProvider;
+
         public ObservableCollection<TehnoloskiPostupak> TehnoloskiPostupakList
         {
             get { return _tehnoloskiPostupakList; }

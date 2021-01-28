@@ -14,6 +14,7 @@ namespace AUPS.ViewModels.MainContentViewModels
     {
         private ObservableCollection<RadniNalog> _radniNalogList;
         private IRadniNalogSqlProvider _radniNalogSqlProvider;
+
         public ObservableCollection<RadniNalog> RadniNalogList
         {
             get { return _radniNalogList; }
