@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\niksa\source\repos\AUPSprojekat\AUPS\App.xaml
-15-1591508218
+14806400501
 
-66295561687
+65-163021064
 1301387179245
-ApplicationMainWindow.xaml;Controls\LogInControl.xaml;Controls\MainContentControl.xaml;Controls\MainContentUserControls\OperacijaControl.xaml;Controls\MainContentUserControls\PredmetRadaControl.xaml;Controls\MainContentUserControls\RadnaListaControl.xaml;Controls\MainContentUserControls\RadnikProizvodnjaControl.xaml;Controls\MainContentUserControls\RadniNalogControl.xaml;Controls\MainContentUserControls\RadnoMestoControl.xaml;Controls\MainContentUserControls\TehnoloskiPostupakControl.xaml;Controls\MainContentUserControls\TrebovanjeControl.xaml;Dialogs\RadnoMesto\CreateRadnoMestoDialog.xaml;RegistrationWindow.xaml;Resources\DataTemplates.xaml;Resources\Styles.xaml;
+ApplicationMainWindow.xaml;Controls\LogInControl.xaml;Controls\MainContentControl.xaml;Controls\MainContentUserControls\OperacijaControl.xaml;Controls\MainContentUserControls\PredmetRadaControl.xaml;Controls\MainContentUserControls\RadnaListaControl.xaml;Controls\MainContentUserControls\RadnikProizvodnjaControl.xaml;Controls\MainContentUserControls\RadniNalogControl.xaml;Controls\MainContentUserControls\RadnoMestoControl.xaml;Controls\MainContentUserControls\TehnoloskiPostupakControl.xaml;Controls\MainContentUserControls\TrebovanjeControl.xaml;RegistrationWindow.xaml;Resources\DataTemplates.xaml;Resources\Styles.xaml;
 
-True
+False
 
