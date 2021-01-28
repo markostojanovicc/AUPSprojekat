@@ -16,6 +16,29 @@ namespace AUPS.ViewModels.Dialogs
         private string _title = "Dijalog za kreiranje radnika";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
+        private string _imeRadnika;
+        private string _prezimeRadnika;
+        private string _idRadnoMesto;
+
+        public string IdRadnoMesto
+        {
+            get { return _idRadnoMesto; }
+            set { _idRadnoMesto = value; }
+        }
+
+        public string PrezimeRadnika
+        {
+            get { return _prezimeRadnika; }
+            set { _prezimeRadnika = value; }
+        }
+
+
+        public string ImeRadnika
+        {
+            get { return _imeRadnika; }
+            set { _imeRadnika = value; }
+        }
+
 
         public List<Pol> Polovi
         {
@@ -41,7 +64,7 @@ namespace AUPS.ViewModels.Dialogs
             set { _isUpdateBtnVisible = value; }
         }
 
-        public bool IsCreateButtonVisible
+        public bool IsCreateBtnVisible
         {
             get { return _isCreateBtnVisible = true; }
             set { _isCreateBtnVisible = value; }
@@ -63,7 +86,7 @@ namespace AUPS.ViewModels.Dialogs
         public void SetViewForUpdateDialog()
         {
             Title = "Dijalog za izmenu radnika";
-            IsCreateButtonVisible = false;
+            IsCreateBtnVisible = false;
             IsUpdateBtnVisible = true;
         }
 

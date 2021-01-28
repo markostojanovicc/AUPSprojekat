@@ -14,6 +14,21 @@ namespace AUPS.ViewModels.Dialogs
         private string _title = "Dijalog za kreiranje radnog mesta";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
+        private string _nazivRadnogMesta;
+        private string _strucnaSprema;
+
+        public string StrucnaSprema
+        {
+            get { return _strucnaSprema; }
+            set { _strucnaSprema = value; }
+        }
+
+
+        public string NazivRadnogMesta
+        {
+            get { return _nazivRadnogMesta; }
+            set { _nazivRadnogMesta = value; }
+        }     
 
         public bool IsUpdateBtnVisible
         {
@@ -21,7 +36,7 @@ namespace AUPS.ViewModels.Dialogs
             set { _isUpdateBtnVisible = value; }
         }
 
-        public bool IsCreateButtonVisible
+        public bool IsCreateBtnVisible
         {
             get { return _isCreateBtnVisible = true; }
             set { _isCreateBtnVisible = value; }
@@ -43,7 +58,7 @@ namespace AUPS.ViewModels.Dialogs
         public void SetViewForUpdateDialog()
         {
             Title = "Dijalog za izmenu radnog mesta";
-            IsCreateButtonVisible = false;
+            IsCreateBtnVisible = false;
             IsUpdateBtnVisible = true;
         }
     }

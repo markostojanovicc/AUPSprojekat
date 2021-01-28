@@ -14,6 +14,38 @@ namespace AUPS.ViewModels.Dialogs
         private string _title = "Dijalog za kreiranje trebovanje";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
+        private string _tipTrebovanja;
+        private string _jedMere;
+        private string _kolicinaRobe;
+        private string _idRadniNalog;
+
+        public string IdRadniNalog
+        {
+            get { return _idRadniNalog; }
+            set { _idRadniNalog = value; }
+        }
+
+
+        public string KolicinaRobe
+        {
+            get { return _kolicinaRobe; }
+            set { _kolicinaRobe = value; }
+        }
+
+
+        public string JedinicaMere
+        {
+            get { return _jedMere; }
+            set { _jedMere = value; }
+        }
+
+
+        public string TipTrebovanja
+        {
+            get { return _tipTrebovanja; }
+            set { _tipTrebovanja = value; }
+        }
+
 
         public bool IsUpdateBtnVisible
         {
@@ -21,7 +53,7 @@ namespace AUPS.ViewModels.Dialogs
             set { _isUpdateBtnVisible = value; }
         }
 
-        public bool IsCreateButtonVisible
+        public bool IsCreateBtnVisible
         {
             get { return _isCreateBtnVisible = true; }
             set { _isCreateBtnVisible = value; }
@@ -43,7 +75,7 @@ namespace AUPS.ViewModels.Dialogs
         public void SetViewForUpdateDialog()
         {
             Title = "Dijalog za izmenu trebovanja";
-            IsCreateButtonVisible = false;
+            IsCreateBtnVisible = false;
             IsUpdateBtnVisible = true;
         }
     }

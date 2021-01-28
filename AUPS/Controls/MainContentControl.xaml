@@ -16,7 +16,7 @@
             <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TabControl Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" SelectedIndex="{Binding SelectedTabIndex}">
+        <TabControl Margin ="0 15 0 0" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" SelectedIndex="{Binding SelectedTabIndex}">
             <TabItem Header="Radno mesto"/>
             <TabItem Header="Operacija"/>
             <TabItem Header="Predmet rada"/>

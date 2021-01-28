@@ -16,16 +16,16 @@
         <Grid Grid.Row="0" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
             <TextBlock Margin="10 0 10 0" Text="Naziv radnog mesta..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtNazivRadnogMesta, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Height="30" Name="txtNazivRadnogMesta" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
+            <TextBox Height="30" Name="txtNazivRadnogMesta" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding NazivRadnogMesta}"/>
         </Grid>
 
         <Grid Grid.Row="1" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
             <TextBlock Margin="10 0 10 0" Text="Strucna sprema..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtStrucnaSprema, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Height="30" Name="txtStrucnaSprema" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
+            <TextBox Height="30" Name="txtStrucnaSprema" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding StrucnaSprema}"/>
         </Grid>
 
-        <Button Visibility="{Binding IsCreateBtnVisible}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
-        <Button Visibility="{Binding IsUpdateBtnVisible}" Style="{StaticResource loginbtnstyle}"  x:Name="btnUpdate" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Potvrdi Izmene" Height="35" Width="160" />
+        <Button Visibility="{Binding IsCreateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
+        <Button Visibility="{Binding IsUpdateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnUpdate" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Potvrdi Izmene" Height="35" Width="160" />
     </Grid>
 </Window>

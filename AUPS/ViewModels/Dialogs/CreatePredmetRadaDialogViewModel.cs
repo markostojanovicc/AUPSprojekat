@@ -14,6 +14,38 @@ namespace AUPS.ViewModels.Dialogs
         private string _title = "Dijalog za kreiranje predmeta rada";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
+        private string _tipPredmetaRada;
+        private string _nazivPR;
+        private string _jedMere;
+        private string _cena;
+
+        public string Cena
+        {
+            get { return _cena; }
+            set { _cena = value; }
+        }
+
+
+        public string JedMere
+        {
+            get { return _jedMere; }
+            set { _jedMere = value; }
+        }
+
+
+        public string NazivPR
+        {
+            get { return _nazivPR; }
+            set { _nazivPR = value; }
+        }
+
+
+        public string TipPredmetaRada
+        {
+            get { return _tipPredmetaRada; }
+            set { _tipPredmetaRada = value; }
+        }
+
 
         public bool IsUpdateBtnVisible
         {
@@ -21,7 +53,7 @@ namespace AUPS.ViewModels.Dialogs
             set { _isUpdateBtnVisible = value; }
         }
 
-        public bool IsCreateButtonVisible
+        public bool IsCreateBtnVisible
         {
             get { return _isCreateBtnVisible = true; }
             set { _isCreateBtnVisible = value; }
@@ -43,7 +75,7 @@ namespace AUPS.ViewModels.Dialogs
         public void SetViewForUpdateDialog()
         {
             Title = "Dijalog za izmenu predmeta rada";
-            IsCreateButtonVisible = false;
+            IsCreateBtnVisible = false;
             IsUpdateBtnVisible = true;
         }
     }

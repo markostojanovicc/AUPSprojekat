@@ -15,24 +15,24 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left" Margin="30">
             <TextBlock Text="Datum ulaza:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20"/>
-            <DatePicker Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 0 0 0"/>
+            <DatePicker Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 0 0 0" SelectedDate="{Binding DatumUlaza}"/>
             <TextBlock Text="Datum izlaza:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Margin="70 0 0 0"/>
-            <DatePicker Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 0 0 0"/>
+            <DatePicker Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 0 0 0" SelectedDate="{Binding DatumIzlaza}"/>
         </StackPanel>
 
         <Grid Grid.Row="1" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
             <TextBlock Margin="10 0 10 0" Text="Kolicina proizvoda..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtKolicinaProizvoda, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Height="30" Name="txtKolicinaProizvoda" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
+            <TextBox Height="30" Name="txtKolicinaProizvoda" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding KolicinaProizvoda}"/>
         </Grid>
 
         <Grid Grid.Row="2" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
             <TextBlock Margin="10 0 10 0" Text="IdPredmetaRada..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtIdIdPredmetaRada, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Height="30" Name="txtIdPredmetaRada" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
+            <TextBox Height="30" Name="txtIdPredmetaRada" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding IdPredmetaRada}"/>
         </Grid>
 
-        <Button Visibility="{Binding IsCreateBtnVisible}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
-        <Button Visibility="{Binding IsUpdateBtnVisible}" Style="{StaticResource loginbtnstyle}"  x:Name="btnUpdate" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Potvrdi Izmene" Height="35" Width="160" />
+        <Button Visibility="{Binding IsCreateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
+        <Button Visibility="{Binding IsUpdateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnUpdate" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Potvrdi Izmene" Height="35" Width="160" />
     </Grid>
 </Window>

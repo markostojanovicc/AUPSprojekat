@@ -21,28 +21,28 @@
         <Grid Grid.Row="0" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
             <TextBlock Margin="10 0 10 0" Text="Kolicina..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtKolicina, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Height="30" Name="txtKolicina" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
+            <TextBox Height="30" Name="txtKolicina" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Kolicina}"/>
         </Grid>
 
         <Grid Grid.Row="1" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
             <TextBlock Margin="10 0 10 0" Text="Id radnika..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtIdRadnika, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Height="30" Name="txtIdRadnika" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
+            <TextBox Height="30" Name="txtIdRadnika" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding IdRadnika}"/>
         </Grid>
 
         <Grid Grid.Row="2" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
             <TextBlock Margin="10 0 10 0" Text="IdRadniNalog..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtCena, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Height="30" Name="txtCena" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
+            <TextBox Height="30" Name="txtCena" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding IdRadniNalog}"/>
         </Grid>
 
         <Grid Grid.Row="3" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
-            <TextBlock Margin="10 0 10 0" Text="sdfsdf..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
+            <TextBlock Margin="10 0 10 0" Text="Id operacije..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=sdfg, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Height="30" Name="sdfg" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
+            <TextBox Height="30" Name="sdfg" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding IdOperacija}"/>
         </Grid>
 
-        <Button Visibility="{Binding IsCreateBtnVisible}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
-        <Button Visibility="{Binding IsUpdateBtnVisible}" Style="{StaticResource loginbtnstyle}"  x:Name="btnUpdate" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Potvrdi Izmene" Height="35" Width="160" />
+        <Button Visibility="{Binding IsCreateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
+        <Button Visibility="{Binding IsUpdateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnUpdate" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Potvrdi Izmene" Height="35" Width="160" />
     </Grid>
 </Window>

@@ -14,6 +14,43 @@ namespace AUPS.ViewModels.Dialogs
         private string _title = "Dijalog za kreiranje operacije";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
+        private string _nazivOperacije;
+        private string _osnovnoVreme;
+        private string _pomocnoVreme;
+        private string _dodatnoVreme;
+        private string _oznakaMasine;
+
+        public string OznakaMasine
+        {
+            get { return _oznakaMasine; }
+            set { _oznakaMasine = value; }
+        }
+
+        public string DodatnoVreme
+        {
+            get { return _dodatnoVreme; }
+            set { _dodatnoVreme = value; }
+        }
+
+        public string PomocnoVreme
+        {
+            get { return _pomocnoVreme; }
+            set { _pomocnoVreme = value; }
+        }
+
+        public string OsnovnoVreme
+        {
+            get { return _osnovnoVreme; }
+            set { _osnovnoVreme = value; }
+        }
+
+
+        public string NazivOperacije
+        {
+            get { return _nazivOperacije; }
+            set { _nazivOperacije = value; }
+        }
+
 
         public bool IsUpdateBtnVisible
         {
@@ -21,7 +58,7 @@ namespace AUPS.ViewModels.Dialogs
             set { _isUpdateBtnVisible = value; }
         }
 
-        public bool IsCreateButtonVisible
+        public bool IsCreateBtnVisible
         {
             get { return _isCreateBtnVisible = true; }
             set { _isCreateBtnVisible = value; }
@@ -43,7 +80,7 @@ namespace AUPS.ViewModels.Dialogs
         public void SetViewForUpdateDialog()
         {
             Title = "Dijalog za izmenu operacije";
-            IsCreateButtonVisible = false;
+            IsCreateBtnVisible = false;
             IsUpdateBtnVisible = true;
         }
     }
