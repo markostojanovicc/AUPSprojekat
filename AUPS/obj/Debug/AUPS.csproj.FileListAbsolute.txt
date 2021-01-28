@@ -108,3 +108,17 @@ C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Resources\Styles.baml
 C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\AUPS.csprojAssemblyReference.cache
 C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\RadnoMesto\CreateRadnoMestoDialog.g.cs
 C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\RadnoMesto\CreateRadnoMestoDialog.baml
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\Operacija\CreateOperacijaDialog.g.cs
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\Operacija\CreateOperacijaDialog.baml
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\PredmetRada\CreatePredmetRadaDialog.g.cs
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\PredmetRada\CreatePredmetRadaDialog.baml
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\RadnaLista\CreateRadnaListaDialog.g.cs
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\RadnaLista\CreateRadnaListaDialog.baml
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\RadnikProizvodnja\CreateRadnikProizvodnjaDialog.g.cs
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\RadnikProizvodnja\CreateRadnikProizvodnjaDialog.baml
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\RadniNalog\CreateRadniNalogDialog.g.cs
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\TehnoloskiPostupak\CreateTehnoloskiPostupakDialog.g.cs
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\Trebovanje\CreateTrebovanjeDialog.g.cs
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\RadniNalog\CreateRadniNalogDialog.baml
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\TehnoloskiPostupak\CreateTehnoloskiPostupakDialog.baml
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\Trebovanje\CreateTrebovanjeDialog.baml

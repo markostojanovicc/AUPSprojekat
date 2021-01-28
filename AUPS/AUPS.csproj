@@ -135,9 +135,31 @@
       <DependentUpon>TrebovanjeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\IntToVisibilityConverter.cs" />
+    <Compile Include="Dialogs\Operacija\CreateOperacijaDialog.xaml.cs">
+      <DependentUpon>CreateOperacijaDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PredmetRada\CreatePredmetRadaDialog.xaml.cs">
+      <DependentUpon>CreatePredmetRadaDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RadnaLista\CreateRadnaListaDialog.xaml.cs">
+      <DependentUpon>CreateRadnaListaDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RadnikProizvodnja\CreateRadnikProizvodnjaDialog.xaml.cs">
+      <DependentUpon>CreateRadnikProizvodnjaDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RadniNalog\CreateRadniNalogDialog.xaml.cs">
+      <DependentUpon>CreateRadniNalogDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\RadnoMesto\CreateRadnoMestoDialog.xaml.cs">
       <DependentUpon>CreateRadnoMestoDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\TehnoloskiPostupak\CreateTehnoloskiPostupakDialog.xaml.cs">
+      <DependentUpon>CreateTehnoloskiPostupakDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Trebovanje\CreateTrebovanjeDialog.xaml.cs">
+      <DependentUpon>CreateTrebovanjeDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Enums\Pol.cs" />
     <Compile Include="Helpers\DialogCloser.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Models\Operacija.cs" />
@@ -174,6 +196,7 @@
     <Compile Include="TemplateSelectors\DataGridTemplateSelector.cs" />
     <Compile Include="ViewModels\ApplictionMainWindowViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\CreateRadnikProizvodnjaDialogViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModels\OperacijaViewModel.cs" />
@@ -233,7 +256,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\Operacija\CreateOperacijaDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\PredmetRada\CreatePredmetRadaDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\RadnaLista\CreateRadnaListaDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\RadnikProizvodnja\CreateRadnikProizvodnjaDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\RadniNalog\CreateRadniNalogDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\RadnoMesto\CreateRadnoMestoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\TehnoloskiPostupak\CreateTehnoloskiPostupakDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Trebovanje\CreateTrebovanjeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -277,9 +328,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Dialogs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.3.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.3.0\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

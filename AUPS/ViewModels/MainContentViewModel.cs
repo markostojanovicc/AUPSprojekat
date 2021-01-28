@@ -1,5 +1,12 @@
 ﻿using AUPS.Commands;
+using AUPS.Dialogs.Operacija;
+using AUPS.Dialogs.PredmetRada;
+using AUPS.Dialogs.RadnaLista;
+using AUPS.Dialogs.RadnikProizvodnja;
+using AUPS.Dialogs.RadniNalog;
 using AUPS.Dialogs.RadnoMesto;
+using AUPS.Dialogs.TehnoloskiPostupak;
+using AUPS.Dialogs.Trebovanje;
 using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using AUPS.ViewModels;
@@ -69,18 +76,32 @@ namespace AUPS
                     createRadnoMestoDialog.Show();
                     break;
                 case 1:
+                    CreateOperacijaDialog createOperacijaDialog = new CreateOperacijaDialog();
+                    createOperacijaDialog.Show();
                     break;
                 case 2:
+                    CreatePredmetRadaDialog createPredmetRadaDialog = new CreatePredmetRadaDialog();
+                    createPredmetRadaDialog.Show();
                     break;
                 case 3:
+                    CreateRadnaListaDialog createRadnaListaDialog = new CreateRadnaListaDialog();
+                    createRadnaListaDialog.Show();
                     break;
                 case 4:
+                    CreateRadnikProizvodnjaDialog createRadnikProizvodnjaDialog = new CreateRadnikProizvodnjaDialog();
+                    createRadnikProizvodnjaDialog.Show();
                     break;
                 case 5:
+                    CreateRadniNalogDialog createRadniNalogDialog = new CreateRadniNalogDialog();
+                    createRadniNalogDialog.Show();
                     break;
                 case 6:
+                    CreateTehnoloskiPostupakDialog createTehnoloskiPostupakDialog = new CreateTehnoloskiPostupakDialog();
+                    createTehnoloskiPostupakDialog.Show();
                     break;
                 case 7:
+                    CreateTrebovanjeDialog createTrebovanjeDialog = new CreateTrebovanjeDialog();
+                    createTrebovanjeDialog.Show();
                     break;
             }
         }

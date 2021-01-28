@@ -1,0 +1,47 @@
+﻿<Window x:Class="AUPS.Dialogs.RadnaLista.CreateRadnaListaDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AUPS.Dialogs.RadnaLista"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="CreateRadnaListaDialog" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <DatePicker Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+        <Grid Grid.Row="0" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
+            <TextBlock Margin="10 0 10 0" Text="Kolicina..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
+                       Visibility="{Binding ElementName=txtKolicina, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <TextBox Height="30" Name="txtKolicina" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
+            <TextBlock Margin="10 0 10 0" Text="Id radnika..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
+                       Visibility="{Binding ElementName=txtIdRadnika, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <TextBox Height="30" Name="txtIdRadnika" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
+        </Grid>
+
+        <Grid Grid.Row="2" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
+            <TextBlock Margin="10 0 10 0" Text="IdRadniNalog..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
+                       Visibility="{Binding ElementName=txtCena, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <TextBox Height="30" Name="txtCena" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
+        </Grid>
+
+        <Grid Grid.Row="3" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
+            <TextBlock Margin="10 0 10 0" Text="sdfsdf..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
+                       Visibility="{Binding ElementName=sdfg, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <TextBox Height="30" Name="sdfg" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
+        </Grid>
+
+        <Button Style="{StaticResource loginbtnstyle}"  x:Name="btnOk" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
+    </Grid>
+</Window>
