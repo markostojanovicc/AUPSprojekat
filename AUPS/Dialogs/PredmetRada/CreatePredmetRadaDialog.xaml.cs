@@ -14,5 +14,11 @@ namespace AUPS.Dialogs.PredmetRada
             InitializeComponent();
             DataContext = new CreatePredmetRadaDialogViewModel(_predmetRadaSqlProvider);
         }
+
+        public CreatePredmetRadaDialog(IPredmetRadaSqlProvider _predmetRadaSqlProvider, AUPS.Models.PredmetRada predmetRada)
+        {
+            InitializeComponent();
+            DataContext = new CreatePredmetRadaDialogViewModel(_predmetRadaSqlProvider, predmetRada);
+        }
     }
 }

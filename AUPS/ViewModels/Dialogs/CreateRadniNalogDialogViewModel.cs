@@ -1,4 +1,5 @@
-﻿using AUPS.SqlProviders.Interfaces;
+﻿using AUPS.Models;
+using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,14 @@ namespace AUPS.ViewModels.Dialogs
         private DateTime _datumUlaza;
         private string _kolicinaProizvoda;
         private string _idPredmetaRada;
+        private int _idRadniNalog;
+
+        public int IdRadniNalog
+        {
+            get { return _idRadniNalog; }
+            set { _idRadniNalog = value; }
+        }
+
 
         public string IdPredmetaRada
         {
@@ -48,13 +57,13 @@ namespace AUPS.ViewModels.Dialogs
 
         public bool IsUpdateBtnVisible
         {
-            get { return _isUpdateBtnVisible = false; }
+            get { return _isUpdateBtnVisible; }
             set { _isUpdateBtnVisible = value; }
         }
 
         public bool IsCreateBtnVisible
         {
-            get { return _isCreateBtnVisible = true; }
+            get { return _isCreateBtnVisible; }
             set { _isCreateBtnVisible = value; }
         }
 
@@ -69,6 +78,16 @@ namespace AUPS.ViewModels.Dialogs
         public CreateRadniNalogDialogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider)
         {
             _radniNalogSqlProvider = radniNalogSqlProvider;
+        }
+
+        public CreateRadniNalogDialogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider, RadniNalog radniNalog)
+        {
+            _radniNalogSqlProvider = radniNalogSqlProvider;
+            IdRadniNalog = radniNalog.IDRadniNalog;
+            DatumUlaza = radniNalog.DatumUlaz;
+            DatumIzlaza = radniNalog.DatumIzlaz;
+            KolicinaProizvoda = radniNalog.KolicinaProizvoda.ToString();
+            IdPredmetaRada = radniNalog.IDPredmetRada.ToString();
         }
 
         public void SetViewForUpdateDialog()

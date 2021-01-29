@@ -1,4 +1,5 @@
-﻿using AUPS.SqlProviders.Interfaces;
+﻿using AUPS.Models;
+using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,14 @@ namespace AUPS.ViewModels.Dialogs
         private string _jedMere;
         private string _kolicinaRobe;
         private string _idRadniNalog;
+        private int _idTrebovanje;
+
+        public int IdTrebovanja
+        {
+            get { return _idTrebovanje; }
+            set { _idTrebovanje = value; }
+        }
+
 
         public string IdRadniNalog
         {
@@ -49,13 +58,13 @@ namespace AUPS.ViewModels.Dialogs
 
         public bool IsUpdateBtnVisible
         {
-            get { return _isUpdateBtnVisible = false; }
+            get { return _isUpdateBtnVisible; }
             set { _isUpdateBtnVisible = value; }
         }
 
         public bool IsCreateBtnVisible
         {
-            get { return _isCreateBtnVisible = true; }
+            get { return _isCreateBtnVisible; }
             set { _isCreateBtnVisible = value; }
         }
 
@@ -66,10 +75,19 @@ namespace AUPS.ViewModels.Dialogs
             set { _title = value; }
         }
 
-
         public CreateTrebovanjeDialogViewModel(ITrebovanjeSqlProvider trebovanjeSqlProvider)
         {
             _trebovanjeSqlProvider = trebovanjeSqlProvider;
+        }
+
+        public CreateTrebovanjeDialogViewModel(ITrebovanjeSqlProvider trebovanjeSqlProvider, Trebovanje trebovanje)
+        {
+            _trebovanjeSqlProvider = trebovanjeSqlProvider;
+            IdTrebovanja = trebovanje.IDTrebovanje;
+            TipTrebovanja = trebovanje.TipTrebovanja;
+            JedinicaMere = trebovanje.JedMere;
+            KolicinaRobe = trebovanje.KolicinaRobe.ToString();
+            IdRadniNalog = trebovanje.IDRadniNalog.ToString();
         }
 
         public void SetViewForUpdateDialog()

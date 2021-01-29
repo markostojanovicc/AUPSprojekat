@@ -1,4 +1,5 @@
-﻿using AUPS.SqlProviders.Interfaces;
+﻿using AUPS.Models;
+using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,14 @@ namespace AUPS.ViewModels.Dialogs
         private string _idRadnika;
         private string _idRadniNalog;
         private string _idOperacija;
+        private int _idRadneListe;
+
+        public int IdRadneListe
+        {
+            get { return _idRadneListe; }
+            set { _idRadneListe = value; }
+        }
+
 
         public string IdOperacija
         {
@@ -56,13 +65,13 @@ namespace AUPS.ViewModels.Dialogs
 
         public bool IsUpdateBtnVisible
         {
-            get { return _isUpdateBtnVisible = false; }
+            get { return _isUpdateBtnVisible; }
             set { _isUpdateBtnVisible = value; }
         }
 
         public bool IsCreateBtnVisible
         {
-            get { return _isCreateBtnVisible = true; }
+            get { return _isCreateBtnVisible; }
             set { _isCreateBtnVisible = value; }
         }
 
@@ -77,6 +86,17 @@ namespace AUPS.ViewModels.Dialogs
         public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider)
         {
             _radnaListaSqlProvider = radnaListaSqlProvider;
+        }
+
+        public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider, RadnaLista radnaLista)
+        {
+            _radnaListaSqlProvider = radnaListaSqlProvider;
+            IdRadneListe = radnaLista.IDRadnaLista;
+            IdRadnika = radnaLista.IDRadnik.ToString();
+            IdRadniNalog = radnaLista.IDRadniNalog.ToString();
+            Kolicina = radnaLista.Kolicina.ToString();
+            Datum = radnaLista.Datum;
+            IdOperacija = radnaLista.IDOperacija.ToString();
         }
 
         public void SetViewForUpdateDialog()

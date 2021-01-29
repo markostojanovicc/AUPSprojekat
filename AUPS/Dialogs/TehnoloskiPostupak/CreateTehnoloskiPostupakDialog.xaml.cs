@@ -14,5 +14,11 @@ namespace AUPS.Dialogs.TehnoloskiPostupak
             InitializeComponent();
             DataContext = new CreateTehnoloskiPostupakViewModel(_tehnoloskiPostupakSqlProvider);
         }
+
+        public CreateTehnoloskiPostupakDialog(ITehnoloskiPostupakSqlProvider _tehnoloskiPostupakSqlProvider, AUPS.Models.TehnoloskiPostupak tehnoloskiPostupak)
+        {
+            InitializeComponent();
+            DataContext = new CreateTehnoloskiPostupakViewModel(_tehnoloskiPostupakSqlProvider, tehnoloskiPostupak);
+        }
     }
 }

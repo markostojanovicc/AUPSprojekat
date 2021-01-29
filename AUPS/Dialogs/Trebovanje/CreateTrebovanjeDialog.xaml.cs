@@ -26,5 +26,11 @@ namespace AUPS.Dialogs.Trebovanje
             InitializeComponent();
             DataContext = new CreateTrebovanjeDialogViewModel(_trebovanjeSqlProvider);
         }
+
+        public CreateTrebovanjeDialog(ITrebovanjeSqlProvider _trebovanjeSqlProvider, AUPS.Models.Trebovanje trebovanje)
+        {
+            InitializeComponent();
+            DataContext = new CreateTrebovanjeDialogViewModel(_trebovanjeSqlProvider, trebovanje);
+        }
     }
 }

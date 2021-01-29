@@ -14,5 +14,11 @@ namespace AUPS.Dialogs.RadnikProizvodnja
             InitializeComponent();
             DataContext = new CreateRadnikProizvodnjaDialogViewModel(_radnikProizvodnjaSqlProvider);
         }
+
+        public CreateRadnikProizvodnjaDialog(IRadnikProizvodnjaSqlProvider _radnikProizvodnjaSqlProvider, AUPS.Models.RadnikProizvodnja radnikProizvodnja)
+        {
+            InitializeComponent();
+            DataContext = new CreateRadnikProizvodnjaDialogViewModel(_radnikProizvodnjaSqlProvider, radnikProizvodnja);
+        }
     }
 }

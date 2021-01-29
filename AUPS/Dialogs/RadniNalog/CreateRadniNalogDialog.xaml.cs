@@ -26,5 +26,11 @@ namespace AUPS.Dialogs.RadniNalog
             InitializeComponent();
             DataContext = new CreateRadniNalogDialogViewModel(_radniNalogSqlProvider);
         }
+
+        public CreateRadniNalogDialog(IRadniNalogSqlProvider _radniNalogSqlProvider, AUPS.Models.RadniNalog radniNalog)
+        {
+            InitializeComponent();
+            DataContext = new CreateRadniNalogDialogViewModel(_radniNalogSqlProvider, radniNalog);
+        }
     }
 }

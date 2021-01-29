@@ -20,6 +20,14 @@ namespace AUPS.ViewModels.Dialogs
         private string _serijaKom;
         private string _brKom;
         private string _idOperacije;
+        private int _idTehnoloskogPostupka;
+
+        public int IdTehnoloskogPostupka
+        {
+            get { return _idTehnoloskogPostupka; }
+            set { _idTehnoloskogPostupka = value; }
+        }
+
 
         public string IdOperacije
         {
@@ -58,13 +66,13 @@ namespace AUPS.ViewModels.Dialogs
 
         public bool IsUpdateBtnVisible
         {
-            get { return _isUpdateBtnVisible = false; }
+            get { return _isUpdateBtnVisible; }
             set { _isUpdateBtnVisible = value; }
         }
 
         public bool IsCreateBtnVisible
         {
-            get { return _isCreateBtnVisible = true; }
+            get { return _isCreateBtnVisible; }
             set { _isCreateBtnVisible = value; }
         }
 
@@ -79,6 +87,17 @@ namespace AUPS.ViewModels.Dialogs
         public CreateTehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider)
         {
             _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
+        }
+
+        public CreateTehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, TehnoloskiPostupak tehnoloskiPostupak)
+        {
+            _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
+            IdTehnoloskogPostupka = tehnoloskiPostupak.IDTehPostupak;
+            TipTehnoloskogPostupka = tehnoloskiPostupak.TipTehPostupak;
+            VremeIzrade = tehnoloskiPostupak.VremeIzrade.ToString();
+            SerijaKom = tehnoloskiPostupak.SerijaKom.ToString();
+            BrKom = tehnoloskiPostupak.BrKomada.ToString();
+            IdOperacije = tehnoloskiPostupak.IDOperacija.ToString();
         }
 
         public void SetViewForUpdateDialog()

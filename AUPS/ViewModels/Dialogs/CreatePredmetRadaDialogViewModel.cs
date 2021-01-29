@@ -1,4 +1,5 @@
-﻿using AUPS.SqlProviders.Interfaces;
+﻿using AUPS.Models;
+using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,14 @@ namespace AUPS.ViewModels.Dialogs
         private string _nazivPR;
         private string _jedMere;
         private string _cena;
+        private int _idPredmetaRada;
+
+        public int IdPredmetaRada
+        {
+            get { return _idPredmetaRada; }
+            set { _idPredmetaRada = value; }
+        }
+
 
         public string Cena
         {
@@ -49,13 +58,13 @@ namespace AUPS.ViewModels.Dialogs
 
         public bool IsUpdateBtnVisible
         {
-            get { return _isUpdateBtnVisible = false; }
+            get { return _isUpdateBtnVisible; }
             set { _isUpdateBtnVisible = value; }
         }
 
         public bool IsCreateBtnVisible
         {
-            get { return _isCreateBtnVisible = true; }
+            get { return _isCreateBtnVisible; }
             set { _isCreateBtnVisible = value; }
         }
 
@@ -70,6 +79,16 @@ namespace AUPS.ViewModels.Dialogs
         public CreatePredmetRadaDialogViewModel(IPredmetRadaSqlProvider predmetRadaSqlProvider)
         {
             _predmetRadaSqlProvider = predmetRadaSqlProvider;
+        }
+
+        public CreatePredmetRadaDialogViewModel(IPredmetRadaSqlProvider predmetRadaSqlProvider, PredmetRada predmetRada)
+        {
+            _predmetRadaSqlProvider = predmetRadaSqlProvider;
+            IdPredmetaRada = predmetRada.IDPredmetRada;
+            TipPredmetaRada = predmetRada.TipPredmetRada;
+            NazivPR = predmetRada.NazivPR;
+            JedMere = predmetRada.JedMerePR;
+            Cena = predmetRada.Cena.ToString();
         }
 
         public void SetViewForUpdateDialog()

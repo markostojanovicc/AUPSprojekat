@@ -14,5 +14,11 @@ namespace AUPS.Dialogs.Operacija
             InitializeComponent();
             DataContext = new CreateOperacijaDialogViewModel(_operacijaSqlProvider);
         }
+
+        public CreateOperacijaDialog(IOperacijaSqlProvider _operacijaSqlProvider, AUPS.Models.Operacija operacija)
+        {
+            InitializeComponent();
+            DataContext = new CreateOperacijaDialogViewModel(_operacijaSqlProvider, operacija);
+        }
     }
 }

@@ -41,14 +41,22 @@ namespace AUPS.ViewModels.Dialogs
 
         public bool IsUpdateBtnVisible
         {
-            get { return _isUpdateBtnVisible = false; }
-            set { _isUpdateBtnVisible = value; }
+            get { return _isUpdateBtnVisible; }
+            set 
+            { 
+                _isUpdateBtnVisible = value;
+                OnPropertyChanged(nameof(IsUpdateBtnVisible));
+            }
         }
 
         public bool IsCreateBtnVisible
         {
-            get { return _isCreateBtnVisible = true; }
-            set { _isCreateBtnVisible = value; }
+            get { return _isCreateBtnVisible; }
+            set 
+            { 
+                _isCreateBtnVisible = value;
+                OnPropertyChanged(nameof(IsCreateBtnVisible));
+            }
         }
 
 

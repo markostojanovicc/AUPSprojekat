@@ -1,4 +1,5 @@
 ﻿using AUPS.Enums;
+using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
@@ -19,6 +20,14 @@ namespace AUPS.ViewModels.Dialogs
         private string _imeRadnika;
         private string _prezimeRadnika;
         private string _idRadnoMesto;
+        private int _idRadnika;
+
+        public int IdRadnika
+        {
+            get { return _idRadnika; }
+            set { _idRadnika = value; }
+        }
+
 
         public string IdRadnoMesto
         {
@@ -60,13 +69,13 @@ namespace AUPS.ViewModels.Dialogs
 
         public bool IsUpdateBtnVisible
         {
-            get { return _isUpdateBtnVisible = false; }
+            get { return _isUpdateBtnVisible; }
             set { _isUpdateBtnVisible = value; }
         }
 
         public bool IsCreateBtnVisible
         {
-            get { return _isCreateBtnVisible = true; }
+            get { return _isCreateBtnVisible; }
             set { _isCreateBtnVisible = value; }
         }
 
@@ -81,6 +90,17 @@ namespace AUPS.ViewModels.Dialogs
         public CreateRadnikProizvodnjaDialogViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider)
         {
             _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
+        }
+
+        public CreateRadnikProizvodnjaDialogViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, RadnikProizvodnja radnikProizvodnja)
+        {
+            _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
+            IdRadnika = radnikProizvodnja.IDRadnik;
+            ImeRadnika = radnikProizvodnja.ImeRadnika;
+            PrezimeRadnika = radnikProizvodnja.PrezimeRadnika;
+            Enum.TryParse(radnikProizvodnja.Pol, out Pol pol);
+            SelectedType = pol;
+            IdRadnoMesto = radnikProizvodnja.IDRadnoMesto.ToString();
         }
 
         public void SetViewForUpdateDialog()

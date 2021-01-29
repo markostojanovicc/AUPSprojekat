@@ -14,5 +14,11 @@ namespace AUPS.Dialogs.RadnaLista
             InitializeComponent();
             DataContext = new CreateRadnaListaDialogViewModel(_radnaListaSqlProvider);
         }
+
+        public CreateRadnaListaDialog(IRadnaListaSqlProvider _radnaListaSqlProvider, AUPS.Models.RadnaLista radnaLista)
+        {
+            InitializeComponent();
+            DataContext = new CreateRadnaListaDialogViewModel(_radnaListaSqlProvider,radnaLista);
+        }
     }
 }

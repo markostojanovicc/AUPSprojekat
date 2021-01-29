@@ -91,53 +91,81 @@ namespace AUPS
                     RadnoMestoViewModel vm = (RadnoMestoViewModel)ContentMainScreen;
                     if(vm.ItemSelected != null)
                     {
-                        CreateRadnoMestoDialog updateRadnoMestoDialog = new CreateRadnoMestoDialog(_radnoMestoSqlProvider, (RadnoMesto)vm.ItemSelected);
+                        CreateRadnoMestoDialog updateRadnoMestoDialog = new CreateRadnoMestoDialog(_radnoMestoSqlProvider, vm.ItemSelected);
                         CreateRadnoMestoDialogViewModel viewModelRadnoMesto = (CreateRadnoMestoDialogViewModel)updateRadnoMestoDialog.DataContext;
                         viewModelRadnoMesto.SetViewForUpdateDialog();
                         updateRadnoMestoDialog.Show();
                     }
                     break;
                 case 1:
-                    CreateOperacijaDialog updateOperacijaDialog = new CreateOperacijaDialog(_operacijaSqlProvider);
-                    CreateOperacijaDialogViewModel viewModelOperacija = (CreateOperacijaDialogViewModel)updateOperacijaDialog.DataContext;
-                    viewModelOperacija.SetViewForUpdateDialog();
-                    updateOperacijaDialog.Show();
+                    OperacijaViewModel vmO = (OperacijaViewModel)ContentMainScreen;
+                    if(vmO.ItemSelected != null)
+                    {
+                        CreateOperacijaDialog updateOperacijaDialog = new CreateOperacijaDialog(_operacijaSqlProvider, vmO.ItemSelected);
+                        CreateOperacijaDialogViewModel viewModelOperacija = (CreateOperacijaDialogViewModel)updateOperacijaDialog.DataContext;
+                        viewModelOperacija.SetViewForUpdateDialog();
+                        updateOperacijaDialog.Show();
+                    }                    
                     break;
                 case 2:
-                    CreatePredmetRadaDialog updatePredmetRadaDialog = new CreatePredmetRadaDialog(_predmetRadaSqlProvider);
-                    CreatePredmetRadaDialogViewModel viewModelPredmetRada = (CreatePredmetRadaDialogViewModel)updatePredmetRadaDialog.DataContext;
-                    viewModelPredmetRada.SetViewForUpdateDialog();
-                    updatePredmetRadaDialog.Show();
+                    PredmetRadaViewModel vmPr = (PredmetRadaViewModel)ContentMainScreen;
+                    if(vmPr != null)
+                    {
+                        CreatePredmetRadaDialog updatePredmetRadaDialog = new CreatePredmetRadaDialog(_predmetRadaSqlProvider, vmPr.ItemSelected);
+                        CreatePredmetRadaDialogViewModel viewModelPredmetRada = (CreatePredmetRadaDialogViewModel)updatePredmetRadaDialog.DataContext;
+                        viewModelPredmetRada.SetViewForUpdateDialog();
+                        updatePredmetRadaDialog.Show();
+                    }                    
                     break;
                 case 3:
-                    CreateRadnaListaDialog updateRadnaListaDialog = new CreateRadnaListaDialog(_radnaListaSqlProvider);
-                    CreateRadnaListaDialogViewModel viewModelRadnaLista = (CreateRadnaListaDialogViewModel)updateRadnaListaDialog.DataContext;
-                    viewModelRadnaLista.SetViewForUpdateDialog();
-                    updateRadnaListaDialog.Show();
+                    RadnaListaViewModel vmRl = (RadnaListaViewModel)ContentMainScreen;
+                    if(vmRl != null)
+                    {
+                        CreateRadnaListaDialog updateRadnaListaDialog = new CreateRadnaListaDialog(_radnaListaSqlProvider, vmRl.ItemSelected);
+                        CreateRadnaListaDialogViewModel viewModelRadnaLista = (CreateRadnaListaDialogViewModel)updateRadnaListaDialog.DataContext;
+                        viewModelRadnaLista.SetViewForUpdateDialog();
+                        updateRadnaListaDialog.Show();
+                    }                    
                     break;
                 case 4:
-                    CreateRadnikProizvodnjaDialog udpateRadnikProizvodnjaDialog = new CreateRadnikProizvodnjaDialog(_radnikProizvodnjaSqlProvider);
-                    CreateRadnikProizvodnjaDialogViewModel viewModelRadnik = (CreateRadnikProizvodnjaDialogViewModel)udpateRadnikProizvodnjaDialog.DataContext;
-                    viewModelRadnik.SetViewForUpdateDialog();
-                    udpateRadnikProizvodnjaDialog.Show();
+                    RadnikProizvodnjaViewModel vmRp = (RadnikProizvodnjaViewModel)ContentMainScreen;
+                    if(vmRp != null)
+                    {
+                        CreateRadnikProizvodnjaDialog udpateRadnikProizvodnjaDialog = new CreateRadnikProizvodnjaDialog(_radnikProizvodnjaSqlProvider, vmRp.ItemSelected);
+                        CreateRadnikProizvodnjaDialogViewModel viewModelRadnik = (CreateRadnikProizvodnjaDialogViewModel)udpateRadnikProizvodnjaDialog.DataContext;
+                        viewModelRadnik.SetViewForUpdateDialog();
+                        udpateRadnikProizvodnjaDialog.Show();
+                    }                    
                     break;
                 case 5:
-                    CreateRadniNalogDialog updateRadniNalogDialog = new CreateRadniNalogDialog(_radniNalogSqlProvider);
-                    CreateRadniNalogDialogViewModel viewModelRadniNalog = (CreateRadniNalogDialogViewModel)updateRadniNalogDialog.DataContext;
-                    viewModelRadniNalog.SetViewForUpdateDialog();
-                    updateRadniNalogDialog.Show();
+                    RadniNalogViewModel vmRn = (RadniNalogViewModel)ContentMainScreen;
+                    if(vmRn != null)
+                    {
+                        CreateRadniNalogDialog updateRadniNalogDialog = new CreateRadniNalogDialog(_radniNalogSqlProvider, vmRn.ItemSelected);
+                        CreateRadniNalogDialogViewModel viewModelRadniNalog = (CreateRadniNalogDialogViewModel)updateRadniNalogDialog.DataContext;
+                        viewModelRadniNalog.SetViewForUpdateDialog();
+                        updateRadniNalogDialog.Show();
+                    }                    
                     break;
                 case 6:
-                    CreateTehnoloskiPostupakDialog updateTehnoloskiPostupakDialog = new CreateTehnoloskiPostupakDialog(_tehnoloskiPostupakSqlProvider);
-                    CreateTehnoloskiPostupakViewModel viewModelTehnoloskiPostupak = (CreateTehnoloskiPostupakViewModel)updateTehnoloskiPostupakDialog.DataContext;
-                    viewModelTehnoloskiPostupak.SetViewForUpdateDialog();
-                    updateTehnoloskiPostupakDialog.Show();
+                    TehnoloskiPostupakViewModel vmTp = (TehnoloskiPostupakViewModel)ContentMainScreen;
+                    if(vmTp != null)
+                    {
+                        CreateTehnoloskiPostupakDialog updateTehnoloskiPostupakDialog = new CreateTehnoloskiPostupakDialog(_tehnoloskiPostupakSqlProvider, vmTp.ItemSelected);
+                        CreateTehnoloskiPostupakViewModel viewModelTehnoloskiPostupak = (CreateTehnoloskiPostupakViewModel)updateTehnoloskiPostupakDialog.DataContext;
+                        viewModelTehnoloskiPostupak.SetViewForUpdateDialog();
+                        updateTehnoloskiPostupakDialog.Show();
+                    }                    
                     break;
                 case 7:
-                    CreateTrebovanjeDialog updateTrebovanjeDialog = new CreateTrebovanjeDialog(_trebovanjeSqlProvider);
-                    CreateTrebovanjeDialogViewModel viewModelTrebovanje = (CreateTrebovanjeDialogViewModel)updateTrebovanjeDialog.DataContext;
-                    viewModelTrebovanje.SetViewForUpdateDialog();
-                    updateTrebovanjeDialog.Show();
+                    TrebovanjeViewModel vmTr = (TrebovanjeViewModel)ContentMainScreen;
+                    if(vmTr != null)
+                    {
+                        CreateTrebovanjeDialog updateTrebovanjeDialog = new CreateTrebovanjeDialog(_trebovanjeSqlProvider, vmTr.ItemSelected);
+                        CreateTrebovanjeDialogViewModel viewModelTrebovanje = (CreateTrebovanjeDialogViewModel)updateTrebovanjeDialog.DataContext;
+                        viewModelTrebovanje.SetViewForUpdateDialog();
+                        updateTrebovanjeDialog.Show();
+                    }                    
                     break;
             }
         }

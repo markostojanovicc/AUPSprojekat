@@ -66,13 +66,13 @@ namespace AUPS.ViewModels.Dialogs
 
         public bool IsUpdateBtnVisible
         {
-            get { return _isUpdateBtnVisible = false; }
+            get { return _isUpdateBtnVisible; }
             set { _isUpdateBtnVisible = value; }
         }
 
         public bool IsCreateBtnVisible
         {
-            get { return _isCreateBtnVisible = true; }
+            get { return _isCreateBtnVisible; }
             set { _isCreateBtnVisible = value; }
         }
 
@@ -115,7 +115,7 @@ namespace AUPS.ViewModels.Dialogs
         {
             Operacija operacija = new Operacija
             {
-                //IDOperacija = IDictionary,
+                IDOperacija = IdOperacije,
                 DodatnoVreme = Int32.Parse(DodatnoVreme),
                 PomocnoVreme = Int32.Parse(PomocnoVreme),
                 OsnovnoVreme = Int32.Parse(OsnovnoVreme),
@@ -133,6 +133,17 @@ namespace AUPS.ViewModels.Dialogs
         public CreateOperacijaDialogViewModel(IOperacijaSqlProvider operacijaSqlProvider)
         {
             _operacijaSqlProvider = operacijaSqlProvider;
+        }
+
+        public CreateOperacijaDialogViewModel(IOperacijaSqlProvider operacijaSqlProvider, Operacija operacija)
+        {
+            _operacijaSqlProvider = operacijaSqlProvider;
+            IdOperacije = operacija.IDOperacija;
+            NazivOperacije = operacija.NazivOperacije;
+            OsnovnoVreme = operacija.OsnovnoVreme.ToString();
+            DodatnoVreme = operacija.DodatnoVreme.ToString();
+            PomocnoVreme = operacija.PomocnoVreme.ToString();
+            OznakaMasine = operacija.OznakaMasine;
         }
 
         public void SetViewForUpdateDialog()
