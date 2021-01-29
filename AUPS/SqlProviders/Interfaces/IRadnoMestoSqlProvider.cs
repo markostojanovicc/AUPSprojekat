@@ -14,5 +14,6 @@ namespace AUPS.SqlProviders.Interfaces
         ObservableCollection<RadnoMesto> GetAllFromRadnoMesto();
         bool DeleteFromRadnoMestoById(int iDRadnoMesto);
         bool UpdateRadnoMestoById(RadnoMesto radnoMestoNew);
+        bool CreateRadnoMestoById(RadnoMesto radnoMestoNew);
     }
 }

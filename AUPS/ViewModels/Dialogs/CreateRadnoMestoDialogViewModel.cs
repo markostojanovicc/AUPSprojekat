@@ -1,4 +1,5 @@
-﻿using AUPS.SqlProviders.Interfaces;
+﻿using AUPS.Models;
+using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,14 @@ namespace AUPS.ViewModels.Dialogs
         private bool _isUpdateBtnVisible = false;
         private string _nazivRadnogMesta;
         private string _strucnaSprema;
+        private int _idRadnogMesta;
+
+        public int IdRadnogMesta
+        {
+            get { return _idRadnogMesta; }
+            set { _idRadnogMesta = value; }
+        }
+
 
         public string StrucnaSprema
         {
@@ -53,6 +62,14 @@ namespace AUPS.ViewModels.Dialogs
         public CreateRadnoMestoDialogViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider)
         {
             _radnoMestoSqlProvider = radnoMestoSqlProvider;
+        }
+
+        public CreateRadnoMestoDialogViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider, RadnoMesto radnoMesto)
+        {
+            _radnoMestoSqlProvider = radnoMestoSqlProvider;
+            _idRadnogMesta = radnoMesto.IDRadnoMesto;
+            _nazivRadnogMesta = radnoMesto.NazivRadnoMesto;
+            _strucnaSprema = radnoMesto.StrucnaSprema;
         }
 
         public void SetViewForUpdateDialog()

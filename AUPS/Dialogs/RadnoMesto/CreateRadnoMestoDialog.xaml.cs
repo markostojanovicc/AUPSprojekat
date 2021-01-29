@@ -14,5 +14,11 @@ namespace AUPS.Dialogs.RadnoMesto
             InitializeComponent();
             DataContext = new CreateRadnoMestoDialogViewModel(_radnoMestoSqlProvider);
         }
+
+        public CreateRadnoMestoDialog(IRadnoMestoSqlProvider _radnoMestoSqlProvider, AUPS.Models.RadnoMesto radnoMesto)
+        {
+            InitializeComponent();
+            DataContext = new CreateRadnoMestoDialogViewModel(_radnoMestoSqlProvider, radnoMesto);
+        }
     }
 }

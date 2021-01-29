@@ -88,10 +88,14 @@ namespace AUPS
             switch (_selectedTabIndex)
             {
                 case 0:
-                    CreateRadnoMestoDialog updateRadnoMestoDialog = new CreateRadnoMestoDialog(_radnoMestoSqlProvider);
-                    CreateRadnoMestoDialogViewModel viewModelRadnoMesto = (CreateRadnoMestoDialogViewModel)updateRadnoMestoDialog.DataContext;
-                    viewModelRadnoMesto.SetViewForUpdateDialog();
-                    updateRadnoMestoDialog.Show();
+                    RadnoMestoViewModel vm = (RadnoMestoViewModel)ContentMainScreen;
+                    if(vm.ItemSelected != null)
+                    {
+                        CreateRadnoMestoDialog updateRadnoMestoDialog = new CreateRadnoMestoDialog(_radnoMestoSqlProvider, (RadnoMesto)vm.ItemSelected);
+                        CreateRadnoMestoDialogViewModel viewModelRadnoMesto = (CreateRadnoMestoDialogViewModel)updateRadnoMestoDialog.DataContext;
+                        viewModelRadnoMesto.SetViewForUpdateDialog();
+                        updateRadnoMestoDialog.Show();
+                    }
                     break;
                 case 1:
                     CreateOperacijaDialog updateOperacijaDialog = new CreateOperacijaDialog(_operacijaSqlProvider);
