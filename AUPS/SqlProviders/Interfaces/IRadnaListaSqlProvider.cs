@@ -15,5 +15,7 @@ namespace AUPS.SqlProviders.Interfaces
         bool DeleteFromRadnaListaById(int iDRadnaLista);
 
         bool UpdateRadnaListaById(RadnaLista radnaLista);
+
+        bool CreateRadnaListaById(RadnaLista radnaListaNew);
     }
 }

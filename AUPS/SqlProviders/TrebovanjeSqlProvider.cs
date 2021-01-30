@@ -30,6 +30,11 @@ namespace AUPS.SqlProviders
                   UPDATE trebovanje SET tiptrebovanja = @TipTrebovanja, jedmere = @JedMere, kolicinarobe = @KolicinaRobe, idradninalog = @IDRadniNalog
                   WHERE idtrebovanje = @Id
             ";
+
+        private const string CREATE_TEHNOLOSKI_POSTUPAK =
+            @"
+                  INSERT INTO trebovanje VALUES (nextval('trebovanjeSeq'), @TipTrebovanja @JedMere, @KolicinaRobe, @IDRadniNalog);
+            ";
         #endregion
 
         public ObservableCollection<Trebovanje> GetAllFromTrebovanje()
@@ -84,6 +89,25 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_TREBOVANJE_BY_ID, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, trebovanjeNew.IDTrebovanje);
+                cmd.Parameters.AddWithValue("@TipTrebovanja", NpgsqlDbType.Varchar, trebovanjeNew.TipTrebovanja);
+                cmd.Parameters.AddWithValue("@JedMere", NpgsqlDbType.Varchar, trebovanjeNew.JedMere);
+                cmd.Parameters.AddWithValue("@KolicinaRobe", NpgsqlDbType.Varchar, trebovanjeNew.KolicinaRobe);
+                cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Varchar, trebovanjeNew.IDRadniNalog);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool CreateTrebovanjeById(Trebovanje trebovanjeNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(CREATE_TEHNOLOSKI_POSTUPAK, sqlConnection);
+
                 cmd.Parameters.AddWithValue("@TipTrebovanja", NpgsqlDbType.Varchar, trebovanjeNew.TipTrebovanja);
                 cmd.Parameters.AddWithValue("@JedMere", NpgsqlDbType.Varchar, trebovanjeNew.JedMere);
                 cmd.Parameters.AddWithValue("@KolicinaRobe", NpgsqlDbType.Varchar, trebovanjeNew.KolicinaRobe);

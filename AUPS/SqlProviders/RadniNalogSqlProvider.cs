@@ -31,6 +31,11 @@ namespace AUPS.SqlProviders
                   WHERE idradninalog = @Id
             ";
 
+        private const string CREATE_RADNI_NALOG =
+            @"
+                  INSERT INTO radninalog VALUES (nextval('radniNalogSeq'), @DatumUlaz, @DatumIzlaz, @KolicinaProizvoda, @IDPredmetRada);
+            ";
+
 
         #endregion
         public ObservableCollection<RadniNalog> GetAllFromRadniNalog()
@@ -85,6 +90,25 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_RADNI_NALOG_BY_ID, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, radniNalogNew.IDRadniNalog);
+                cmd.Parameters.AddWithValue("@DatumUlaz", NpgsqlDbType.Varchar, radniNalogNew.DatumUlaz);
+                cmd.Parameters.AddWithValue("@DatumIzlaz", NpgsqlDbType.Varchar, radniNalogNew.DatumIzlaz);
+                cmd.Parameters.AddWithValue("@KolicinaProizvoda", NpgsqlDbType.Varchar, radniNalogNew.KolicinaProizvoda);
+                cmd.Parameters.AddWithValue("@IDPredmetRada", NpgsqlDbType.Varchar, radniNalogNew.IDPredmetRada);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool CreateRadniNalogById(RadniNalog radniNalogNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(CREATE_RADNI_NALOG, sqlConnection);
+
                 cmd.Parameters.AddWithValue("@DatumUlaz", NpgsqlDbType.Varchar, radniNalogNew.DatumUlaz);
                 cmd.Parameters.AddWithValue("@DatumIzlaz", NpgsqlDbType.Varchar, radniNalogNew.DatumIzlaz);
                 cmd.Parameters.AddWithValue("@KolicinaProizvoda", NpgsqlDbType.Varchar, radniNalogNew.KolicinaProizvoda);

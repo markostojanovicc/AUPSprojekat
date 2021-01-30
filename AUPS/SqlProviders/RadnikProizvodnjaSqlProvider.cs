@@ -28,8 +28,13 @@ namespace AUPS.SqlProviders
 
         private const string UPDATE_RADNIK_PROIZVODNJA_BY_ID =
             @"
-                  UPDATE radnik SET imeradnika = @ImeRadnika, prezimeradnika = @PrezimeRadnika, pol = @Pol, idradnomesto = @IDRadnoMesto
+                  UPDATE radnikproizvodnja SET imeradnika = @ImeRadnika, prezimeradnika = @PrezimeRadnika, pol = @Pol, idradnomesto = @IDRadnoMesto
                   WHERE idradnik= @Id
+            ";
+
+        private const string CREATE_RADNIK_PROIZVODNJA =
+            @"
+                  INSERT INTO radnikproizvodnja VALUES (nextval('radnikProizvodnjaSeq'), @ImeRadnika, @PrezimeRadnika, @Pol, @IDRadnoMesto);
             ";
 
         #endregion
@@ -90,6 +95,25 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@PrezimeRadnika", NpgsqlDbType.Varchar, radnikProizvodnjaNew.PrezimeRadnika);
                 cmd.Parameters.AddWithValue("@Pol", NpgsqlDbType.Varchar, radnikProizvodnjaNew.Pol);
                 cmd.Parameters.AddWithValue("@IDRadnoMesto", NpgsqlDbType.Varchar, radnikProizvodnjaNew.IDRadnoMesto);
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool CreateRadnikProizvodnjaById(RadnikProizvodnja radnikProizvodnjaNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(CREATE_RADNIK_PROIZVODNJA, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@ImeRadnika", NpgsqlDbType.Varchar, radnikProizvodnjaNew.ImeRadnika);
+                cmd.Parameters.AddWithValue("@PrezimeRadnika", NpgsqlDbType.Varchar, radnikProizvodnjaNew.PrezimeRadnika);
+                cmd.Parameters.AddWithValue("@Pol", NpgsqlDbType.Varchar, radnikProizvodnjaNew.Pol);
+                cmd.Parameters.AddWithValue("@IDRadnoMesto", NpgsqlDbType.Varchar, radnikProizvodnjaNew.IDRadnoMesto);
+
                 int rowsAffected = cmd.ExecuteNonQuery();
 
                 return rowsAffected == 1;

@@ -15,5 +15,7 @@ namespace AUPS.SqlProviders.Interfaces
         bool DeleteFromRadnikProizvodnjaById(int iDRadnik);
 
         bool UpdateRadnikProizvodnjaById(RadnikProizvodnja radnikProizvodnja);
+
+        bool CreateRadnikProizvodnjaById(RadnikProizvodnja radnikProizvodnjaNew);
     }
 }

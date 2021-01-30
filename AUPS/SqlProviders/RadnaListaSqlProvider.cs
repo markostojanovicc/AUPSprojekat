@@ -32,6 +32,10 @@ namespace AUPS.SqlProviders
                   WHERE idradnalista = @Id
             ";
 
+        private const string CREATE_RADNA_LISTA =
+            @"
+                  INSERT INTO radnalista VALUES (nextval('radnaListaSeq'), @Datum, @Kolicina, @IDRadnik, @IDRadniNalog, @IDOperacija);
+            ";
 
         #endregion
 
@@ -94,6 +98,26 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@IDRadnik", NpgsqlDbType.Integer, radnaListaNew.IDRadnik);
                 cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Varchar, radnaListaNew.IDRadniNalog);
                 cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Varchar, radnaListaNew.IDOperacija);
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool CreateRadnaListaById(RadnaLista radnaListaNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(CREATE_RADNA_LISTA, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Datum", NpgsqlDbType.Varchar, radnaListaNew.Datum);
+                cmd.Parameters.AddWithValue("@Kolicina", NpgsqlDbType.Varchar, radnaListaNew.Kolicina);
+                cmd.Parameters.AddWithValue("@IDRadnik", NpgsqlDbType.Integer, radnaListaNew.IDRadnik);
+                cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Varchar, radnaListaNew.IDRadniNalog);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Varchar, radnaListaNew.IDOperacija);
+
                 int rowsAffected = cmd.ExecuteNonQuery();
 
                 return rowsAffected == 1;

@@ -33,7 +33,7 @@ namespace AUPS.SqlProviders
 
         private const string CREATE_RADNO_MESTO =
             @"
-                  INSERT INTO radnomesto VALUES (nextval('radnomestoseq'),'djdjd','dhdhd');
+                  INSERT INTO radnomesto VALUES (nextval('radnomestoseq'), @NazivRadnogMesta, @StrucnaSprema );
             ";
 
 
