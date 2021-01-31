@@ -34,6 +34,10 @@ namespace AUPS.SqlProviders
                   WHERE idtehpostupak = @Id
             ";
 
+        private const string CREATE_TEHNOLOSKI_POSTUPAK =
+            @"
+                  INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), @TipTehPostupak, @VremeIzrade, @SerijaKom, @BrKomada, @IDOperacija);
+            ";
 
         #endregion
 
@@ -97,6 +101,26 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@SerijaKom", NpgsqlDbType.Integer, tehnoloskiPostupakNew.SerijaKom);
                 cmd.Parameters.AddWithValue("@BrKomada", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.BrKomada);
                 //cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.IDOperacija);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool CreateTehnoloskiPostupakById(TehnoloskiPostupak tehnoloskiPostupakNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(CREATE_TEHNOLOSKI_POSTUPAK, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@TipTehPostupak", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.TipTehPostupak);
+                cmd.Parameters.AddWithValue("@VremeIzrade", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.VremeIzrade);
+                cmd.Parameters.AddWithValue("@SerijaKom", NpgsqlDbType.Integer, tehnoloskiPostupakNew.SerijaKom);
+                cmd.Parameters.AddWithValue("@BrKomada", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.BrKomada);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.IDOperacija);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

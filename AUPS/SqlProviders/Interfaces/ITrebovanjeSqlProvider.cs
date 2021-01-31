@@ -15,5 +15,7 @@ namespace AUPS.SqlProviders.Interfaces
         bool DeleteFromTrebovanjeById(int iDTrebovanje);
 
         bool UpdateTrebovanjeById(Trebovanje trebovanje);
+
+        bool CreateTrebovanjeById(Trebovanje trebovanjeNew);
     }
 }

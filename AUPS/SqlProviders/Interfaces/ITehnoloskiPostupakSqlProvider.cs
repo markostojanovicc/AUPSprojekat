@@ -15,5 +15,7 @@ namespace AUPS.SqlProviders.Interfaces
         bool DeleteFromTehnoloskiPostupakById(int iDTehPostupak);
 
         bool UpdateTehnoloskiPostupakById(TehnoloskiPostupak tehnoloskiPostupak);
+
+        bool CreateTehnoloskiPostupakById(TehnoloskiPostupak tehnoloskiPostupakNew);
     }
 }

@@ -10,5 +10,7 @@ namespace AUPS.SqlProviders.Interfaces
         bool DeleteFromOperacijaById(int iDOperacija);
 
         bool UpdateOperacijaById(Operacija operacija);
+
+        bool CreateOperacijaById(Operacija operacijaNew);
     }
 }
