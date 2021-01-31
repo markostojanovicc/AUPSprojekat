@@ -12,9 +12,10 @@
                 <DataGridTextColumn Header="Id" Binding="{Binding IDRadnaLista}" Width="*"/>
                 <DataGridTextColumn Header="Datum" Binding="{Binding Datum}" Width="*"/>
                 <DataGridTextColumn Header="Kolicina" Binding="{Binding Kolicina}"  Width="*"/>
-                <DataGridTextColumn Header="Id radnika" Binding="{Binding IDRadnik}"  Width="*"/>
-                <DataGridTextColumn Header="Id radnog naloga" Binding="{Binding IDRadniNalog}"  Width="*"/>
-                <DataGridTextColumn Header="Id operacije" Binding="{Binding IDOperacija}" Width="*" />
+                <DataGridTextColumn Header="Ime radnika" Binding="{Binding Radnik.ImeRadnika}"  Width="*"/>
+                <DataGridTextColumn Header="Prezime radnika" Binding="{Binding Radnik.PrezimeRadnika}"  Width="*"/>
+                <DataGridTextColumn Header="Id radnog naloga" Binding="{Binding RadniNalog.IDRadniNalog}"  Width="*"/>
+                <DataGridTextColumn Header="Naziv operacije" Binding="{Binding Operacija.NazivOperacije}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

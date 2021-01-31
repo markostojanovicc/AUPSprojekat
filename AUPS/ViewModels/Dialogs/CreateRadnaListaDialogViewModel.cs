@@ -3,6 +3,7 @@ using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,10 +18,55 @@ namespace AUPS.ViewModels.Dialogs
         private bool _isUpdateBtnVisible = false;
         private DateTime _datum;
         private string _kolicina;
-        private string _idRadnika;
-        private string _idRadniNalog;
-        private string _idOperacija;
+        private int _idRadnika;
+        private int _idRadniNalog;
+        private int _idOperacija;
         private int _idRadneListe;
+        private List<int> _radniNalogIds;
+        private ObservableCollection<Operacija> _operacijaList;
+        private ObservableCollection<RadnikProizvodnja> _radnikProizvodnjaList;
+
+        public ObservableCollection<RadnikProizvodnja> RadnikProizvodnjaList
+        {
+            get { return _radnikProizvodnjaList; }
+            set { _radnikProizvodnjaList = value; }
+        }
+
+        public String RadnikProizvodnjaSelected { get; set; }
+
+        public List<string> RadnikProizvodnjaNazivi
+        {
+            get
+            {
+                List<string> nls = new List<string>();
+                foreach(RadnikProizvodnja rp in RadnikProizvodnjaList)
+                {
+                    string nl = rp.ImeRadnika + ' ' + rp.PrezimeRadnika;
+                    nls.Add(nl);
+                }
+                return nls;
+            }
+        }
+
+        public ObservableCollection<Operacija> OperacijaList
+        {
+            get { return _operacijaList; }
+            set { _operacijaList = value; }
+        }
+
+        public string SelectedOperacija { get; set; }
+
+        public List<string> OperacijaNazivi
+        {
+            get { return OperacijaList.Select(x => x.NazivOperacije).ToList(); }
+        }
+
+
+        public List<int> RadniNalogIds
+        {
+            get { return _radniNalogIds; }
+            set { _radniNalogIds = value; }
+        }
 
         public int IdRadneListe
         {
@@ -29,21 +75,21 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public string IdOperacija
+        public int IdOperacija
         {
             get { return _idOperacija; }
             set { _idOperacija = value; }
         }
 
 
-        public string IdRadniNalog
+        public int SelectedIdRadniNalog
         {
             get { return _idRadniNalog; }
             set { _idRadniNalog = value; }
         }
 
 
-        public string IdRadnika
+        public int IdRadnika
         {
             get { return _idRadnika; }
             set { _idRadnika = value; }
@@ -83,20 +129,31 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider)
+        public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider, List<int> radniNalogIds, ObservableCollection<Operacija> operacijaList, ObservableCollection<AUPS.Models.RadnikProizvodnja> radnikProizvodnjaList)
         {
             _radnaListaSqlProvider = radnaListaSqlProvider;
+            SelectedIdRadniNalog = radniNalogIds.First();
+            RadniNalogIds = radniNalogIds;
+            _operacijaList = operacijaList;
+            SelectedOperacija = operacijaList.First().NazivOperacije;
+            RadnikProizvodnjaList = radnikProizvodnjaList;
+            RadnikProizvodnjaSelected = RadnikProizvodnjaNazivi.First();
         }
 
-        public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider, RadnaLista radnaLista)
+        public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider, List<int> radniNalogIds, ObservableCollection<Operacija> operacijaList, ObservableCollection<AUPS.Models.RadnikProizvodnja> radnikProizvodnjaList, RadnaLista radnaLista)
         {
             _radnaListaSqlProvider = radnaListaSqlProvider;
             IdRadneListe = radnaLista.IDRadnaLista;
-            IdRadnika = radnaLista.IDRadnik.ToString();
-            IdRadniNalog = radnaLista.IDRadniNalog.ToString();
+            IdRadnika = radnaLista.Radnik.IDRadnik;
+            SelectedIdRadniNalog = radnaLista.RadniNalog.IDRadniNalog;
+            RadniNalogIds = radniNalogIds;
             Kolicina = radnaLista.Kolicina.ToString();
             Datum = radnaLista.Datum;
-            IdOperacija = radnaLista.IDOperacija.ToString();
+            IdOperacija = radnaLista.Operacija.IDOperacija;
+            _operacijaList = operacijaList;
+            SelectedOperacija = radnaLista.Operacija.NazivOperacije;
+            RadnikProizvodnjaList = radnikProizvodnjaList;
+            RadnikProizvodnjaSelected = RadnikProizvodnjaNazivi.First();
         }
 
         public void SetViewForUpdateDialog()

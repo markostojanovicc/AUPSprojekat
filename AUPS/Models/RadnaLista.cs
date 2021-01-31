@@ -17,9 +17,9 @@ namespace AUPS.Models
         public int IDRadnaLista { get; set; }
         public DateTime Datum { get; set; }
         public int Kolicina { get; set; }
-        public int IDRadnik { get; set; }
-        public int IDRadniNalog { get; set; }
-        public int IDOperacija { get; set; }
+        public RadnikProizvodnja Radnik { get; set; }
+        public RadniNalog RadniNalog { get; set; }
+        public Operacija Operacija { get; set; }
 
     }
 }

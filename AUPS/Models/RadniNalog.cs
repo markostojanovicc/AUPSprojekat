@@ -18,7 +18,7 @@ namespace AUPS.Models
         public DateTime DatumUlaz { get; set; }
         public DateTime DatumIzlaz { get; set; }
         public int KolicinaProizvoda { get; set; }
-        public int IDPredmetRada { get; set; }
+        public PredmetRada PredmetRada { get; set; }
 
     }
 }

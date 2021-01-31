@@ -1,5 +1,7 @@
 ﻿using AUPS.SqlProviders.Interfaces;
 using AUPS.ViewModels.Dialogs;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace AUPS.Dialogs.RadnikProizvodnja
@@ -9,16 +11,16 @@ namespace AUPS.Dialogs.RadnikProizvodnja
     /// </summary>
     public partial class CreateRadnikProizvodnjaDialog : Window
     {
-        public CreateRadnikProizvodnjaDialog(IRadnikProizvodnjaSqlProvider _radnikProizvodnjaSqlProvider)
+        public CreateRadnikProizvodnjaDialog(IRadnikProizvodnjaSqlProvider _radnikProizvodnjaSqlProvider, ObservableCollection<AUPS.Models.RadnoMesto> radnogMestoList)
         {
             InitializeComponent();
-            DataContext = new CreateRadnikProizvodnjaDialogViewModel(_radnikProizvodnjaSqlProvider);
+            DataContext = new CreateRadnikProizvodnjaDialogViewModel(_radnikProizvodnjaSqlProvider, radnogMestoList);
         }
 
-        public CreateRadnikProizvodnjaDialog(IRadnikProizvodnjaSqlProvider _radnikProizvodnjaSqlProvider, AUPS.Models.RadnikProizvodnja radnikProizvodnja)
+        public CreateRadnikProizvodnjaDialog(IRadnikProizvodnjaSqlProvider _radnikProizvodnjaSqlProvider, ObservableCollection<AUPS.Models.RadnoMesto> radnogMestoList, AUPS.Models.RadnikProizvodnja radnikProizvodnja)
         {
             InitializeComponent();
-            DataContext = new CreateRadnikProizvodnjaDialogViewModel(_radnikProizvodnjaSqlProvider, radnikProizvodnja);
+            DataContext = new CreateRadnikProizvodnjaDialogViewModel(_radnikProizvodnjaSqlProvider, radnogMestoList, radnikProizvodnja);
         }
     }
 }

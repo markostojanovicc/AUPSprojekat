@@ -13,7 +13,7 @@
                 <DataGridTextColumn Header="Datum ulaza" Binding="{Binding DatumUlaz}" Width="*"/>
                 <DataGridTextColumn Header="Datum izlaza" Binding="{Binding DatumIzlaz}" Width="*" />
                 <DataGridTextColumn Header="Kolicina proizvoda" Binding="{Binding KolicinaProizvoda}" Width="*" />
-                <DataGridTextColumn Header="Id predmeta rada" Binding="{Binding IDPredmetRada}" Width="*" />
+                <DataGridTextColumn Header="Naziv predmeta rada" Binding="{Binding PredmetRada.NazivPR}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

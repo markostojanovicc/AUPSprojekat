@@ -3,6 +3,7 @@ using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,27 @@ namespace AUPS.ViewModels.Dialogs
         private string _vremeIzrade;
         private string _serijaKom;
         private string _brKom;
-        private string _idOperacije;
+        private int _idOperacije;
         private int _idTehnoloskogPostupka;
+        private ObservableCollection<Operacija> _operacijaList;
+        private string _selectedOperacija;
+
+        public string SelectedOperacija
+        {
+            get { return _selectedOperacija; }
+            set { _selectedOperacija = value; }
+        }
+
+        public List<string> NaziviOperacija
+        {
+            get { return OperacijaList.Select(x => x.NazivOperacije).ToList(); }
+        }
+
+        public ObservableCollection<Operacija> OperacijaList
+        {
+            get { return _operacijaList; }
+            set { _operacijaList = value; }
+        }
 
         public int IdTehnoloskogPostupka
         {
@@ -29,7 +49,7 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public string IdOperacije
+        public int IdOperacije
         {
             get { return _idOperacije; }
             set { _idOperacije = value; }
@@ -84,12 +104,14 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public CreateTehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider)
+        public CreateTehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ObservableCollection<Operacija> operacijaList)
         {
             _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
+            OperacijaList = operacijaList;
+            SelectedOperacija = operacijaList.First().NazivOperacije;
         }
 
-        public CreateTehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, TehnoloskiPostupak tehnoloskiPostupak)
+        public CreateTehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ObservableCollection<Operacija> operacijaList, TehnoloskiPostupak tehnoloskiPostupak)
         {
             _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
             IdTehnoloskogPostupka = tehnoloskiPostupak.IDTehPostupak;
@@ -97,7 +119,9 @@ namespace AUPS.ViewModels.Dialogs
             VremeIzrade = tehnoloskiPostupak.VremeIzrade.ToString();
             SerijaKom = tehnoloskiPostupak.SerijaKom.ToString();
             BrKom = tehnoloskiPostupak.BrKomada.ToString();
-            IdOperacije = tehnoloskiPostupak.IDOperacija.ToString();
+            IdOperacije = tehnoloskiPostupak.Operacija.IDOperacija;
+            OperacijaList = operacijaList;
+            SelectedOperacija = tehnoloskiPostupak.Operacija.NazivOperacije;
         }
 
         public void SetViewForUpdateDialog()

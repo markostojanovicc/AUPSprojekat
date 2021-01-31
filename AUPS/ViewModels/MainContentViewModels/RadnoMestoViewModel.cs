@@ -31,15 +31,10 @@ namespace AUPS.ViewModels.MainContentViewModels
 
        
 
-        public RadnoMestoViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider)
+        public RadnoMestoViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider, ObservableCollection<RadnoMesto> _radnoMestoList)
         {
             _radnoMestoSqlProvider = radnoMestoSqlProvider;
-            FillTableWithData();
-        }
-
-        private void FillTableWithData()
-        {
-            RadnoMestoList = _radnoMestoSqlProvider.GetAllFromRadnoMesto();
+            RadnoMestoList = _radnoMestoList;
         }
     }
 }

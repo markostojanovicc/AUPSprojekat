@@ -3,6 +3,7 @@ using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,29 @@ namespace AUPS.ViewModels.Dialogs
         private DateTime _datumIzlaza;
         private DateTime _datumUlaza;
         private string _kolicinaProizvoda;
-        private string _idPredmetaRada;
+        private int _idPredmetaRada;
         private int _idRadniNalog;
+        private ObservableCollection<PredmetRada> _predmetRadaList;
+        private string _selectedPredmetRada;
+
+        public string SelectedPredmetRada
+        {
+            get { return _selectedPredmetRada; }
+            set { _selectedPredmetRada = value; }
+        }
+
+        public List<string> NaziviPredmetaRada 
+        {
+            get { return PredmetRadaList.Select(x => x.NazivPR).ToList(); }
+        }
+
+
+        public ObservableCollection<PredmetRada> PredmetRadaList
+        {
+            get { return _predmetRadaList; }
+            set { _predmetRadaList = value; }
+        }
+
 
         public int IdRadniNalog
         {
@@ -28,7 +50,7 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public string IdPredmetaRada
+        public int IdPredmetaRada
         {
             get { return _idPredmetaRada; }
             set { _idPredmetaRada = value; }
@@ -75,19 +97,23 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public CreateRadniNalogDialogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider)
+        public CreateRadniNalogDialogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider, ObservableCollection<PredmetRada> predmetRadaList)
         {
             _radniNalogSqlProvider = radniNalogSqlProvider;
+            PredmetRadaList = predmetRadaList;
+            SelectedPredmetRada = predmetRadaList[0].NazivPR;
         }
 
-        public CreateRadniNalogDialogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider, RadniNalog radniNalog)
+        public CreateRadniNalogDialogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider, ObservableCollection<PredmetRada> predmetRadaList, RadniNalog radniNalog)
         {
             _radniNalogSqlProvider = radniNalogSqlProvider;
             IdRadniNalog = radniNalog.IDRadniNalog;
             DatumUlaza = radniNalog.DatumUlaz;
             DatumIzlaza = radniNalog.DatumIzlaz;
             KolicinaProizvoda = radniNalog.KolicinaProizvoda.ToString();
-            IdPredmetaRada = radniNalog.IDPredmetRada.ToString();
+            IdPredmetaRada = radniNalog.PredmetRada.IDPredmetRada;
+            PredmetRadaList = predmetRadaList;
+            SelectedPredmetRada = radniNalog.PredmetRada.NazivPR;
         }
 
         public void SetViewForUpdateDialog()

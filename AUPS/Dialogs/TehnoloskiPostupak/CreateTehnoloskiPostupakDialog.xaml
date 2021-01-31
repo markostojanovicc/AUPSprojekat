@@ -40,11 +40,8 @@
             <TextBox Height="30" Name="txtBrojKomada" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding BrKom}"/>
         </Grid>
 
-        <Grid Grid.Row="4" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
-            <TextBlock Margin="10 0 10 0" Text="Id operacije..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
-                       Visibility="{Binding ElementName=txtIdOperacije, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Height="30" Name="txtIdOperacije" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding IdOperacije}"/>
-        </Grid>
+        <ComboBox Grid.Row="4" ItemsSource="{Binding NaziviOperacija}" SelectedItem="{Binding SelectedOperacija, Mode=TwoWay}" Margin="30 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                  Height="35" Width="Auto" FontSize="20" />
 
         <Button Visibility="{Binding IsCreateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
         <Button Visibility="{Binding IsUpdateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnUpdate" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Potvrdi Izmene" Height="35" Width="160" />

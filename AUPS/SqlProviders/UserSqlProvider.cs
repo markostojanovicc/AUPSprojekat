@@ -27,8 +27,6 @@ namespace AUPS.SqlProviders
 
         public User FindUserByEmailAndPassword(string email, string password)
         {
-            User result = new User();
-
             using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
             {
                 sqlConnection.Open();
@@ -42,13 +40,14 @@ namespace AUPS.SqlProviders
 
                 if (reader.HasRows)
                 {
+                     User result = new User();
                      result.Ime = reader[0].ToString();
                      result.Prezime = reader[1].ToString();
                      result.Password = reader[2].ToString();
                      result.Username = reader[3].ToString();
                 }
 
-                return result;
+                return new User();
             }
         }
 

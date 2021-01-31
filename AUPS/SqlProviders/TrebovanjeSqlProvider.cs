@@ -51,7 +51,8 @@ namespace AUPS.SqlProviders
                     trebovanje.TipTrebovanja = rdr.GetString(1);
                     trebovanje.JedMere = rdr.GetString(2);
                     trebovanje.KolicinaRobe = rdr.GetInt32(3);
-                    trebovanje.IDRadniNalog = rdr.GetInt32(3);
+                    trebovanje.RadniNalog = new RadniNalog();
+                    trebovanje.RadniNalog.IDRadniNalog = rdr.GetInt32(4);
                     trebovanjeList.Add(trebovanje);
                 }
             }
@@ -87,7 +88,7 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@TipTrebovanja", NpgsqlDbType.Varchar, trebovanjeNew.TipTrebovanja);
                 cmd.Parameters.AddWithValue("@JedMere", NpgsqlDbType.Varchar, trebovanjeNew.JedMere);
                 cmd.Parameters.AddWithValue("@KolicinaRobe", NpgsqlDbType.Varchar, trebovanjeNew.KolicinaRobe);
-                cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Varchar, trebovanjeNew.IDRadniNalog);
+                //cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Varchar, trebovanjeNew.IDRadniNalog);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

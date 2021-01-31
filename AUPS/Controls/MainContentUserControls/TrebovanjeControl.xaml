@@ -13,7 +13,7 @@
                 <DataGridTextColumn Header="Tip trebovanja" Binding="{Binding TipTrebovanja}" Width="*"/>
                 <DataGridTextColumn Header="Jedinica mere" Binding="{Binding JedMere}" Width="*"/>
                 <DataGridTextColumn Header="Kolicina robe" Binding="{Binding KolicinaRobe}" Width="*" />
-                <DataGridTextColumn Header="Id radnog naloga" Binding="{Binding IDRadniNalog}" Width="*" />
+                <DataGridTextColumn Header="Id radnog naloga" Binding="{Binding RadniNalog.IDRadniNalog}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

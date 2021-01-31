@@ -18,7 +18,10 @@ namespace AUPS.SqlProviders
 
         private const string GET_ALL_RECORDS_FROM_RADNI_NALOG =
             @"
-                  SELECT * FROM radninalog;
+                  SELECT rn.*, pr.nazivpr
+                    FROM radninalog rn
+                    LEFT JOIN predmetrada pr
+                    ON rn.idpredmetrada = pr.idpredmetrada
             ";
         private const string DELETE_FROM_RADNI_NALOG_BY_ID =
             @"
@@ -52,7 +55,8 @@ namespace AUPS.SqlProviders
                     radniNalog.DatumUlaz = rdr.GetDateTime(1);
                     radniNalog.DatumIzlaz = rdr.GetDateTime(2);
                     radniNalog.KolicinaProizvoda = rdr.GetInt32(3);
-                    radniNalog.IDPredmetRada = rdr.GetInt32(4);
+                    radniNalog.PredmetRada = new PredmetRada();
+                    radniNalog.PredmetRada.NazivPR = rdr.GetString(5);
                     radniNalogList.Add(radniNalog);
                 }
             }
@@ -88,7 +92,7 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@DatumUlaz", NpgsqlDbType.Varchar, radniNalogNew.DatumUlaz);
                 cmd.Parameters.AddWithValue("@DatumIzlaz", NpgsqlDbType.Varchar, radniNalogNew.DatumIzlaz);
                 cmd.Parameters.AddWithValue("@KolicinaProizvoda", NpgsqlDbType.Varchar, radniNalogNew.KolicinaProizvoda);
-                cmd.Parameters.AddWithValue("@IDPredmetRada", NpgsqlDbType.Varchar, radniNalogNew.IDPredmetRada);
+                //cmd.Parameters.AddWithValue("@IDPredmetRada", NpgsqlDbType.Varchar, radniNalogNew.IDPredmetRada);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

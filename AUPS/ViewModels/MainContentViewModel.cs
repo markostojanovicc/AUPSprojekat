@@ -26,6 +26,7 @@ namespace AUPS
 {
     public class MainContentViewModel : BaseViewModel
     {
+        #region sql providers
         private IRadnoMestoSqlProvider _radnoMestoSqlProvider;
         private IOperacijaSqlProvider _operacijaSqlProvider;
         private IPredmetRadaSqlProvider _predmetRadaSqlProvider;
@@ -34,12 +35,56 @@ namespace AUPS
         private IRadniNalogSqlProvider _radniNalogSqlProvider;
         private ITehnoloskiPostupakSqlProvider _tehnoloskiPostupakSqlProvider;
         private ITrebovanjeSqlProvider _trebovanjeSqlProvider;
-        private object _contentMainScreen;
+        #endregion
+
+        #region commands
         private ICommand _addButtonCommand;
         private ICommand _deleteButtonCommand;
         private ICommand _updateButtonCommand;
+        #endregion
+
+        #region view models
+        private readonly RadnoMestoViewModel radnoMestoViewModel;
+        private readonly OperacijaViewModel operacijaViewModel;
+        private readonly PredmetRadaViewModel predmetRadaViewModel;
+        private readonly RadnaListaViewModel radnaListaViewModel;
+        private readonly RadnikProizvodnjaViewModel radnikProizvodnjaViewModel;
+        private readonly RadniNalogViewModel radniNalogViewModel;
+        private readonly TehnoloskiPostupakViewModel tehnoloskiPostupakViewModel;
+        private readonly TrebovanjeViewModel trebovanjeViewModel;
+        #endregion
+
+        public MainContentViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider, IOperacijaSqlProvider operacijaSqlProvider
+                                    , IPredmetRadaSqlProvider predmetRadaSqlProvider, IRadnaListaSqlProvider radnaListaSqlProvider
+                                    , IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, IRadniNalogSqlProvider radniNalogSqlProvider
+                                    , ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ITrebovanjeSqlProvider trebovanjeSqlProvider,
+                                    RadnoMestoViewModel radnoMestoViewModel, OperacijaViewModel operacijaViewModel, PredmetRadaViewModel predmetRadaViewModel,
+                                    RadnaListaViewModel radnaListaViewModel, RadnikProizvodnjaViewModel radnikProizvodnjaViewModel, RadniNalogViewModel radniNalogViewModel,
+                                    TehnoloskiPostupakViewModel tehnoloskiPostupakViewModel, TrebovanjeViewModel trebovanjeViewModel)
+        {
+            _radnoMestoSqlProvider = radnoMestoSqlProvider;
+            _operacijaSqlProvider = operacijaSqlProvider;
+            _predmetRadaSqlProvider = predmetRadaSqlProvider;
+            _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
+            _radniNalogSqlProvider = radniNalogSqlProvider;
+            _radnaListaSqlProvider = radnaListaSqlProvider;
+            _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
+            _trebovanjeSqlProvider = trebovanjeSqlProvider;
+            this.radnoMestoViewModel = radnoMestoViewModel;
+            this.operacijaViewModel = operacijaViewModel;
+            this.predmetRadaViewModel = predmetRadaViewModel;
+            this.radnaListaViewModel = radnaListaViewModel;
+            this.radnikProizvodnjaViewModel = radnikProizvodnjaViewModel;
+            this.radniNalogViewModel = radniNalogViewModel;
+            this.tehnoloskiPostupakViewModel = tehnoloskiPostupakViewModel;
+            this.trebovanjeViewModel = trebovanjeViewModel;
+            GetDataFromDb();
+        }
+
 
         private int _selectedTabIndex = 0;
+
+        private object _contentMainScreen;
 
         public ICommand AddButtonCommand
         {
@@ -88,80 +133,72 @@ namespace AUPS
             switch (_selectedTabIndex)
             {
                 case 0:
-                    RadnoMestoViewModel vm = (RadnoMestoViewModel)ContentMainScreen;
-                    if(vm.ItemSelected != null)
+                    if(radnoMestoViewModel.ItemSelected != null)
                     {
-                        CreateRadnoMestoDialog updateRadnoMestoDialog = new CreateRadnoMestoDialog(_radnoMestoSqlProvider, vm.ItemSelected);
+                        CreateRadnoMestoDialog updateRadnoMestoDialog = new CreateRadnoMestoDialog(_radnoMestoSqlProvider, radnoMestoViewModel.ItemSelected);
                         CreateRadnoMestoDialogViewModel viewModelRadnoMesto = (CreateRadnoMestoDialogViewModel)updateRadnoMestoDialog.DataContext;
                         viewModelRadnoMesto.SetViewForUpdateDialog();
                         updateRadnoMestoDialog.Show();
                     }
                     break;
                 case 1:
-                    OperacijaViewModel vmO = (OperacijaViewModel)ContentMainScreen;
-                    if(vmO.ItemSelected != null)
+                    if(operacijaViewModel.ItemSelected != null)
                     {
-                        CreateOperacijaDialog updateOperacijaDialog = new CreateOperacijaDialog(_operacijaSqlProvider, vmO.ItemSelected);
+                        CreateOperacijaDialog updateOperacijaDialog = new CreateOperacijaDialog(_operacijaSqlProvider, operacijaViewModel.ItemSelected);
                         CreateOperacijaDialogViewModel viewModelOperacija = (CreateOperacijaDialogViewModel)updateOperacijaDialog.DataContext;
                         viewModelOperacija.SetViewForUpdateDialog();
                         updateOperacijaDialog.Show();
                     }                    
                     break;
                 case 2:
-                    PredmetRadaViewModel vmPr = (PredmetRadaViewModel)ContentMainScreen;
-                    if(vmPr != null)
+                    if(predmetRadaViewModel != null)
                     {
-                        CreatePredmetRadaDialog updatePredmetRadaDialog = new CreatePredmetRadaDialog(_predmetRadaSqlProvider, vmPr.ItemSelected);
+                        CreatePredmetRadaDialog updatePredmetRadaDialog = new CreatePredmetRadaDialog(_predmetRadaSqlProvider, predmetRadaViewModel.ItemSelected);
                         CreatePredmetRadaDialogViewModel viewModelPredmetRada = (CreatePredmetRadaDialogViewModel)updatePredmetRadaDialog.DataContext;
                         viewModelPredmetRada.SetViewForUpdateDialog();
                         updatePredmetRadaDialog.Show();
                     }                    
                     break;
                 case 3:
-                    RadnaListaViewModel vmRl = (RadnaListaViewModel)ContentMainScreen;
-                    if(vmRl != null)
+                    if(radnaListaViewModel != null)
                     {
-                        CreateRadnaListaDialog updateRadnaListaDialog = new CreateRadnaListaDialog(_radnaListaSqlProvider, vmRl.ItemSelected);
+                        CreateRadnaListaDialog updateRadnaListaDialog = new CreateRadnaListaDialog(_radnaListaSqlProvider, radniNalogViewModel.RadniNalogList.Select(x => x.IDRadniNalog).ToList(), operacijaViewModel.OperacijaList, radnikProizvodnjaViewModel.RadnikProizvodnjaList, radnaListaViewModel.ItemSelected);
                         CreateRadnaListaDialogViewModel viewModelRadnaLista = (CreateRadnaListaDialogViewModel)updateRadnaListaDialog.DataContext;
                         viewModelRadnaLista.SetViewForUpdateDialog();
                         updateRadnaListaDialog.Show();
                     }                    
                     break;
                 case 4:
-                    RadnikProizvodnjaViewModel vmRp = (RadnikProizvodnjaViewModel)ContentMainScreen;
-                    if(vmRp != null)
+                    if(radnikProizvodnjaViewModel != null)
                     {
-                        CreateRadnikProizvodnjaDialog udpateRadnikProizvodnjaDialog = new CreateRadnikProizvodnjaDialog(_radnikProizvodnjaSqlProvider, vmRp.ItemSelected);
+                        CreateRadnikProizvodnjaDialog udpateRadnikProizvodnjaDialog = new CreateRadnikProizvodnjaDialog(_radnikProizvodnjaSqlProvider, radnoMestoViewModel.RadnoMestoList, radnikProizvodnjaViewModel.ItemSelected);
                         CreateRadnikProizvodnjaDialogViewModel viewModelRadnik = (CreateRadnikProizvodnjaDialogViewModel)udpateRadnikProizvodnjaDialog.DataContext;
                         viewModelRadnik.SetViewForUpdateDialog();
                         udpateRadnikProizvodnjaDialog.Show();
                     }                    
                     break;
                 case 5:
-                    RadniNalogViewModel vmRn = (RadniNalogViewModel)ContentMainScreen;
-                    if(vmRn != null)
+                    if(radniNalogViewModel != null)
                     {
-                        CreateRadniNalogDialog updateRadniNalogDialog = new CreateRadniNalogDialog(_radniNalogSqlProvider, vmRn.ItemSelected);
+                        CreateRadniNalogDialog updateRadniNalogDialog = new CreateRadniNalogDialog(_radniNalogSqlProvider, predmetRadaViewModel.PredmetRadaList, radniNalogViewModel.ItemSelected);
                         CreateRadniNalogDialogViewModel viewModelRadniNalog = (CreateRadniNalogDialogViewModel)updateRadniNalogDialog.DataContext;
                         viewModelRadniNalog.SetViewForUpdateDialog();
                         updateRadniNalogDialog.Show();
                     }                    
                     break;
                 case 6:
-                    TehnoloskiPostupakViewModel vmTp = (TehnoloskiPostupakViewModel)ContentMainScreen;
-                    if(vmTp != null)
+                    if(tehnoloskiPostupakViewModel != null)
                     {
-                        CreateTehnoloskiPostupakDialog updateTehnoloskiPostupakDialog = new CreateTehnoloskiPostupakDialog(_tehnoloskiPostupakSqlProvider, vmTp.ItemSelected);
+                        CreateTehnoloskiPostupakDialog updateTehnoloskiPostupakDialog = new CreateTehnoloskiPostupakDialog(_tehnoloskiPostupakSqlProvider, operacijaViewModel.OperacijaList, tehnoloskiPostupakViewModel.ItemSelected);
                         CreateTehnoloskiPostupakViewModel viewModelTehnoloskiPostupak = (CreateTehnoloskiPostupakViewModel)updateTehnoloskiPostupakDialog.DataContext;
                         viewModelTehnoloskiPostupak.SetViewForUpdateDialog();
                         updateTehnoloskiPostupakDialog.Show();
                     }                    
                     break;
                 case 7:
-                    TrebovanjeViewModel vmTr = (TrebovanjeViewModel)ContentMainScreen;
-                    if(vmTr != null)
+                    if(trebovanjeViewModel != null)
                     {
-                        CreateTrebovanjeDialog updateTrebovanjeDialog = new CreateTrebovanjeDialog(_trebovanjeSqlProvider, vmTr.ItemSelected);
+                        CreateTrebovanjeDialog updateTrebovanjeDialog = new CreateTrebovanjeDialog(_trebovanjeSqlProvider, radniNalogViewModel.RadniNalogList.Select(x => x.IDRadniNalog).ToList(), trebovanjeViewModel.ItemSelected);
                         CreateTrebovanjeDialogViewModel viewModelTrebovanje = (CreateTrebovanjeDialogViewModel)updateTrebovanjeDialog.DataContext;
                         viewModelTrebovanje.SetViewForUpdateDialog();
                         updateTrebovanjeDialog.Show();
@@ -187,23 +224,23 @@ namespace AUPS
                     createPredmetRadaDialog.Show();
                     break;
                 case 3:
-                    CreateRadnaListaDialog createRadnaListaDialog = new CreateRadnaListaDialog(_radnaListaSqlProvider);
+                    CreateRadnaListaDialog createRadnaListaDialog = new CreateRadnaListaDialog(_radnaListaSqlProvider, radniNalogViewModel.RadniNalogList.Select(x => x.IDRadniNalog).ToList(), operacijaViewModel.OperacijaList, radnikProizvodnjaViewModel.RadnikProizvodnjaList);
                     createRadnaListaDialog.Show();
                     break;
                 case 4:
-                    CreateRadnikProizvodnjaDialog createRadnikProizvodnjaDialog = new CreateRadnikProizvodnjaDialog(_radnikProizvodnjaSqlProvider);
+                    CreateRadnikProizvodnjaDialog createRadnikProizvodnjaDialog = new CreateRadnikProizvodnjaDialog(_radnikProizvodnjaSqlProvider, radnoMestoViewModel.RadnoMestoList);
                     createRadnikProizvodnjaDialog.Show();
                     break;
                 case 5:
-                    CreateRadniNalogDialog createRadniNalogDialog = new CreateRadniNalogDialog(_radniNalogSqlProvider);
+                    CreateRadniNalogDialog createRadniNalogDialog = new CreateRadniNalogDialog(_radniNalogSqlProvider, predmetRadaViewModel.PredmetRadaList);
                     createRadniNalogDialog.Show();
                     break;
                 case 6:
-                    CreateTehnoloskiPostupakDialog createTehnoloskiPostupakDialog = new CreateTehnoloskiPostupakDialog(_tehnoloskiPostupakSqlProvider);
+                    CreateTehnoloskiPostupakDialog createTehnoloskiPostupakDialog = new CreateTehnoloskiPostupakDialog(_tehnoloskiPostupakSqlProvider, operacijaViewModel.OperacijaList);
                     createTehnoloskiPostupakDialog.Show();
                     break;
                 case 7:
-                    CreateTrebovanjeDialog createTrebovanjeDialog = new CreateTrebovanjeDialog(_trebovanjeSqlProvider);
+                    CreateTrebovanjeDialog createTrebovanjeDialog = new CreateTrebovanjeDialog(_trebovanjeSqlProvider, radniNalogViewModel.RadniNalogList.Select(x => x.IDRadniNalog).ToList());
                     createTrebovanjeDialog.Show();
                     break;
             }
@@ -336,49 +373,46 @@ namespace AUPS
                     switch (value)
                     {
                         case 0:
-                            ContentMainScreen = new RadnoMestoViewModel(_radnoMestoSqlProvider);
+                            ContentMainScreen = radnoMestoViewModel;
                             break;
                         case 1:
-                            ContentMainScreen = new OperacijaViewModel(_operacijaSqlProvider);
+                            ContentMainScreen = operacijaViewModel;
                             break;
                         case 2:
-                            ContentMainScreen = new PredmetRadaViewModel(_predmetRadaSqlProvider);
+                            ContentMainScreen = predmetRadaViewModel;
                             break;
                         case 3:
-                            ContentMainScreen = new RadnaListaViewModel(_radnaListaSqlProvider);
+                            ContentMainScreen = radnaListaViewModel;
                             break;
                         case 4:
-                            ContentMainScreen = new RadnikProizvodnjaViewModel(_radnikProizvodnjaSqlProvider);
+                            ContentMainScreen = radnikProizvodnjaViewModel;
                             break;
                         case 5:
-                            ContentMainScreen = new RadniNalogViewModel(_radniNalogSqlProvider);
+                            ContentMainScreen = radniNalogViewModel;
                             break;
                         case 6:
-                            ContentMainScreen = new TehnoloskiPostupakViewModel(_tehnoloskiPostupakSqlProvider);
+                            ContentMainScreen = tehnoloskiPostupakViewModel;
                             break;
                         case 7:
-                            ContentMainScreen = new TrebovanjeViewModel(_trebovanjeSqlProvider);
+                            ContentMainScreen = trebovanjeViewModel;
                             break;
                     }
                 }
             }
         }
 
-
-        public MainContentViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider, IOperacijaSqlProvider operacijaSqlProvider
-                                    ,IPredmetRadaSqlProvider predmetRadaSqlProvider, IRadnaListaSqlProvider radnaListaSqlProvider
-                                    ,IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, IRadniNalogSqlProvider radniNalogSqlProvider
-                                    ,ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ITrebovanjeSqlProvider trebovanjeSqlProvider)
+        private void GetDataFromDb()
         {
-            _radnoMestoSqlProvider = radnoMestoSqlProvider;
-            _operacijaSqlProvider = operacijaSqlProvider;
-            _predmetRadaSqlProvider = predmetRadaSqlProvider;
-            _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
-            _radniNalogSqlProvider = radniNalogSqlProvider;
-            _radnaListaSqlProvider = radnaListaSqlProvider;
-            _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
-            _trebovanjeSqlProvider = trebovanjeSqlProvider;
-            ContentMainScreen = new RadnoMestoViewModel(radnoMestoSqlProvider);
+            operacijaViewModel.OperacijaList = _operacijaSqlProvider.GetAllFromOperacija();
+            predmetRadaViewModel.PredmetRadaList = _predmetRadaSqlProvider.GetAllFromPredmetRada();
+            radnaListaViewModel.RadnaListaList = _radnaListaSqlProvider.GetAllFromRadnaLista();
+            radnikProizvodnjaViewModel.RadnikProizvodnjaList = _radnikProizvodnjaSqlProvider.GetAllFromRadnikProizvodnja();
+            radniNalogViewModel.RadniNalogList = _radniNalogSqlProvider.GetAllFromRadniNalog();
+            radnoMestoViewModel.RadnoMestoList = _radnoMestoSqlProvider.GetAllFromRadnoMesto();
+            tehnoloskiPostupakViewModel.TehnoloskiPostupakList = _tehnoloskiPostupakSqlProvider.GetAllFromTehnoloskiPostupak();
+            trebovanjeViewModel.TrebovanjeList = _trebovanjeSqlProvider.GetAllFromTrebovanje();
+
+            ContentMainScreen = radnoMestoViewModel;
         }
     }
 }

@@ -18,6 +18,6 @@ namespace AUPS.Models
         public int VremeIzrade { get; set; }
         public int SerijaKom { get; set; }
         public int BrKomada { get; set; }
-        public int IDOperacija { get; set; }
+        public Operacija Operacija { get; set; }
     }
 }

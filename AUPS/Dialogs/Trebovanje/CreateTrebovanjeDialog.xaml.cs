@@ -21,16 +21,16 @@ namespace AUPS.Dialogs.Trebovanje
     /// </summary>
     public partial class CreateTrebovanjeDialog : Window
     {
-        public CreateTrebovanjeDialog(ITrebovanjeSqlProvider _trebovanjeSqlProvider)
+        public CreateTrebovanjeDialog(ITrebovanjeSqlProvider _trebovanjeSqlProvider, List<int> radniNalogIds)
         {
             InitializeComponent();
-            DataContext = new CreateTrebovanjeDialogViewModel(_trebovanjeSqlProvider);
+            DataContext = new CreateTrebovanjeDialogViewModel(_trebovanjeSqlProvider, radniNalogIds);
         }
 
-        public CreateTrebovanjeDialog(ITrebovanjeSqlProvider _trebovanjeSqlProvider, AUPS.Models.Trebovanje trebovanje)
+        public CreateTrebovanjeDialog(ITrebovanjeSqlProvider _trebovanjeSqlProvider, List<int> radniNalogIds, AUPS.Models.Trebovanje trebovanje)
         {
             InitializeComponent();
-            DataContext = new CreateTrebovanjeDialogViewModel(_trebovanjeSqlProvider, trebovanje);
+            DataContext = new CreateTrebovanjeDialogViewModel(_trebovanjeSqlProvider, radniNalogIds, trebovanje);
         }
     }
 }

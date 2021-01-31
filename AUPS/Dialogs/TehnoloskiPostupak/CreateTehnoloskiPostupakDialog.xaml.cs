@@ -1,5 +1,6 @@
 ﻿using AUPS.SqlProviders.Interfaces;
 using AUPS.ViewModels.Dialogs;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace AUPS.Dialogs.TehnoloskiPostupak
@@ -9,16 +10,16 @@ namespace AUPS.Dialogs.TehnoloskiPostupak
     /// </summary>
     public partial class CreateTehnoloskiPostupakDialog : Window
     {
-        public CreateTehnoloskiPostupakDialog(ITehnoloskiPostupakSqlProvider _tehnoloskiPostupakSqlProvider)
+        public CreateTehnoloskiPostupakDialog(ITehnoloskiPostupakSqlProvider _tehnoloskiPostupakSqlProvider, ObservableCollection<AUPS.Models.Operacija> operacijaList)
         {
             InitializeComponent();
-            DataContext = new CreateTehnoloskiPostupakViewModel(_tehnoloskiPostupakSqlProvider);
+            DataContext = new CreateTehnoloskiPostupakViewModel(_tehnoloskiPostupakSqlProvider, operacijaList);
         }
 
-        public CreateTehnoloskiPostupakDialog(ITehnoloskiPostupakSqlProvider _tehnoloskiPostupakSqlProvider, AUPS.Models.TehnoloskiPostupak tehnoloskiPostupak)
+        public CreateTehnoloskiPostupakDialog(ITehnoloskiPostupakSqlProvider _tehnoloskiPostupakSqlProvider, ObservableCollection<AUPS.Models.Operacija> operacijaList, AUPS.Models.TehnoloskiPostupak tehnoloskiPostupak)
         {
             InitializeComponent();
-            DataContext = new CreateTehnoloskiPostupakViewModel(_tehnoloskiPostupakSqlProvider, tehnoloskiPostupak);
+            DataContext = new CreateTehnoloskiPostupakViewModel(_tehnoloskiPostupakSqlProvider, operacijaList, tehnoloskiPostupak);
         }
     }
 }

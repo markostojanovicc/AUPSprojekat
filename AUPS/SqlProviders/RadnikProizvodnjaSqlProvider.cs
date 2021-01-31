@@ -18,7 +18,10 @@ namespace AUPS.SqlProviders
 
         private const string GET_ALL_RECORDS_FROM_RADNIK_PROIZVODNJA =
             @"
-                  SELECT * FROM radnikproizvodnja;
+                    SELECT rp.*, rm.nazivradnomesto 
+                    FROM radnikproizvodnja rp
+                    LEFT JOIN radnomesto rm
+                    ON rp.idradnomesto = rm.idradnomesto
             ";
 
         private const string DELETE_FROM_RADNIK_PROIZVODNJA_BY_ID =
@@ -53,7 +56,9 @@ namespace AUPS.SqlProviders
                     radnikProizvodnja.ImeRadnika = rdr.GetString(1);
                     radnikProizvodnja.PrezimeRadnika = rdr.GetString(2);
                     radnikProizvodnja.Pol = rdr.GetString(3);
-                    radnikProizvodnja.IDRadnoMesto = rdr.GetInt32(4);
+                    radnikProizvodnja.RadnoMesto = new RadnoMesto();
+                    radnikProizvodnja.RadnoMesto.IDRadnoMesto = rdr.GetInt32(4);
+                    radnikProizvodnja.RadnoMesto.NazivRadnoMesto = rdr.GetString(5);
                     radnikProizvodnjaList.Add(radnikProizvodnja);
                 }
             }
@@ -89,7 +94,7 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@ImeRadnika", NpgsqlDbType.Varchar, radnikProizvodnjaNew.ImeRadnika);
                 cmd.Parameters.AddWithValue("@PrezimeRadnika", NpgsqlDbType.Varchar, radnikProizvodnjaNew.PrezimeRadnika);
                 cmd.Parameters.AddWithValue("@Pol", NpgsqlDbType.Varchar, radnikProizvodnjaNew.Pol);
-                cmd.Parameters.AddWithValue("@IDRadnoMesto", NpgsqlDbType.Varchar, radnikProizvodnjaNew.IDRadnoMesto);
+                //cmd.Parameters.AddWithValue("@IDRadnoMesto", NpgsqlDbType.Varchar, radnikProizvodnjaNew.IDRadnoMesto);
                 int rowsAffected = cmd.ExecuteNonQuery();
 
                 return rowsAffected == 1;

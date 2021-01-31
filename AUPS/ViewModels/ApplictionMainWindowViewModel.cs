@@ -1,5 +1,6 @@
 ﻿using AUPS.SqlProviders;
 using AUPS.SqlProviders.Interfaces;
+using AUPS.ViewModels.MainContentViewModels;
 using ChatApp;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,14 @@ namespace AUPS.ViewModels
     {
         private object _contentMainScreen;
         private IUserSqlProvider _userSqlProvider;
+        private readonly RadnoMestoViewModel radnoMestoViewModel;
+        private readonly OperacijaViewModel operacijaViewModel;
+        private readonly PredmetRadaViewModel predmetRadaViewModel;
+        private readonly RadnaListaViewModel radnaListaViewModel;
+        private readonly RadnikProizvodnjaViewModel radnikProizvodnjaViewModel;
+        private readonly RadniNalogViewModel radniNalogViewModel;
+        private readonly TehnoloskiPostupakViewModel tehnoloskiPostupakViewModel;
+        private readonly TrebovanjeViewModel trebovanjeViewModel;
         private IRadnoMestoSqlProvider _radnoMestoSqlProvider;
         private IOperacijaSqlProvider _operacijaSqlProvider;
         private IPredmetRadaSqlProvider _predmetRadaSqlProvider;
@@ -41,9 +50,19 @@ namespace AUPS.ViewModels
                                     , IPredmetRadaSqlProvider predmetRadaSqlProvider, IRadnaListaSqlProvider radnaListaSqlProvider
                                     , IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, IRadniNalogSqlProvider radniNalogSqlProvider
                                     , ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ITrebovanjeSqlProvider trebovanjeSqlProvider
-                                    , IUserSqlProvider userSqlProvider)
+                                    , IUserSqlProvider userSqlProvider, RadnoMestoViewModel radnoMestoViewModel, OperacijaViewModel operacijaViewModel, PredmetRadaViewModel predmetRadaViewModel,
+                                    RadnaListaViewModel radnaListaViewModel, RadnikProizvodnjaViewModel radnikProizvodnjaViewModel, RadniNalogViewModel radniNalogViewModel,
+                                    TehnoloskiPostupakViewModel tehnoloskiPostupakViewModel, TrebovanjeViewModel trebovanjeViewModel)
         {
             _userSqlProvider = userSqlProvider;
+            this.radnoMestoViewModel = radnoMestoViewModel;
+            this.operacijaViewModel = operacijaViewModel;
+            this.predmetRadaViewModel = predmetRadaViewModel;
+            this.radnaListaViewModel = radnaListaViewModel;
+            this.radnikProizvodnjaViewModel = radnikProizvodnjaViewModel;
+            this.radniNalogViewModel = radniNalogViewModel;
+            this.tehnoloskiPostupakViewModel = tehnoloskiPostupakViewModel;
+            this.trebovanjeViewModel = trebovanjeViewModel;
             _radnoMestoSqlProvider = radnoMestoSqlProvider;
             _operacijaSqlProvider = operacijaSqlProvider;
             _predmetRadaSqlProvider = predmetRadaSqlProvider;
@@ -66,7 +85,8 @@ namespace AUPS.ViewModels
             App.Current.MainWindow.WindowState = WindowState.Maximized;
             ContentMainScreen = new MainContentViewModel(_radnoMestoSqlProvider, _operacijaSqlProvider, _predmetRadaSqlProvider,
                 _radnaListaSqlProvider, _radnikProizvodnjaSqlProvider, _radniNalogSqlProvider, _tehnoloskiPostupakSqlProvider,
-                _trebovanjeSqlProvider);
+                _trebovanjeSqlProvider, radnoMestoViewModel, operacijaViewModel, predmetRadaViewModel, radnaListaViewModel
+                , radnikProizvodnjaViewModel, radniNalogViewModel, tehnoloskiPostupakViewModel, trebovanjeViewModel);
         }
     }
 }

@@ -2,6 +2,7 @@
 using AUPS.ViewModels.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,16 +22,16 @@ namespace AUPS.Dialogs.RadniNalog
     /// </summary>
     public partial class CreateRadniNalogDialog : Window
     {
-        public CreateRadniNalogDialog(IRadniNalogSqlProvider _radniNalogSqlProvider)
+        public CreateRadniNalogDialog(IRadniNalogSqlProvider _radniNalogSqlProvider, ObservableCollection<AUPS.Models.PredmetRada> predmetRadaList)
         {
             InitializeComponent();
-            DataContext = new CreateRadniNalogDialogViewModel(_radniNalogSqlProvider);
+            DataContext = new CreateRadniNalogDialogViewModel(_radniNalogSqlProvider, predmetRadaList);
         }
 
-        public CreateRadniNalogDialog(IRadniNalogSqlProvider _radniNalogSqlProvider, AUPS.Models.RadniNalog radniNalog)
+        public CreateRadniNalogDialog(IRadniNalogSqlProvider _radniNalogSqlProvider, ObservableCollection<AUPS.Models.PredmetRada> predmetRadaList, AUPS.Models.RadniNalog radniNalog)
         {
             InitializeComponent();
-            DataContext = new CreateRadniNalogDialogViewModel(_radniNalogSqlProvider, radniNalog);
+            DataContext = new CreateRadniNalogDialogViewModel(_radniNalogSqlProvider, predmetRadaList, radniNalog);
         }
     }
 }

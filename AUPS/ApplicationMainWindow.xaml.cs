@@ -1,5 +1,6 @@
 ﻿using AUPS.SqlProviders.Interfaces;
 using AUPS.ViewModels;
+using AUPS.ViewModels.MainContentViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,12 +26,17 @@ namespace AUPS
                                     , IRadnoMestoSqlProvider radnoMestoSqlProvider, IOperacijaSqlProvider operacijaSqlProvider
                                     , IPredmetRadaSqlProvider predmetRadaSqlProvider, IRadnaListaSqlProvider radnaListaSqlProvider
                                     , IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, IRadniNalogSqlProvider radniNalogSqlProvider
-                                    , ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ITrebovanjeSqlProvider trebovanjeSqlProvider)
+                                    , ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ITrebovanjeSqlProvider trebovanjeSqlProvider
+                                    , RadnoMestoViewModel radnoMestoViewModel, OperacijaViewModel operacijaViewModel, PredmetRadaViewModel predmetRadaViewModel,
+                                    RadnaListaViewModel radnaListaViewModel, RadnikProizvodnjaViewModel radnikProizvodnjaViewModel, RadniNalogViewModel radniNalogViewModel,
+                                    TehnoloskiPostupakViewModel tehnoloskiPostupakViewModel, TrebovanjeViewModel trebovanjeViewModel)
         {
             InitializeComponent();
 
             DataContext = new ApplictionMainWindowViewModel(radnoMestoSqlProvider, operacijaSqlProvider, predmetRadaSqlProvider, radnaListaSqlProvider,
-                radnikProizvodnjaSqlProvider, radniNalogSqlProvider, tehnoloskiPostupakSqlProvider, trebovanjeSqlProvider, userSqlProvider);
+                radnikProizvodnjaSqlProvider, radniNalogSqlProvider, tehnoloskiPostupakSqlProvider, trebovanjeSqlProvider, userSqlProvider,
+                radnoMestoViewModel, operacijaViewModel, predmetRadaViewModel, radnaListaViewModel, radnikProizvodnjaViewModel, radniNalogViewModel
+                , tehnoloskiPostupakViewModel, trebovanjeViewModel);
         }
     }
 }

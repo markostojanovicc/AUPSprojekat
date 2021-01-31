@@ -20,6 +20,12 @@ namespace AUPS.ViewModels.Dialogs
         private string _kolicinaRobe;
         private string _idRadniNalog;
         private int _idTrebovanje;
+        List<int> _radniNalogIds;
+
+        public List<string> IdRadnihNaloga
+        {
+            get { return _radniNalogIds.Select(x => x.ToString()).ToList(); }
+        }
 
         public int IdTrebovanja
         {
@@ -28,7 +34,7 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public string IdRadniNalog
+        public string SelectedRadniNalog
         {
             get { return _idRadniNalog; }
             set { _idRadniNalog = value; }
@@ -75,19 +81,22 @@ namespace AUPS.ViewModels.Dialogs
             set { _title = value; }
         }
 
-        public CreateTrebovanjeDialogViewModel(ITrebovanjeSqlProvider trebovanjeSqlProvider)
+        public CreateTrebovanjeDialogViewModel(ITrebovanjeSqlProvider trebovanjeSqlProvider, List<int> radniNalogIds)
         {
             _trebovanjeSqlProvider = trebovanjeSqlProvider;
+            _radniNalogIds = radniNalogIds;
+            SelectedRadniNalog = _radniNalogIds.First().ToString();
         }
 
-        public CreateTrebovanjeDialogViewModel(ITrebovanjeSqlProvider trebovanjeSqlProvider, Trebovanje trebovanje)
+        public CreateTrebovanjeDialogViewModel(ITrebovanjeSqlProvider trebovanjeSqlProvider, List<int> radniNalogIds, Trebovanje trebovanje)
         {
             _trebovanjeSqlProvider = trebovanjeSqlProvider;
             IdTrebovanja = trebovanje.IDTrebovanje;
             TipTrebovanja = trebovanje.TipTrebovanja;
             JedinicaMere = trebovanje.JedMere;
             KolicinaRobe = trebovanje.KolicinaRobe.ToString();
-            IdRadniNalog = trebovanje.IDRadniNalog.ToString();
+            _radniNalogIds = radniNalogIds;
+            SelectedRadniNalog = trebovanje.RadniNalog.IDRadniNalog.ToString();
         }
 
         public void SetViewForUpdateDialog()

@@ -4,6 +4,7 @@ using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,19 @@ namespace AUPS.ViewModels.Dialogs
         private string _prezimeRadnika;
         private string _idRadnoMesto;
         private int _idRadnika;
+        private string _selectedRadnoMesto;
+        private ObservableCollection<RadnoMesto> _radnoMestoList;
+
+        public List<string> NaziviRadnihMesta
+        {
+            get { return _radnoMestoList.Select(x => x.NazivRadnoMesto).ToList(); }
+        }
+
+        public string SelectedRadnoMesto
+        {
+            get { return _selectedRadnoMesto; }
+            set { _selectedRadnoMesto = value; }
+        }
 
         public int IdRadnika
         {
@@ -33,6 +47,12 @@ namespace AUPS.ViewModels.Dialogs
         {
             get { return _idRadnoMesto; }
             set { _idRadnoMesto = value; }
+        }
+
+        private ObservableCollection<RadnoMesto> RadnoMestoList
+        {
+            get { return _radnoMestoList; }
+            set { _radnoMestoList = value; }
         }
 
         public string PrezimeRadnika
@@ -87,12 +107,15 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public CreateRadnikProizvodnjaDialogViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider)
+        public CreateRadnikProizvodnjaDialogViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, ObservableCollection<RadnoMesto> radnoMestoList)
         {
             _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
+            RadnoMestoList = radnoMestoList;
+            SelectedRadnoMesto = radnoMestoList[0].NazivRadnoMesto;
+
         }
 
-        public CreateRadnikProizvodnjaDialogViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, RadnikProizvodnja radnikProizvodnja)
+        public CreateRadnikProizvodnjaDialogViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, ObservableCollection<RadnoMesto> radnoMestoList, RadnikProizvodnja radnikProizvodnja)
         {
             _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
             IdRadnika = radnikProizvodnja.IDRadnik;
@@ -100,7 +123,9 @@ namespace AUPS.ViewModels.Dialogs
             PrezimeRadnika = radnikProizvodnja.PrezimeRadnika;
             Enum.TryParse(radnikProizvodnja.Pol, out Pol pol);
             SelectedType = pol;
-            IdRadnoMesto = radnikProizvodnja.IDRadnoMesto.ToString();
+            IdRadnoMesto = radnikProizvodnja.RadnoMesto.IDRadnoMesto.ToString();
+            RadnoMestoList = radnoMestoList;
+            SelectedRadnoMesto = radnikProizvodnja.RadnoMesto.NazivRadnoMesto;
         }
 
         public void SetViewForUpdateDialog()
