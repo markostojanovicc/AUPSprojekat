@@ -116,7 +116,7 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@DatumUlaz", NpgsqlDbType.Varchar, radniNalogNew.DatumUlaz);
                 cmd.Parameters.AddWithValue("@DatumIzlaz", NpgsqlDbType.Varchar, radniNalogNew.DatumIzlaz);
                 cmd.Parameters.AddWithValue("@KolicinaProizvoda", NpgsqlDbType.Varchar, radniNalogNew.KolicinaProizvoda);
-                cmd.Parameters.AddWithValue("@IDPredmetRada", NpgsqlDbType.Varchar, radniNalogNew.IDPredmetRada);
+                cmd.Parameters.AddWithValue("@IDPredmetRada", NpgsqlDbType.Varchar, radniNalogNew.PredmetRada.IDPredmetRada);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

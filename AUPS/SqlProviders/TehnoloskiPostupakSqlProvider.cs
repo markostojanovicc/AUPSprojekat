@@ -120,7 +120,7 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@VremeIzrade", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.VremeIzrade);
                 cmd.Parameters.AddWithValue("@SerijaKom", NpgsqlDbType.Integer, tehnoloskiPostupakNew.SerijaKom);
                 cmd.Parameters.AddWithValue("@BrKomada", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.BrKomada);
-                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.IDOperacija);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.Operacija.IDOperacija);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
