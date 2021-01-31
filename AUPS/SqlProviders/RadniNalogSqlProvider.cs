@@ -30,7 +30,7 @@ namespace AUPS.SqlProviders
 
         private const string UPDATE_RADNI_NALOG_BY_ID =
             @"
-                  UPDATE radninalog SET datumulaz = @DatumUlaz, datumizlaz = @DatumIzlaz kolicinaproizvoda = @KolicinaProizvoda, idpredmetrada= @IDPredmetRada
+                  UPDATE radninalog SET datumulaz = @DatumUlaz, datumizlaz = @DatumIzlaz, kolicinaproizvoda = @KolicinaProizvoda, idpredmetrada= @IDPredmetRada
                   WHERE idradninalog = @Id
             ";
 
@@ -94,10 +94,10 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_RADNI_NALOG_BY_ID, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, radniNalogNew.IDRadniNalog);
-                cmd.Parameters.AddWithValue("@DatumUlaz", NpgsqlDbType.Varchar, radniNalogNew.DatumUlaz);
-                cmd.Parameters.AddWithValue("@DatumIzlaz", NpgsqlDbType.Varchar, radniNalogNew.DatumIzlaz);
-                cmd.Parameters.AddWithValue("@KolicinaProizvoda", NpgsqlDbType.Varchar, radniNalogNew.KolicinaProizvoda);
-                //cmd.Parameters.AddWithValue("@IDPredmetRada", NpgsqlDbType.Varchar, radniNalogNew.IDPredmetRada);
+                cmd.Parameters.AddWithValue("@DatumUlaz", NpgsqlDbType.Date, radniNalogNew.DatumUlaz);
+                cmd.Parameters.AddWithValue("@DatumIzlaz", NpgsqlDbType.Date, radniNalogNew.DatumIzlaz);
+                cmd.Parameters.AddWithValue("@KolicinaProizvoda", NpgsqlDbType.Integer, radniNalogNew.KolicinaProizvoda);
+                cmd.Parameters.AddWithValue("@IDPredmetRada", NpgsqlDbType.Integer, radniNalogNew.PredmetRada.IDPredmetRada);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -113,10 +113,10 @@ namespace AUPS.SqlProviders
 
                 NpgsqlCommand cmd = new NpgsqlCommand(CREATE_RADNI_NALOG, sqlConnection);
 
-                cmd.Parameters.AddWithValue("@DatumUlaz", NpgsqlDbType.Varchar, radniNalogNew.DatumUlaz);
-                cmd.Parameters.AddWithValue("@DatumIzlaz", NpgsqlDbType.Varchar, radniNalogNew.DatumIzlaz);
-                cmd.Parameters.AddWithValue("@KolicinaProizvoda", NpgsqlDbType.Varchar, radniNalogNew.KolicinaProizvoda);
-                cmd.Parameters.AddWithValue("@IDPredmetRada", NpgsqlDbType.Varchar, radniNalogNew.PredmetRada.IDPredmetRada);
+                cmd.Parameters.AddWithValue("@DatumUlaz", NpgsqlDbType.Date, radniNalogNew.DatumUlaz);
+                cmd.Parameters.AddWithValue("@DatumIzlaz", NpgsqlDbType.Date, radniNalogNew.DatumIzlaz);
+                cmd.Parameters.AddWithValue("@KolicinaProizvoda", NpgsqlDbType.Integer, radniNalogNew.KolicinaProizvoda);
+                cmd.Parameters.AddWithValue("@IDPredmetRada", NpgsqlDbType.Integer, radniNalogNew.PredmetRada.IDPredmetRada);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

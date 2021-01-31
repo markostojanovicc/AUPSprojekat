@@ -33,7 +33,7 @@ namespace AUPS.SqlProviders
 
         private const string CREATE_TEHNOLOSKI_POSTUPAK =
             @"
-                  INSERT INTO trebovanje VALUES (nextval('trebovanjeSeq'), @TipTrebovanja @JedMere, @KolicinaRobe, @IDRadniNalog);
+                  INSERT INTO trebovanje VALUES (nextval('trebovanjeSeq'), @TipTrebovanja, @JedMere, @KolicinaRobe, @IDRadniNalog);
             ";
         #endregion
 
@@ -92,8 +92,8 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, trebovanjeNew.IDTrebovanje);
                 cmd.Parameters.AddWithValue("@TipTrebovanja", NpgsqlDbType.Varchar, trebovanjeNew.TipTrebovanja);
                 cmd.Parameters.AddWithValue("@JedMere", NpgsqlDbType.Varchar, trebovanjeNew.JedMere);
-                cmd.Parameters.AddWithValue("@KolicinaRobe", NpgsqlDbType.Varchar, trebovanjeNew.KolicinaRobe);
-                //cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Varchar, trebovanjeNew.IDRadniNalog);
+                cmd.Parameters.AddWithValue("@KolicinaRobe", NpgsqlDbType.Integer, trebovanjeNew.KolicinaRobe);
+                cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Integer, trebovanjeNew.RadniNalog.IDRadniNalog);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -111,8 +111,8 @@ namespace AUPS.SqlProviders
 
                 cmd.Parameters.AddWithValue("@TipTrebovanja", NpgsqlDbType.Varchar, trebovanjeNew.TipTrebovanja);
                 cmd.Parameters.AddWithValue("@JedMere", NpgsqlDbType.Varchar, trebovanjeNew.JedMere);
-                cmd.Parameters.AddWithValue("@KolicinaRobe", NpgsqlDbType.Varchar, trebovanjeNew.KolicinaRobe);
-                cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Varchar, trebovanjeNew.RadniNalog.IDRadniNalog);
+                cmd.Parameters.AddWithValue("@KolicinaRobe", NpgsqlDbType.Integer, trebovanjeNew.KolicinaRobe);
+                cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Integer, trebovanjeNew.RadniNalog.IDRadniNalog);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

@@ -37,7 +37,7 @@ namespace AUPS.SqlProviders
 
         private const string CREATE_RADNIK_PROIZVODNJA =
             @"
-                  INSERT INTO radnikproizvodnja VALUES (nextval('radnikProizvodnjaSeq'), @ImeRadnika, @PrezimeRadnika, @Pol, @IDRadnoMesto);
+                  INSERT INTO radnikproizvodnja VALUES (nextval('radnikSeq'), @ImeRadnika, @PrezimeRadnika, @Pol, @IDRadnoMesto);
             ";
 
         #endregion
@@ -99,7 +99,7 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@ImeRadnika", NpgsqlDbType.Varchar, radnikProizvodnjaNew.ImeRadnika);
                 cmd.Parameters.AddWithValue("@PrezimeRadnika", NpgsqlDbType.Varchar, radnikProizvodnjaNew.PrezimeRadnika);
                 cmd.Parameters.AddWithValue("@Pol", NpgsqlDbType.Varchar, radnikProizvodnjaNew.Pol);
-                //cmd.Parameters.AddWithValue("@IDRadnoMesto", NpgsqlDbType.Varchar, radnikProizvodnjaNew.IDRadnoMesto);
+                cmd.Parameters.AddWithValue("@IDRadnoMesto", NpgsqlDbType.Integer, radnikProizvodnjaNew.RadnoMesto.IDRadnoMesto);
                 int rowsAffected = cmd.ExecuteNonQuery();
 
                 return rowsAffected == 1;
@@ -117,7 +117,7 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@ImeRadnika", NpgsqlDbType.Varchar, radnikProizvodnjaNew.ImeRadnika);
                 cmd.Parameters.AddWithValue("@PrezimeRadnika", NpgsqlDbType.Varchar, radnikProizvodnjaNew.PrezimeRadnika);
                 cmd.Parameters.AddWithValue("@Pol", NpgsqlDbType.Varchar, radnikProizvodnjaNew.Pol);
-                cmd.Parameters.AddWithValue("@IDRadnoMesto", NpgsqlDbType.Varchar, radnikProizvodnjaNew.RadnoMesto.IDRadnoMesto);
+                cmd.Parameters.AddWithValue("@IDRadnoMesto", NpgsqlDbType.Integer, radnikProizvodnjaNew.RadnoMesto.IDRadnoMesto);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

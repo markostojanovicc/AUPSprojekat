@@ -102,11 +102,11 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_RADNA_LISTA_BY_ID, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, radnaListaNew.IDRadnaLista);
-                cmd.Parameters.AddWithValue("@Datum", NpgsqlDbType.Varchar, radnaListaNew.Datum);
-                cmd.Parameters.AddWithValue("@Kolicina", NpgsqlDbType.Varchar, radnaListaNew.Kolicina);
+                cmd.Parameters.AddWithValue("@Datum", NpgsqlDbType.Date, radnaListaNew.Datum);
+                cmd.Parameters.AddWithValue("@Kolicina", NpgsqlDbType.Integer, radnaListaNew.Kolicina);
                 cmd.Parameters.AddWithValue("@IDRadnik", NpgsqlDbType.Integer, radnaListaNew.Radnik.IDRadnik);
-                cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Varchar, radnaListaNew.RadniNalog.IDRadniNalog);
-                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Varchar, radnaListaNew.Operacija.IDOperacija);
+                cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Integer, radnaListaNew.RadniNalog.IDRadniNalog);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, radnaListaNew.Operacija.IDOperacija);
                 int rowsAffected = cmd.ExecuteNonQuery();
 
                 return rowsAffected == 1;
@@ -122,7 +122,7 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(CREATE_RADNA_LISTA, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@Datum", NpgsqlDbType.Date, radnaListaNew.Datum);
-                cmd.Parameters.AddWithValue("@Kolicina", NpgsqlDbType.Numeric, radnaListaNew.Kolicina);
+                cmd.Parameters.AddWithValue("@Kolicina", NpgsqlDbType.Integer, radnaListaNew.Kolicina);
                 cmd.Parameters.AddWithValue("@IDRadnik", NpgsqlDbType.Integer, radnaListaNew.Radnik.IDRadnik);
                 cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Integer, radnaListaNew.RadniNalog.IDRadniNalog);
                 cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, radnaListaNew.Operacija.IDOperacija);

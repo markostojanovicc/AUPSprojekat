@@ -97,10 +97,10 @@ namespace AUPS.SqlProviders
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, tehnoloskiPostupakNew.IDTehPostupak);
                 cmd.Parameters.AddWithValue("@TipTehPostupak", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.TipTehPostupak);
-                cmd.Parameters.AddWithValue("@VremeIzrade", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.VremeIzrade);
+                cmd.Parameters.AddWithValue("@VremeIzrade", NpgsqlDbType.Integer, tehnoloskiPostupakNew.VremeIzrade);
                 cmd.Parameters.AddWithValue("@SerijaKom", NpgsqlDbType.Integer, tehnoloskiPostupakNew.SerijaKom);
-                cmd.Parameters.AddWithValue("@BrKomada", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.BrKomada);
-                //cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.IDOperacija);
+                cmd.Parameters.AddWithValue("@BrKomada", NpgsqlDbType.Integer, tehnoloskiPostupakNew.BrKomada);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, tehnoloskiPostupakNew.Operacija.IDOperacija);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -117,10 +117,10 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(CREATE_TEHNOLOSKI_POSTUPAK, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@TipTehPostupak", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.TipTehPostupak);
-                cmd.Parameters.AddWithValue("@VremeIzrade", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.VremeIzrade);
+                cmd.Parameters.AddWithValue("@VremeIzrade", NpgsqlDbType.Integer, tehnoloskiPostupakNew.VremeIzrade);
                 cmd.Parameters.AddWithValue("@SerijaKom", NpgsqlDbType.Integer, tehnoloskiPostupakNew.SerijaKom);
-                cmd.Parameters.AddWithValue("@BrKomada", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.BrKomada);
-                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.Operacija.IDOperacija);
+                cmd.Parameters.AddWithValue("@BrKomada", NpgsqlDbType.Integer, tehnoloskiPostupakNew.BrKomada);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, tehnoloskiPostupakNew.Operacija.IDOperacija);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

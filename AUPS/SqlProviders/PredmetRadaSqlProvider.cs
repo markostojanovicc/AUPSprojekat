@@ -93,7 +93,7 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@TipPredmetRada", NpgsqlDbType.Varchar, predmetRadaNew.TipPredmetRada);
                 cmd.Parameters.AddWithValue("@NazivPR", NpgsqlDbType.Varchar, predmetRadaNew.NazivPR);
                 cmd.Parameters.AddWithValue("@JedMerePR", NpgsqlDbType.Varchar, predmetRadaNew.JedMerePR);
-                cmd.Parameters.AddWithValue("@Cena", NpgsqlDbType.Varchar, predmetRadaNew.Cena);
+                cmd.Parameters.AddWithValue("@Cena", NpgsqlDbType.Integer, predmetRadaNew.Cena);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -112,7 +112,7 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@TipPredmetRada", NpgsqlDbType.Varchar, predmetRadaNew.TipPredmetRada);
                 cmd.Parameters.AddWithValue("@NazivPR", NpgsqlDbType.Varchar, predmetRadaNew.NazivPR);
                 cmd.Parameters.AddWithValue("@JedMerePR", NpgsqlDbType.Varchar, predmetRadaNew.JedMerePR);
-                cmd.Parameters.AddWithValue("@Cena", NpgsqlDbType.Varchar, predmetRadaNew.Cena);
+                cmd.Parameters.AddWithValue("@Cena", NpgsqlDbType.Integer, predmetRadaNew.Cena);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

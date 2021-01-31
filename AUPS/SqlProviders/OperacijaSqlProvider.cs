@@ -91,9 +91,9 @@ namespace AUPS.SqlProviders
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, operacijaNew.IDOperacija);
                 cmd.Parameters.AddWithValue("@NazivOperacije", NpgsqlDbType.Varchar, operacijaNew.NazivOperacije);
-                cmd.Parameters.AddWithValue("@OsnovnoVreme", NpgsqlDbType.Varchar, operacijaNew.OsnovnoVreme);
+                cmd.Parameters.AddWithValue("@OsnovnoVreme", NpgsqlDbType.Integer, operacijaNew.OsnovnoVreme);
                 cmd.Parameters.AddWithValue("@PomocnoVreme", NpgsqlDbType.Integer, operacijaNew.PomocnoVreme);
-                cmd.Parameters.AddWithValue("@DodatnoVreme", NpgsqlDbType.Varchar, operacijaNew.DodatnoVreme);
+                cmd.Parameters.AddWithValue("@DodatnoVreme", NpgsqlDbType.Integer, operacijaNew.DodatnoVreme);
                 cmd.Parameters.AddWithValue("@OznakaMasine", NpgsqlDbType.Varchar, operacijaNew.OznakaMasine);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -111,9 +111,9 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(CREATE_OPERACIJA, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@NazivOperacije", NpgsqlDbType.Varchar, operacijaNew.NazivOperacije);
-                cmd.Parameters.AddWithValue("@OsnovnoVreme", NpgsqlDbType.Varchar, operacijaNew.OsnovnoVreme);
+                cmd.Parameters.AddWithValue("@OsnovnoVreme", NpgsqlDbType.Integer, operacijaNew.OsnovnoVreme);
                 cmd.Parameters.AddWithValue("@PomocnoVreme", NpgsqlDbType.Integer, operacijaNew.PomocnoVreme);
-                cmd.Parameters.AddWithValue("@DodatnoVreme", NpgsqlDbType.Varchar, operacijaNew.DodatnoVreme);
+                cmd.Parameters.AddWithValue("@DodatnoVreme", NpgsqlDbType.Integer, operacijaNew.DodatnoVreme);
                 cmd.Parameters.AddWithValue("@OznakaMasine", NpgsqlDbType.Varchar, operacijaNew.OznakaMasine);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
