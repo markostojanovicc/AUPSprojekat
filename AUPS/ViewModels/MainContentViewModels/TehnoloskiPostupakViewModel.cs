@@ -28,15 +28,9 @@ namespace AUPS.ViewModels.MainContentViewModels
             set { _itemSelected = value; }
         }
 
-        public TehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider)
+        public TehnoloskiPostupakViewModel()
         {
-            _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
-            FillTableWithData();
-        }
 
-        private void FillTableWithData()
-        {
-            TehnoloskiPostupakList = _tehnoloskiPostupakSqlProvider.GetAllFromTehnoloskiPostupak();
         }
     }
 }

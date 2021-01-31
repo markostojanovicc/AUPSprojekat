@@ -1,4 +1,5 @@
-﻿using AUPS.Models;
+﻿using AUPS.Commands;
+using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
 {
@@ -23,12 +25,14 @@ namespace AUPS.ViewModels.Dialogs
         private int _idOperacije;
         private int _idTehnoloskogPostupka;
         private ObservableCollection<Operacija> _operacijaList;
-        private string _selectedOperacija;
+        private int _selectedIndexOperacija;
+        private ICommand _updateButtonCommand;
+        private ICommand _createButtonCommand;
 
-        public string SelectedOperacija
+        public int SelectedIndexOperacija
         {
-            get { return _selectedOperacija; }
-            set { _selectedOperacija = value; }
+            get { return _selectedIndexOperacija; }
+            set { _selectedIndexOperacija = value; }
         }
 
         public List<string> NaziviOperacija
@@ -108,7 +112,7 @@ namespace AUPS.ViewModels.Dialogs
         {
             _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
             OperacijaList = operacijaList;
-            SelectedOperacija = operacijaList.First().NazivOperacije;
+            _selectedIndexOperacija = 0;
         }
 
         public CreateTehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ObservableCollection<Operacija> operacijaList, TehnoloskiPostupak tehnoloskiPostupak)
@@ -121,7 +125,71 @@ namespace AUPS.ViewModels.Dialogs
             BrKom = tehnoloskiPostupak.BrKomada.ToString();
             IdOperacije = tehnoloskiPostupak.Operacija.IDOperacija;
             OperacijaList = operacijaList;
-            SelectedOperacija = tehnoloskiPostupak.Operacija.NazivOperacije;
+            _selectedIndexOperacija = operacijaList.IndexOf(tehnoloskiPostupak.Operacija);
+        }
+
+        public bool CanExecuteBtnCommand
+        {
+            get
+            {
+                return !(string.IsNullOrEmpty(TipTehnoloskogPostupka) || string.IsNullOrEmpty(VremeIzrade) || string.IsNullOrEmpty(SerijaKom)
+                     || string.IsNullOrEmpty(BrKom));
+            }
+        }
+
+        public ICommand AddButtonCommand
+        {
+            get
+            {
+                if (_createButtonCommand == null)
+                {
+                    this._createButtonCommand = new RelayCommand(
+                        param => CreateButtonCommandExecute(param));
+                }
+
+                return _createButtonCommand;
+            }
+        }
+
+        public ICommand UpdateButtonCommand
+        {
+            get
+            {
+                if (_updateButtonCommand == null)
+                {
+                    this._updateButtonCommand = new RelayCommand(
+                        param => UpdateButtonCommandExecute(param));
+                }
+
+                return _updateButtonCommand;
+            }
+        }
+
+        private void UpdateButtonCommandExecute(object param)
+        {
+            TehnoloskiPostupak tehnoloskiPostupak = new TehnoloskiPostupak
+            {
+                IDTehPostupak = _idTehnoloskogPostupka,
+                SerijaKom = Int32.Parse(_serijaKom),
+                BrKomada = Int32.Parse(_brKom),
+                TipTehPostupak = _tipTehnoloskogPostupka,
+                VremeIzrade = Int32.Parse(_vremeIzrade),
+                Operacija = OperacijaList[SelectedIndexOperacija]
+            };
+            _tehnoloskiPostupakSqlProvider.UpdateTehnoloskiPostupakById(tehnoloskiPostupak);
+        }
+
+        private void CreateButtonCommandExecute(object param)
+        {
+            TehnoloskiPostupak tehnoloskiPostupak = new TehnoloskiPostupak
+            {
+                SerijaKom = Int32.Parse(_serijaKom),
+                BrKomada = Int32.Parse(_brKom),
+                TipTehPostupak = _tipTehnoloskogPostupka,
+                VremeIzrade = Int32.Parse(_vremeIzrade),
+                Operacija = OperacijaList[SelectedIndexOperacija]
+            };
+            _tehnoloskiPostupakSqlProvider.CreateTehnoloskiPostupakById(tehnoloskiPostupak);
         }
 
         public void SetViewForUpdateDialog()

@@ -19,31 +19,31 @@
         <Grid Grid.Row="0" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
             <TextBlock Margin="10 0 10 0" Text="Tip tehnoloskog postupka..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtTipTehnoloskogPostupka, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Height="30" Name="txtTipTehnoloskogPostupka" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding TipTehnoloskogPostupka}"/>
+            <TextBox Height="30" Name="txtTipTehnoloskogPostupka" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding TipTehnoloskogPostupka, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Grid Grid.Row="1" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
             <TextBlock Margin="10 0 10 0" Text="Vreme izrade..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtVremeIzrade, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Height="30" Name="txtVremeIzrade" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding VremeIzrade}"/>
+            <TextBox Height="30" Name="txtVremeIzrade" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding VremeIzrade, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Grid Grid.Row="2" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
             <TextBlock Margin="10 0 10 0" Text="Serija(kom)..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtSerijaKomada, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Height="30" Name="txtSerijaKomada" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding SerijaKom}"/>
+            <TextBox Height="30" Name="txtSerijaKomada" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding SerijaKom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Grid Grid.Row="3" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
             <TextBlock Margin="10 0 10 0" Text="Broj komada..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtBrojKomada, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Height="30" Name="txtBrojKomada" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding BrKom}"/>
+            <TextBox Height="30" Name="txtBrojKomada" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding BrKom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
-        <ComboBox Grid.Row="4" ItemsSource="{Binding NaziviOperacija}" SelectedItem="{Binding SelectedOperacija, Mode=TwoWay}" Margin="30 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"
+        <ComboBox Grid.Row="4" ItemsSource="{Binding NaziviOperacija}" SelectedIndex="{Binding SelectedIndexOperacija, Mode=TwoWay}" Margin="30 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"
                   Height="35" Width="Auto" FontSize="20" />
 
-        <Button Visibility="{Binding IsCreateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
-        <Button Visibility="{Binding IsUpdateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnUpdate" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Potvrdi Izmene" Height="35" Width="160" />
+        <Button IsEnabled="{Binding CanExecuteBtnCommand}" Command="{Binding AddButtonCommand}" Visibility="{Binding IsCreateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
+        <Button IsEnabled="{Binding CanExecuteBtnCommand}" Command="{Binding UpdateButtonCommand}" Visibility="{Binding IsUpdateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnUpdate" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Potvrdi Izmene" Height="35" Width="160" />
     </Grid>
 </Window>

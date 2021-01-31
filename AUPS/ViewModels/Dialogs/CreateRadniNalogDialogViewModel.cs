@@ -1,4 +1,5 @@
-﻿using AUPS.Models;
+﻿using AUPS.Commands;
+using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
 {
@@ -16,18 +18,28 @@ namespace AUPS.ViewModels.Dialogs
         private string _title = "Dijalog za kreiranje radnog naloga";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
-        private DateTime _datumIzlaza;
-        private DateTime _datumUlaza;
+        private DateTime _datumIzlaza = DateTime.UtcNow;
+        private DateTime _datumUlaza = DateTime.UtcNow;
         private string _kolicinaProizvoda;
         private int _idPredmetaRada;
         private int _idRadniNalog;
+        private ICommand _updateButtonCommand;
+        private ICommand _createButtonCommand;
         private ObservableCollection<PredmetRada> _predmetRadaList;
-        private string _selectedPredmetRada;
+        private int _selectedIndexPredmetRada;
 
-        public string SelectedPredmetRada
+        public int SelectedIndexPredmetRada
         {
-            get { return _selectedPredmetRada; }
-            set { _selectedPredmetRada = value; }
+            get { return _selectedIndexPredmetRada; }
+            set { _selectedIndexPredmetRada = value; }
+        }
+
+        public bool CanExecuteBtnCommand
+        {
+            get
+            {
+                return !(string.IsNullOrEmpty(KolicinaProizvoda));
+            }
         }
 
         public List<string> NaziviPredmetaRada 
@@ -101,7 +113,7 @@ namespace AUPS.ViewModels.Dialogs
         {
             _radniNalogSqlProvider = radniNalogSqlProvider;
             PredmetRadaList = predmetRadaList;
-            SelectedPredmetRada = predmetRadaList[0].NazivPR;
+            _selectedIndexPredmetRada = 0;
         }
 
         public CreateRadniNalogDialogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider, ObservableCollection<PredmetRada> predmetRadaList, RadniNalog radniNalog)
@@ -113,7 +125,60 @@ namespace AUPS.ViewModels.Dialogs
             KolicinaProizvoda = radniNalog.KolicinaProizvoda.ToString();
             IdPredmetaRada = radniNalog.PredmetRada.IDPredmetRada;
             PredmetRadaList = predmetRadaList;
-            SelectedPredmetRada = radniNalog.PredmetRada.NazivPR;
+            _selectedIndexPredmetRada = PredmetRadaList.IndexOf(radniNalog.PredmetRada);
+        }
+
+        public ICommand AddButtonCommand
+        {
+            get
+            {
+                if (_createButtonCommand == null)
+                {
+                    this._createButtonCommand = new RelayCommand(
+                        param => CreateButtonCommandExecute(param));
+                }
+
+                return _createButtonCommand;
+            }
+        }
+
+        public ICommand UpdateButtonCommand
+        {
+            get
+            {
+                if (_updateButtonCommand == null)
+                {
+                    this._updateButtonCommand = new RelayCommand(
+                        param => UpdateButtonCommandExecute(param));
+                }
+
+                return _updateButtonCommand;
+            }
+        }
+
+        private void UpdateButtonCommandExecute(object param)
+        {
+            RadniNalog radniNalog = new RadniNalog
+            {
+                IDRadniNalog = _idRadniNalog,
+                DatumIzlaz = _datumIzlaza,
+                DatumUlaz = _datumUlaza,
+                KolicinaProizvoda = Int32.Parse(_kolicinaProizvoda),
+                PredmetRada = PredmetRadaList[SelectedIndexPredmetRada]
+            };
+            _radniNalogSqlProvider.UpdateRadniNalogById(radniNalog);
+        }
+
+        private void CreateButtonCommandExecute(object param)
+        {
+            RadniNalog radniNalog = new RadniNalog
+            {
+                DatumIzlaz = _datumIzlaza,
+                DatumUlaz = _datumUlaza,
+                KolicinaProizvoda = Int32.Parse(_kolicinaProizvoda),
+                PredmetRada = PredmetRadaList[SelectedIndexPredmetRada]
+            };
+            _radniNalogSqlProvider.CreateRadniNalogById(radniNalog);
         }
 
         public void SetViewForUpdateDialog()

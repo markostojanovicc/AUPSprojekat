@@ -1,4 +1,5 @@
-﻿using AUPS.Models;
+﻿using AUPS.Commands;
+using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
 {
@@ -18,7 +20,16 @@ namespace AUPS.ViewModels.Dialogs
         private string _nazivRadnogMesta;
         private string _strucnaSprema;
         private int _idRadnogMesta;
+        private ICommand _updateButtonCommand;
+        private ICommand _createButtonCommand;
 
+        public bool CanExecuteBtnCommand
+        {
+            get
+            {
+                return !(string.IsNullOrEmpty(NazivRadnogMesta) || string.IsNullOrEmpty(StrucnaSprema));
+            }
+        }
         public int IdRadnogMesta
         {
             get { return _idRadnogMesta; }
@@ -78,6 +89,55 @@ namespace AUPS.ViewModels.Dialogs
             _idRadnogMesta = radnoMesto.IDRadnoMesto;
             _nazivRadnogMesta = radnoMesto.NazivRadnoMesto;
             _strucnaSprema = radnoMesto.StrucnaSprema;
+        }
+
+        public ICommand AddButtonCommand
+        {
+            get
+            {
+                if (_createButtonCommand == null)
+                {
+                    this._createButtonCommand = new RelayCommand(
+                        param => CreateButtonCommandExecute(param));
+                }
+
+                return _createButtonCommand;
+            }
+        }
+
+        public ICommand UpdateButtonCommand
+        {
+            get
+            {
+                if (_updateButtonCommand == null)
+                {
+                    this._updateButtonCommand = new RelayCommand(
+                        param => UpdateButtonCommandExecute(param));
+                }
+
+                return _updateButtonCommand;
+            }
+        }
+
+        private void UpdateButtonCommandExecute(object param)
+        {
+            RadnoMesto radnoMesto = new RadnoMesto
+            {
+                IDRadnoMesto = _idRadnogMesta,
+                NazivRadnoMesto = _nazivRadnogMesta,
+                StrucnaSprema = _strucnaSprema
+            };
+            _radnoMestoSqlProvider.UpdateRadnoMestoById(radnoMesto);
+        }
+
+        private void CreateButtonCommandExecute(object param)
+        {
+            RadnoMesto radnoMesto = new RadnoMesto
+            {
+                NazivRadnoMesto = _nazivRadnogMesta,
+                StrucnaSprema = _strucnaSprema
+            };
+            _radnoMestoSqlProvider.CreateRadnoMestoById(radnoMesto);
         }
 
         public void SetViewForUpdateDialog()

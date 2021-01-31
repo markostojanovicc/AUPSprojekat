@@ -1,4 +1,5 @@
-﻿using AUPS.Enums;
+﻿using AUPS.Commands;
+using AUPS.Enums;
 using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using ChatApp;
@@ -8,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
 {
@@ -22,7 +24,9 @@ namespace AUPS.ViewModels.Dialogs
         private string _prezimeRadnika;
         private string _idRadnoMesto;
         private int _idRadnika;
-        private string _selectedRadnoMesto;
+        private int _selectedIndexRadnoMesto;
+        private ICommand _updateButtonCommand;
+        private ICommand _createButtonCommand;
         private ObservableCollection<RadnoMesto> _radnoMestoList;
 
         public List<string> NaziviRadnihMesta
@@ -30,10 +34,10 @@ namespace AUPS.ViewModels.Dialogs
             get { return _radnoMestoList.Select(x => x.NazivRadnoMesto).ToList(); }
         }
 
-        public string SelectedRadnoMesto
+        public int SelectedIndexRadnoMesto
         {
-            get { return _selectedRadnoMesto; }
-            set { _selectedRadnoMesto = value; }
+            get { return _selectedIndexRadnoMesto; }
+            set { _selectedIndexRadnoMesto = value; }
         }
 
         public int IdRadnika
@@ -111,8 +115,7 @@ namespace AUPS.ViewModels.Dialogs
         {
             _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
             RadnoMestoList = radnoMestoList;
-            SelectedRadnoMesto = radnoMestoList[0].NazivRadnoMesto;
-
+            SelectedIndexRadnoMesto = 0;
         }
 
         public CreateRadnikProizvodnjaDialogViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, ObservableCollection<RadnoMesto> radnoMestoList, RadnikProizvodnja radnikProizvodnja)
@@ -125,7 +128,60 @@ namespace AUPS.ViewModels.Dialogs
             SelectedType = pol;
             IdRadnoMesto = radnikProizvodnja.RadnoMesto.IDRadnoMesto.ToString();
             RadnoMestoList = radnoMestoList;
-            SelectedRadnoMesto = radnikProizvodnja.RadnoMesto.NazivRadnoMesto;
+            SelectedIndexRadnoMesto = radnoMestoList.IndexOf(radnikProizvodnja.RadnoMesto);
+        }
+
+        public ICommand AddButtonCommand
+        {
+            get
+            {
+                if (_createButtonCommand == null)
+                {
+                    this._createButtonCommand = new RelayCommand(
+                        param => CreateButtonCommandExecute(param));
+                }
+
+                return _createButtonCommand;
+            }
+        }
+
+        public ICommand UpdateButtonCommand
+        {
+            get
+            {
+                if (_updateButtonCommand == null)
+                {
+                    this._updateButtonCommand = new RelayCommand(
+                        param => UpdateButtonCommandExecute(param));
+                }
+
+                return _updateButtonCommand;
+            }
+        }
+
+        private void UpdateButtonCommandExecute(object param)
+        {
+            RadnikProizvodnja radnikProizvodnja = new RadnikProizvodnja
+            {
+                IDRadnik = _idRadnika,
+                ImeRadnika = _imeRadnika,
+                PrezimeRadnika = _prezimeRadnika,
+                Pol = SelectedType.ToString(),
+                RadnoMesto = RadnoMestoList[SelectedIndexRadnoMesto]
+            };
+            _radnikProizvodnjaSqlProvider.UpdateRadnikProizvodnjaById(radnikProizvodnja);
+        }
+
+        private void CreateButtonCommandExecute(object param)
+        {
+            RadnikProizvodnja radnikProizvodnja = new RadnikProizvodnja
+            {
+                ImeRadnika = _imeRadnika,
+                PrezimeRadnika = _prezimeRadnika,
+                Pol = SelectedType.ToString(),
+                RadnoMesto = RadnoMestoList[SelectedIndexRadnoMesto]
+            };
+            _radnikProizvodnjaSqlProvider.CreateRadnikProizvodnjaById(radnikProizvodnja);
         }
 
         public void SetViewForUpdateDialog()

@@ -27,14 +27,9 @@ namespace AUPS.ViewModels.MainContentViewModels
             }
         }
 
-        private IRadnoMestoSqlProvider _radnoMestoSqlProvider;
-
-       
-
-        public RadnoMestoViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider, ObservableCollection<RadnoMesto> _radnoMestoList)
+        public RadnoMestoViewModel()
         {
-            _radnoMestoSqlProvider = radnoMestoSqlProvider;
-            RadnoMestoList = _radnoMestoList;
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AUPS.Models;
+﻿using AUPS.Commands;
+using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
 {
@@ -20,6 +22,8 @@ namespace AUPS.ViewModels.Dialogs
         private string _jedMere;
         private string _cena;
         private int _idPredmetaRada;
+        private ICommand _updateButtonCommand;
+        private ICommand _createButtonCommand;
 
         public int IdPredmetaRada
         {
@@ -89,6 +93,68 @@ namespace AUPS.ViewModels.Dialogs
             NazivPR = predmetRada.NazivPR;
             JedMere = predmetRada.JedMerePR;
             Cena = predmetRada.Cena.ToString();
+        }
+
+        public ICommand AddButtonCommand
+        {
+            get
+            {
+                if (_createButtonCommand == null)
+                {
+                    this._createButtonCommand = new RelayCommand(
+                        param => CreateButtonCommandExecute(param));
+                }
+
+                return _createButtonCommand;
+            }
+        }
+
+        public bool CanExecuteBtnCommand
+        {
+            get
+            {
+                return !(string.IsNullOrEmpty(TipPredmetaRada) || string.IsNullOrEmpty(NazivPR) || string.IsNullOrEmpty(JedMere)
+                     || string.IsNullOrEmpty(Cena));
+            }
+        }
+
+        public ICommand UpdateButtonCommand
+        {
+            get
+            {
+                if (_updateButtonCommand == null)
+                {
+                    this._updateButtonCommand = new RelayCommand(
+                        param => UpdateButtonCommandExecute(param));
+                }
+
+                return _updateButtonCommand;
+            }
+        }
+
+        private void UpdateButtonCommandExecute(object param)
+        {
+            PredmetRada predmetRada = new PredmetRada
+            {
+                IDPredmetRada = IdPredmetaRada,
+                Cena = Int32.Parse(_cena),
+                JedMerePR = _jedMere,
+                NazivPR = _nazivPR,
+                TipPredmetRada = _tipPredmetaRada
+            };
+            _predmetRadaSqlProvider.UpdatePredmetRadaById(predmetRada);
+        }
+
+        private void CreateButtonCommandExecute(object param)
+        {
+            PredmetRada udpatedPredmetRada = new PredmetRada
+            {
+                Cena = Int32.Parse(_cena),
+                JedMerePR = _jedMere,
+                NazivPR = _nazivPR,
+                TipPredmetRada = _tipPredmetaRada
+            };
+            _predmetRadaSqlProvider.CreatePredmetRadaById(udpatedPredmetRada);
         }
 
         public void SetViewForUpdateDialog()

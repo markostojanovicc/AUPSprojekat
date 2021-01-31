@@ -33,15 +33,8 @@ namespace AUPS.ViewModels.MainContentViewModels
             }
         }
 
-        public OperacijaViewModel(IOperacijaSqlProvider operacijaSqlProvider)
+        public OperacijaViewModel()
         {
-            _operacijaSqlProvider = operacijaSqlProvider;
-            FillTableWithData();
-        }
-
-        private void FillTableWithData()
-        {
-            OperacijaList = _operacijaSqlProvider.GetAllFromOperacija();
         }
     }
 }

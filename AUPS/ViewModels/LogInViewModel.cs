@@ -24,7 +24,8 @@ namespace AUPS.ViewModels
         private string _password;
 
         public delegate void LogInSuccededEventHandler(object source, EventArgs args);
-        public event LogInSuccededEventHandler LogInSucceded;
+        public event LogInSuccededEventHandler LogInSucceded; 
+
         public string Email
         {
             get

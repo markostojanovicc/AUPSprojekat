@@ -33,15 +33,9 @@ namespace AUPS.ViewModels.MainContentViewModels
             set { _itemSelected = value; }
         }
 
-        public RadniNalogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider)
+        public RadniNalogViewModel()
         {
-            _radniNalogSqlProvider = radniNalogSqlProvider;
-            FillTableWithData();
-        }
 
-        private void FillTableWithData()
-        {
-            RadniNalogList = _radniNalogSqlProvider.GetAllFromRadniNalog();
         }
     }
 }

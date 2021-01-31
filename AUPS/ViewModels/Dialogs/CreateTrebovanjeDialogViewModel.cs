@@ -1,4 +1,5 @@
-﻿using AUPS.Models;
+﻿using AUPS.Commands;
+using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
 {
@@ -18,13 +20,23 @@ namespace AUPS.ViewModels.Dialogs
         private string _tipTrebovanja;
         private string _jedMere;
         private string _kolicinaRobe;
-        private string _idRadniNalog;
+        private int _idRadniNalog;
         private int _idTrebovanje;
+        private ICommand _updateButtonCommand;
+        private ICommand _createButtonCommand;
         List<int> _radniNalogIds;
 
         public List<string> IdRadnihNaloga
         {
             get { return _radniNalogIds.Select(x => x.ToString()).ToList(); }
+        }
+
+        public bool CanExecuteBtnCommand
+        {
+            get
+            {
+                return !(string.IsNullOrEmpty(TipTrebovanja) || string.IsNullOrEmpty(JedinicaMere) || string.IsNullOrEmpty(KolicinaRobe));
+            }
         }
 
         public int IdTrebovanja
@@ -34,7 +46,7 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public string SelectedRadniNalog
+        public int SelectedRadniNalog
         {
             get { return _idRadniNalog; }
             set { _idRadniNalog = value; }
@@ -85,7 +97,6 @@ namespace AUPS.ViewModels.Dialogs
         {
             _trebovanjeSqlProvider = trebovanjeSqlProvider;
             _radniNalogIds = radniNalogIds;
-            SelectedRadniNalog = _radniNalogIds.First().ToString();
         }
 
         public CreateTrebovanjeDialogViewModel(ITrebovanjeSqlProvider trebovanjeSqlProvider, List<int> radniNalogIds, Trebovanje trebovanje)
@@ -96,7 +107,60 @@ namespace AUPS.ViewModels.Dialogs
             JedinicaMere = trebovanje.JedMere;
             KolicinaRobe = trebovanje.KolicinaRobe.ToString();
             _radniNalogIds = radniNalogIds;
-            SelectedRadniNalog = trebovanje.RadniNalog.IDRadniNalog.ToString();
+            SelectedRadniNalog = trebovanje.RadniNalog.IDRadniNalog;
+        }
+
+        public ICommand AddButtonCommand
+        {
+            get
+            {
+                if (_createButtonCommand == null)
+                {
+                    this._createButtonCommand = new RelayCommand(
+                        param => CreateButtonCommandExecute(param));
+                }
+
+                return _createButtonCommand;
+            }
+        }
+
+        public ICommand UpdateButtonCommand
+        {
+            get
+            {
+                if (_updateButtonCommand == null)
+                {
+                    this._updateButtonCommand = new RelayCommand(
+                        param => UpdateButtonCommandExecute(param));
+                }
+
+                return _updateButtonCommand;
+            }
+        }
+
+        private void UpdateButtonCommandExecute(object param)
+        {
+            Trebovanje trebovanje = new Trebovanje
+            {
+                IDTrebovanje = _idTrebovanje,
+                JedMere = _jedMere,
+                KolicinaRobe = Int32.Parse(_kolicinaRobe),
+                TipTrebovanja = _tipTrebovanja,
+                RadniNalog = new RadniNalog { IDRadniNalog = SelectedRadniNalog }
+            };
+            _trebovanjeSqlProvider.UpdateTrebovanjeById(trebovanje);
+        }
+
+        private void CreateButtonCommandExecute(object param)
+        {
+            Trebovanje trebovanje = new Trebovanje
+            {
+                JedMere = _jedMere,
+                KolicinaRobe = Int32.Parse(_kolicinaRobe),
+                TipTrebovanja = _tipTrebovanja,
+                RadniNalog = new RadniNalog { IDRadniNalog = SelectedRadniNalog }
+            };
+            _trebovanjeSqlProvider.CreateTrebovanjeById(trebovanje);
         }
 
         public void SetViewForUpdateDialog()

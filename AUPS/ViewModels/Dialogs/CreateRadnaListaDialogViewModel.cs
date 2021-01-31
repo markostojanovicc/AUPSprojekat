@@ -1,4 +1,5 @@
-﻿using AUPS.Models;
+﻿using AUPS.Commands;
+using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using ChatApp;
 using System;
@@ -7,20 +8,21 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
 {
     public class CreateRadnaListaDialogViewModel : BaseViewModel
     {
         private IRadnaListaSqlProvider _radnaListaSqlProvider;
+        private ICommand addButtonCommand;
+        private ICommand updateButtonCommand;
         private string _title = "Dijalog za kreiranje radna lista";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
         private DateTime _datum;
         private string _kolicina;
-        private int _idRadnika;
         private int _idRadniNalog;
-        private int _idOperacija;
         private int _idRadneListe;
         private List<int> _radniNalogIds;
         private ObservableCollection<Operacija> _operacijaList;
@@ -54,7 +56,9 @@ namespace AUPS.ViewModels.Dialogs
             set { _operacijaList = value; }
         }
 
-        public string SelectedOperacija { get; set; }
+        public int SelectedIndexOperacija { get; set; }
+        public int SelectedIndexRadnikProizvodnja { get; set; }
+        public int SelectedIndexRadniNalog { get; set; }
 
         public List<string> OperacijaNazivi
         {
@@ -77,8 +81,14 @@ namespace AUPS.ViewModels.Dialogs
 
         public int IdOperacija
         {
-            get { return _idOperacija; }
-            set { _idOperacija = value; }
+            get
+            {
+                return OperacijaList[SelectedIndexOperacija].IDOperacija;
+            }
+            set
+            {
+                IdOperacija = value;
+            }
         }
 
 
@@ -91,8 +101,14 @@ namespace AUPS.ViewModels.Dialogs
 
         public int IdRadnika
         {
-            get { return _idRadnika; }
-            set { _idRadnika = value; }
+            get
+            {
+                return RadnikProizvodnjaList[SelectedIndexRadnikProizvodnja].IDRadnik;
+            }
+            set
+            {
+                IdOperacija = value;
+            }
         }
 
 
@@ -128,6 +144,70 @@ namespace AUPS.ViewModels.Dialogs
             set { _title = value; }
         }
 
+        public bool CanExecuteBtnCommand
+        {
+            get
+            {
+                return !(string.IsNullOrEmpty(Kolicina) );
+            }
+        }
+
+        public ICommand AddButtonCommand
+        {
+            get
+            {
+                if (addButtonCommand == null)
+                {
+                    this.addButtonCommand = new RelayCommand(
+                        param => AddButtonCommandExecute(param));
+                }
+
+                return addButtonCommand;
+            }
+        }
+
+        private void AddButtonCommandExecute(object param)
+        {
+            RadnaLista radnaLista = new RadnaLista()
+            {
+                Datum = _datum,
+                Kolicina = Int32.Parse(_kolicina),
+                Operacija = new Operacija { IDOperacija = IdOperacija },
+                Radnik = new RadnikProizvodnja { IDRadnik = IdRadnika },
+                RadniNalog = new RadniNalog { IDRadniNalog = _idRadniNalog }
+            };
+
+            _radnaListaSqlProvider.CreateRadnaListaById(radnaLista);
+        }
+
+        public ICommand UpdateButtonCommand
+        {
+            get
+            {
+                if (updateButtonCommand == null)
+                {
+                    this.updateButtonCommand = new RelayCommand(
+                        param => UpdateButtonCommandExecute(param));
+                }
+
+                return updateButtonCommand;
+            }
+        }
+
+        private void UpdateButtonCommandExecute(object param)
+        {
+            RadnaLista updatedRadnaLista = new RadnaLista()
+            {
+                IDRadnaLista = IdRadneListe,
+                Datum = _datum,
+                Kolicina = Int32.Parse(_kolicina),
+                Operacija = new Operacija { IDOperacija = IdOperacija },
+                Radnik = new RadnikProizvodnja { IDRadnik = IdRadnika },
+                RadniNalog = new RadniNalog {IDRadniNalog = _idRadniNalog }
+            };
+
+            _radnaListaSqlProvider.UpdateRadnaListaById(updatedRadnaLista);
+        }
 
         public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider, List<int> radniNalogIds, ObservableCollection<Operacija> operacijaList, ObservableCollection<AUPS.Models.RadnikProizvodnja> radnikProizvodnjaList)
         {
@@ -135,7 +215,7 @@ namespace AUPS.ViewModels.Dialogs
             SelectedIdRadniNalog = radniNalogIds.First();
             RadniNalogIds = radniNalogIds;
             _operacijaList = operacijaList;
-            SelectedOperacija = operacijaList.First().NazivOperacije;
+            SelectedIndexOperacija = 0;
             RadnikProizvodnjaList = radnikProizvodnjaList;
             RadnikProizvodnjaSelected = RadnikProizvodnjaNazivi.First();
         }
@@ -151,7 +231,7 @@ namespace AUPS.ViewModels.Dialogs
             Datum = radnaLista.Datum;
             IdOperacija = radnaLista.Operacija.IDOperacija;
             _operacijaList = operacijaList;
-            SelectedOperacija = radnaLista.Operacija.NazivOperacije;
+            SelectedIndexOperacija = operacijaList.IndexOf(radnaLista.Operacija);
             RadnikProizvodnjaList = radnikProizvodnjaList;
             RadnikProizvodnjaSelected = RadnikProizvodnjaNazivi.First();
         }
