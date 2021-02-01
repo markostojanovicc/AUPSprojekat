@@ -62,6 +62,7 @@ namespace AUPS.SqlProviders
                     tehnoloskiPostupak.SerijaKom = rdr.GetInt32(3);
                     tehnoloskiPostupak.BrKomada = rdr.GetInt32(4);
                     tehnoloskiPostupak.Operacija = new Operacija();
+                    tehnoloskiPostupak.Operacija.IDOperacija = rdr.GetInt32(5);
                     tehnoloskiPostupak.Operacija.NazivOperacije = rdr.GetString(6);
                     tehnoloskiPostupakList.Add(tehnoloskiPostupak);
                 }

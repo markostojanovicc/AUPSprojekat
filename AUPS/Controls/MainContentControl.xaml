@@ -7,7 +7,12 @@
              xmlns:templateSelectors ="clr-namespace:AUPS.TemplateSelectors"
              mc:Ignorable="d" 
              d:DesignHeight="1400" d:DesignWidth="2000">
-    <Grid>
+    
+    <Grid Height="Auto" Width="Auto">
+        <Grid.Background>
+
+            <ImageBrush ImageSource="{StaticResource MainContentBackground}"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>

@@ -1,4 +1,5 @@
 ﻿using AUPS.Commands;
+using AUPS.Dialogs.ErrorDialogs;
 using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using ChatApp;
@@ -6,8 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
@@ -125,7 +125,7 @@ namespace AUPS.ViewModels.Dialogs
             KolicinaProizvoda = radniNalog.KolicinaProizvoda.ToString();
             IdPredmetaRada = radniNalog.PredmetRada.IDPredmetRada;
             PredmetRadaList = predmetRadaList;
-            _selectedIndexPredmetRada = PredmetRadaList.IndexOf(radniNalog.PredmetRada);
+            _selectedIndexPredmetRada = PredmetRadaList.IndexOf(predmetRadaList.FirstOrDefault(x => x.IDPredmetRada == radniNalog.PredmetRada.IDPredmetRada));
         }
 
         public ICommand AddButtonCommand
@@ -158,27 +158,51 @@ namespace AUPS.ViewModels.Dialogs
 
         private void UpdateButtonCommandExecute(object param)
         {
-            RadniNalog radniNalog = new RadniNalog
+            if (_datumIzlaza > _datumUlaza)
             {
-                IDRadniNalog = _idRadniNalog,
-                DatumIzlaz = _datumIzlaza,
-                DatumUlaz = _datumUlaza,
-                KolicinaProizvoda = Int32.Parse(_kolicinaProizvoda),
-                PredmetRada = PredmetRadaList[SelectedIndexPredmetRada]
-            };
-            _radniNalogSqlProvider.UpdateRadniNalogById(radniNalog);
+                RadniNalog radniNalog = new RadniNalog
+                {
+                    IDRadniNalog = _idRadniNalog,
+                    DatumIzlaz = _datumIzlaza,
+                    DatumUlaz = _datumUlaza,
+                    KolicinaProizvoda = Int32.Parse(_kolicinaProizvoda),
+                    PredmetRada = PredmetRadaList[SelectedIndexPredmetRada]
+                };
+                _radniNalogSqlProvider.UpdateRadniNalogById(radniNalog);
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+                ErrorDialog errorDialog = new ErrorDialog();
+                ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+                errorDialogViewModel.ErrorMessage = "Greška. Datum izlaza je manji od datuma ulaza. Pokušajte ponovo.";
+                errorDialog.ShowDialog();
+            }            
         }
 
         private void CreateButtonCommandExecute(object param)
         {
-            RadniNalog radniNalog = new RadniNalog
+            if (_datumIzlaza > _datumUlaza)
             {
-                DatumIzlaz = _datumIzlaza,
-                DatumUlaz = _datumUlaza,
-                KolicinaProizvoda = Int32.Parse(_kolicinaProizvoda),
-                PredmetRada = PredmetRadaList[SelectedIndexPredmetRada]
-            };
-            _radniNalogSqlProvider.CreateRadniNalogById(radniNalog);
+                RadniNalog radniNalog = new RadniNalog
+                {
+                    DatumIzlaz = _datumIzlaza,
+                    DatumUlaz = _datumUlaza,
+                    KolicinaProizvoda = Int32.Parse(_kolicinaProizvoda),
+                    PredmetRada = PredmetRadaList[SelectedIndexPredmetRada]
+                };
+                _radniNalogSqlProvider.CreateRadniNalogById(radniNalog);
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }            
+            else
+            {
+                ErrorDialog errorDialog = new ErrorDialog();
+                ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+                errorDialogViewModel.ErrorMessage = "Greška. Datum izlaza je manji od datuma ulaza. Pokušajte ponovo.";
+                errorDialog.ShowDialog();
+            }
         }
 
         public void SetViewForUpdateDialog()

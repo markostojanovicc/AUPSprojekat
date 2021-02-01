@@ -135,6 +135,9 @@
       <DependentUpon>TrebovanjeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\IntToVisibilityConverter.cs" />
+    <Compile Include="Dialogs\ErrorDialogs\ErrorDialog.xaml.cs">
+      <DependentUpon>ErrorDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Operacija\CreateOperacijaDialog.xaml.cs">
       <DependentUpon>CreateOperacijaDialog.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,7 @@
     <Compile Include="ViewModels\Dialogs\CreateRadnoMestoDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\CreateTehnoloskiPostupakViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\CreateTrebovanjeDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\ErrorDialogViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModels\OperacijaViewModel.cs" />
@@ -263,6 +267,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\ErrorDialogs\ErrorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\Operacija\CreateOperacijaDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -303,6 +311,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -335,7 +347,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\background.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.3.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.3.0\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

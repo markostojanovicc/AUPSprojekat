@@ -125,7 +125,7 @@ namespace AUPS.ViewModels.Dialogs
             BrKom = tehnoloskiPostupak.BrKomada.ToString();
             IdOperacije = tehnoloskiPostupak.Operacija.IDOperacija;
             OperacijaList = operacijaList;
-            _selectedIndexOperacija = operacijaList.IndexOf(tehnoloskiPostupak.Operacija);
+            _selectedIndexOperacija = operacijaList.IndexOf(operacijaList.First(x => x.IDOperacija == tehnoloskiPostupak.Operacija.IDOperacija));
         }
 
         public bool CanExecuteBtnCommand

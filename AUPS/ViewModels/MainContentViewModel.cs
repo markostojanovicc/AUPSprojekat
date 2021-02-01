@@ -1,4 +1,5 @@
 ﻿using AUPS.Commands;
+using AUPS.Dialogs.ErrorDialogs;
 using AUPS.Dialogs.Operacija;
 using AUPS.Dialogs.PredmetRada;
 using AUPS.Dialogs.RadnaLista;
@@ -138,8 +139,9 @@ namespace AUPS
                         CreateRadnoMestoDialog updateRadnoMestoDialog = new CreateRadnoMestoDialog(_radnoMestoSqlProvider, radnoMestoViewModel.ItemSelected);
                         CreateRadnoMestoDialogViewModel viewModelRadnoMesto = (CreateRadnoMestoDialogViewModel)updateRadnoMestoDialog.DataContext;
                         viewModelRadnoMesto.SetViewForUpdateDialog();
-                        updateRadnoMestoDialog.Show();
-                    }
+                        updateRadnoMestoDialog.ShowDialog();
+                    }else
+                        ShowNotSelectedErrorDialog(false);
                     break;
                 case 1:
                     if(operacijaViewModel.ItemSelected != null)
@@ -147,8 +149,9 @@ namespace AUPS
                         CreateOperacijaDialog updateOperacijaDialog = new CreateOperacijaDialog(_operacijaSqlProvider, operacijaViewModel.ItemSelected);
                         CreateOperacijaDialogViewModel viewModelOperacija = (CreateOperacijaDialogViewModel)updateOperacijaDialog.DataContext;
                         viewModelOperacija.SetViewForUpdateDialog();
-                        updateOperacijaDialog.Show();
-                    }                    
+                        updateOperacijaDialog.ShowDialog();
+                    }else
+                        ShowNotSelectedErrorDialog(false);                    
                     break;
                 case 2:
                     if(predmetRadaViewModel != null)
@@ -156,8 +159,9 @@ namespace AUPS
                         CreatePredmetRadaDialog updatePredmetRadaDialog = new CreatePredmetRadaDialog(_predmetRadaSqlProvider, predmetRadaViewModel.ItemSelected);
                         CreatePredmetRadaDialogViewModel viewModelPredmetRada = (CreatePredmetRadaDialogViewModel)updatePredmetRadaDialog.DataContext;
                         viewModelPredmetRada.SetViewForUpdateDialog();
-                        updatePredmetRadaDialog.Show();
-                    }                    
+                        updatePredmetRadaDialog.ShowDialog();
+                    }else
+                        ShowNotSelectedErrorDialog(false);                    
                     break;
                 case 3:
                     if(radnaListaViewModel != null)
@@ -165,8 +169,9 @@ namespace AUPS
                         CreateRadnaListaDialog updateRadnaListaDialog = new CreateRadnaListaDialog(_radnaListaSqlProvider, radniNalogViewModel.RadniNalogList.Select(x => x.IDRadniNalog).ToList(), operacijaViewModel.OperacijaList, radnikProizvodnjaViewModel.RadnikProizvodnjaList, radnaListaViewModel.ItemSelected);
                         CreateRadnaListaDialogViewModel viewModelRadnaLista = (CreateRadnaListaDialogViewModel)updateRadnaListaDialog.DataContext;
                         viewModelRadnaLista.SetViewForUpdateDialog();
-                        updateRadnaListaDialog.Show();
-                    }                    
+                        updateRadnaListaDialog.ShowDialog();
+                    }else
+                        ShowNotSelectedErrorDialog(false);                    
                     break;
                 case 4:
                     if(radnikProizvodnjaViewModel != null)
@@ -174,8 +179,9 @@ namespace AUPS
                         CreateRadnikProizvodnjaDialog udpateRadnikProizvodnjaDialog = new CreateRadnikProizvodnjaDialog(_radnikProizvodnjaSqlProvider, radnoMestoViewModel.RadnoMestoList, radnikProizvodnjaViewModel.ItemSelected);
                         CreateRadnikProizvodnjaDialogViewModel viewModelRadnik = (CreateRadnikProizvodnjaDialogViewModel)udpateRadnikProizvodnjaDialog.DataContext;
                         viewModelRadnik.SetViewForUpdateDialog();
-                        udpateRadnikProizvodnjaDialog.Show();
-                    }                    
+                        udpateRadnikProizvodnjaDialog.ShowDialog();
+                    }else
+                        ShowNotSelectedErrorDialog(false);                    
                     break;
                 case 5:
                     if(radniNalogViewModel != null)
@@ -183,8 +189,9 @@ namespace AUPS
                         CreateRadniNalogDialog updateRadniNalogDialog = new CreateRadniNalogDialog(_radniNalogSqlProvider, predmetRadaViewModel.PredmetRadaList, radniNalogViewModel.ItemSelected);
                         CreateRadniNalogDialogViewModel viewModelRadniNalog = (CreateRadniNalogDialogViewModel)updateRadniNalogDialog.DataContext;
                         viewModelRadniNalog.SetViewForUpdateDialog();
-                        updateRadniNalogDialog.Show();
-                    }                    
+                        updateRadniNalogDialog.ShowDialog();
+                    }else
+                        ShowNotSelectedErrorDialog(false);
                     break;
                 case 6:
                     if(tehnoloskiPostupakViewModel != null)
@@ -192,8 +199,9 @@ namespace AUPS
                         CreateTehnoloskiPostupakDialog updateTehnoloskiPostupakDialog = new CreateTehnoloskiPostupakDialog(_tehnoloskiPostupakSqlProvider, operacijaViewModel.OperacijaList, tehnoloskiPostupakViewModel.ItemSelected);
                         CreateTehnoloskiPostupakViewModel viewModelTehnoloskiPostupak = (CreateTehnoloskiPostupakViewModel)updateTehnoloskiPostupakDialog.DataContext;
                         viewModelTehnoloskiPostupak.SetViewForUpdateDialog();
-                        updateTehnoloskiPostupakDialog.Show();
-                    }                    
+                        updateTehnoloskiPostupakDialog.ShowDialog();
+                    }else
+                        ShowNotSelectedErrorDialog(false);                   
                     break;
                 case 7:
                     if(trebovanjeViewModel != null)
@@ -201,10 +209,19 @@ namespace AUPS
                         CreateTrebovanjeDialog updateTrebovanjeDialog = new CreateTrebovanjeDialog(_trebovanjeSqlProvider, radniNalogViewModel.RadniNalogList.Select(x => x.IDRadniNalog).ToList(), trebovanjeViewModel.ItemSelected);
                         CreateTrebovanjeDialogViewModel viewModelTrebovanje = (CreateTrebovanjeDialogViewModel)updateTrebovanjeDialog.DataContext;
                         viewModelTrebovanje.SetViewForUpdateDialog();
-                        updateTrebovanjeDialog.Show();
-                    }                    
+                        updateTrebovanjeDialog.ShowDialog();
+                    }else
+                        ShowNotSelectedErrorDialog(false);
                     break;
             }
+        }
+
+        private void ShowNotSelectedErrorDialog(bool isDelete)
+        {
+            ErrorDialog errorDialog = new ErrorDialog();
+            ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+            errorDialogViewModel.ErrorMessage = isDelete ? "Niste selektovali red koji želite da obrišete. Pokušajte ponovo." : "Niste selektovali red koji želite da izmenite.Pokušajte ponovo.";
+            errorDialog.ShowDialog();
         }
 
         private void AddButtonCommandExecute(object param)
@@ -213,35 +230,35 @@ namespace AUPS
             {
                 case 0:
                     CreateRadnoMestoDialog createRadnoMestoDialog = new CreateRadnoMestoDialog(_radnoMestoSqlProvider);
-                    createRadnoMestoDialog.Show();
+                    createRadnoMestoDialog.ShowDialog();
                     break;
                 case 1:
                     CreateOperacijaDialog createOperacijaDialog = new CreateOperacijaDialog(_operacijaSqlProvider);
-                    createOperacijaDialog.Show();
+                    createOperacijaDialog.ShowDialog();
                     break;
                 case 2:
                     CreatePredmetRadaDialog createPredmetRadaDialog = new CreatePredmetRadaDialog(_predmetRadaSqlProvider);
-                    createPredmetRadaDialog.Show();
+                    createPredmetRadaDialog.ShowDialog();
                     break;
                 case 3:
                     CreateRadnaListaDialog createRadnaListaDialog = new CreateRadnaListaDialog(_radnaListaSqlProvider, radniNalogViewModel.RadniNalogList.Select(x => x.IDRadniNalog).ToList(), operacijaViewModel.OperacijaList, radnikProizvodnjaViewModel.RadnikProizvodnjaList);
-                    createRadnaListaDialog.Show();
+                    createRadnaListaDialog.ShowDialog();
                     break;
                 case 4:
                     CreateRadnikProizvodnjaDialog createRadnikProizvodnjaDialog = new CreateRadnikProizvodnjaDialog(_radnikProizvodnjaSqlProvider, radnoMestoViewModel.RadnoMestoList);
-                    createRadnikProizvodnjaDialog.Show();
+                    createRadnikProizvodnjaDialog.ShowDialog();
                     break;
                 case 5:
                     CreateRadniNalogDialog createRadniNalogDialog = new CreateRadniNalogDialog(_radniNalogSqlProvider, predmetRadaViewModel.PredmetRadaList);
-                    createRadniNalogDialog.Show();
+                    createRadniNalogDialog.ShowDialog();
                     break;
                 case 6:
                     CreateTehnoloskiPostupakDialog createTehnoloskiPostupakDialog = new CreateTehnoloskiPostupakDialog(_tehnoloskiPostupakSqlProvider, operacijaViewModel.OperacijaList);
-                    createTehnoloskiPostupakDialog.Show();
+                    createTehnoloskiPostupakDialog.ShowDialog();
                     break;
                 case 7:
                     CreateTrebovanjeDialog createTrebovanjeDialog = new CreateTrebovanjeDialog(_trebovanjeSqlProvider, radniNalogViewModel.RadniNalogList.Select(x => x.IDRadniNalog).ToList());
-                    createTrebovanjeDialog.Show();
+                    createTrebovanjeDialog.ShowDialog();
                     break;
             }
         }
@@ -255,90 +272,90 @@ namespace AUPS
                     case 0:
                         RadnoMestoViewModel radnoMestoViewModel = (RadnoMestoViewModel)ContentMainScreen;
                         RadnoMesto selected = radnoMestoViewModel.ItemSelected;
-                        //todo error dialog
                         if(selected != null)
                         {
                             succeded = _radnoMestoSqlProvider.DeleteFromRadnoMestoById(selected.IDRadnoMesto);
                             if (succeded)
                                 radnoMestoViewModel.RadnoMestoList.Remove(selected);
-                        }
+                        }else
+                            ShowNotSelectedErrorDialog(true);
                         break;
                     case 1:
                         OperacijaViewModel operacijaViewModel = (OperacijaViewModel)ContentMainScreen;
                         Operacija selectedOperacija = operacijaViewModel.ItemSelected;
-                        //todo error dialog
                         if(selectedOperacija != null)
                         {
                             succeded = _operacijaSqlProvider.DeleteFromOperacijaById(selectedOperacija.IDOperacija);
                             if (succeded)
                                 operacijaViewModel.OperacijaList.Remove(selectedOperacija);
-                        }
+                        }else
+                            ShowNotSelectedErrorDialog(true);
                         break;
                     case 2:
                         PredmetRadaViewModel predmetRadaViewModel = (PredmetRadaViewModel)ContentMainScreen;
                         PredmetRada predmetRadaSelected = predmetRadaViewModel.ItemSelected;
-                        //todo error dialog
                         if(predmetRadaSelected != null)
                         {
                             succeded = _predmetRadaSqlProvider.DeleteFromPredmetRadaById(predmetRadaSelected.IDPredmetRada);
                             if (succeded)
                                 predmetRadaViewModel.PredmetRadaList.Remove(predmetRadaSelected);
-                        }                        
+                        }else
+                            ShowNotSelectedErrorDialog(true);                        
                         break;
                     case 3:
                         RadnaListaViewModel radnaListaViewModel = (RadnaListaViewModel)ContentMainScreen;
                         RadnaLista radnaListaSelected = radnaListaViewModel.ItemSelected;
-                        //todo error dialog
                         if (radnaListaSelected != null)
                         {
                             succeded = _radnaListaSqlProvider.DeleteFromRadnaListaById(radnaListaSelected.IDRadnaLista);
                             if (succeded)
                                 radnaListaViewModel.RadnaListaList.Remove(radnaListaSelected);
-                        }
+                        }else
+                            ShowNotSelectedErrorDialog(true);
                         break;
                     case 4:
                         RadnikProizvodnjaViewModel radnikProizvodnjaViewModel = (RadnikProizvodnjaViewModel)ContentMainScreen;
                         RadnikProizvodnja radnikProizvodnjaSelected = radnikProizvodnjaViewModel.ItemSelected;
-                        //todo error dialog
                         if (radnikProizvodnjaSelected != null)
                         {
                             succeded = _radnikProizvodnjaSqlProvider.DeleteFromRadnikProizvodnjaById(radnikProizvodnjaSelected.IDRadnik);
                             if (succeded)
                                 radnikProizvodnjaViewModel.RadnikProizvodnjaList.Remove(radnikProizvodnjaSelected);
-                        }
+                        }else
+                            ShowNotSelectedErrorDialog(true);
                         break;
                     case 5:
                         RadniNalogViewModel radniNalogViewModel = (RadniNalogViewModel)ContentMainScreen;
                         RadniNalog radniNalogSelected = radniNalogViewModel.ItemSelected;
-                        //todo error dialog
                         if (radniNalogSelected != null)
                         {
                             succeded = _radniNalogSqlProvider.DeleteFromRadniNalogById(radniNalogSelected.IDRadniNalog);
                             if (succeded)
                                 radniNalogViewModel.RadniNalogList.Remove(radniNalogSelected);
-                        }
+                        }else
+                            ShowNotSelectedErrorDialog(true);
                         break;
                     case 6:
                         TehnoloskiPostupakViewModel tehnoloskiPostupakViewModel = (TehnoloskiPostupakViewModel)ContentMainScreen;
                         TehnoloskiPostupak tehnoloskiPostupakSelected = tehnoloskiPostupakViewModel.ItemSelected;
-                        //todo error dialog
                         if (tehnoloskiPostupakSelected != null)
                         {
                             succeded = _tehnoloskiPostupakSqlProvider.DeleteFromTehnoloskiPostupakById(tehnoloskiPostupakSelected.IDTehPostupak);
                             if (succeded)
                                 tehnoloskiPostupakViewModel.TehnoloskiPostupakList.Remove(tehnoloskiPostupakSelected);
-                        }
+                        }else
+                            ShowNotSelectedErrorDialog(true);
                         break;
                     case 7:
                         TrebovanjeViewModel trebovanjeViewModel = (TrebovanjeViewModel)ContentMainScreen;
                         Trebovanje trebovanjeSelected = trebovanjeViewModel.ItemSelected;
-                        //todo error dialog
                         if (trebovanjeSelected != null)
                         {
                             succeded = _trebovanjeSqlProvider.DeleteFromTrebovanjeById(trebovanjeSelected.IDTrebovanje);
                             if (succeded)
                                 trebovanjeViewModel.TrebovanjeList.Remove(trebovanjeSelected);
-                        }
+                        }else
+                            ShowNotSelectedErrorDialog(true);
                         break;
                 }
             }

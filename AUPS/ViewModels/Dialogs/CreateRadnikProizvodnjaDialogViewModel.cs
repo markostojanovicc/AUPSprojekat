@@ -65,6 +65,14 @@ namespace AUPS.ViewModels.Dialogs
             set { _prezimeRadnika = value; }
         }
 
+        public bool CanExecuteBtnCommand
+        {
+            get
+            {
+                return !(string.IsNullOrEmpty(ImeRadnika) || string.IsNullOrEmpty(PrezimeRadnika));
+            }
+        }
+
 
         public string ImeRadnika
         {
@@ -128,7 +136,7 @@ namespace AUPS.ViewModels.Dialogs
             SelectedType = pol;
             IdRadnoMesto = radnikProizvodnja.RadnoMesto.IDRadnoMesto.ToString();
             RadnoMestoList = radnoMestoList;
-            SelectedIndexRadnoMesto = radnoMestoList.IndexOf(radnikProizvodnja.RadnoMesto);
+            SelectedIndexRadnoMesto = radnoMestoList.IndexOf(radnoMestoList.First(x => x.IDRadnoMesto == radnikProizvodnja.RadnoMesto.IDRadnoMesto));
         }
 
         public ICommand AddButtonCommand

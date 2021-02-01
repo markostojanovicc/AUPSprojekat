@@ -20,7 +20,7 @@ namespace AUPS.ViewModels.Dialogs
         private string _title = "Dijalog za kreiranje radna lista";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
-        private DateTime _datum;
+        private DateTime _datum = DateTime.UtcNow;
         private string _kolicina;
         private int _idRadniNalog;
         private int _idRadneListe;
@@ -46,6 +46,7 @@ namespace AUPS.ViewModels.Dialogs
                     string nl = rp.ImeRadnika + ' ' + rp.PrezimeRadnika;
                     nls.Add(nl);
                 }
+                nls.Add(" ");
                 return nls;
             }
         }
@@ -103,12 +104,10 @@ namespace AUPS.ViewModels.Dialogs
         {
             get
             {
-                return RadnikProizvodnjaList[SelectedIndexRadnikProizvodnja].IDRadnik;
+                return RadnikProizvodnjaList.Count - 1 > SelectedIndexRadnikProizvodnja ? 
+                    RadnikProizvodnjaList[SelectedIndexRadnikProizvodnja].IDRadnik : 0;
             }
-            set
-            {
-                IdOperacija = value;
-            }
+            set { }
         }
 
 
@@ -173,7 +172,7 @@ namespace AUPS.ViewModels.Dialogs
                 Datum = _datum,
                 Kolicina = Int32.Parse(_kolicina),
                 Operacija = new Operacija { IDOperacija = IdOperacija },
-                Radnik = new RadnikProizvodnja { IDRadnik = IdRadnika },
+                Radnik = IdRadnika == 0 ? null : new RadnikProizvodnja { IDRadnik = IdRadnika },
                 RadniNalog = new RadniNalog { IDRadniNalog = _idRadniNalog }
             };
 
@@ -217,23 +216,21 @@ namespace AUPS.ViewModels.Dialogs
             _operacijaList = operacijaList;
             SelectedIndexOperacija = 0;
             RadnikProizvodnjaList = radnikProizvodnjaList;
-            RadnikProizvodnjaSelected = RadnikProizvodnjaNazivi.First();
+            SelectedIndexRadnikProizvodnja = radnikProizvodnjaList.Count;
         }
 
         public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider, List<int> radniNalogIds, ObservableCollection<Operacija> operacijaList, ObservableCollection<AUPS.Models.RadnikProizvodnja> radnikProizvodnjaList, RadnaLista radnaLista)
         {
             _radnaListaSqlProvider = radnaListaSqlProvider;
             IdRadneListe = radnaLista.IDRadnaLista;
-            IdRadnika = radnaLista.Radnik.IDRadnik;
             SelectedIdRadniNalog = radnaLista.RadniNalog.IDRadniNalog;
             RadniNalogIds = radniNalogIds;
             Kolicina = radnaLista.Kolicina.ToString();
             Datum = radnaLista.Datum;
-            IdOperacija = radnaLista.Operacija.IDOperacija;
             _operacijaList = operacijaList;
-            SelectedIndexOperacija = operacijaList.IndexOf(radnaLista.Operacija);
+            SelectedIndexOperacija = operacijaList.IndexOf(operacijaList.First(x=> x.IDOperacija==radnaLista.Operacija.IDOperacija));
             RadnikProizvodnjaList = radnikProizvodnjaList;
-            RadnikProizvodnjaSelected = RadnikProizvodnjaNazivi.First();
+            SelectedIndexRadnikProizvodnja = radnikProizvodnjaList.IndexOf(radnikProizvodnjaList.FirstOrDefault(x => x.IDRadnik == radnaLista.Radnik?.IDRadnik));
         }
 
         public void SetViewForUpdateDialog()

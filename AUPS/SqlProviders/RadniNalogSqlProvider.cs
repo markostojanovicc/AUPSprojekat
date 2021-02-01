@@ -61,6 +61,7 @@ namespace AUPS.SqlProviders
                     radniNalog.DatumIzlaz = rdr.GetDateTime(2);
                     radniNalog.KolicinaProizvoda = rdr.GetInt32(3);
                     radniNalog.PredmetRada = new PredmetRada();
+                    radniNalog.PredmetRada.IDPredmetRada = rdr.GetInt32(4);
                     radniNalog.PredmetRada.NazivPR = rdr.GetString(5);
                     radniNalogList.Add(radniNalog);
                 }

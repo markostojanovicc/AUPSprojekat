@@ -66,10 +66,15 @@ namespace AUPS.SqlProviders
                     radnaLista.RadniNalog = new RadniNalog();
                     radnaLista.RadniNalog.IDRadniNalog = rdr.GetInt32(4);
                     radnaLista.Operacija = new Operacija();
+                    radnaLista.Operacija.IDOperacija = rdr.GetInt32(5);
                     radnaLista.Operacija.NazivOperacije = rdr.GetString(6);
-                    radnaLista.Radnik = new RadnikProizvodnja();
-                    radnaLista.Radnik.ImeRadnika = rdr.GetString(7);
-                    radnaLista.Radnik.PrezimeRadnika = rdr.GetString(8);
+                    if (!rdr.IsDBNull(3))
+                    {
+                        radnaLista.Radnik = new RadnikProizvodnja();
+                        radnaLista.Radnik.IDRadnik = rdr.GetInt32(3);
+                        radnaLista.Radnik.ImeRadnika = rdr.GetString(7);
+                        radnaLista.Radnik.PrezimeRadnika = rdr.GetString(8);
+                    }
                     radnaListaList.Add(radnaLista);
                 }
             }
@@ -123,7 +128,10 @@ namespace AUPS.SqlProviders
 
                 cmd.Parameters.AddWithValue("@Datum", NpgsqlDbType.Date, radnaListaNew.Datum);
                 cmd.Parameters.AddWithValue("@Kolicina", NpgsqlDbType.Integer, radnaListaNew.Kolicina);
-                cmd.Parameters.AddWithValue("@IDRadnik", NpgsqlDbType.Integer, radnaListaNew.Radnik.IDRadnik);
+                if(radnaListaNew.Radnik != null)
+                    cmd.Parameters.AddWithValue("@IDRadnik", NpgsqlDbType.Integer, radnaListaNew.Radnik.IDRadnik);
+                else
+                    cmd.Parameters.AddWithValue("@IDRadnik", NpgsqlDbType.Integer, DBNull.Value);
                 cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Integer, radnaListaNew.RadniNalog.IDRadniNalog);
                 cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, radnaListaNew.Operacija.IDOperacija);
 
