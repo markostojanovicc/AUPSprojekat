@@ -96,6 +96,7 @@
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
+    <converters:DateConverter x:Key="DateTimeToDateConverter" />
 
     <Style x:Key="EntryFieldStyle" TargetType="Grid" >
         <Setter Property="HorizontalAlignment" Value="Stretch" />

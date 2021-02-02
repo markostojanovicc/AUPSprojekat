@@ -10,7 +10,7 @@
         <DataGrid AutoGenerateColumns="False" Grid.Row="1" Grid.Column="1" SelectedItem="{Binding ItemSelected}"  ItemsSource="{Binding RadnaListaList}" HorizontalAlignment="Stretch" Margin="10,10,100,0" VerticalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IDRadnaLista}" Width="*"/>
-                <DataGridTextColumn Header="Datum" Binding="{Binding Datum}" Width="*"/>
+                <DataGridTextColumn Header="Datum" Binding="{Binding Datum, Converter={StaticResource DateTimeToDateConverter}}" Width="*"/>
                 <DataGridTextColumn Header="Kolicina" Binding="{Binding Kolicina}"  Width="*"/>
                 <DataGridTextColumn Header="Ime radnika" Binding="{Binding Radnik.ImeRadnika}"  Width="*"/>
                 <DataGridTextColumn Header="Prezime radnika" Binding="{Binding Radnik.PrezimeRadnika}"  Width="*"/>

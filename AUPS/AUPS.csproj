@@ -134,6 +134,7 @@
     <Compile Include="Controls\MainContentUserControls\TrebovanjeControl.xaml.cs">
       <DependentUpon>TrebovanjeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="Converters\IntToVisibilityConverter.cs" />
     <Compile Include="Dialogs\ErrorDialogs\ErrorDialog.xaml.cs">
       <DependentUpon>ErrorDialog.xaml</DependentUpon>

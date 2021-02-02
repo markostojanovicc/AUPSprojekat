@@ -10,8 +10,8 @@
         <DataGrid AutoGenerateColumns="False" Grid.Row="1" Grid.Column="1" SelectedItem="{Binding ItemSelected}"  ItemsSource="{Binding RadniNalogList}" HorizontalAlignment="Stretch" Margin="10,10,100,0" VerticalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IDRadniNalog}" Width="*"/>
-                <DataGridTextColumn Header="Datum ulaza" Binding="{Binding DatumUlaz}" Width="*"/>
-                <DataGridTextColumn Header="Datum izlaza" Binding="{Binding DatumIzlaz}" Width="*" />
+                <DataGridTextColumn Header="Datum ulaza" Binding="{Binding DatumUlaz, Converter={StaticResource DateTimeToDateConverter}}" Width="*"/>
+                <DataGridTextColumn Header="Datum izlaza" Binding="{Binding DatumIzlaz, Converter={StaticResource DateTimeToDateConverter}}" Width="*" />
                 <DataGridTextColumn Header="Kolicina proizvoda" Binding="{Binding KolicinaProizvoda}" Width="*" />
                 <DataGridTextColumn Header="Naziv predmeta rada" Binding="{Binding PredmetRada.NazivPR}" Width="*" />
             </DataGrid.Columns>
