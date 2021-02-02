@@ -124,7 +124,7 @@ namespace AUPS.ViewModels
         private void RegistrationButtonCommandExecute(object param)
         {
             RegistrationWindow registrationWindow = new RegistrationWindow(_userSqlProvider);
-            registrationWindow.Show();
+            registrationWindow.ShowDialog();
         }
 
         private bool CanExecuteLoginButtonCommand()

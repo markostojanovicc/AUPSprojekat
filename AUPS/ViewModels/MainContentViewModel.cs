@@ -225,6 +225,15 @@ namespace AUPS
             errorDialog.ShowDialog();
         }
 
+        private void ShowCantDeleteErrorDialog()
+        {
+            ErrorDialog errorDialog = new ErrorDialog();
+            ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+            errorDialog.Title = "Greška";
+            errorDialogViewModel.ErrorMessage = "Nije dozvoljeno obrisati radno mesto koje sadrzi radnike.";
+            errorDialog.ShowDialog();
+        }
+
         private void AddButtonCommandExecute(object param)
         {
             switch (_selectedTabIndex)
@@ -275,9 +284,14 @@ namespace AUPS
                         RadnoMesto selected = radnoMestoViewModel.ItemSelected;
                         if(selected != null)
                         {
-                            succeded = _radnoMestoSqlProvider.DeleteFromRadnoMestoById(selected.IDRadnoMesto);
-                            if (succeded)
-                                radnoMestoViewModel.RadnoMestoList.Remove(selected);
+                            if (!DoesRadnikProizvodnjaContainsRadnoMestoId(selected.IDRadnoMesto))
+                            {
+                                succeded = _radnoMestoSqlProvider.DeleteFromRadnoMestoById(selected.IDRadnoMesto);
+                                if (succeded)
+                                    radnoMestoViewModel.RadnoMestoList.Remove(selected);
+                            }
+                            else
+                                ShowCantDeleteErrorDialog();                            
                         }else
                             ShowNotSelectedErrorDialog(true);
                         break;
@@ -431,6 +445,13 @@ namespace AUPS
             trebovanjeViewModel.TrebovanjeList = _trebovanjeSqlProvider.GetAllFromTrebovanje();
 
             ContentMainScreen = radnoMestoViewModel;
+        }
+
+        private bool DoesRadnikProizvodnjaContainsRadnoMestoId(int idRadnoMesto)
+        {
+            RadnikProizvodnja radnikProizvodnja = radnikProizvodnjaViewModel.RadnikProizvodnjaList.FirstOrDefault(x => x.RadnoMesto?.IDRadnoMesto == idRadnoMesto);
+
+            return radnikProizvodnja != null;
         }
     }
 }
