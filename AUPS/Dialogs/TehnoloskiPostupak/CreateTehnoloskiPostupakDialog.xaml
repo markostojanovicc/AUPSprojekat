@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AUPS.Dialogs.TehnoloskiPostupak"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="{Binding Title}" Height="450" Width="800">
+        Title="{Binding Title}" Height="550" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="90"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -40,7 +40,8 @@
             <TextBox Height="30" Name="txtBrojKomada" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding BrKom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
-        <ComboBox Grid.Row="4" ItemsSource="{Binding NaziviOperacija}" SelectedIndex="{Binding SelectedIndexOperacija, Mode=TwoWay}" Margin="30 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"
+        <TextBlock Grid.Row="4" Text="Operacija naziv:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30" Width="140" Height="30"/>
+        <ComboBox Grid.Row="4" ItemsSource="{Binding NaziviOperacija}" SelectedIndex="{Binding SelectedIndexOperacija, Mode=TwoWay}" Margin="200 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"
                   Height="35" Width="Auto" FontSize="20" />
 
         <Button IsEnabled="{Binding CanExecuteBtnCommand}" Command="{Binding AddButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Visibility="{Binding IsCreateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />

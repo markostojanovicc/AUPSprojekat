@@ -33,7 +33,8 @@
             <TextBox Height="30" Name="txtKolicinaRobe" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding KolicinaRobe, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
-        <ComboBox Grid.Row="3" ItemsSource="{Binding IdRadnihNaloga}" SelectedItem="{Binding SelectedRadniNalog, Mode=TwoWay}" SelectedIndex="0" Margin="30 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"
+        <TextBlock Grid.Row="3" Text="Radni nalog id:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30" Width="140" Height="30"/>
+        <ComboBox Grid.Row="3" ItemsSource="{Binding IdRadnihNaloga}" SelectedItem="{Binding SelectedRadniNalog, Mode=TwoWay}" SelectedIndex="0" Margin="200 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"
                   Height="35" Width="Auto" FontSize="20" />
 
         <Button IsEnabled="{Binding CanExecuteBtnCommand}" Command="{Binding AddButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Visibility="{Binding IsCreateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
