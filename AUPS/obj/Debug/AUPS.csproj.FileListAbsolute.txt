@@ -205,3 +205,6 @@ C:\Users\niksa\source\repos\AUPSprojekat\AUPS\obj\Debug\AUPS.csproj.Fody.CopyLoc
 C:\Users\niksa\source\repos\AUPSprojekat\AUPS\obj\Debug\AUPS.csproj.CopyComplete
 C:\Users\niksa\source\repos\AUPSprojekat\AUPS\obj\Debug\AUPS.exe
 C:\Users\niksa\source\repos\AUPSprojekat\AUPS\obj\Debug\AUPS.pdb
+C:\Users\niksa\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\ErrorDialogs\ErrorDialog.g.cs
+C:\Users\niksa\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\ErrorDialogs\ErrorDialog.baml
+C:\Users\niksa\source\repos\AUPSprojekat\AUPS\obj\Debug\Resources\Images.baml

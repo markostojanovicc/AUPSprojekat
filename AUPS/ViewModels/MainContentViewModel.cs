@@ -220,7 +220,8 @@ namespace AUPS
         {
             ErrorDialog errorDialog = new ErrorDialog();
             ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
-            errorDialogViewModel.ErrorMessage = isDelete ? "Niste selektovali red koji želite da obrišete. Pokušajte ponovo." : "Niste selektovali red koji želite da izmenite.Pokušajte ponovo.";
+            errorDialog.Title = "Greška";
+            errorDialogViewModel.ErrorMessage = isDelete ? "Niste selektovali red koji želite da obrišete. Pokušajte ponovo." : "Niste selektovali red koji želite da izmenite. Pokušajte ponovo.";
             errorDialog.ShowDialog();
         }
 

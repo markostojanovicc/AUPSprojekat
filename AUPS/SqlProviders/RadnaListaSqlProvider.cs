@@ -33,7 +33,7 @@ namespace AUPS.SqlProviders
 
         private const string UPDATE_RADNA_LISTA_BY_ID =
             @"
-                  UPDATE radnalista SET datum = @Datum, kolicina = @Kolicina, idradnik = @IDRadnik, idradninalog = @IDRadniNalog, idoperacija = @IDOperacija
+                  UPDATE radnalista SET datum = @Datum, kolicinarl = @Kolicina, idradnik = @IDRadnik, idradninalog = @IDRadniNalog, idoperacija = @IDOperacija
                   WHERE idradnalista = @Id
             ";
 
