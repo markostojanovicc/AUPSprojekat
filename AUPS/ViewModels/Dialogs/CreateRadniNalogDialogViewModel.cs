@@ -184,7 +184,7 @@ namespace AUPS.ViewModels.Dialogs
 
         private void CreateButtonCommandExecute(object param)
         {
-            if (_datumIzlaza > _datumUlaza)
+            if (_datumIzlaza >= _datumUlaza)
             {
                 RadniNalog radniNalog = new RadniNalog
                 {
@@ -201,7 +201,8 @@ namespace AUPS.ViewModels.Dialogs
             {
                 ErrorDialog errorDialog = new ErrorDialog();
                 ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
-                errorDialogViewModel.ErrorMessage = "Greška. Datum izlaza je manji od datuma ulaza. Pokušajte ponovo.";
+                errorDialog.Title = "Greška";
+                errorDialogViewModel.ErrorMessage = "Datum izlaza je manji od datuma ulaza. Pokušajte ponovo.";
                 errorDialog.ShowDialog();
             }
         }
