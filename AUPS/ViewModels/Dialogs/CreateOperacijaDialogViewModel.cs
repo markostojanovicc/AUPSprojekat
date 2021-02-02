@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
@@ -151,7 +152,16 @@ namespace AUPS.ViewModels.Dialogs
                 NazivOperacije = NazivOperacije,
                 OznakaMasine = OznakaMasine
             };
-            _operacijaSqlProvider.UpdateOperacijaById(operacija);
+            bool isUpdated = _operacijaSqlProvider.UpdateOperacijaById(operacija);
+            if (isUpdated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+
+            }
         }
 
         private void CreateButtonCommandExecute(object param)
@@ -164,7 +174,16 @@ namespace AUPS.ViewModels.Dialogs
                 NazivOperacije = NazivOperacije,
                 OznakaMasine = OznakaMasine
             };
-            _operacijaSqlProvider.CreateOperacijaById(operacija);
+            bool isCreated = _operacijaSqlProvider.CreateOperacijaById(operacija);
+            if (isCreated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+
+            }
         }
 
         public CreateOperacijaDialogViewModel(IOperacijaSqlProvider operacijaSqlProvider)

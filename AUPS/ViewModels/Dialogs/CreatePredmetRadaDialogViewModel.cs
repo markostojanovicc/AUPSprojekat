@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
@@ -142,7 +143,16 @@ namespace AUPS.ViewModels.Dialogs
                 NazivPR = _nazivPR,
                 TipPredmetRada = _tipPredmetaRada
             };
-            _predmetRadaSqlProvider.UpdatePredmetRadaById(predmetRada);
+            bool isUpdated = _predmetRadaSqlProvider.UpdatePredmetRadaById(predmetRada);
+            if (isUpdated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+
+            }
         }
 
         private void CreateButtonCommandExecute(object param)
@@ -154,7 +164,17 @@ namespace AUPS.ViewModels.Dialogs
                 NazivPR = _nazivPR,
                 TipPredmetRada = _tipPredmetaRada
             };
-            _predmetRadaSqlProvider.CreatePredmetRadaById(udpatedPredmetRada);
+            bool isCreated = _predmetRadaSqlProvider.CreatePredmetRadaById(udpatedPredmetRada);
+            if (isCreated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+
+            }
+
         }
 
         public void SetViewForUpdateDialog()

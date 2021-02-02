@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
@@ -148,7 +149,16 @@ namespace AUPS.ViewModels.Dialogs
                 TipTrebovanja = _tipTrebovanja,
                 RadniNalog = new RadniNalog { IDRadniNalog = SelectedRadniNalog }
             };
-            _trebovanjeSqlProvider.UpdateTrebovanjeById(trebovanje);
+            bool isUpdated = _trebovanjeSqlProvider.UpdateTrebovanjeById(trebovanje);
+            if (isUpdated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+
+            }
         }
 
         private void CreateButtonCommandExecute(object param)
@@ -160,7 +170,16 @@ namespace AUPS.ViewModels.Dialogs
                 TipTrebovanja = _tipTrebovanja,
                 RadniNalog = new RadniNalog { IDRadniNalog = SelectedRadniNalog }
             };
-            _trebovanjeSqlProvider.CreateTrebovanjeById(trebovanje);
+            bool isCreated = _trebovanjeSqlProvider.CreateTrebovanjeById(trebovanje);
+            if (isCreated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+
+            }
         }
 
         public void SetViewForUpdateDialog()

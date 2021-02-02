@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
@@ -177,7 +178,16 @@ namespace AUPS.ViewModels.Dialogs
                 Pol = SelectedType.ToString(),
                 RadnoMesto = RadnoMestoList[SelectedIndexRadnoMesto]
             };
-            _radnikProizvodnjaSqlProvider.UpdateRadnikProizvodnjaById(radnikProizvodnja);
+            bool isUpdated = _radnikProizvodnjaSqlProvider.UpdateRadnikProizvodnjaById(radnikProizvodnja);
+            if (isUpdated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+
+            }
         }
 
         private void CreateButtonCommandExecute(object param)
@@ -189,7 +199,16 @@ namespace AUPS.ViewModels.Dialogs
                 Pol = SelectedType.ToString(),
                 RadnoMesto = RadnoMestoList[SelectedIndexRadnoMesto]
             };
-            _radnikProizvodnjaSqlProvider.CreateRadnikProizvodnjaById(radnikProizvodnja);
+            bool isCreated = _radnikProizvodnjaSqlProvider.CreateRadnikProizvodnjaById(radnikProizvodnja);
+            if (isCreated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+
+            }
         }
 
         public void SetViewForUpdateDialog()

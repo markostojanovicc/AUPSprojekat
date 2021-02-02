@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
@@ -176,7 +177,16 @@ namespace AUPS.ViewModels.Dialogs
                 VremeIzrade = Int32.Parse(_vremeIzrade),
                 Operacija = OperacijaList[SelectedIndexOperacija]
             };
-            _tehnoloskiPostupakSqlProvider.UpdateTehnoloskiPostupakById(tehnoloskiPostupak);
+            bool isUpdated = _tehnoloskiPostupakSqlProvider.UpdateTehnoloskiPostupakById(tehnoloskiPostupak);
+            if (isUpdated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+
+            }
         }
 
         private void CreateButtonCommandExecute(object param)
@@ -189,7 +199,16 @@ namespace AUPS.ViewModels.Dialogs
                 VremeIzrade = Int32.Parse(_vremeIzrade),
                 Operacija = OperacijaList[SelectedIndexOperacija]
             };
-            _tehnoloskiPostupakSqlProvider.CreateTehnoloskiPostupakById(tehnoloskiPostupak);
+            bool isCreated = _tehnoloskiPostupakSqlProvider.CreateTehnoloskiPostupakById(tehnoloskiPostupak);
+            if (isCreated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+
+            }
         }
 
         public void SetViewForUpdateDialog()

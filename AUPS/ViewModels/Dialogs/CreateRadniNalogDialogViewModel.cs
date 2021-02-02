@@ -168,9 +168,16 @@ namespace AUPS.ViewModels.Dialogs
                     KolicinaProizvoda = Int32.Parse(_kolicinaProizvoda),
                     PredmetRada = PredmetRadaList[SelectedIndexPredmetRada]
                 };
-                _radniNalogSqlProvider.UpdateRadniNalogById(radniNalog);
-                Window curWindow = (Window)param;
-                curWindow.Close();
+                bool isCreated = _radniNalogSqlProvider.UpdateRadniNalogById(radniNalog);
+                if (isCreated)
+                {
+                    Window curWindow = (Window)param;
+                    curWindow.Close();
+                }
+                else
+                {
+
+                }
             }
             else
             {

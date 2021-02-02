@@ -51,7 +51,7 @@
                          FontSize="25" Margin="100 0 100 0" helpers:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
-        <Button IsEnabled="{Binding CanSubmit}" Grid.Row ="6" Name="submitBtn" Style="{StaticResource loginbtnstyle}" Height="40" Width="240" Content="Submit" Command="{Binding SubmitButtonCommand}"/>
+        <Button IsEnabled="{Binding CanSubmit}" Grid.Row ="6" Name="submitBtn" Style="{StaticResource loginbtnstyle}" Height="40" Width="240" Content="Submit" Command="{Binding SubmitButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
 
     </Grid>
 </Window>

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
@@ -127,7 +128,16 @@ namespace AUPS.ViewModels.Dialogs
                 NazivRadnoMesto = _nazivRadnogMesta,
                 StrucnaSprema = _strucnaSprema
             };
-            _radnoMestoSqlProvider.UpdateRadnoMestoById(radnoMesto);
+            bool isUpdated = _radnoMestoSqlProvider.UpdateRadnoMestoById(radnoMesto);
+            if (isUpdated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+
+            }
         }
 
         private void CreateButtonCommandExecute(object param)
@@ -137,7 +147,16 @@ namespace AUPS.ViewModels.Dialogs
                 NazivRadnoMesto = _nazivRadnogMesta,
                 StrucnaSprema = _strucnaSprema
             };
-            _radnoMestoSqlProvider.CreateRadnoMestoById(radnoMesto);
+            bool isCreated = _radnoMestoSqlProvider.CreateRadnoMestoById(radnoMesto);
+            if (isCreated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+
+            }
         }
 
         public void SetViewForUpdateDialog()
