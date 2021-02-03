@@ -8,7 +8,7 @@ namespace AUPS.Enums
 {
     public enum Pol
     {
-        Musko,
-        Zensko
+        muški,
+        ženski
     }
 }

@@ -44,7 +44,7 @@ namespace AUPS.ViewModels.Dialogs
 
         public List<string> NaziviPredmetaRada 
         {
-            get { return PredmetRadaList.Select(x => x.NazivPR).ToList(); }
+            get { return PredmetRadaList.Select(x => x.TipPredmetRada + " " + x.NazivPR).ToList(); }
         }
 
 
@@ -176,7 +176,11 @@ namespace AUPS.ViewModels.Dialogs
                 }
                 else
                 {
-
+                    ErrorDialog errorDialog = new ErrorDialog();
+                    ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+                    errorDialog.Title = "Greška";
+                    errorDialogViewModel.ErrorMessage = "Došlo je do greške. Pokušajte ponovo";
+                    errorDialog.ShowDialog();
                 }
             }
             else
@@ -200,9 +204,20 @@ namespace AUPS.ViewModels.Dialogs
                     KolicinaProizvoda = Int32.Parse(_kolicinaProizvoda),
                     PredmetRada = PredmetRadaList[SelectedIndexPredmetRada]
                 };
-                _radniNalogSqlProvider.CreateRadniNalogById(radniNalog);
-                Window curWindow = (Window)param;
-                curWindow.Close();
+                bool isCreated =  _radniNalogSqlProvider.CreateRadniNalogById(radniNalog);
+                if (isCreated)
+                {
+                    Window curWindow = (Window)param;
+                    curWindow.Close();
+                }
+                else
+                {
+                    ErrorDialog errorDialog = new ErrorDialog();
+                    ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+                    errorDialog.Title = "Greška";
+                    errorDialogViewModel.ErrorMessage = "Došlo je do greške. Pokušajte ponovo";
+                    errorDialog.ShowDialog();
+                }
             }            
             else
             {

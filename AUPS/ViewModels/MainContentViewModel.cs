@@ -154,7 +154,7 @@ namespace AUPS
                         ShowNotSelectedErrorDialog(false);                    
                     break;
                 case 2:
-                    if(predmetRadaViewModel != null)
+                    if(predmetRadaViewModel.ItemSelected != null)
                     {
                         CreatePredmetRadaDialog updatePredmetRadaDialog = new CreatePredmetRadaDialog(_predmetRadaSqlProvider, predmetRadaViewModel.ItemSelected);
                         CreatePredmetRadaDialogViewModel viewModelPredmetRada = (CreatePredmetRadaDialogViewModel)updatePredmetRadaDialog.DataContext;
@@ -164,7 +164,7 @@ namespace AUPS
                         ShowNotSelectedErrorDialog(false);                    
                     break;
                 case 3:
-                    if(radnaListaViewModel != null)
+                    if(radnaListaViewModel.ItemSelected != null)
                     {
                         CreateRadnaListaDialog updateRadnaListaDialog = new CreateRadnaListaDialog(_radnaListaSqlProvider, radniNalogViewModel.RadniNalogList.Select(x => x.IDRadniNalog).ToList(), operacijaViewModel.OperacijaList, radnikProizvodnjaViewModel.RadnikProizvodnjaList, radnaListaViewModel.ItemSelected);
                         CreateRadnaListaDialogViewModel viewModelRadnaLista = (CreateRadnaListaDialogViewModel)updateRadnaListaDialog.DataContext;
@@ -174,7 +174,7 @@ namespace AUPS
                         ShowNotSelectedErrorDialog(false);                    
                     break;
                 case 4:
-                    if(radnikProizvodnjaViewModel != null)
+                    if(radnikProizvodnjaViewModel.ItemSelected != null)
                     {
                         CreateRadnikProizvodnjaDialog udpateRadnikProizvodnjaDialog = new CreateRadnikProizvodnjaDialog(_radnikProizvodnjaSqlProvider, radnoMestoViewModel.RadnoMestoList, radnikProizvodnjaViewModel.ItemSelected);
                         CreateRadnikProizvodnjaDialogViewModel viewModelRadnik = (CreateRadnikProizvodnjaDialogViewModel)udpateRadnikProizvodnjaDialog.DataContext;
@@ -184,7 +184,7 @@ namespace AUPS
                         ShowNotSelectedErrorDialog(false);                    
                     break;
                 case 5:
-                    if(radniNalogViewModel != null)
+                    if(radniNalogViewModel.ItemSelected != null)
                     {
                         CreateRadniNalogDialog updateRadniNalogDialog = new CreateRadniNalogDialog(_radniNalogSqlProvider, predmetRadaViewModel.PredmetRadaList, radniNalogViewModel.ItemSelected);
                         CreateRadniNalogDialogViewModel viewModelRadniNalog = (CreateRadniNalogDialogViewModel)updateRadniNalogDialog.DataContext;
@@ -194,7 +194,7 @@ namespace AUPS
                         ShowNotSelectedErrorDialog(false);
                     break;
                 case 6:
-                    if(tehnoloskiPostupakViewModel != null)
+                    if(tehnoloskiPostupakViewModel.ItemSelected != null)
                     {
                         CreateTehnoloskiPostupakDialog updateTehnoloskiPostupakDialog = new CreateTehnoloskiPostupakDialog(_tehnoloskiPostupakSqlProvider, operacijaViewModel.OperacijaList, tehnoloskiPostupakViewModel.ItemSelected);
                         CreateTehnoloskiPostupakViewModel viewModelTehnoloskiPostupak = (CreateTehnoloskiPostupakViewModel)updateTehnoloskiPostupakDialog.DataContext;
@@ -204,7 +204,7 @@ namespace AUPS
                         ShowNotSelectedErrorDialog(false);                   
                     break;
                 case 7:
-                    if(trebovanjeViewModel != null)
+                    if(trebovanjeViewModel.ItemSelected != null)
                     {
                         CreateTrebovanjeDialog updateTrebovanjeDialog = new CreateTrebovanjeDialog(_trebovanjeSqlProvider, radniNalogViewModel.RadniNalogList.Select(x => x.IDRadniNalog).ToList(), trebovanjeViewModel.ItemSelected);
                         CreateTrebovanjeDialogViewModel viewModelTrebovanje = (CreateTrebovanjeDialogViewModel)updateTrebovanjeDialog.DataContext;
@@ -230,7 +230,7 @@ namespace AUPS
             ErrorDialog errorDialog = new ErrorDialog();
             ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
             errorDialog.Title = "Greška";
-            errorDialogViewModel.ErrorMessage = "Nije dozvoljeno obrisati radno mesto koje sadrzi radnike.";
+            errorDialogViewModel.ErrorMessage = "Nije dozvoljeno obrisati radno mesto koje sadrži radnike.";
             errorDialog.ShowDialog();
         }
 

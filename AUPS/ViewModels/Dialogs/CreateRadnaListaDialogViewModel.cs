@@ -1,4 +1,5 @@
 ﻿using AUPS.Commands;
+using AUPS.Dialogs.ErrorDialogs;
 using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using ChatApp;
@@ -8,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AUPS.ViewModels.Dialogs
@@ -15,8 +17,8 @@ namespace AUPS.ViewModels.Dialogs
     public class CreateRadnaListaDialogViewModel : BaseViewModel
     {
         private IRadnaListaSqlProvider _radnaListaSqlProvider;
-        private ICommand addButtonCommand;
-        private ICommand updateButtonCommand;
+        private ICommand _createButtonCommand;
+        private ICommand _updateButtonCommand;
         private string _title = "Dijalog za kreiranje radna lista";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
@@ -155,17 +157,17 @@ namespace AUPS.ViewModels.Dialogs
         {
             get
             {
-                if (addButtonCommand == null)
+                if (_createButtonCommand == null)
                 {
-                    this.addButtonCommand = new RelayCommand(
-                        param => AddButtonCommandExecute(param));
+                    this._createButtonCommand = new RelayCommand(
+                        param => CreateButtonCommandExecute(param));
                 }
 
-                return addButtonCommand;
+                return _createButtonCommand;
             }
         }
 
-        private void AddButtonCommandExecute(object param)
+        private void CreateButtonCommandExecute(object param)
         {
             RadnaLista radnaLista = new RadnaLista()
             {
@@ -176,20 +178,33 @@ namespace AUPS.ViewModels.Dialogs
                 RadniNalog = new RadniNalog { IDRadniNalog = _idRadniNalog }
             };
 
-            _radnaListaSqlProvider.CreateRadnaListaById(radnaLista);
+            bool isCreated = _radnaListaSqlProvider.CreateRadnaListaById(radnaLista);
+            if (isCreated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+                ErrorDialog errorDialog = new ErrorDialog();
+                ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+                errorDialog.Title = "Greška";
+                errorDialogViewModel.ErrorMessage = "Došlo je do greške. Pokušajte ponovo";
+                errorDialog.ShowDialog();
+            }
         }
 
         public ICommand UpdateButtonCommand
         {
             get
             {
-                if (updateButtonCommand == null)
+                if (_updateButtonCommand == null)
                 {
-                    this.updateButtonCommand = new RelayCommand(
+                    this._updateButtonCommand = new RelayCommand(
                         param => UpdateButtonCommandExecute(param));
                 }
 
-                return updateButtonCommand;
+                return _updateButtonCommand;
             }
         }
 
@@ -205,10 +220,24 @@ namespace AUPS.ViewModels.Dialogs
                 RadniNalog = new RadniNalog {IDRadniNalog = _idRadniNalog }
             };
 
-            _radnaListaSqlProvider.UpdateRadnaListaById(updatedRadnaLista);
+            bool isUpdated = _radnaListaSqlProvider.UpdateRadnaListaById(updatedRadnaLista);
+
+            if (isUpdated)
+            {
+                Window curWindow = (Window)param;
+                curWindow.Close();
+            }
+            else
+            {
+                ErrorDialog errorDialog = new ErrorDialog();
+                ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+                errorDialog.Title = "Greška";
+                errorDialogViewModel.ErrorMessage = "Došlo je do greške. Pokušajte ponovo";
+                errorDialog.ShowDialog();
+            }
         }
 
-        public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider, List<int> radniNalogIds, ObservableCollection<Operacija> operacijaList, ObservableCollection<AUPS.Models.RadnikProizvodnja> radnikProizvodnjaList)
+            public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider, List<int> radniNalogIds, ObservableCollection<Operacija> operacijaList, ObservableCollection<AUPS.Models.RadnikProizvodnja> radnikProizvodnjaList)
         {
             _radnaListaSqlProvider = radnaListaSqlProvider;
             SelectedIdRadniNalog = radniNalogIds.First();
