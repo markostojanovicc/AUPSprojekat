@@ -26,6 +26,7 @@ namespace AUPS.ViewModels.Dialogs
         private ICommand _updateButtonCommand;
         private ICommand _createButtonCommand;
         List<int> _radniNalogIds;
+        private readonly MainContentViewModel mainContentViewModel;
 
         public List<string> IdRadnihNaloga
         {
@@ -94,13 +95,16 @@ namespace AUPS.ViewModels.Dialogs
             set { _title = value; }
         }
 
-        public CreateTrebovanjeDialogViewModel(ITrebovanjeSqlProvider trebovanjeSqlProvider, List<int> radniNalogIds)
+        public CreateTrebovanjeDialogViewModel(ITrebovanjeSqlProvider trebovanjeSqlProvider, List<int> radniNalogIds,
+            MainContentViewModel mainContentViewModel)
         {
             _trebovanjeSqlProvider = trebovanjeSqlProvider;
             _radniNalogIds = radniNalogIds;
+            this.mainContentViewModel = mainContentViewModel;
         }
 
-        public CreateTrebovanjeDialogViewModel(ITrebovanjeSqlProvider trebovanjeSqlProvider, List<int> radniNalogIds, Trebovanje trebovanje)
+        public CreateTrebovanjeDialogViewModel(ITrebovanjeSqlProvider trebovanjeSqlProvider, List<int> radniNalogIds, Trebovanje trebovanje,
+            MainContentViewModel mainContentViewModel)
         {
             _trebovanjeSqlProvider = trebovanjeSqlProvider;
             IdTrebovanja = trebovanje.IDTrebovanje;
@@ -109,6 +113,7 @@ namespace AUPS.ViewModels.Dialogs
             KolicinaRobe = trebovanje.KolicinaRobe.ToString();
             _radniNalogIds = radniNalogIds;
             SelectedRadniNalog = trebovanje.RadniNalog.IDRadniNalog;
+            this.mainContentViewModel = mainContentViewModel;
         }
 
         public ICommand AddButtonCommand
@@ -154,6 +159,7 @@ namespace AUPS.ViewModels.Dialogs
             {
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }
             else
             {
@@ -175,6 +181,7 @@ namespace AUPS.ViewModels.Dialogs
             {
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }
             else
             {

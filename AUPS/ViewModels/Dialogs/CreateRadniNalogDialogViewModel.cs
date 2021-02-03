@@ -15,6 +15,7 @@ namespace AUPS.ViewModels.Dialogs
     public class CreateRadniNalogDialogViewModel : BaseViewModel
     {
         private IRadniNalogSqlProvider _radniNalogSqlProvider;
+        private readonly MainContentViewModel mainContentViewModel;
         private string _title = "Dijalog za kreiranje radnog naloga";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
@@ -109,14 +110,17 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public CreateRadniNalogDialogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider, ObservableCollection<PredmetRada> predmetRadaList)
+        public CreateRadniNalogDialogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider, ObservableCollection<PredmetRada> predmetRadaList,
+            MainContentViewModel mainContentViewModel)
         {
             _radniNalogSqlProvider = radniNalogSqlProvider;
             PredmetRadaList = predmetRadaList;
+            this.mainContentViewModel = mainContentViewModel;
             _selectedIndexPredmetRada = 0;
         }
 
-        public CreateRadniNalogDialogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider, ObservableCollection<PredmetRada> predmetRadaList, RadniNalog radniNalog)
+        public CreateRadniNalogDialogViewModel(IRadniNalogSqlProvider radniNalogSqlProvider, ObservableCollection<PredmetRada> predmetRadaList, RadniNalog radniNalog,
+            MainContentViewModel mainContentViewModel)
         {
             _radniNalogSqlProvider = radniNalogSqlProvider;
             IdRadniNalog = radniNalog.IDRadniNalog;
@@ -126,6 +130,7 @@ namespace AUPS.ViewModels.Dialogs
             IdPredmetaRada = radniNalog.PredmetRada.IDPredmetRada;
             PredmetRadaList = predmetRadaList;
             _selectedIndexPredmetRada = PredmetRadaList.IndexOf(predmetRadaList.FirstOrDefault(x => x.IDPredmetRada == radniNalog.PredmetRada.IDPredmetRada));
+            this.mainContentViewModel = mainContentViewModel;
         }
 
         public ICommand AddButtonCommand
@@ -173,6 +178,7 @@ namespace AUPS.ViewModels.Dialogs
                 {
                     Window curWindow = (Window)param;
                     curWindow.Close();
+                    mainContentViewModel.RefreshData();
                 }
                 else
                 {
@@ -203,6 +209,7 @@ namespace AUPS.ViewModels.Dialogs
                 _radniNalogSqlProvider.CreateRadniNalogById(radniNalog);
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }            
             else
             {

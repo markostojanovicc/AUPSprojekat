@@ -22,16 +22,18 @@ namespace AUPS.Dialogs.RadniNalog
     /// </summary>
     public partial class CreateRadniNalogDialog : Window
     {
-        public CreateRadniNalogDialog(IRadniNalogSqlProvider _radniNalogSqlProvider, ObservableCollection<AUPS.Models.PredmetRada> predmetRadaList)
+        public CreateRadniNalogDialog(IRadniNalogSqlProvider _radniNalogSqlProvider
+            , ObservableCollection<AUPS.Models.PredmetRada> predmetRadaList, MainContentViewModel main)
         {
             InitializeComponent();
-            DataContext = new CreateRadniNalogDialogViewModel(_radniNalogSqlProvider, predmetRadaList);
+            DataContext = new CreateRadniNalogDialogViewModel(_radniNalogSqlProvider, predmetRadaList, main);
         }
 
-        public CreateRadniNalogDialog(IRadniNalogSqlProvider _radniNalogSqlProvider, ObservableCollection<AUPS.Models.PredmetRada> predmetRadaList, AUPS.Models.RadniNalog radniNalog)
+        public CreateRadniNalogDialog(IRadniNalogSqlProvider _radniNalogSqlProvider, ObservableCollection<AUPS.Models.PredmetRada> predmetRadaList, AUPS.Models.RadniNalog radniNalog
+            , MainContentViewModel main)
         {
             InitializeComponent();
-            DataContext = new CreateRadniNalogDialogViewModel(_radniNalogSqlProvider, predmetRadaList, radniNalog);
+            DataContext = new CreateRadniNalogDialogViewModel(_radniNalogSqlProvider, predmetRadaList, radniNalog, main);
         }
     }
 }

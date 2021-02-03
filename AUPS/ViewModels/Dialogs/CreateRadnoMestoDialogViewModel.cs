@@ -15,6 +15,7 @@ namespace AUPS.ViewModels.Dialogs
     public class CreateRadnoMestoDialogViewModel : BaseViewModel
     {
         private IRadnoMestoSqlProvider _radnoMestoSqlProvider;
+        private readonly MainContentViewModel mainContentViewModel;
         private string _title = "Dijalog za kreiranje radnog mesta";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
@@ -79,17 +80,21 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public CreateRadnoMestoDialogViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider)
+        public CreateRadnoMestoDialogViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider,
+            MainContentViewModel mainContentViewModel)
         {
             _radnoMestoSqlProvider = radnoMestoSqlProvider;
+            this.mainContentViewModel = mainContentViewModel;
         }
 
-        public CreateRadnoMestoDialogViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider, RadnoMesto radnoMesto)
+        public CreateRadnoMestoDialogViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider, RadnoMesto radnoMesto,
+            MainContentViewModel mainContentViewModel)
         {
             _radnoMestoSqlProvider = radnoMestoSqlProvider;
             _idRadnogMesta = radnoMesto.IDRadnoMesto;
             _nazivRadnogMesta = radnoMesto.NazivRadnoMesto;
             _strucnaSprema = radnoMesto.StrucnaSprema;
+            this.mainContentViewModel = mainContentViewModel;
         }
 
         public ICommand AddButtonCommand
@@ -133,6 +138,7 @@ namespace AUPS.ViewModels.Dialogs
             {
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }
             else
             {
@@ -152,6 +158,7 @@ namespace AUPS.ViewModels.Dialogs
             {
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }
             else
             {
