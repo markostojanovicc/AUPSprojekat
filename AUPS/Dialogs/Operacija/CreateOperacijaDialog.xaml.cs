@@ -9,16 +9,16 @@ namespace AUPS.Dialogs.Operacija
     /// </summary>
     public partial class CreateOperacijaDialog : Window
     {
-        public CreateOperacijaDialog(IOperacijaSqlProvider _operacijaSqlProvider)
+        public CreateOperacijaDialog(IOperacijaSqlProvider _operacijaSqlProvider, MainContentViewModel main)
         {
             InitializeComponent();
-            DataContext = new CreateOperacijaDialogViewModel(_operacijaSqlProvider);
+            DataContext = new CreateOperacijaDialogViewModel(_operacijaSqlProvider, main);
         }
 
-        public CreateOperacijaDialog(IOperacijaSqlProvider _operacijaSqlProvider, AUPS.Models.Operacija operacija)
+        public CreateOperacijaDialog(IOperacijaSqlProvider _operacijaSqlProvider, AUPS.Models.Operacija operacija, MainContentViewModel main)
         {
             InitializeComponent();
-            DataContext = new CreateOperacijaDialogViewModel(_operacijaSqlProvider, operacija);
+            DataContext = new CreateOperacijaDialogViewModel(_operacijaSqlProvider, operacija, main);
         }
     }
 }

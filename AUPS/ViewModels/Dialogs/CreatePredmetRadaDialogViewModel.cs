@@ -16,6 +16,7 @@ namespace AUPS.ViewModels.Dialogs
     public class CreatePredmetRadaDialogViewModel : BaseViewModel
     {
         private IPredmetRadaSqlProvider _predmetRadaSqlProvider;
+        private readonly MainContentViewModel mainContentViewModel;
         private string _title = "Dijalog za kreiranje predmeta rada";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
@@ -82,12 +83,15 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public CreatePredmetRadaDialogViewModel(IPredmetRadaSqlProvider predmetRadaSqlProvider)
+        public CreatePredmetRadaDialogViewModel(IPredmetRadaSqlProvider predmetRadaSqlProvider,
+            MainContentViewModel mainContentViewModel)
         {
             _predmetRadaSqlProvider = predmetRadaSqlProvider;
+            this.mainContentViewModel = mainContentViewModel;
         }
 
-        public CreatePredmetRadaDialogViewModel(IPredmetRadaSqlProvider predmetRadaSqlProvider, PredmetRada predmetRada)
+        public CreatePredmetRadaDialogViewModel(IPredmetRadaSqlProvider predmetRadaSqlProvider, PredmetRada predmetRada,
+            MainContentViewModel mainContentViewModel)
         {
             _predmetRadaSqlProvider = predmetRadaSqlProvider;
             IdPredmetaRada = predmetRada.IDPredmetRada;
@@ -95,6 +99,7 @@ namespace AUPS.ViewModels.Dialogs
             NazivPR = predmetRada.NazivPR;
             JedMere = predmetRada.JedMerePR;
             Cena = predmetRada.Cena.ToString();
+            this.mainContentViewModel = mainContentViewModel;
         }
 
         public ICommand AddButtonCommand
@@ -149,6 +154,7 @@ namespace AUPS.ViewModels.Dialogs
             {
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }
             else
             {
@@ -174,6 +180,7 @@ namespace AUPS.ViewModels.Dialogs
             {
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }
             else
             {

@@ -28,6 +28,7 @@ namespace AUPS.ViewModels.Dialogs
         private int _idRadneListe;
         private List<int> _radniNalogIds;
         private ObservableCollection<Operacija> _operacijaList;
+        private readonly MainContentViewModel mainContentViewModel;
         private ObservableCollection<RadnikProizvodnja> _radnikProizvodnjaList;
 
         public ObservableCollection<RadnikProizvodnja> RadnikProizvodnjaList
@@ -183,6 +184,7 @@ namespace AUPS.ViewModels.Dialogs
             {
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }
             else
             {
@@ -234,10 +236,12 @@ namespace AUPS.ViewModels.Dialogs
                 errorDialog.Title = "Greška";
                 errorDialogViewModel.ErrorMessage = "Došlo je do greške. Pokušajte ponovo";
                 errorDialog.ShowDialog();
+                mainContentViewModel.RefreshData();
             }
         }
 
-            public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider, List<int> radniNalogIds, ObservableCollection<Operacija> operacijaList, ObservableCollection<AUPS.Models.RadnikProizvodnja> radnikProizvodnjaList)
+            public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider, List<int> radniNalogIds, ObservableCollection<Operacija> operacijaList, ObservableCollection<AUPS.Models.RadnikProizvodnja> radnikProizvodnjaList,
+            MainContentViewModel mainContentViewModel)
         {
             _radnaListaSqlProvider = radnaListaSqlProvider;
             SelectedIdRadniNalog = radniNalogIds.First();
@@ -246,9 +250,11 @@ namespace AUPS.ViewModels.Dialogs
             SelectedIndexOperacija = 0;
             RadnikProizvodnjaList = radnikProizvodnjaList;
             SelectedIndexRadnikProizvodnja = radnikProizvodnjaList.Count;
+            this.mainContentViewModel = mainContentViewModel;
         }
 
-        public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider, List<int> radniNalogIds, ObservableCollection<Operacija> operacijaList, ObservableCollection<AUPS.Models.RadnikProizvodnja> radnikProizvodnjaList, RadnaLista radnaLista)
+        public CreateRadnaListaDialogViewModel(IRadnaListaSqlProvider radnaListaSqlProvider, List<int> radniNalogIds, ObservableCollection<Operacija> operacijaList, ObservableCollection<AUPS.Models.RadnikProizvodnja> radnikProizvodnjaList, RadnaLista radnaLista,
+            MainContentViewModel mainContentViewModel)
         {
             _radnaListaSqlProvider = radnaListaSqlProvider;
             IdRadneListe = radnaLista.IDRadnaLista;
@@ -259,6 +265,7 @@ namespace AUPS.ViewModels.Dialogs
             _operacijaList = operacijaList;
             SelectedIndexOperacija = operacijaList.IndexOf(operacijaList.First(x=> x.IDOperacija==radnaLista.Operacija.IDOperacija));
             RadnikProizvodnjaList = radnikProizvodnjaList;
+            this.mainContentViewModel = mainContentViewModel;
             SelectedIndexRadnikProizvodnja = radnikProizvodnjaList.IndexOf(radnikProizvodnjaList.FirstOrDefault(x => x.IDRadnik == radnaLista.Radnik?.IDRadnik));
         }
 

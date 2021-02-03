@@ -16,6 +16,7 @@ namespace AUPS.ViewModels.Dialogs
     public class CreateOperacijaDialogViewModel : BaseViewModel
     {
         private IOperacijaSqlProvider _operacijaSqlProvider;
+        private readonly MainContentViewModel mainContentViewModel;
         private string _title = "Dijalog za kreiranje operacije";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
@@ -158,6 +159,7 @@ namespace AUPS.ViewModels.Dialogs
             {
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }
             else
             {
@@ -184,6 +186,7 @@ namespace AUPS.ViewModels.Dialogs
             {
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }
             else
             {
@@ -195,12 +198,14 @@ namespace AUPS.ViewModels.Dialogs
             }
         }
 
-        public CreateOperacijaDialogViewModel(IOperacijaSqlProvider operacijaSqlProvider)
+        public CreateOperacijaDialogViewModel(IOperacijaSqlProvider operacijaSqlProvider, MainContentViewModel mainContentViewModel)
         {
             _operacijaSqlProvider = operacijaSqlProvider;
+            this.mainContentViewModel = mainContentViewModel;
         }
 
-        public CreateOperacijaDialogViewModel(IOperacijaSqlProvider operacijaSqlProvider, Operacija operacija)
+        public CreateOperacijaDialogViewModel(IOperacijaSqlProvider operacijaSqlProvider, Operacija operacija,
+             MainContentViewModel mainContentViewModel)
         {
             _operacijaSqlProvider = operacijaSqlProvider;
             IdOperacije = operacija.IDOperacija;
@@ -208,7 +213,9 @@ namespace AUPS.ViewModels.Dialogs
             OsnovnoVreme = operacija.OsnovnoVreme.ToString();
             DodatnoVreme = operacija.DodatnoVreme.ToString();
             PomocnoVreme = operacija.PomocnoVreme.ToString();
+            PomocnoVreme = operacija.PomocnoVreme.ToString();
             OznakaMasine = operacija.OznakaMasine;
+            this.mainContentViewModel = mainContentViewModel;
         }
 
         public void SetViewForUpdateDialog()

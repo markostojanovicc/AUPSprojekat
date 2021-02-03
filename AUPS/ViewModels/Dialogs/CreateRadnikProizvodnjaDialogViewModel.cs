@@ -19,6 +19,7 @@ namespace AUPS.ViewModels.Dialogs
     {
         private List<Pol> _polovi = new List<Pol>() { Pol.muški, Pol.ženski };
         private IRadnikProizvodnjaSqlProvider _radnikProizvodnjaSqlProvider;
+        private readonly MainContentViewModel mainContentViewModel;
         private string _title = "Dijalog za kreiranje radnika";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
@@ -121,14 +122,17 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public CreateRadnikProizvodnjaDialogViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, ObservableCollection<RadnoMesto> radnoMestoList)
+        public CreateRadnikProizvodnjaDialogViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, ObservableCollection<RadnoMesto> radnoMestoList,
+            MainContentViewModel mainContentViewModel)
         {
             _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
             RadnoMestoList = radnoMestoList;
             SelectedIndexRadnoMesto = 0;
+            mainContentViewModel.RefreshData();
         }
 
-        public CreateRadnikProizvodnjaDialogViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, ObservableCollection<RadnoMesto> radnoMestoList, RadnikProizvodnja radnikProizvodnja)
+        public CreateRadnikProizvodnjaDialogViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, ObservableCollection<RadnoMesto> radnoMestoList, RadnikProizvodnja radnikProizvodnja,
+            MainContentViewModel mainContentViewModel)
         {
             _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
             IdRadnika = radnikProizvodnja.IDRadnik;
@@ -138,6 +142,7 @@ namespace AUPS.ViewModels.Dialogs
             SelectedType = pol;
             IdRadnoMesto = radnikProizvodnja.RadnoMesto.IDRadnoMesto.ToString();
             RadnoMestoList = radnoMestoList;
+            this.mainContentViewModel = mainContentViewModel;
             SelectedIndexRadnoMesto = radnoMestoList.IndexOf(radnoMestoList.First(x => x.IDRadnoMesto == radnikProizvodnja.RadnoMesto.IDRadnoMesto));
         }
 
@@ -184,6 +189,7 @@ namespace AUPS.ViewModels.Dialogs
             {
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }
             else
             {
@@ -209,6 +215,7 @@ namespace AUPS.ViewModels.Dialogs
             {
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }
             else
             {

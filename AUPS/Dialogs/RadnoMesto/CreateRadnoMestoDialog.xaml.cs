@@ -9,16 +9,17 @@ namespace AUPS.Dialogs.RadnoMesto
     /// </summary>
     public partial class CreateRadnoMestoDialog : Window
     {
-        public CreateRadnoMestoDialog(IRadnoMestoSqlProvider _radnoMestoSqlProvider)
+        public CreateRadnoMestoDialog(IRadnoMestoSqlProvider _radnoMestoSqlProvider, MainContentViewModel main)
         {
             InitializeComponent();
-            DataContext = new CreateRadnoMestoDialogViewModel(_radnoMestoSqlProvider);
+            DataContext = new CreateRadnoMestoDialogViewModel(_radnoMestoSqlProvider, main);
         }
 
-        public CreateRadnoMestoDialog(IRadnoMestoSqlProvider _radnoMestoSqlProvider, AUPS.Models.RadnoMesto radnoMesto)
+        public CreateRadnoMestoDialog(IRadnoMestoSqlProvider _radnoMestoSqlProvider, AUPS.Models.RadnoMesto radnoMesto
+            , MainContentViewModel main)
         {
             InitializeComponent();
-            DataContext = new CreateRadnoMestoDialogViewModel(_radnoMestoSqlProvider, radnoMesto);
+            DataContext = new CreateRadnoMestoDialogViewModel(_radnoMestoSqlProvider, radnoMesto, main);
         }
     }
 }

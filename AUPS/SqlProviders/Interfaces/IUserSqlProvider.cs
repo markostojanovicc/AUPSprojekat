@@ -11,5 +11,6 @@ namespace AUPS.SqlProviders.Interfaces
     {
         User FindUserByEmailAndPassword(string email, string password);
         bool CreateUser(User user);
+        bool FindIfUserExistsByEmail(string email);
     }
 }

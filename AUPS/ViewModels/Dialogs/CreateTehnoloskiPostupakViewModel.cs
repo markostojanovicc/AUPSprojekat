@@ -17,6 +17,7 @@ namespace AUPS.ViewModels.Dialogs
     public class CreateTehnoloskiPostupakViewModel : BaseViewModel
     {
         private ITehnoloskiPostupakSqlProvider _tehnoloskiPostupakSqlProvider;
+        private readonly MainContentViewModel mainContentViewModel;
         private string _title = "Dijalog za kreiranje tehnoloskog postupka";
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
@@ -110,14 +111,17 @@ namespace AUPS.ViewModels.Dialogs
         }
 
 
-        public CreateTehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ObservableCollection<Operacija> operacijaList)
+        public CreateTehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ObservableCollection<Operacija> operacijaList,
+            MainContentViewModel mainContentViewModel)
         {
             _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
             OperacijaList = operacijaList;
             _selectedIndexOperacija = 0;
+            this.mainContentViewModel = mainContentViewModel;
         }
 
-        public CreateTehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ObservableCollection<Operacija> operacijaList, TehnoloskiPostupak tehnoloskiPostupak)
+        public CreateTehnoloskiPostupakViewModel(ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ObservableCollection<Operacija> operacijaList, TehnoloskiPostupak tehnoloskiPostupak,
+            MainContentViewModel mainContentViewModel)
         {
             _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
             IdTehnoloskogPostupka = tehnoloskiPostupak.IDTehPostupak;
@@ -127,6 +131,7 @@ namespace AUPS.ViewModels.Dialogs
             BrKom = tehnoloskiPostupak.BrKomada.ToString();
             IdOperacije = tehnoloskiPostupak.Operacija.IDOperacija;
             OperacijaList = operacijaList;
+            this.mainContentViewModel = mainContentViewModel;
             _selectedIndexOperacija = operacijaList.IndexOf(operacijaList.First(x => x.IDOperacija == tehnoloskiPostupak.Operacija.IDOperacija));
         }
 
@@ -183,6 +188,7 @@ namespace AUPS.ViewModels.Dialogs
             {
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }
             else
             {
@@ -209,6 +215,7 @@ namespace AUPS.ViewModels.Dialogs
             {
                 Window curWindow = (Window)param;
                 curWindow.Close();
+                mainContentViewModel.RefreshData();
             }
             else
             {
