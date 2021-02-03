@@ -30,6 +30,11 @@ namespace AUPS.SqlProviders
                   UPDATE operacija SET nazivoperacije = @NazivOperacije, osnovnovreme = @OsnovnoVreme, pomocnovreme = @PomocnoVreme, dodatnovreme = @DodatnoVreme, oznakamasine = @OznakaMasine
                   WHERE idoperacija = @Id
             ";
+
+        private const string CREATE_OPERACIJA =
+            @"
+                  INSERT INTO operacija VALUES (nextval('operacijaSeq'), @NazivOperacije, @OsnovnoVreme, @PomocnoVreme, @DodatnoVreme, @OznakaMasine);
+            ";
         #endregion
 
         public ObservableCollection<Operacija> GetAllFromOperacija() 
@@ -69,6 +74,47 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(DELETE_FROM_OPERACIJA_BY_ID, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, iDOperacija);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool UpdateOperacijaById(Operacija operacijaNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_OPERACIJA_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, operacijaNew.IDOperacija);
+                cmd.Parameters.AddWithValue("@NazivOperacije", NpgsqlDbType.Varchar, operacijaNew.NazivOperacije);
+                cmd.Parameters.AddWithValue("@OsnovnoVreme", NpgsqlDbType.Integer, operacijaNew.OsnovnoVreme);
+                cmd.Parameters.AddWithValue("@PomocnoVreme", NpgsqlDbType.Integer, operacijaNew.PomocnoVreme);
+                cmd.Parameters.AddWithValue("@DodatnoVreme", NpgsqlDbType.Integer, operacijaNew.DodatnoVreme);
+                cmd.Parameters.AddWithValue("@OznakaMasine", NpgsqlDbType.Varchar, operacijaNew.OznakaMasine);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool CreateOperacijaById(Operacija operacijaNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(CREATE_OPERACIJA, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@NazivOperacije", NpgsqlDbType.Varchar, operacijaNew.NazivOperacije);
+                cmd.Parameters.AddWithValue("@OsnovnoVreme", NpgsqlDbType.Integer, operacijaNew.OsnovnoVreme);
+                cmd.Parameters.AddWithValue("@PomocnoVreme", NpgsqlDbType.Integer, operacijaNew.PomocnoVreme);
+                cmd.Parameters.AddWithValue("@DodatnoVreme", NpgsqlDbType.Integer, operacijaNew.DodatnoVreme);
+                cmd.Parameters.AddWithValue("@OznakaMasine", NpgsqlDbType.Varchar, operacijaNew.OznakaMasine);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

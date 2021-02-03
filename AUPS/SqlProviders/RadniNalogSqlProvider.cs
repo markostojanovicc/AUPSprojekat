@@ -18,7 +18,10 @@ namespace AUPS.SqlProviders
 
         private const string GET_ALL_RECORDS_FROM_RADNI_NALOG =
             @"
-                  SELECT * FROM radninalog;
+                  SELECT rn.*, pr.nazivpr
+                    FROM radninalog rn
+                    LEFT JOIN predmetrada pr
+                    ON rn.idpredmetrada = pr.idpredmetrada
             ";
         private const string DELETE_FROM_RADNI_NALOG_BY_ID =
             @"
@@ -27,8 +30,13 @@ namespace AUPS.SqlProviders
 
         private const string UPDATE_RADNI_NALOG_BY_ID =
             @"
-                  UPDATE radninalog SET datumulaz = @DatumUlaz, datumizlaz = @DatumIzlaz kolicinaproizvoda = @KolicinaProizvoda, idpredmetrada= @IDPredmetRada
+                  UPDATE radninalog SET datumulaz = @DatumUlaz, datumizlaz = @DatumIzlaz, kolicinaproizvoda = @KolicinaProizvoda, idpredmetrada= @IDPredmetRada
                   WHERE idradninalog = @Id
+            ";
+
+        private const string CREATE_RADNI_NALOG =
+            @"
+                  INSERT INTO radninalog VALUES (nextval('radniNalogSeq'), @DatumUlaz, @DatumIzlaz, @KolicinaProizvoda, @IDPredmetRada);
             ";
 
 
@@ -52,7 +60,9 @@ namespace AUPS.SqlProviders
                     radniNalog.DatumUlaz = rdr.GetDateTime(1);
                     radniNalog.DatumIzlaz = rdr.GetDateTime(2);
                     radniNalog.KolicinaProizvoda = rdr.GetInt32(3);
-                    radniNalog.IDPredmetRada = rdr.GetInt32(4);
+                    radniNalog.PredmetRada = new PredmetRada();
+                    radniNalog.PredmetRada.IDPredmetRada = rdr.GetInt32(4);
+                    radniNalog.PredmetRada.NazivPR = rdr.GetString(5);
                     radniNalogList.Add(radniNalog);
                 }
             }
@@ -69,6 +79,45 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(DELETE_FROM_RADNI_NALOG_BY_ID, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, iDRadniNalog);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool UpdateRadniNalogById(RadniNalog radniNalogNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_RADNI_NALOG_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, radniNalogNew.IDRadniNalog);
+                cmd.Parameters.AddWithValue("@DatumUlaz", NpgsqlDbType.Date, radniNalogNew.DatumUlaz);
+                cmd.Parameters.AddWithValue("@DatumIzlaz", NpgsqlDbType.Date, radniNalogNew.DatumIzlaz);
+                cmd.Parameters.AddWithValue("@KolicinaProizvoda", NpgsqlDbType.Integer, radniNalogNew.KolicinaProizvoda);
+                cmd.Parameters.AddWithValue("@IDPredmetRada", NpgsqlDbType.Integer, radniNalogNew.PredmetRada.IDPredmetRada);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool CreateRadniNalogById(RadniNalog radniNalogNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(CREATE_RADNI_NALOG, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@DatumUlaz", NpgsqlDbType.Date, radniNalogNew.DatumUlaz);
+                cmd.Parameters.AddWithValue("@DatumIzlaz", NpgsqlDbType.Date, radniNalogNew.DatumIzlaz);
+                cmd.Parameters.AddWithValue("@KolicinaProizvoda", NpgsqlDbType.Integer, radniNalogNew.KolicinaProizvoda);
+                cmd.Parameters.AddWithValue("@IDPredmetRada", NpgsqlDbType.Integer, radniNalogNew.PredmetRada.IDPredmetRada);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

@@ -13,5 +13,9 @@ namespace AUPS.SqlProviders.Interfaces
     {
         ObservableCollection<PredmetRada> GetAllFromPredmetRada();
         bool DeleteFromPredmetRadaById(int iDPredmetRada);
+
+        bool UpdatePredmetRadaById(PredmetRada predmetRada);
+
+        bool CreatePredmetRadaById(PredmetRada predmetRadaNew);
     }
 }

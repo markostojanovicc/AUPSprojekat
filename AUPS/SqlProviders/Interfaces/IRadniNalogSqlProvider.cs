@@ -13,5 +13,9 @@ namespace AUPS.SqlProviders.Interfaces
     {
         ObservableCollection<RadniNalog> GetAllFromRadniNalog();
         bool DeleteFromRadniNalogById(int iDRadniNalog);
+
+        bool UpdateRadniNalogById(RadniNalog radniNalog);
+
+        bool CreateRadniNalogById(RadniNalog radniNalogNew);
     }
 }

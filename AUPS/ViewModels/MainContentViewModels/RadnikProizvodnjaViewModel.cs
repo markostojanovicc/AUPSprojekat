@@ -33,15 +33,9 @@ namespace AUPS.ViewModels.MainContentViewModels
             set { _itemSelected = value; }
         }
 
-        public RadnikProizvodnjaViewModel(IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider)
+        public RadnikProizvodnjaViewModel()
         {
-            _radnikProizvodnjaSqlProvider = radnikProizvodnjaSqlProvider;
-            FillTableWithData();
-        }
 
-        private void FillTableWithData()
-        {
-            RadnikProizvodnjaList = _radnikProizvodnjaSqlProvider.GetAllFromRadnikProizvodnja();
         }
     }
 }

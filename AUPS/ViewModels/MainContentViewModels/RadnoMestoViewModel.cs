@@ -27,19 +27,9 @@ namespace AUPS.ViewModels.MainContentViewModels
             }
         }
 
-        private IRadnoMestoSqlProvider _radnoMestoSqlProvider;
-
-       
-
-        public RadnoMestoViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider)
+        public RadnoMestoViewModel()
         {
-            _radnoMestoSqlProvider = radnoMestoSqlProvider;
-            FillTableWithData();
-        }
 
-        private void FillTableWithData()
-        {
-            RadnoMestoList = _radnoMestoSqlProvider.GetAllFromRadnoMesto();
         }
     }
 }

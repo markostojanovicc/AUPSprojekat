@@ -10,6 +10,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/AUPS;component/Resources/DataTemplates.xaml"/>
                 <ResourceDictionary Source="/AUPS;component/Resources/Styles.xaml"/>
+                <ResourceDictionary Source="/AUPS;component/Resources/Images.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

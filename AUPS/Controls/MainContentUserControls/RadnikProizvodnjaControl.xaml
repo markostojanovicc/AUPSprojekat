@@ -7,13 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DataGrid AutoGenerateColumns="False" Grid.Row="1" Grid.Column="1"  ItemsSource="{Binding RadnikProizvodnjaList}" HorizontalAlignment="Stretch" Margin="10,10,100,0" VerticalAlignment="Stretch">
+        <DataGrid AutoGenerateColumns="False" Grid.Row="1" Grid.Column="1" SelectedItem="{Binding ItemSelected}"  ItemsSource="{Binding RadnikProizvodnjaList}" HorizontalAlignment="Stretch" Margin="10,10,100,0" VerticalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding IDRadnik}" Width="*"/>
                 <DataGridTextColumn Header="Ime radnika" Binding="{Binding ImeRadnika}" Width="*"/>
                 <DataGridTextColumn Header="Prezime radnika" Binding="{Binding PrezimeRadnika}"  Width="*"/>
                 <DataGridTextColumn Header="Pol" Binding="{Binding Pol}" Width="*" />
-                <DataGridTextColumn Header="Id radnog mesta" Binding="{Binding IDRadnoMesto}" Width="*" />
+                <DataGridTextColumn Header="Naziv radnog mesta" Binding="{Binding RadnoMesto.NazivRadnoMesto}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -78,7 +78,8 @@ namespace AUPS.ViewModels
 
             if (isUserCreated)
             {
-                
+                Window curWindow = (Window)param;
+                curWindow.Close();
             }
             else
             {

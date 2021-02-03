@@ -28,15 +28,9 @@ namespace AUPS.ViewModels.MainContentViewModels
             set { _itemSelected = value; }
         }
 
-        public TrebovanjeViewModel(ITrebovanjeSqlProvider trebovanjeSqlProvider)
+        public TrebovanjeViewModel()
         {
-            _trebovanjeSqlProvider = trebovanjeSqlProvider;
-            FillTableWithData();
-        }
 
-        private void FillTableWithData()
-        {
-            TrebovanjeList = _trebovanjeSqlProvider.GetAllFromTrebovanje();
         }
     }
 }

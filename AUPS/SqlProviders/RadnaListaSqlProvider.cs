@@ -18,7 +18,12 @@ namespace AUPS.SqlProviders
 
         private const string GET_ALL_RECORDS_FROM_RADNA_LISTA =
             @"
-                  SELECT * FROM radnalista;
+                  SELECT rl.*, o.nazivoperacije, rp.imeradnika,rp.prezimeradnika
+                FROM radnalista rl
+                LEFT JOIN operacija o
+                ON rl.idoperacija = o.idoperacija
+				LEFT JOIN radnikproizvodnja rp
+				ON rl.idradnik = rp.idradnik
             ";
 
         private const string DELETE_FROM_RADNA_LISTA_BY_ID =
@@ -28,10 +33,14 @@ namespace AUPS.SqlProviders
 
         private const string UPDATE_RADNA_LISTA_BY_ID =
             @"
-                  UPDATE radnalista SET datum = @Datum, kolicina = @Kolicina, idradnik = @IDRadnik, idradninalog = @IDRadniNalog, idoperacija = @IDOperacija
+                  UPDATE radnalista SET datum = @Datum, kolicinarl = @Kolicina, idradnik = @IDRadnik, idradninalog = @IDRadniNalog, idoperacija = @IDOperacija
                   WHERE idradnalista = @Id
             ";
 
+        private const string CREATE_RADNA_LISTA =
+            @"
+                  INSERT INTO radnalista VALUES (nextval('radnaListaSeq'), @Datum, @Kolicina, @IDRadnik, @IDRadniNalog, @IDOperacija);
+            ";
 
         #endregion
 
@@ -54,9 +63,18 @@ namespace AUPS.SqlProviders
                     radnaLista.IDRadnaLista = rdr.GetInt32(0);
                     radnaLista.Datum = rdr.GetDateTime(1);
                     radnaLista.Kolicina = rdr.GetInt32(2);
-                    radnaLista.IDRadnik = rdr.GetInt32(3);
-                    radnaLista.IDRadniNalog = rdr.GetInt32(4);
-                    radnaLista.IDOperacija = rdr.GetInt32(5);
+                    radnaLista.RadniNalog = new RadniNalog();
+                    radnaLista.RadniNalog.IDRadniNalog = rdr.GetInt32(4);
+                    radnaLista.Operacija = new Operacija();
+                    radnaLista.Operacija.IDOperacija = rdr.GetInt32(5);
+                    radnaLista.Operacija.NazivOperacije = rdr.GetString(6);
+                    if (!rdr.IsDBNull(3))
+                    {
+                        radnaLista.Radnik = new RadnikProizvodnja();
+                        radnaLista.Radnik.IDRadnik = rdr.GetInt32(3);
+                        radnaLista.Radnik.ImeRadnika = rdr.GetString(7);
+                        radnaLista.Radnik.PrezimeRadnika = rdr.GetString(8);
+                    }
                     radnaListaList.Add(radnaLista);
                 }
             }
@@ -73,6 +91,49 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(DELETE_FROM_RADNA_LISTA_BY_ID, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, iDRadnaLista);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool UpdateRadnaListaById(RadnaLista radnaListaNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_RADNA_LISTA_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, radnaListaNew.IDRadnaLista);
+                cmd.Parameters.AddWithValue("@Datum", NpgsqlDbType.Date, radnaListaNew.Datum);
+                cmd.Parameters.AddWithValue("@Kolicina", NpgsqlDbType.Integer, radnaListaNew.Kolicina);
+                cmd.Parameters.AddWithValue("@IDRadnik", NpgsqlDbType.Integer, radnaListaNew.Radnik.IDRadnik);
+                cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Integer, radnaListaNew.RadniNalog.IDRadniNalog);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, radnaListaNew.Operacija.IDOperacija);
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool CreateRadnaListaById(RadnaLista radnaListaNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(CREATE_RADNA_LISTA, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Datum", NpgsqlDbType.Date, radnaListaNew.Datum);
+                cmd.Parameters.AddWithValue("@Kolicina", NpgsqlDbType.Integer, radnaListaNew.Kolicina);
+                if(radnaListaNew.Radnik != null)
+                    cmd.Parameters.AddWithValue("@IDRadnik", NpgsqlDbType.Integer, radnaListaNew.Radnik.IDRadnik);
+                else
+                    cmd.Parameters.AddWithValue("@IDRadnik", NpgsqlDbType.Integer, DBNull.Value);
+                cmd.Parameters.AddWithValue("@IDRadniNalog", NpgsqlDbType.Integer, radnaListaNew.RadniNalog.IDRadniNalog);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, radnaListaNew.Operacija.IDOperacija);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

@@ -24,7 +24,7 @@
                 MainContentDataTemplate="{StaticResource MainContentTemplate}"/>
         
     </Window.Resources>
-    <Grid>
+    <Grid Height="Auto" Width="Auto">
         <ContentControl VerticalAlignment="Stretch" 
                         Content="{Binding ContentMainScreen}"
                         ContentTemplateSelector="{StaticResource ApplicationMainWindowTemplateSelector}"/>

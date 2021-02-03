@@ -17,7 +17,7 @@ namespace AUPS.Models
         public string TipTrebovanja { get; set; }
         public string JedMere { get; set; }
         public  int KolicinaRobe { get; set; }
-        public int IDRadniNalog { get; set; }
+        public RadniNalog RadniNalog { get; set; }
         
 
     }

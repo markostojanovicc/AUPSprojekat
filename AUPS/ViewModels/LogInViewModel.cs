@@ -24,7 +24,8 @@ namespace AUPS.ViewModels
         private string _password;
 
         public delegate void LogInSuccededEventHandler(object source, EventArgs args);
-        public event LogInSuccededEventHandler LogInSucceded;
+        public event LogInSuccededEventHandler LogInSucceded; 
+
         public string Email
         {
             get
@@ -123,7 +124,7 @@ namespace AUPS.ViewModels
         private void RegistrationButtonCommandExecute(object param)
         {
             RegistrationWindow registrationWindow = new RegistrationWindow(_userSqlProvider);
-            registrationWindow.Show();
+            registrationWindow.ShowDialog();
         }
 
         private bool CanExecuteLoginButtonCommand()

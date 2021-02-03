@@ -18,7 +18,10 @@ namespace AUPS.SqlProviders
 
         private const string GET_ALL_RECORDS_FROM_TEHNOLOSKI_POSTUPAK =
             @"
-                  SELECT * FROM tehnoloskipostupak;
+                  SELECT tp.*,o.nazivoperacije
+                FROM tehnoloskipostupak tp
+                LEFT JOIN operacija o
+                ON tp.idoperacija = o.idoperacija
             ";
         private const string DELETE_FROM_TEHNOLOSKI_POSTUPAK_BY_ID =
             @"
@@ -31,6 +34,10 @@ namespace AUPS.SqlProviders
                   WHERE idtehpostupak = @Id
             ";
 
+        private const string CREATE_TEHNOLOSKI_POSTUPAK =
+            @"
+                  INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), @TipTehPostupak, @VremeIzrade, @SerijaKom, @BrKomada, @IDOperacija);
+            ";
 
         #endregion
 
@@ -54,7 +61,9 @@ namespace AUPS.SqlProviders
                     tehnoloskiPostupak.VremeIzrade = rdr.GetInt32(2);
                     tehnoloskiPostupak.SerijaKom = rdr.GetInt32(3);
                     tehnoloskiPostupak.BrKomada = rdr.GetInt32(4);
-                    tehnoloskiPostupak.IDOperacija = rdr.GetInt32(5);
+                    tehnoloskiPostupak.Operacija = new Operacija();
+                    tehnoloskiPostupak.Operacija.IDOperacija = rdr.GetInt32(5);
+                    tehnoloskiPostupak.Operacija.NazivOperacije = rdr.GetString(6);
                     tehnoloskiPostupakList.Add(tehnoloskiPostupak);
                 }
             }
@@ -72,6 +81,47 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(DELETE_FROM_TEHNOLOSKI_POSTUPAK_BY_ID, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, iDTehPostupak);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool UpdateTehnoloskiPostupakById(TehnoloskiPostupak tehnoloskiPostupakNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_TEHNOLOSKI_POSTUPAK_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, tehnoloskiPostupakNew.IDTehPostupak);
+                cmd.Parameters.AddWithValue("@TipTehPostupak", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.TipTehPostupak);
+                cmd.Parameters.AddWithValue("@VremeIzrade", NpgsqlDbType.Integer, tehnoloskiPostupakNew.VremeIzrade);
+                cmd.Parameters.AddWithValue("@SerijaKom", NpgsqlDbType.Integer, tehnoloskiPostupakNew.SerijaKom);
+                cmd.Parameters.AddWithValue("@BrKomada", NpgsqlDbType.Integer, tehnoloskiPostupakNew.BrKomada);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, tehnoloskiPostupakNew.Operacija.IDOperacija);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool CreateTehnoloskiPostupakById(TehnoloskiPostupak tehnoloskiPostupakNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(CREATE_TEHNOLOSKI_POSTUPAK, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@TipTehPostupak", NpgsqlDbType.Varchar, tehnoloskiPostupakNew.TipTehPostupak);
+                cmd.Parameters.AddWithValue("@VremeIzrade", NpgsqlDbType.Integer, tehnoloskiPostupakNew.VremeIzrade);
+                cmd.Parameters.AddWithValue("@SerijaKom", NpgsqlDbType.Integer, tehnoloskiPostupakNew.SerijaKom);
+                cmd.Parameters.AddWithValue("@BrKomada", NpgsqlDbType.Integer, tehnoloskiPostupakNew.BrKomada);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, tehnoloskiPostupakNew.Operacija.IDOperacija);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

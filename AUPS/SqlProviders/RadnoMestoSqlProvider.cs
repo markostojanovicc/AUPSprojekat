@@ -31,6 +31,11 @@ namespace AUPS.SqlProviders
                   WHERE idradnomesto = @Id
             ";
 
+        private const string CREATE_RADNO_MESTO =
+            @"
+                  INSERT INTO radnomesto VALUES (nextval('radnomestoseq'), @NazivRadnogMesta, @StrucnaSprema );
+            ";
+
 
         #endregion
 
@@ -84,6 +89,23 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_RADNO_MESTO_BY_ID, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, radnoMestoNew.IDRadnoMesto);
+                cmd.Parameters.AddWithValue("@NazivRadnogMesta", NpgsqlDbType.Varchar, radnoMestoNew.NazivRadnoMesto);
+                cmd.Parameters.AddWithValue("@StrucnaSprema", NpgsqlDbType.Varchar, radnoMestoNew.StrucnaSprema);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool CreateRadnoMestoById(RadnoMesto radnoMestoNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(CREATE_RADNO_MESTO, sqlConnection);
+
                 cmd.Parameters.AddWithValue("@NazivRadnogMesta", NpgsqlDbType.Varchar, radnoMestoNew.NazivRadnoMesto);
                 cmd.Parameters.AddWithValue("@StrucnaSprema", NpgsqlDbType.Varchar, radnoMestoNew.StrucnaSprema);
 

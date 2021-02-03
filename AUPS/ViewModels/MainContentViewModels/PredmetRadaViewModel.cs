@@ -33,15 +33,9 @@ namespace AUPS.ViewModels.MainContentViewModels
             set { _itemSelected = value; }
         }
 
-        public PredmetRadaViewModel(IPredmetRadaSqlProvider predmetRadaSqlProvider)
+        public PredmetRadaViewModel()
         {
-            _predmetRadaSqlProvider = predmetRadaSqlProvider;
-            FillTableWithData();
-        }
 
-        private void FillTableWithData()
-        {
-            PredmetRadaList = _predmetRadaSqlProvider.GetAllFromPredmetRada();
         }
     }
 }

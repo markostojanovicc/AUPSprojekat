@@ -96,12 +96,32 @@
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
+    <converters:DateConverter x:Key="DateTimeToDateConverter" />
 
     <Style x:Key="EntryFieldStyle" TargetType="Grid" >
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="20,0" />
     </Style>
+
+    <Style x:Key="crudbtn" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Name="borderlogin" CornerRadius="5" BorderThickness="1" BorderBrush="#33adff" Background="#008ae6">
+
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="White">
+
+                        </ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    
 
 
 </ResourceDictionary>

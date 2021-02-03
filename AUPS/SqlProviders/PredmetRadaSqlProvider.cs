@@ -30,6 +30,11 @@ namespace AUPS.SqlProviders
                   UPDATE predmetrada SET tippredmetrada = @TipPredmetRada, nazivpr = @NazivPR, jedmerepr = @JedMerePR, cena = @Cena
                   WHERE idpredmetrada = @Id
             ";
+
+        private const string CREATE_PREDMET_RADA =
+            @"
+                  INSERT INTO predmetrada VALUES (nextval('predmetRadaSeq'), @TipPredmetRada, @NazivPR, @JedMerePR, @Cena);
+            ";
         #endregion
 
         public ObservableCollection<PredmetRada> GetAllFromPredmetRada()
@@ -69,6 +74,45 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(DELETE_FROM_PREDMET_RADA_BY_ID, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, iDPredmetRada);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool UpdatePredmetRadaById(PredmetRada predmetRadaNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_PREDMET_RADA_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, predmetRadaNew.IDPredmetRada);
+                cmd.Parameters.AddWithValue("@TipPredmetRada", NpgsqlDbType.Varchar, predmetRadaNew.TipPredmetRada);
+                cmd.Parameters.AddWithValue("@NazivPR", NpgsqlDbType.Varchar, predmetRadaNew.NazivPR);
+                cmd.Parameters.AddWithValue("@JedMerePR", NpgsqlDbType.Varchar, predmetRadaNew.JedMerePR);
+                cmd.Parameters.AddWithValue("@Cena", NpgsqlDbType.Integer, predmetRadaNew.Cena);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool CreatePredmetRadaById(PredmetRada predmetRadaNew)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(CREATE_PREDMET_RADA, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@TipPredmetRada", NpgsqlDbType.Varchar, predmetRadaNew.TipPredmetRada);
+                cmd.Parameters.AddWithValue("@NazivPR", NpgsqlDbType.Varchar, predmetRadaNew.NazivPR);
+                cmd.Parameters.AddWithValue("@JedMerePR", NpgsqlDbType.Varchar, predmetRadaNew.JedMerePR);
+                cmd.Parameters.AddWithValue("@Cena", NpgsqlDbType.Integer, predmetRadaNew.Cena);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

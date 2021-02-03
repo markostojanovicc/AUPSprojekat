@@ -1,0 +1,40 @@
+﻿<Window x:Class="AUPS.Dialogs.RadnikProizvodnja.CreateRadnikProizvodnjaDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AUPS.Dialogs.RadnikProizvodnja"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="{Binding Title}" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
+            <TextBlock Margin="10 0 10 0" Text="Ime radnika..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
+                       Visibility="{Binding ElementName=txtImeRadnika, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <TextBox Height="30" Name="txtImeRadnika" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding ImeRadnika, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+        
+        <Grid Grid.Row="1" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
+            <TextBlock Margin="10 0 10 0" Text="Prezime radnika..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
+                       Visibility="{Binding ElementName=txtPrezimeRadnika, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <TextBox Height="30" Name="txtPrezimeRadnika" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding PrezimeRadnika, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+        
+        <ComboBox Grid.Row="3" ItemsSource="{Binding Polovi}" SelectedItem="{Binding SelectedType, Mode=TwoWay}" Margin="30 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                  Height="35" Width="100" FontSize="20" />
+
+        <TextBlock Grid.Row="2" Text="Naziv radnog mesta:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30" Width="185" Height="30"/>
+        <ComboBox Grid.Row="2" ItemsSource="{Binding NaziviRadnihMesta}" SelectedIndex="{Binding SelectedIndexRadnoMesto, Mode=TwoWay}" Margin="250 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                  Height="35" Width="Auto" FontSize="20" />
+
+        <Button IsEnabled="{Binding CanExecuteBtnCommand}" Command="{Binding AddButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Visibility="{Binding IsCreateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
+        <Button IsEnabled="{Binding CanExecuteBtnCommand}" Command="{Binding UpdateButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Visibility="{Binding IsUpdateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnUpdate" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Potvrdi Izmene" Height="35" Width="160" />
+    </Grid>
+</Window>
