@@ -1,8 +1,10 @@
 ﻿using AUPS.Commands;
+using AUPS.Dialogs.ErrorDialogs;
 using AUPS.Helpers;
 using AUPS.Models;
 using AUPS.SqlProviders;
 using AUPS.SqlProviders.Interfaces;
+using AUPS.ViewModels.Dialogs;
 using ChatApp;
 using System;
 using System.Collections.Generic;
@@ -150,7 +152,11 @@ namespace AUPS.ViewModels
             }
             else
             {
-                //AlertHelper.ShowErrorDialog("InvalidUserData", false, false, "LoginError");
+                ErrorDialog errorDialog = new ErrorDialog();
+                ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+                errorDialog.Title = "Greška";
+                errorDialogViewModel.ErrorMessage = "Korisnik sa unetim kredencijalima ne postoji. Pokušajte ponovo.";
+                errorDialog.ShowDialog();
                 Email = string.Empty;
                 Password = string.Empty;
             }

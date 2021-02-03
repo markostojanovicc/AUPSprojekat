@@ -16,7 +16,7 @@ namespace AUPS.SqlProviders
 
         private const string GET_USER_BY_EMAIL_AND_PASSWORD=
             @"
-                  SELECT * FROM korisnik where email = '@Email' and password = '@Password' ;
+                  SELECT * FROM korisnik where email = @Email and password = @Password ;
             ";
 
         private const string INSERT_USER =
@@ -27,6 +27,7 @@ namespace AUPS.SqlProviders
 
         public User FindUserByEmailAndPassword(string email, string password)
         {
+            User result = null;
             using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
             {
                 sqlConnection.Open();
@@ -38,16 +39,16 @@ namespace AUPS.SqlProviders
 
                 NpgsqlDataReader reader = cmd.ExecuteReader();
 
-                if (reader.HasRows)
+                if (reader.Read())
                 {
-                     User result = new User();
+                     result = new User();
                      result.Ime = reader[0].ToString();
                      result.Prezime = reader[1].ToString();
                      result.Password = reader[2].ToString();
                      result.Username = reader[3].ToString();
                 }
 
-                return new User();
+                return result;
             }
         }
 
