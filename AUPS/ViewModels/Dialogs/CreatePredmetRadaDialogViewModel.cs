@@ -1,4 +1,5 @@
 ﻿using AUPS.Commands;
+using AUPS.Dialogs.ErrorDialogs;
 using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using ChatApp;
@@ -151,7 +152,11 @@ namespace AUPS.ViewModels.Dialogs
             }
             else
             {
-
+                ErrorDialog errorDialog = new ErrorDialog();
+                ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+                errorDialog.Title = "Greška";
+                errorDialogViewModel.ErrorMessage = "Došlo je do greške. Pokušajte ponovo";
+                errorDialog.ShowDialog();
             }
         }
 
@@ -172,7 +177,11 @@ namespace AUPS.ViewModels.Dialogs
             }
             else
             {
-
+                ErrorDialog errorDialog = new ErrorDialog();
+                ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+                errorDialog.Title = "Greška";
+                errorDialogViewModel.ErrorMessage = "Došlo je do greške. Pokušajte ponovo";
+                errorDialog.ShowDialog();
             }
 
         }

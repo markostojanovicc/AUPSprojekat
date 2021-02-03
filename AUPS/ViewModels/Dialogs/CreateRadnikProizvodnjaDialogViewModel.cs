@@ -1,4 +1,5 @@
 ﻿using AUPS.Commands;
+using AUPS.Dialogs.ErrorDialogs;
 using AUPS.Enums;
 using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
@@ -16,7 +17,7 @@ namespace AUPS.ViewModels.Dialogs
 {
     public class CreateRadnikProizvodnjaDialogViewModel : BaseViewModel
     {
-        private List<Pol> _polovi = new List<Pol>() { Pol.Musko, Pol.Zensko };
+        private List<Pol> _polovi = new List<Pol>() { Pol.muški, Pol.ženski };
         private IRadnikProizvodnjaSqlProvider _radnikProizvodnjaSqlProvider;
         private string _title = "Dijalog za kreiranje radnika";
         private bool _isCreateBtnVisible = true;
@@ -186,7 +187,11 @@ namespace AUPS.ViewModels.Dialogs
             }
             else
             {
-
+                ErrorDialog errorDialog = new ErrorDialog();
+                ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+                errorDialog.Title = "Greška";
+                errorDialogViewModel.ErrorMessage = "Došlo je do greške. Pokušajte ponovo";
+                errorDialog.ShowDialog();
             }
         }
 
@@ -207,7 +212,11 @@ namespace AUPS.ViewModels.Dialogs
             }
             else
             {
-
+                ErrorDialog errorDialog = new ErrorDialog();
+                ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+                errorDialog.Title = "Greška";
+                errorDialogViewModel.ErrorMessage = "Došlo je do greške. Pokušajte ponovo";
+                errorDialog.ShowDialog();
             }
         }
 

@@ -18,7 +18,7 @@ namespace AUPS.SqlProviders
 
         private const string GET_ALL_RECORDS_FROM_RADNI_NALOG =
             @"
-                  SELECT rn.*, pr.nazivpr
+                  SELECT rn.*, pr.tippredmetrada, pr.nazivpr
                     FROM radninalog rn
                     LEFT JOIN predmetrada pr
                     ON rn.idpredmetrada = pr.idpredmetrada
@@ -62,7 +62,8 @@ namespace AUPS.SqlProviders
                     radniNalog.KolicinaProizvoda = rdr.GetInt32(3);
                     radniNalog.PredmetRada = new PredmetRada();
                     radniNalog.PredmetRada.IDPredmetRada = rdr.GetInt32(4);
-                    radniNalog.PredmetRada.NazivPR = rdr.GetString(5);
+                    radniNalog.PredmetRada.TipPredmetRada = rdr.GetString(5);
+                    radniNalog.PredmetRada.NazivPR = rdr.GetString(6);
                     radniNalogList.Add(radniNalog);
                 }
             }

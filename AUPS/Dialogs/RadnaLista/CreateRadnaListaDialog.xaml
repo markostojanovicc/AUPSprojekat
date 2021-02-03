@@ -16,7 +16,7 @@
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
 
-        <DatePicker SelectedDate="{Binding Datum}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <DatePicker SelectedDate="{Binding Datum}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="200,25,490,25" Height="30" />
 
         <Grid Grid.Row="0" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
             <TextBlock Margin="10 0 10 0" Text="Kolicina..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
@@ -24,18 +24,19 @@
             <TextBox Height="30" Name="txtKolicina" Margin="10 0 10 0" Background="Transparent" FontSize="25" Text="{Binding Kolicina, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
-        <TextBlock Grid.Row="1" Text="Naziv Radnika:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30" Width="140" Height="30"/>
+        <TextBlock TextWrapping="WrapWithOverflow" Grid.Row="1" Text="Ime i prezime radnika:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,33,0,13" Width="140" Height="54"/>
         <ComboBox Grid.Row="1" ItemsSource="{Binding RadnikProizvodnjaNazivi}" SelectedIndex="{Binding SelectedIndexRadnikProizvodnja, Mode=TwoWay}" Margin="200 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"
                   Height="35" Width="Auto" FontSize="20" />
 
-        <TextBlock Grid.Row="2" Text="Radni nalog id:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30" Width="140" Height="30"/>
+        <TextBlock Grid.Row="2" Text="Radni nalog id:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,35,0,35" Width="140" Height="30"/>
         <ComboBox Grid.Row="2" ItemsSource="{Binding RadniNalogIds}" SelectedItem="{Binding SelectedIdRadniNalog, Mode=TwoWay}" Margin="200 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"
                   Height="35" Width="Auto" FontSize="20" />
 
-        <TextBlock Grid.Row="3" Text="Operacija naziv:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30" Width="140" Height="30"/>        
+        <TextBlock Grid.Row="3" Text="Naziv operacije:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30" Width="140" Height="30"/>
         <ComboBox Grid.Row="3" ItemsSource="{Binding OperacijaNazivi}" SelectedIndex="{Binding SelectedIndexOperacija, Mode=TwoWay}" Margin="200 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"
                   Height="35" Width="Auto" FontSize="20" />
 
+        <TextBlock Grid.Row="4" Text="Datum:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="99,25,0,25" Width="71" Height="30" RenderTransformOrigin="1.035,0.383"/>
         <Button IsEnabled="{Binding CanExecuteBtnCommand}" Command="{Binding AddButtonCommand}"  CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Visibility="{Binding IsCreateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnCreate" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Kreiraj" Height="35" Width="95" />
         <Button IsEnabled="{Binding CanExecuteBtnCommand}" Command="{Binding UpdateButtonCommand}"  CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Visibility="{Binding IsUpdateBtnVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource loginbtnstyle}"  x:Name="btnUpdate" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Potvrdi Izmene" Height="35" Width="160" />
     </Grid>
