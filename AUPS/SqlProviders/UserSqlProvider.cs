@@ -19,6 +19,11 @@ namespace AUPS.SqlProviders
                   SELECT * FROM korisnik where email = @Email and password = @Password ;
             ";
 
+        private const string GET_USER_BY_EMAIL =
+            @"
+                  SELECT * FROM korisnik where email = @Email;
+            ";
+
         private const string INSERT_USER =
             @"
                   INSERT INTO korisnik VALUES (@Ime, @Prezime, @Password, @Username, @Email);
@@ -49,6 +54,22 @@ namespace AUPS.SqlProviders
                 }
 
                 return result;
+            }
+        }
+
+        public bool FindIfUserExistsByEmail(string email)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(GET_USER_BY_EMAIL, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Email", NpgsqlDbType.Varchar, email);
+
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                return reader.HasRows;
             }
         }
 

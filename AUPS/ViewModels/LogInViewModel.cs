@@ -143,21 +143,16 @@ namespace AUPS.ViewModels
 
         private void LoginButtonCommandExecute(object param)
         {
-            if (!Email.Contains("@"))
-                ShowErrorDialog("Email must contain @ character. Try again.");
-            else if(Password.Length < 8)
-                ShowErrorDialog("Password must have at least 8 characters. Try again.");
+            User user =_userSqlProvider.FindUserByEmailAndPassword(Email, Password);
+
+            if(user != null)
+            {
+                DialogResult = true;
+                OnLogInSucceded();
+            }
             else
             {
-                User user = _userSqlProvider.FindUserByEmailAndPassword(Email, Password);
-
-                if (user != null)
-                {
-                    DialogResult = true;
-                    OnLogInSucceded();
-                }
-                else
-                    ShowErrorDialog("Korisnik sa unetim kredencijalima ne postoji. Pokušajte ponovo.");
+                ShowErrorDialog("Korisnik sa unetim kredencijalima ne postoji. Pokušajte ponovo.");
             }
         }
 
@@ -171,7 +166,7 @@ namespace AUPS.ViewModels
         {
             ErrorDialog errorDialog = new ErrorDialog();
             ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
-            errorDialog.Title = "Greška";
+            errorDialog.Title = "Error";
             errorDialogViewModel.ErrorMessage = message;
             errorDialog.ShowDialog();
             Email = string.Empty;

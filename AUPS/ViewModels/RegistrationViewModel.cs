@@ -1,6 +1,8 @@
 ﻿using AUPS.Commands;
+using AUPS.Dialogs.ErrorDialogs;
 using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
+using AUPS.ViewModels.Dialogs;
 using ChatApp;
 using System;
 using System.Collections.Generic;
@@ -65,31 +67,58 @@ namespace AUPS.ViewModels
 
         private void SubmitButtonCommandExecute(object param)
         {
-            User newUser = new User
-            {
-                Ime = _name,
-                Prezime = _lastName,
-                Email = _email,
-                Password = _password,
-                Username = _username
-            };
-
-            bool isUserCreated = _userSqlProvider.CreateUser(newUser);
-
-            if (isUserCreated)
-            {
-                Window curWindow = (Window)param;
-                curWindow.Close();
-            }
+            if (!Email.Contains("@"))
+                ShowErrorDialog("Email must contain @ character. Try again.");
+            else if (Password.Length < 8)
+                ShowErrorDialog("Password must have at least 8 characters. Try again.");
             else
             {
-                
+                bool userExists = _userSqlProvider.FindIfUserExistsByEmail(_email);
+
+                if (!userExists)
+                {
+                    User newUser = new User
+                    {
+                        Ime = _name,
+                        Prezime = _lastName,
+                        Email = _email,
+                        Password = _password,
+                        Username = _username
+                    };
+
+                    bool isUserCreated = _userSqlProvider.CreateUser(newUser);
+
+                    if (isUserCreated)
+                    {
+                        Window curWindow = (Window)param;
+                        curWindow.Close();
+                    }
+                    else
+                    {
+                        ShowErrorDialog("We couldn't create account. Try again.");
+                    }
+                }
+                else
+                    ShowErrorDialog("User with that email exist, can't create account.");
             }
         }
 
         public RegistrationViewModel(IUserSqlProvider userSqlProvider)
         {
             _userSqlProvider = userSqlProvider;
+        }
+        private void ShowErrorDialog(string message)
+        {
+            ErrorDialog errorDialog = new ErrorDialog();
+            ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
+            errorDialog.Title = "Error";
+            errorDialogViewModel.ErrorMessage = message;
+            errorDialog.ShowDialog();
+            Email = string.Empty;
+            Password = string.Empty;
+            Name = string.Empty;
+            LastName = string.Empty;
+            UserName = string.Empty;
         }
     }
 }
