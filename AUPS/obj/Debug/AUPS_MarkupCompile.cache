@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\niksa\source\repos\AUPSprojekat\AUPS\obj\Debug\
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\
 AUPS
 none
 false
 DEBUG;TRACE
-C:\Users\niksa\source\repos\AUPSprojekat\AUPS\App.xaml
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\App.xaml
 24-752902201
 
-84-1359006448
-1301387179245
+85-2135210608
+130-1446869699
 ApplicationMainWindow.xaml;Controls\LogInControl.xaml;Controls\MainContentControl.xaml;Controls\MainContentUserControls\OperacijaControl.xaml;Controls\MainContentUserControls\PredmetRadaControl.xaml;Controls\MainContentUserControls\RadnaListaControl.xaml;Controls\MainContentUserControls\RadnikProizvodnjaControl.xaml;Controls\MainContentUserControls\RadniNalogControl.xaml;Controls\MainContentUserControls\RadnoMestoControl.xaml;Controls\MainContentUserControls\TehnoloskiPostupakControl.xaml;Controls\MainContentUserControls\TrebovanjeControl.xaml;Dialogs\ErrorDialogs\ErrorDialog.xaml;Dialogs\Operacija\CreateOperacijaDialog.xaml;Dialogs\PredmetRada\CreatePredmetRadaDialog.xaml;Dialogs\RadnaLista\CreateRadnaListaDialog.xaml;Dialogs\RadnikProizvodnja\CreateRadnikProizvodnjaDialog.xaml;Dialogs\RadniNalog\CreateRadniNalogDialog.xaml;Dialogs\RadnoMesto\CreateRadnoMestoDialog.xaml;Dialogs\TehnoloskiPostupak\CreateTehnoloskiPostupakDialog.xaml;Dialogs\Trebovanje\CreateTrebovanjeDialog.xaml;RegistrationWindow.xaml;Resources\DataTemplates.xaml;Resources\Images.xaml;Resources\Styles.xaml;
 
 False

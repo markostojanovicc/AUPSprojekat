@@ -208,3 +208,6 @@ C:\Users\niksa\source\repos\AUPSprojekat\AUPS\obj\Debug\AUPS.pdb
 C:\Users\niksa\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\ErrorDialogs\ErrorDialog.g.cs
 C:\Users\niksa\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\ErrorDialogs\ErrorDialog.baml
 C:\Users\niksa\source\repos\AUPSprojekat\AUPS\obj\Debug\Resources\Images.baml
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\ErrorDialogs\ErrorDialog.g.cs
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Dialogs\ErrorDialogs\ErrorDialog.baml
+C:\Users\Admin\source\repos\AUPSprojekat\AUPS\obj\Debug\Resources\Images.baml

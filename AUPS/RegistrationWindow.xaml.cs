@@ -27,7 +27,5 @@ namespace AUPS
 
             DataContext = new RegistrationViewModel(userSqlProvider);
         }
-
-        
     }
 }

@@ -26,7 +26,7 @@ namespace AUPS.SqlProviders
 
         private const string INSERT_USER =
             @"
-                  INSERT INTO korisnik VALUES (@Ime, @Prezime, @Password, @Username, @Email);
+                  INSERT INTO korisnik VALUES (@Ime, @Prezime, @Password, @Username, @Email, @ImagePath);
             ";
         #endregion
 
@@ -51,6 +51,8 @@ namespace AUPS.SqlProviders
                      result.Prezime = reader[1].ToString();
                      result.Password = reader[2].ToString();
                      result.Username = reader[3].ToString();
+                     result.Email = reader[4].ToString();
+                     result.ImagePath = reader[5].ToString();
                 }
 
                 return result;
@@ -86,6 +88,7 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@Ime", NpgsqlDbType.Varchar, user.Ime);
                 cmd.Parameters.AddWithValue("@Prezime", NpgsqlDbType.Varchar, user.Prezime);
                 cmd.Parameters.AddWithValue("@Username", NpgsqlDbType.Varchar, user.Username);
+                cmd.Parameters.AddWithValue("@ImagePath", NpgsqlDbType.Varchar, user.ImagePath);
 
                 int insertedRows = cmd.ExecuteNonQuery();
 

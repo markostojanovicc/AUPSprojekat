@@ -4,6 +4,7 @@ using AUPS.Models;
 using AUPS.SqlProviders.Interfaces;
 using AUPS.ViewModels.Dialogs;
 using ChatApp;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,9 @@ namespace AUPS.ViewModels
         private string _name;
         private string _lastName;
         private string _username;
+        private string _filePath;
         private ICommand submitButtonCommand;
+        private ICommand selectFileCommand;
         IUserSqlProvider _userSqlProvider;
         #endregion
 
@@ -65,6 +68,30 @@ namespace AUPS.ViewModels
             }
         }
 
+        public ICommand SelectFileCmd
+        {
+            get
+            {
+                if (selectFileCommand == null)
+                {
+                    this.selectFileCommand = new RelayCommand(
+                        param => SelectFileCommandExecute(param));
+                }
+
+                return selectFileCommand;
+            }
+        }
+
+        private void SelectFileCommandExecute(object param)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            bool? response = openFileDialog.ShowDialog();
+            if(response == true)
+            {
+                _filePath = openFileDialog.FileName;
+            }
+        }
+
         private void SubmitButtonCommandExecute(object param)
         {
             if (!Email.Contains("@"))
@@ -83,7 +110,8 @@ namespace AUPS.ViewModels
                         Prezime = _lastName,
                         Email = _email,
                         Password = _password,
-                        Username = _username
+                        Username = _username,
+                        ImagePath = _filePath
                     };
 
                     bool isUserCreated = _userSqlProvider.CreateUser(newUser);

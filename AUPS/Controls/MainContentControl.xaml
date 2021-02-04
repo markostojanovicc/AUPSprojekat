@@ -62,6 +62,10 @@
             ContentTemplateSelector="{StaticResource MainContentTemplateSelector}"
             />
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
+            <Image Height="80" Width="60" Source="{Binding ImageSource}"/>
+            <TextBlock Text="Logged in:"/>
+            <TextBlock Text="{Binding UserName}" Margin="5"/>
+            <TextBlock Text="{Binding UserLastName}" Margin="5"/>
             <Button Style="{StaticResource crudbtn}" Content="Add" Command="{Binding AddButtonCommand}" Margin="10 120 0 0"/>
             <Button Style="{StaticResource crudbtn}" Content="Delete" Command="{Binding DeleteButtonCommand}" Margin=" 10 20 0 0"/>
             <Button Style="{StaticResource crudbtn}" Content="Update" Command="{Binding UpdateButtonCommand}" Margin="10 20 0 0"/>

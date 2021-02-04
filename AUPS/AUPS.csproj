@@ -164,6 +164,7 @@
       <DependentUpon>CreateTrebovanjeDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Enums\Pol.cs" />
+    <Compile Include="Event\UserEventArgs.cs" />
     <Compile Include="Helpers\DialogCloser.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Models\Operacija.cs" />

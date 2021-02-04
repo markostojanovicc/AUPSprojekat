@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,28 @@ namespace AUPS
         private ICommand _updateButtonCommand;
         #endregion
 
+        private string _imageSource;
+        private string _userName;
+        private string _userLastName;
+
+        public string ImageSource
+        {
+            get { return _imageSource; }
+            set { _imageSource = value; }
+        }
+
+        public string UserName
+        {
+            get { return _userName; }
+            set { _userName = value; }
+        }
+
+        public string UserLastName
+        {
+            get { return _userLastName; }
+            set { _userLastName = value; }
+        }
+
         #region view models
         private RadnoMestoViewModel radnoMestoViewModel = new RadnoMestoViewModel();
         private OperacijaViewModel operacijaViewModel;
@@ -61,7 +84,7 @@ namespace AUPS
                                     , ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ITrebovanjeSqlProvider trebovanjeSqlProvider,
                                     RadnoMestoViewModel radnoMestoViewModel, OperacijaViewModel operacijaViewModel, PredmetRadaViewModel predmetRadaViewModel,
                                     RadnaListaViewModel radnaListaViewModel, RadnikProizvodnjaViewModel radnikProizvodnjaViewModel, RadniNalogViewModel radniNalogViewModel,
-                                    TehnoloskiPostupakViewModel tehnoloskiPostupakViewModel, TrebovanjeViewModel trebovanjeViewModel)
+                                    TehnoloskiPostupakViewModel tehnoloskiPostupakViewModel, TrebovanjeViewModel trebovanjeViewModel, User loggedUser)
         {
             _radnoMestoSqlProvider = radnoMestoSqlProvider;
             _operacijaSqlProvider = operacijaSqlProvider;
@@ -80,8 +103,15 @@ namespace AUPS
             this.tehnoloskiPostupakViewModel = tehnoloskiPostupakViewModel;
             this.trebovanjeViewModel = trebovanjeViewModel;
             GetDataFromDb();
+            _userName = loggedUser.Ime;
+            _userLastName = loggedUser.Prezime;
+            SetImage(loggedUser.ImagePath);
         }
 
+        private void SetImage(string imagePath)
+        {
+            _imageSource = imagePath;
+        }
 
         private int _selectedTabIndex = 0;
 

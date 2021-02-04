@@ -6,9 +6,13 @@
         xmlns:local="clr-namespace:AUPS"
         xmlns:helpers="clr-namespace:AUPS.Helpers"
         mc:Ignorable="d"
-        Title="Registration" Height="550" Width="800">
+        Title="Registration" Height="700" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -18,40 +22,45 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Registration" FontSize="33" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-
-        <Grid Grid.Row="1" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
+        <TextBlock Grid.Row="0" Text="Registration" FontSize="33" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="302,16,301,15"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <TextBlock Text="Choose a picture to upload:" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="120,0,0,0"/>
+            <Button Content="Select piture" Margin="20" Command="{Binding SelectFileCmd}"/>
+        </StackPanel>
+        <Grid Grid.Row="1" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" Grid.ColumnSpan="2" Margin="20,21" >
             <TextBlock Margin="100 0 100 0" Text="Enter Name..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtName, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <TextBox Height="30" Name="txtName" Margin="100 0 100 0" Background="Transparent" FontSize="25" Text="{Binding Name}"/>
         </Grid>
 
-        <Grid Grid.Row="2" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
+        <Grid Grid.Row="2" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" Grid.ColumnSpan="2" Margin="20,21" >
             <TextBlock Margin="100 0 100 0" Text="Enter Last name..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtLastName, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <TextBox Height="30" Name="txtLastName" Margin="100 0 100 0" Background="Transparent" FontSize="25" Text="{Binding LastName}"/>
         </Grid>
 
-        <Grid Grid.Row="3" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
+        <Grid Grid.Row="3" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" Grid.ColumnSpan="2" Margin="20,21" >
             <TextBlock Margin="100 0 100 0" Text="Enter Username..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtUsername, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <TextBox Height="30" Name="txtUsername" Margin="100 0 100 0" Background="Transparent" FontSize="25" Text="{Binding UserName}"/>
         </Grid>
 
-        <Grid Grid.Row="4" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
+        <Grid Grid.Row="4" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" Grid.ColumnSpan="2" Margin="20,21" >
             <TextBlock Margin="100 0 100 0" Text="Enter Email..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtEmail, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <TextBox Height="30" Name="txtEmail" Margin="100 0 100 0" Background="Transparent" FontSize="25" Text="{Binding Email}"/>
         </Grid>
 
-        <Grid Grid.Row="5" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
+        <Grid Grid.Row="5" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" Grid.ColumnSpan="2" Margin="20,21" >
             <TextBlock Margin="100 0 100 0" Text="Enter Password..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ShowPasswordTextBlock, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <PasswordBox Height="30" x:Name="txtPasswordBox" helpers:PasswordBoxHelper.BindPassword="true" Background="Transparent"  
                          FontSize="25" Margin="100 0 100 0" helpers:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
-
-        <Button IsEnabled="{Binding CanSubmit}" Grid.Row ="6" Name="submitBtn" Style="{StaticResource loginbtnstyle}" Height="40" Width="240" Content="Submit" Command="{Binding SubmitButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+        
+        
+        
+        <Button IsEnabled="{Binding CanSubmit}" Grid.Row ="7" Name="submitBtn" Style="{StaticResource loginbtnstyle}" Height="40" Width="240" Content="Submit" Command="{Binding SubmitButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Grid.ColumnSpan="2" Margin="276,17"/>
 
     </Grid>
 </Window>

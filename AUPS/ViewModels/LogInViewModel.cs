@@ -1,5 +1,6 @@
 ﻿using AUPS.Commands;
 using AUPS.Dialogs.ErrorDialogs;
+using AUPS.Event;
 using AUPS.Helpers;
 using AUPS.Models;
 using AUPS.SqlProviders;
@@ -25,7 +26,7 @@ namespace AUPS.ViewModels
         private string _email;
         private string _password;
 
-        public delegate void LogInSuccededEventHandler(object source, EventArgs args);
+        public delegate void LogInSuccededEventHandler(object source, UserEventArgs args);
         public event LogInSuccededEventHandler LogInSucceded; 
 
         public string Email
@@ -148,7 +149,7 @@ namespace AUPS.ViewModels
             if(user != null)
             {
                 DialogResult = true;
-                OnLogInSucceded();
+                OnLogInSucceded(user);
             }
             else
             {
@@ -156,10 +157,10 @@ namespace AUPS.ViewModels
             }
         }
 
-        protected virtual void OnLogInSucceded()
+        protected virtual void OnLogInSucceded(User user)
         {
             if (LogInSucceded != null)
-                LogInSucceded(this, EventArgs.Empty);
+                LogInSucceded(this, new UserEventArgs { loggedUser = user});
         }
 
         private void ShowErrorDialog(string message)

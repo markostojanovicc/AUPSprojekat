@@ -1,4 +1,5 @@
-﻿using AUPS.SqlProviders;
+﻿using AUPS.Event;
+using AUPS.SqlProviders;
 using AUPS.SqlProviders.Interfaces;
 using AUPS.ViewModels.MainContentViewModels;
 using ChatApp;
@@ -80,13 +81,13 @@ namespace AUPS.ViewModels
             ContentMainScreen = logInViewModel;
         }
 
-        private void LogInViewModel_LogInSucceded(object source, EventArgs args)
+        private void LogInViewModel_LogInSucceded(object source, UserEventArgs args)
         {
             App.Current.MainWindow.WindowState = WindowState.Maximized;
             ContentMainScreen = new MainContentViewModel(_radnoMestoSqlProvider, _operacijaSqlProvider, _predmetRadaSqlProvider,
                 _radnaListaSqlProvider, _radnikProizvodnjaSqlProvider, _radniNalogSqlProvider, _tehnoloskiPostupakSqlProvider,
                 _trebovanjeSqlProvider, radnoMestoViewModel, operacijaViewModel, predmetRadaViewModel, radnaListaViewModel
-                , radnikProizvodnjaViewModel, radniNalogViewModel, tehnoloskiPostupakViewModel, trebovanjeViewModel);
+                , radnikProizvodnjaViewModel, radniNalogViewModel, tehnoloskiPostupakViewModel, trebovanjeViewModel, args.loggedUser);
         }
     }
 }
