@@ -1,0 +1,91 @@
+drop table if exists operacija cascade;
+drop table if exists tehnoloskipostupak cascade;
+drop table if exists predmetrada cascade;
+drop table if exists radninalog cascade;
+drop table if exists trebovanje cascade;
+drop table if exists radnomesto cascade;
+drop table if exists radnikproizvodnja cascade;
+drop table if exists radnalista cascade;
+drop table if exists korisnik cascade;
+
+CREATE TABLE operacija (
+IDOperacija int PRIMARY KEY NOT NULL,
+NazivOperacije varchar(50) NOT NULL,
+OsnovnoVreme numeric NOT NULL,
+PomocnoVreme numeric,
+DodatnoVreme numeric,
+OznakaMasine varchar(50)
+);
+
+CREATE TABLE tehnoloskipostupak (
+IDTehPostupak int PRIMARY KEY NOT NULL,
+TipTehPostupak varchar(50) NOT NULL,
+VremeIzrade numeric NOT NULL,
+SerijaKom numeric,
+BrKomada numeric NOT NULL,
+IDOperacija int,
+CONSTRAINT fk_tehpostupak_operacija FOREIGN KEY (IDOperacija) REFERENCES operacija (idoperacija) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE predmetrada (
+IDPredmetRada int PRIMARY KEY NOT NULL,
+TipPredmetRada varchar(50) NOT NULL,
+NazivPR varchar(50) NOT NULL,
+JedMerePR varchar(50),
+Cena numeric 
+);
+
+
+CREATE TABLE radninalog (
+IDRadniNalog int PRIMARY KEY NOT NULL,
+DatumUlaz date,
+DatumIzlaz date,
+KolicinaProizvoda numeric NOT NULL,
+IDPredmetRada int,
+CONSTRAINT fk_nalog_proizvod FOREIGN KEY (IDPredmetRada) REFERENCES predmetrada (idpredmetrada) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE trebovanje (
+IDTrebovanje int PRIMARY KEY NOT NULL,
+TipTrebovanja varchar(50) NOT NULL,
+JedMere varchar(50),
+KolicinaRobe numeric,
+IDRadniNalog int,
+CONSTRAINT fk_trebovanje_nalog FOREIGN KEY (IDRadniNalog) REFERENCES radninalog (idradninalog) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE radnomesto (
+IDRadnoMesto int NOT NULL PRIMARY KEY,
+NazivRadnoMesto varchar(50) NOT NULL,
+StrucnaSprema varchar(50)
+);
+
+CREATE TABLE radnikproizvodnja (
+IDRadnik int PRIMARY KEY NOT NULL,
+ImeRadnika varchar(50) NOT NULL,
+PrezimeRadnika varchar(50) NOT NULL,
+Pol varchar(50),
+IDRadnoMesto int,
+CONSTRAINT fk_radnik_radnomesto FOREIGN KEY (IDRadnoMesto) REFERENCES radnomesto (idradnomesto)
+);
+
+CREATE TABLE radnalista (
+IDRadnaLista int PRIMARY KEY NOT NULL,
+Datum date,
+KolicinaRL numeric NOT NULL,
+IDRadnik int,
+IDRadniNalog int,
+IDOperacija int,
+CONSTRAINT fk_radnalista_radnik FOREIGN KEY (IDRadnik) references radnikproizvodnja (idradnik) ON DELETE SET NULL ON UPDATE CASCADE,
+CONSTRAINT fk_radnalista_radninalog FOREIGN KEY (IDRadniNalog) references radninalog (idradninalog) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_radnalista_operacija FOREIGN KEY (IDOperacija) references operacija (idoperacija) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Korisnik (
+Ime varchar(50) NOT NULL,
+Prezime varchar(50) NOT NULL,
+Password varchar(50) NOT NULL,
+Username varchar (50) NOT NULL,
+Email varchar (50) NOT NULL,
+ImagePath varchar (50)
+);

@@ -1,0 +1,146 @@
+DROP SEQUENCE IF EXISTS operacijaSeq;
+CREATE SEQUENCE operacijaSeq
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 100
+NO CYCLE;
+
+INSERT INTO operacija  VALUES (nextval('operacijaSeq'), 'sečenje lepenke', 60, 3, 0, 'MB-2200');
+INSERT INTO operacija  VALUES (nextval('operacijaSeq'), 'plastifikacija', 30, 5, 3, 'PL-170');
+INSERT INTO operacija  VALUES (nextval('operacijaSeq'), 'kaširanje', 20, 7, 1, 'K-92');
+INSERT INTO operacija  VALUES (nextval('operacijaSeq'), 'trorezanje', 60, 2, 2, 'TR1000');
+INSERT INTO operacija  VALUES (nextval('operacijaSeq'), 'šivenje', 45, 0, 3, 'SV-980');
+INSERT INTO operacija  VALUES (nextval('operacijaSeq'), 'savijanje', 25, 4, 2, 'SC-500');
+INSERT INTO operacija  VALUES (nextval('operacijaSeq'), 'brojanje tabaka', 30, 5, 3, 'BT2200');
+INSERT INTO operacija  VALUES (nextval('operacijaSeq'), 'ćoškarenje', 30, 5, 5, 'SSD500');
+INSERT INTO operacija  VALUES (nextval('operacijaSeq'), 'štampa', 60, 7, 1, 'PR1000E');
+INSERT INTO operacija  VALUES (nextval('operacijaSeq'), 'povezivanje', 25, 2, 3, 'PV100');
+
+DROP SEQUENCE IF EXISTS tehPostupakSeq;
+CREATE SEQUENCE tehPostupakSeq
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 100
+NO CYCLE;
+
+INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), 'izrada', 63, 2 , 1000, 1);
+INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), 'izrada', 38, 2 , 1000, 2);
+INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), 'izrada', 28, 1 , 2500, 3);
+INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), 'izrada', 64, 1 , 1500, 4);
+INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), 'montaža', 48, 2 , 800, 5);
+INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), 'izrada', 31, 2 , 1000, 6);
+INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), 'kontrola', 38, 1 , 2000, 7);
+INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), 'izrada', 40, 2 , 1500, 8);
+INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), 'izrada', 68, 1 , 1000, 9);
+INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), 'montaža', 30, 2 , 2500, 10);
+
+DROP SEQUENCE IF EXISTS predmetRadaSeq;
+CREATE SEQUENCE predmetRadaSeq
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 100
+NO CYCLE;
+
+INSERT INTO predmetrada VALUES (nextval('predmetRadaSeq'), 'Šolja', 'Standardna', 'kom', 150);
+INSERT INTO predmetrada VALUES (nextval('predmetRadaSeq'), 'Šolja', 'Magična', 'kom', 250);
+INSERT INTO predmetrada VALUES (nextval('predmetRadaSeq'), 'Majica', 'XS', 'kom', 300);
+INSERT INTO predmetrada VALUES (nextval('predmetRadaSeq'), 'Majica', 'S', 'kom', 300);
+INSERT INTO predmetrada VALUES (nextval('predmetRadaSeq'), 'Majica', 'M', 'kom', 300);
+INSERT INTO predmetrada VALUES (nextval('predmetRadaSeq'), 'Majica', 'L', 'kom', 300);
+INSERT INTO predmetrada VALUES (nextval('predmetRadaSeq'), 'Majica', 'XL', 'kom', 300);
+INSERT INTO predmetrada VALUES (nextval('predmetRadaSeq'), 'Majica', '2XL', 'kom', 300);
+INSERT INTO predmetrada VALUES (nextval('predmetRadaSeq'), 'Roll-up baner', '85x200', 'kom', 550);
+INSERT INTO predmetrada VALUES (nextval('predmetRadaSeq'), 'Roll-up baner', '100x200', 'kom', 600);
+
+DROP SEQUENCE IF EXISTS radniNalogSeq;
+CREATE SEQUENCE radniNalogSeq
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 100
+NO CYCLE;
+
+INSERT INTO radninalog VALUES (nextval('radniNalogSeq'), TO_DATE('19.01.2021.', 'DD.MM.YYYY.'), TO_DATE('19.01.2021.', 'DD.MM.YYYY.'), 50, 3);
+INSERT INTO radninalog VALUES (nextval('radniNalogSeq'), TO_DATE('20.01.2021.', 'DD.MM.YYYY.'), TO_DATE('20.01.2021.', 'DD.MM.YYYY.'), 30, 1);
+INSERT INTO radninalog VALUES (nextval('radniNalogSeq'), TO_DATE('20.01.2021.', 'DD.MM.YYYY.'), TO_DATE('20.01.2021.', 'DD.MM.YYYY.'), 70, 4);
+INSERT INTO radninalog VALUES (nextval('radniNalogSeq'), TO_DATE('21.01.2021.', 'DD.MM.YYYY.'), TO_DATE('21.01.2021.', 'DD.MM.YYYY.'), 10, 5);
+INSERT INTO radninalog VALUES (nextval('radniNalogSeq'), TO_DATE('22.01.2021.', 'DD.MM.YYYY.'), TO_DATE('22.01.2021.', 'DD.MM.YYYY.'), 100, 2);
+INSERT INTO radninalog VALUES (nextval('radniNalogSeq'), TO_DATE('22.01.2021.', 'DD.MM.YYYY.'), TO_DATE('22.01.2021.', 'DD.MM.YYYY.'), 10, 7);
+INSERT INTO radninalog VALUES (nextval('radniNalogSeq'), TO_DATE('23.01.2021.', 'DD.MM.YYYY.'), TO_DATE('23.01.2021.', 'DD.MM.YYYY.'), 25, 9);
+INSERT INTO radninalog VALUES (nextval('radniNalogSeq'), TO_DATE('23.01.2021.', 'DD.MM.YYYY.'), TO_DATE('23.01.2021.', 'DD.MM.YYYY.'), 25, 10);
+INSERT INTO radninalog VALUES (nextval('radniNalogSeq'), TO_DATE('24.01.2021.', 'DD.MM.YYYY.'), TO_DATE('24.01.2021.', 'DD.MM.YYYY.'), 50, 3);
+INSERT INTO radninalog VALUES (nextval('radniNalogSeq'), TO_DATE('24.01.2021.', 'DD.MM.YYYY.'), TO_DATE('24.01.2021.', 'DD.MM.YYYY.'), 70, 4);
+
+DROP SEQUENCE IF EXISTS trebovanjeSeq;
+CREATE SEQUENCE trebovanjeSeq
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 100
+NO CYCLE;
+
+INSERT INTO trebovanje VALUES (nextval('trebovanjeSeq'), 'izdatnica', 'kom', 50, 1 );
+INSERT INTO trebovanje VALUES (nextval('trebovanjeSeq'), 'potrošnica', 'kom', 5, 1 );
+INSERT INTO trebovanje VALUES (nextval('trebovanjeSeq'), 'potrošnica', 'kom', 30, 1 );
+INSERT INTO trebovanje VALUES (nextval('trebovanjeSeq'), 'povratnica', 'kom', 15, 1 );
+INSERT INTO trebovanje VALUES (nextval('trebovanjeSeq'), 'izdatnica', 'kom', 100, 2 );
+INSERT INTO trebovanje VALUES (nextval('trebovanjeSeq'), 'potrošnica', 'kom', 100, 2 );
+INSERT INTO trebovanje VALUES (nextval('trebovanjeSeq'), 'trebovanje', 'kom', 150, 3 );
+INSERT INTO trebovanje VALUES (nextval('trebovanjeSeq'), 'izdatnica', 'kom', 90, 3 );
+INSERT INTO trebovanje VALUES (nextval('trebovanjeSeq'), 'potrošnica', 'kom', 50, 3 );
+INSERT INTO trebovanje VALUES (nextval('trebovanjeSeq'), 'povratnica', 'kom', 40, 3 );
+
+DROP SEQUENCE IF EXISTS radnoMestoSeq;
+CREATE SEQUENCE radnoMestoSeq
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 100
+NO CYCLE;
+
+INSERT INTO radnomesto VALUES (nextval('radnoMestoSeq'), 'Grafički dizajner', 'VŠS');
+INSERT INTO radnomesto VALUES (nextval('radnoMestoSeq'), 'Radnik u doradi', 'SSS');
+INSERT INTO radnomesto VALUES (nextval('radnoMestoSeq'), 'Operater na mašinama za štampu', 'SSS');
+INSERT INTO radnomesto VALUES (nextval('radnoMestoSeq'), 'Operater na CNC mašini', 'VSS');
+INSERT INTO radnomesto VALUES (nextval('radnoMestoSeq'), 'Montažer u štampariji', 'SSS');
+INSERT INTO radnomesto VALUES (nextval('radnoMestoSeq'), 'Referent nabavke', 'VSS');
+INSERT INTO radnomesto VALUES (nextval('radnoMestoSeq'), 'Knjigovezac', 'SSS');
+INSERT INTO radnomesto VALUES (nextval('radnoMestoSeq'), 'Tipo mašinista', 'SSS');
+INSERT INTO radnomesto VALUES (nextval('radnoMestoSeq'), 'Operater na plastifikaciji', 'SSS');
+INSERT INTO radnomesto VALUES (nextval('radnoMestoSeq'), 'Operater za digitalnu štampu', 'SSS');
+
+DROP SEQUENCE IF EXISTS radnikSeq;
+CREATE SEQUENCE radnikSeq
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 100
+NO CYCLE;
+
+INSERT INTO radnikProizvodnja VALUES (nextval('radnikSeq'), 'Bojana', 'Popov', 'ženski', 1);
+INSERT INTO radnikProizvodnja VALUES (nextval('radnikSeq'), 'Nikša', 'Kovačević', 'muški', 1);
+INSERT INTO radnikProizvodnja VALUES (nextval('radnikSeq'), 'Marko', 'Stojanović', 'muški', 1);
+INSERT INTO radnikProizvodnja VALUES (nextval('radnikSeq'), 'Ivana', 'Picajkic', 'ženski', 5);
+INSERT INTO radnikProizvodnja VALUES (nextval('radnikSeq'), 'Ana', 'Perović', 'ženski', 2);
+INSERT INTO radnikProizvodnja VALUES (nextval('radnikSeq'), 'Jovan', 'Joksimović', 'muški', 3);
+INSERT INTO radnikProizvodnja VALUES (nextval('radnikSeq'), 'Boris', 'Popov', 'muški', 9);
+INSERT INTO radnikProizvodnja VALUES (nextval('radnikSeq'), 'Anđela', 'Anđić', 'ženski', 10);
+INSERT INTO radnikProizvodnja VALUES (nextval('radnikSeq'), 'Stefan', 'Stefanović', 'muški', 4);
+INSERT INTO radnikProizvodnja VALUES (nextval('radnikSeq'), 'Marko', 'Marković', 'muški', 8);
+
+DROP SEQUENCE IF EXISTS radnaListaSeq;
+CREATE SEQUENCE radnaListaSeq
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 100
+NO CYCLE;
+
+INSERT  INTO radnalista VALUES (nextval('radnaListaSeq'), TO_DATE('19.01.2021.', 'DD.MM.YYYY.'), 50, 9, 1, 1);
+INSERT  INTO radnalista VALUES (nextval('radnaListaSeq'), TO_DATE('19.01.2021.', 'DD.MM.YYYY.'), 50, 6, 1, 4);
+INSERT  INTO radnalista VALUES (nextval('radnaListaSeq'), TO_DATE('19.01.2021.', 'DD.MM.YYYY.'), 50, 6, 1, 6);
+INSERT  INTO radnalista VALUES (nextval('radnaListaSeq'), TO_DATE('19.01.2021.', 'DD.MM.YYYY.'), 50, 4, 1, 5);
+INSERT  INTO radnalista VALUES (nextval('radnaListaSeq'), TO_DATE('19.01.2021.', 'DD.MM.YYYY.'), 50, 4, 1, 10);
+INSERT  INTO radnalista VALUES (nextval('radnaListaSeq'), TO_DATE('19.01.2021.', 'DD.MM.YYYY.'), 50, 7, 1, 2);
+INSERT  INTO radnalista VALUES (nextval('radnaListaSeq'), TO_DATE('19.01.2021.', 'DD.MM.YYYY.'), 50, 1, 1, 7);
+INSERT  INTO radnalista VALUES (nextval('radnaListaSeq'), TO_DATE('19.01.2021.', 'DD.MM.YYYY.'), 30, 10, 2, 9);
+INSERT  INTO radnalista VALUES (nextval('radnaListaSeq'), TO_DATE('19.01.2021.', 'DD.MM.YYYY.'), 30, 2, 2, 7);
+INSERT  INTO radnalista VALUES (nextval('radnaListaSeq'), TO_DATE('19.01.2021.', 'DD.MM.YYYY.'), 30, 4, 2, 10);
+
+
+
