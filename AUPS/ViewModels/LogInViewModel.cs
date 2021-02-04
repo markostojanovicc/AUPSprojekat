@@ -166,7 +166,7 @@ namespace AUPS.ViewModels
         {
             ErrorDialog errorDialog = new ErrorDialog();
             ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
-            errorDialog.Title = "Error";
+            errorDialog.Title = "Greška";
             errorDialogViewModel.ErrorMessage = message;
             errorDialog.ShowDialog();
             Email = string.Empty;

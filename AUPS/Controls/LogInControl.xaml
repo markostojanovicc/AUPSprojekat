@@ -16,23 +16,23 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Please Log In" VerticalAlignment="Top" Height="54" Width="225" FontSize="34" FontWeight="Bold" RenderTransformOrigin="0.744,0.343" Grid.Column="1"/>
-        <Button Grid.Row="1" Content="New user? Create an account" HorizontalAlignment="Center" VerticalAlignment="Top" Width="183" Height="27" Background="Transparent" BorderBrush="White" Cursor="Hand" Grid.Column="1" Command="{Binding RegistrationButtonCommand}"/>
+        <TextBlock Grid.Row="0" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Text="Ulogujte se u sistem" VerticalAlignment="Top" Height="93" Width="226" FontSize="34" FontWeight="Bold" RenderTransformOrigin="0.744,0.343" Margin="126,0" Grid.RowSpan="2"/>
+        <Button Grid.Row="1" Content="Novi korisnik? Napravite nalog" HorizontalAlignment="Center" VerticalAlignment="Top" Width="183" Height="27" Background="Transparent" BorderBrush="White" Cursor="Hand" Command="{Binding RegistrationButtonCommand}" RenderTransformOrigin="0.496,1.87" Margin="140,34,155,0"/>
 
         <Grid Grid.Row="2" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
-            <TextBlock Margin="5,2" Text="Enter email..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
+            <TextBlock Margin="5,2" Text="Unesite email..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtUserEntry, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <TextBox Height="30" Name="txtUserEntry" Background="Transparent" FontSize="25" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Grid Grid.Row="3" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" >
-            <TextBlock Margin="5,2" Text="Enter password..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
+            <TextBlock Margin="5,2" Text="Unesite šifru..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ShowPasswordTextBlock, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <PasswordBox Height="30" x:Name="txtPasswordBox" helpers:PasswordBoxHelper.BindPassword="true" Background="Transparent"  FontSize="25" helpers:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <!--<controls:BindablePasswordBox Height="30" x:Name="txtUserEntry1" Background="Transparent" FontSize="25" Password="{Binding Password}"/>-->
         </Grid>
 
-        <Button IsEnabled="{Binding CanLogIn}" Style="{StaticResource changeBackgroundStyle}" Grid.Row="4" Content="Log In" HorizontalAlignment="Center" VerticalAlignment="Center" Width="307" Height="38" Grid.Column="1" Command="{Binding LogInButtonCommand}"/>
+        <Button IsEnabled="{Binding CanLogIn}" Style="{StaticResource changeBackgroundStyle}" Grid.Row="4" Content="Ulogujte se" HorizontalAlignment="Center" VerticalAlignment="Center" Width="307" Height="38" Grid.Column="1" Command="{Binding LogInButtonCommand}"/>
 
     </Grid>
 </UserControl>
