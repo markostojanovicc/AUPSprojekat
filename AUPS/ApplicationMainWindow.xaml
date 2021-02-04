@@ -8,7 +8,7 @@
         xmlns:templateSelectors="clr-namespace:AUPS.TemplateSelectors"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="AUPS" Height="450" Width="800">
+        Title="ApplicationMainWindow" Height="450" Width="800">
     <Window.Resources>
         
         <DataTemplate x:Key="LogInContentTemplate">
