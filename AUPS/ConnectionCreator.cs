@@ -10,7 +10,7 @@ namespace AUPS.SqlProviders
 {
     public class ConnectionCreator
     {
-        private static string connString = "Server=localhost;Port=5432;User Id=postgres;Password=apursp;Database=AUPSprojekat";
+        private static string connString = "Server=localhost;Port=5432;User Id=postgres;Password=St.Cyprian5;Database=AUPSprojekat";
         public static NpgsqlConnection createConnection()
         {
             return new NpgsqlConnection(connString);

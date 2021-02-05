@@ -95,9 +95,9 @@ namespace AUPS.ViewModels
         private void SubmitButtonCommandExecute(object param)
         {
             if (!Email.Contains("@"))
-                ShowErrorDialog("Email must contain @ character. Try again.");
+                ShowErrorDialog("Email mora sadržati @ simbol. Pokušajte ponovo");
             else if (Password.Length < 8)
-                ShowErrorDialog("Password must have at least 8 characters. Try again.");
+                ShowErrorDialog("Lozinka mora imati najmanje 6 karaktera. Pokušajte ponovo");
             else
             {
                 bool userExists = _userSqlProvider.FindIfUserExistsByEmail(_email);
@@ -123,11 +123,11 @@ namespace AUPS.ViewModels
                     }
                     else
                     {
-                        ShowErrorDialog("We couldn't create account. Try again.");
+                        ShowErrorDialog("Nalog nije napravljen. Pokušajte ponovo");
                     }
                 }
                 else
-                    ShowErrorDialog("User with that email exist, can't create account.");
+                    ShowErrorDialog("Korisnik sa datim email-om već postoji, Pokušajte ponovo");
             }
         }
 
@@ -139,7 +139,7 @@ namespace AUPS.ViewModels
         {
             ErrorDialog errorDialog = new ErrorDialog();
             ErrorDialogViewModel errorDialogViewModel = (ErrorDialogViewModel)errorDialog.DataContext;
-            errorDialog.Title = "Error";
+            errorDialog.Title = "Greška";
             errorDialogViewModel.ErrorMessage = message;
             errorDialog.ShowDialog();
             Email = string.Empty;
