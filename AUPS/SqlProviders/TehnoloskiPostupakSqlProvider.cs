@@ -18,10 +18,7 @@ namespace AUPS.SqlProviders
 
         private const string GET_ALL_RECORDS_FROM_TEHNOLOSKI_POSTUPAK =
             @"
-                  SELECT tp.*,o.nazivoperacije
-                FROM tehnoloskipostupak tp
-                LEFT JOIN operacija o
-                ON tp.idoperacija = o.idoperacija
+                SELECT * FROM tehnoloskipostupak
             ";
         private const string DELETE_FROM_TEHNOLOSKI_POSTUPAK_BY_ID =
             @"
@@ -30,13 +27,13 @@ namespace AUPS.SqlProviders
 
         private const string UPDATE_TEHNOLOSKI_POSTUPAK_BY_ID =
             @"
-                  UPDATE tehnoloskipostupak SET tiptehpostupak = @TipTehPostupak, vremeizrade = @VremeIzrade, serijakom = @SerijaKom, brKomada= @BrKomada, idoperacija = @IDOperacija
+                  UPDATE tehnoloskipostupak SET tiptehpostupak = @TipTehPostupak, vremeizrade = @VremeIzrade, serijakom = @SerijaKom, brKomada= @BrKomada
                   WHERE idtehpostupak = @Id
             ";
 
         private const string CREATE_TEHNOLOSKI_POSTUPAK =
             @"
-                  INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), @TipTehPostupak, @VremeIzrade, @SerijaKom, @BrKomada, @IDOperacija);
+                  INSERT INTO tehnoloskipostupak VALUES (nextval('tehPostupakSeq'), @TipTehPostupak, @VremeIzrade, @SerijaKom, @BrKomada);
             ";
 
         #endregion
@@ -61,9 +58,6 @@ namespace AUPS.SqlProviders
                     tehnoloskiPostupak.VremeIzrade = rdr.GetInt32(2);
                     tehnoloskiPostupak.SerijaKom = rdr.GetInt32(3);
                     tehnoloskiPostupak.BrKomada = rdr.GetInt32(4);
-                    tehnoloskiPostupak.Operacija = new Operacija();
-                    tehnoloskiPostupak.Operacija.IDOperacija = rdr.GetInt32(5);
-                    tehnoloskiPostupak.Operacija.NazivOperacije = rdr.GetString(6);
                     tehnoloskiPostupakList.Add(tehnoloskiPostupak);
                 }
             }
@@ -101,7 +95,6 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@VremeIzrade", NpgsqlDbType.Integer, tehnoloskiPostupakNew.VremeIzrade);
                 cmd.Parameters.AddWithValue("@SerijaKom", NpgsqlDbType.Integer, tehnoloskiPostupakNew.SerijaKom);
                 cmd.Parameters.AddWithValue("@BrKomada", NpgsqlDbType.Integer, tehnoloskiPostupakNew.BrKomada);
-                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, tehnoloskiPostupakNew.Operacija.IDOperacija);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -121,7 +114,6 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@VremeIzrade", NpgsqlDbType.Integer, tehnoloskiPostupakNew.VremeIzrade);
                 cmd.Parameters.AddWithValue("@SerijaKom", NpgsqlDbType.Integer, tehnoloskiPostupakNew.SerijaKom);
                 cmd.Parameters.AddWithValue("@BrKomada", NpgsqlDbType.Integer, tehnoloskiPostupakNew.BrKomada);
-                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, tehnoloskiPostupakNew.Operacija.IDOperacija);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

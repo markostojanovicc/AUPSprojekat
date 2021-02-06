@@ -12,9 +12,9 @@ DEBUG;TRACE
 C:\Users\niksa\source\repos\AUPSprojekat\AUPS\App.xaml
 24-752902201
 
-861317397321
+891268960285
 1301387179245
 ApplicationMainWindow.xaml;Controls\LogInControl.xaml;Controls\MainContentControl.xaml;Controls\MainContentUserControls\OperacijaControl.xaml;Controls\MainContentUserControls\PredmetRadaControl.xaml;Controls\MainContentUserControls\RadnaListaControl.xaml;Controls\MainContentUserControls\RadnikProizvodnjaControl.xaml;Controls\MainContentUserControls\RadniNalogControl.xaml;Controls\MainContentUserControls\RadnoMestoControl.xaml;Controls\MainContentUserControls\TehnoloskiPostupakControl.xaml;Controls\MainContentUserControls\TrebovanjeControl.xaml;Dialogs\ErrorDialogs\ErrorDialog.xaml;Dialogs\Operacija\CreateOperacijaDialog.xaml;Dialogs\PredmetRada\CreatePredmetRadaDialog.xaml;Dialogs\RadnaLista\CreateRadnaListaDialog.xaml;Dialogs\RadnikProizvodnja\CreateRadnikProizvodnjaDialog.xaml;Dialogs\RadniNalog\CreateRadniNalogDialog.xaml;Dialogs\RadnoMesto\CreateRadnoMestoDialog.xaml;Dialogs\TehnoloskiPostupak\CreateTehnoloskiPostupakDialog.xaml;Dialogs\Trebovanje\CreateTrebovanjeDialog.xaml;RegistrationWindow.xaml;Resources\DataTemplates.xaml;Resources\Images.xaml;Resources\Styles.xaml;
 
-True
+False
 

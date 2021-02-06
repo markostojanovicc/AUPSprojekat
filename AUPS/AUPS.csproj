@@ -174,11 +174,13 @@
     <Compile Include="Models\RadniNalog.cs" />
     <Compile Include="Models\RadnoMesto.cs" />
     <Compile Include="Models\TehnoloskiPostupak.cs" />
+    <Compile Include="Models\TehnPostupakOperacija.cs" />
     <Compile Include="Models\Trebovanje.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="RegistrationWindow.xaml.cs">
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SqlProviders\Interfaces\ITehnPostupakOperacijaSqlProvider.cs" />
     <Compile Include="SqlProviders\Interfaces\IOperacijaSqlProvider.cs" />
     <Compile Include="SqlProviders\Interfaces\IPredmetRadaSqlProvider.cs" />
     <Compile Include="SqlProviders\Interfaces\IRadnaListaSqlProvider.cs" />
@@ -195,6 +197,7 @@
     <Compile Include="SqlProviders\RadniNalogSqlProvider.cs" />
     <Compile Include="SqlProviders\RadnoMestoSqlProvider.cs" />
     <Compile Include="SqlProviders\TehnoloskiPostupakSqlProvider.cs" />
+    <Compile Include="SqlProviders\TehnPostupakOperacijaSqlProvider.cs" />
     <Compile Include="SqlProviders\TrebovanjeSqlProvider.cs" />
     <Compile Include="SqlProviders\UserSqlProvider.cs" />
     <Compile Include="TemplateSelectors\ApplicationMainWindowTemplateSelector.cs" />
