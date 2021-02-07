@@ -12,12 +12,13 @@ namespace AUPS.Dialogs.TehnPostupakOperacija
     {
         public CreateTehnPostupakOperacijaDialog(ITehnPostupakOperacijaSqlProvider tehnPostupakOperacijaSqlProvider,
             ObservableCollection<AUPS.Models.Operacija> operacijaList,
-             ObservableCollection<AUPS.Models.TehnoloskiPostupak> tehnoloskiPostupakList, int maxRBr)
+             ObservableCollection<AUPS.Models.TehnoloskiPostupak> tehnoloskiPostupakList, int maxRBr,
+             AUPS.Models.TehnPostupakOperacija selected)
         {
             InitializeComponent();
 
             DataContext = new CreateTehnPostupakOperacijaDialogViewModel(tehnPostupakOperacijaSqlProvider,
-                operacijaList, tehnoloskiPostupakList, maxRBr);
+                operacijaList, tehnoloskiPostupakList, maxRBr, selected);
         }
     }
 }

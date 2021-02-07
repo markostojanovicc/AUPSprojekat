@@ -6,6 +6,7 @@ using ChatApp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -17,6 +18,7 @@ namespace AUPS.ViewModels.Dialogs
         private bool _isCreateBtnVisible = true;
         private bool _isUpdateBtnVisible = false;
         private int _rbrSelected;
+        private int _idTehnPostupakOperacija;
 
         private ICommand _updateButtonCommand;
         private ICommand _createButtonCommand;
@@ -106,6 +108,7 @@ namespace AUPS.ViewModels.Dialogs
         {
             TehnPostupakOperacija tehnPostupakOperacija = new TehnPostupakOperacija
             {
+                IDTehnPostupakOperacija = _idTehnPostupakOperacija,
                 Operacija = new Operacija { IDOperacija = SelectedOperacija.IDOperacija },
                 TehnoloskiPostupak = new TehnoloskiPostupak { IDTehPostupak = SelectedTehnoloskiPostupak.IDTehPostupak },
                 RBrOperacije = RBrSelected
@@ -122,18 +125,27 @@ namespace AUPS.ViewModels.Dialogs
 
         public CreateTehnPostupakOperacijaDialogViewModel(ITehnPostupakOperacijaSqlProvider tehnPostupakOperacijaSqlProvider,
              ObservableCollection<Operacija> operacijaList,
-             ObservableCollection<TehnoloskiPostupak> tehnoloskiPostupakList, int maxRBr)
+             ObservableCollection<TehnoloskiPostupak> tehnoloskiPostupakList, int maxRBr, TehnPostupakOperacija selected)
         {
             _tehnPostupakOperacijaSqlProvider = tehnPostupakOperacijaSqlProvider;
             OperacijaList = operacijaList;
             TehnoloskiPostupakList = tehnoloskiPostupakList;
+            if (selected != null)
+            {
+                SetViewForUpdateDialog(selected);
+                maxRBr--;
+            } 
             CreateRBrList(maxRBr);
         }
 
-        public void SetViewForUpdateDialog()
+        public void SetViewForUpdateDialog(TehnPostupakOperacija selected)
         {
             IsCreateBtnVisible = false;
             IsUpdateBtnVisible = true;
+            RBrSelected = selected.RBrOperacije;
+            SelectedOperacija = OperacijaList.First(x => x.IDOperacija == selected.Operacija.IDOperacija);
+            SelectedTehnoloskiPostupak = TehnoloskiPostupakList.First(x => x.IDTehPostupak == selected.TehnoloskiPostupak.IDTehPostupak);
+            _idTehnPostupakOperacija = selected.IDTehnPostupakOperacija;
         }
 
         private void CreateRBrList(int maxRb)

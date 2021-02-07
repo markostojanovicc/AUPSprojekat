@@ -99,11 +99,11 @@ namespace AUPS.ViewModels.MainContentViewModels
             }
         }
 
-        public void OpenCreateDialog(ObservableCollection<AUPS.Models.Operacija> operacijaList,
-             ObservableCollection<AUPS.Models.TehnoloskiPostupak> tehnoloskiPostupakList)
+        public void OpenDialog(ObservableCollection<AUPS.Models.Operacija> operacijaList,
+             ObservableCollection<AUPS.Models.TehnoloskiPostupak> tehnoloskiPostupakList, bool isCreate)
         {
             CreateTehnPostupakOperacijaDialog createTehnPostupakOperacijaDialog = new CreateTehnPostupakOperacijaDialog(_tehnPostupakOperacijaSqlProvider,
-                operacijaList, tehnoloskiPostupakList, TpoListFilterd.Count>0 ? TpoListFilterd.Max(x => x.RBrOperacije)+1 : 1);
+                operacijaList, tehnoloskiPostupakList, TpoListFilterd.Count>0 ? TpoListFilterd.Max(x => x.RBrOperacije)+1 : 1, isCreate ? null : ItemSelected);
             CreateTehnPostupakOperacijaDialogViewModel viewmodel = (CreateTehnPostupakOperacijaDialogViewModel) createTehnPostupakOperacijaDialog.DataContext;
             viewmodel.ChangeOperationSucceded += CreateTehnPostupakOperacijaDialogViewModel_ChangeOperationSucceded;
             createTehnPostupakOperacijaDialog.ShowDialog();

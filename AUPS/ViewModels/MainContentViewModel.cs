@@ -254,6 +254,16 @@ namespace AUPS
                     }else
                         ShowNotSelectedErrorDialog(false);
                     break;
+                case 8:
+                    if (tehnPostupakOperacijaViewModel.ItemSelected != null)
+                    {
+                        tehnPostupakOperacijaViewModel.OpenDialog(operacijaViewModel.OperacijaList,
+                        tehnoloskiPostupakViewModel.TehnoloskiPostupakList, false);
+                        break;
+                    }
+                    else
+                        ShowNotSelectedErrorDialog(false);
+                    break;
             }
         }
 
@@ -312,8 +322,8 @@ namespace AUPS
                     createTrebovanjeDialog.ShowDialog();
                     break;
                 case 8:
-                    tehnPostupakOperacijaViewModel.OpenCreateDialog(operacijaViewModel.OperacijaList,
-                        tehnoloskiPostupakViewModel.TehnoloskiPostupakList);
+                    tehnPostupakOperacijaViewModel.OpenDialog(operacijaViewModel.OperacijaList,
+                        tehnoloskiPostupakViewModel.TehnoloskiPostupakList, true);
                     break;
             }
         }
