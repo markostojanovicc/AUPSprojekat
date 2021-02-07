@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AUPS.Models
 {
-    class TehnPostupakOperacija
+    public class TehnPostupakOperacija
     {
         public TehnPostupakOperacija()
         {
@@ -15,10 +15,10 @@ namespace AUPS.Models
 
         public int IDTehnPostupakOperacija { get; set; }
 
-        public int IDTehPostupak { get; set; }
+        public TehnoloskiPostupak TehnoloskiPostupak { get; set; }
 
-        public int IDOperacija { get; set; }
+        public Operacija Operacija { get; set; }
 
-        public int RbrOperacije { get; set; }
+        public int RBrOperacije { get; set; }
     }
 }

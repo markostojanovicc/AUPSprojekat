@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 
 namespace AUPS.SqlProviders.Interfaces
 {
-    interface ITehnPostupakOperacijaSqlProvider
+    public interface ITehnPostupakOperacijaSqlProvider
     {
         ObservableCollection<TehnPostupakOperacija> GetAllFromTehnPostupakOperacija();
+
         bool DeleteFromTehnPostupakOperacijaById(int iDTehnPostupakOperacija);
 
-        bool UpdateTehnPostupakOperacijaById(TehnPostupakOperacija tehnPostupakOperacija);
+        bool UpdateTehnPostupakOperacija(TehnPostupakOperacija tehnPostupakOperacija);
+
+        bool UpdateRBrOperacijaFromTehnPostupakOperacija(TehnPostupakOperacija tehnPostupakOperacija);
 
         bool CreateTehnPostupakOperacijaById(TehnPostupakOperacija tehnPostupakOperacijaNew);
     }

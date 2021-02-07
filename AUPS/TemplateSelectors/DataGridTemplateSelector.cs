@@ -1,9 +1,4 @@
 ﻿using AUPS.ViewModels.MainContentViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,6 +15,7 @@ namespace AUPS.TemplateSelectors
         public DataTemplate RadnoMestoContentDataTemplate { get; set; }
         public DataTemplate TehnoloskiPostupakContentDataTemplate { get; set; }
         public DataTemplate TrebovanjeContentDataTemplate { get; set; }
+        public DataTemplate TehnPostupakOperacijaDataTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -54,6 +50,10 @@ namespace AUPS.TemplateSelectors
             else if (item is TrebovanjeViewModel)
             {
                 return TrebovanjeContentDataTemplate;
+            }
+            else if(item is TehnPostupakOperacijaViewModel)
+            {
+                return TehnPostupakOperacijaDataTemplate;
             }
             return null;
         }

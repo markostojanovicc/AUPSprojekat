@@ -14,7 +14,6 @@
                 <DataGridTextColumn Header="Vreme izrade" Binding="{Binding VremeIzrade}" Width="*" />
                 <DataGridTextColumn Header="Serija(kom)" Binding="{Binding SerijaKom}" Width="*" />
                 <DataGridTextColumn Header="Br. komada" Binding="{Binding BrKomada}" Width="*" />
-                <DataGridTextColumn Header="Naziv operacije" Binding="{Binding Operacija.NazivOperacije}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

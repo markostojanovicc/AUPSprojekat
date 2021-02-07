@@ -27,16 +27,16 @@ namespace AUPS
                                     , IPredmetRadaSqlProvider predmetRadaSqlProvider, IRadnaListaSqlProvider radnaListaSqlProvider
                                     , IRadnikProizvodnjaSqlProvider radnikProizvodnjaSqlProvider, IRadniNalogSqlProvider radniNalogSqlProvider
                                     , ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ITrebovanjeSqlProvider trebovanjeSqlProvider
-                                    , RadnoMestoViewModel radnoMestoViewModel, OperacijaViewModel operacijaViewModel, PredmetRadaViewModel predmetRadaViewModel,
+                                    , ITehnPostupakOperacijaSqlProvider tehnPostupakOperacijaSqlProvider, RadnoMestoViewModel radnoMestoViewModel, OperacijaViewModel operacijaViewModel, PredmetRadaViewModel predmetRadaViewModel,
                                     RadnaListaViewModel radnaListaViewModel, RadnikProizvodnjaViewModel radnikProizvodnjaViewModel, RadniNalogViewModel radniNalogViewModel,
-                                    TehnoloskiPostupakViewModel tehnoloskiPostupakViewModel, TrebovanjeViewModel trebovanjeViewModel)
+                                    TehnoloskiPostupakViewModel tehnoloskiPostupakViewModel, TrebovanjeViewModel trebovanjeViewModel, TehnPostupakOperacijaViewModel tehnPostupakOperacijaViewModel)
         {
             InitializeComponent();
 
             DataContext = new ApplictionMainWindowViewModel(radnoMestoSqlProvider, operacijaSqlProvider, predmetRadaSqlProvider, radnaListaSqlProvider,
-                radnikProizvodnjaSqlProvider, radniNalogSqlProvider, tehnoloskiPostupakSqlProvider, trebovanjeSqlProvider, userSqlProvider,
+                radnikProizvodnjaSqlProvider, radniNalogSqlProvider, tehnoloskiPostupakSqlProvider, trebovanjeSqlProvider, tehnPostupakOperacijaSqlProvider, userSqlProvider,
                 radnoMestoViewModel, operacijaViewModel, predmetRadaViewModel, radnaListaViewModel, radnikProizvodnjaViewModel, radniNalogViewModel
-                , tehnoloskiPostupakViewModel, trebovanjeViewModel);
+                , tehnoloskiPostupakViewModel, trebovanjeViewModel, tehnPostupakOperacijaViewModel);
         }
     }
 }

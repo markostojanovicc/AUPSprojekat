@@ -55,6 +55,7 @@
             <TabItem Header="Radni nalog"/>
             <TabItem Header="Tehnoloski postupak"/>
             <TabItem Header="Trebovanje"/>
+            <TabItem Header="Tehnoloski postupak i operacija"/>
         </TabControl>
         <ContentControl Grid.Row="1" Grid.Column="1"
             VerticalAlignment="Stretch"

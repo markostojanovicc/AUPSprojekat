@@ -48,6 +48,7 @@ namespace AUPS
             container.Bind<ITehnoloskiPostupakSqlProvider>().To<TehnoloskiPostupakSqlProvider>();
             container.Bind<ITrebovanjeSqlProvider>().To<TrebovanjeSqlProvider>();
             container.Bind<IUserSqlProvider>().To<UserSqlProvider>();
+            container.Bind<ITehnPostupakOperacijaSqlProvider>().To<TehnPostupakOperacijaSqlProvider>();
 
         }
     }

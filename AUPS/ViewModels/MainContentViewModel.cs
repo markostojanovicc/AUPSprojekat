@@ -76,6 +76,8 @@ namespace AUPS
         private RadniNalogViewModel radniNalogViewModel;
         private TehnoloskiPostupakViewModel tehnoloskiPostupakViewModel;
         private TrebovanjeViewModel trebovanjeViewModel;
+        private TehnPostupakOperacijaViewModel tehnPostupakOperacijaViewModel;
+        private readonly ITehnPostupakOperacijaSqlProvider tehnPostupakOperacijaSqlProvider;
         #endregion
 
         public MainContentViewModel(IRadnoMestoSqlProvider radnoMestoSqlProvider, IOperacijaSqlProvider operacijaSqlProvider
@@ -84,7 +86,8 @@ namespace AUPS
                                     , ITehnoloskiPostupakSqlProvider tehnoloskiPostupakSqlProvider, ITrebovanjeSqlProvider trebovanjeSqlProvider,
                                     RadnoMestoViewModel radnoMestoViewModel, OperacijaViewModel operacijaViewModel, PredmetRadaViewModel predmetRadaViewModel,
                                     RadnaListaViewModel radnaListaViewModel, RadnikProizvodnjaViewModel radnikProizvodnjaViewModel, RadniNalogViewModel radniNalogViewModel,
-                                    TehnoloskiPostupakViewModel tehnoloskiPostupakViewModel, TrebovanjeViewModel trebovanjeViewModel, User loggedUser)
+                                    TehnoloskiPostupakViewModel tehnoloskiPostupakViewModel, TrebovanjeViewModel trebovanjeViewModel,
+                                    TehnPostupakOperacijaViewModel tehnPostupakOperacijaViewModel, ITehnPostupakOperacijaSqlProvider tehnPostupakOperacijaSqlProvider, User loggedUser)
         {
             _radnoMestoSqlProvider = radnoMestoSqlProvider;
             _operacijaSqlProvider = operacijaSqlProvider;
@@ -102,10 +105,18 @@ namespace AUPS
             this.radniNalogViewModel = radniNalogViewModel;
             this.tehnoloskiPostupakViewModel = tehnoloskiPostupakViewModel;
             this.trebovanjeViewModel = trebovanjeViewModel;
+            this.tehnPostupakOperacijaViewModel = tehnPostupakOperacijaViewModel;
+            this.tehnPostupakOperacijaViewModel.DataShouldBeRefreshed += TehnPostupakOperacijaViewModel_DataShouldBeRefreshed;
+            this.tehnPostupakOperacijaSqlProvider = tehnPostupakOperacijaSqlProvider;
             GetDataFromDb();
             _userName = loggedUser.Ime;
             _userLastName = loggedUser.Prezime;
             SetImage(loggedUser.ImagePath);
+        }
+
+        private void TehnPostupakOperacijaViewModel_DataShouldBeRefreshed(object source, EventArgs args)
+        {
+            RefreshData();
         }
 
         private void SetImage(string imagePath)
@@ -300,6 +311,10 @@ namespace AUPS
                     CreateTrebovanjeDialog createTrebovanjeDialog = new CreateTrebovanjeDialog(_trebovanjeSqlProvider, radniNalogViewModel.RadniNalogList.Select(x => x.IDRadniNalog).ToList(), this);
                     createTrebovanjeDialog.ShowDialog();
                     break;
+                case 8:
+                    tehnPostupakOperacijaViewModel.OpenCreateDialog(operacijaViewModel.OperacijaList,
+                        tehnoloskiPostupakViewModel.TehnoloskiPostupakList);
+                    break;
             }
         }
 
@@ -402,6 +417,10 @@ namespace AUPS
                         }else
                             ShowNotSelectedErrorDialog(true);
                         break;
+                    case 8:
+                        TehnPostupakOperacijaViewModel tpoViewModel = (TehnPostupakOperacijaViewModel)ContentMainScreen;
+                        tpoViewModel.DeleteSelected();
+                        break;
                 }
             }
         }
@@ -458,6 +477,9 @@ namespace AUPS
                         case 7:
                             ContentMainScreen = trebovanjeViewModel;
                             break;
+                        case 8:
+                            ContentMainScreen = tehnPostupakOperacijaViewModel;
+                            break;
                     }
                 }
             }
@@ -473,6 +495,8 @@ namespace AUPS
             radnoMestoViewModel.RadnoMestoList = _radnoMestoSqlProvider.GetAllFromRadnoMesto();
             tehnoloskiPostupakViewModel.TehnoloskiPostupakList = _tehnoloskiPostupakSqlProvider.GetAllFromTehnoloskiPostupak();
             trebovanjeViewModel.TrebovanjeList = _trebovanjeSqlProvider.GetAllFromTrebovanje();
+            tehnPostupakOperacijaViewModel.TehnoloskiPostupakList= tehnoloskiPostupakViewModel.TehnoloskiPostupakList;
+            tehnPostupakOperacijaViewModel.TpoList= tehnPostupakOperacijaSqlProvider.GetAllFromTehnPostupakOperacija();
 
             ContentMainScreen = radnoMestoViewModel;
         }
@@ -494,6 +518,8 @@ namespace AUPS
             radnoMestoViewModel.RadnoMestoList = _radnoMestoSqlProvider.GetAllFromRadnoMesto();
             tehnoloskiPostupakViewModel.TehnoloskiPostupakList = _tehnoloskiPostupakSqlProvider.GetAllFromTehnoloskiPostupak();
             trebovanjeViewModel.TrebovanjeList = _trebovanjeSqlProvider.GetAllFromTrebovanje();
+            tehnPostupakOperacijaViewModel.TehnoloskiPostupakList = tehnoloskiPostupakViewModel.TehnoloskiPostupakList;
+            tehnPostupakOperacijaViewModel.TpoList = tehnPostupakOperacijaSqlProvider.GetAllFromTehnPostupakOperacija();
         }
     }
 }

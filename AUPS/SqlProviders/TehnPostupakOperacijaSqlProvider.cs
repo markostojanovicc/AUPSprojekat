@@ -11,13 +11,18 @@ using System.Threading.Tasks;
 
 namespace AUPS.SqlProviders
 {
-    class TehnPostupakOperacijaSqlProvider : ITehnPostupakOperacijaSqlProvider
+    public class TehnPostupakOperacijaSqlProvider : ITehnPostupakOperacijaSqlProvider
     {
 
         #region Queries
         private const string GET_ALL_RECORDS_FROM_TEHN_POSTUPAK_OPERACIJA =
             @"
-                SELECT * FROM tehnpostupakoperacija
+                SELECT tpo.*, o.nazivoperacije, tp.tiptehpostupak 
+                FROM tehnpostupakoperacija tpo
+                INNER JOIN operacija o
+                ON tpo.idoperacija = o.idoperacija
+                INNER JOIN tehnoloskipostupak tp
+                ON tp.idtehpostupak = tpo.idtehpostupak
             ";
         private const string DELETE_FROM_TEHN_POSTUPAK_OPERACIJA_BY_ID =
             @"
@@ -30,9 +35,15 @@ namespace AUPS.SqlProviders
                 WHERE idtehnpostupakoperacija = @Id
             ";
 
+        private const string UPDATE_RBROPERACIJE_FROM_TEHN_POSTUPAK_OPERACIJA_BY_ID =
+            @"
+                UPDATE tehnpostupakoperacija SET rbroperacije= @RbrOperacije
+                WHERE idtehnpostupakoperacija = @Id
+            ";
+
         private const string CREATE_TEHN_POSTUPAK_OPERACIJA =
             @"
-                INSERT INTO tehnpostupakoperacija VALUES (nextval('tehnpostupakOperacijaSeq'), @TipTehPostupak, @VremeIzrade, @SerijaKom, @BrKomada);
+                INSERT INTO tehnpostupakoperacija VALUES (nextval('tehnpostupakOperacijaSeq'), @IDTehPostupak, @IDOperacija, @RbrOperacije);
             ";
         #endregion
 
@@ -53,9 +64,17 @@ namespace AUPS.SqlProviders
                 {
                     TehnPostupakOperacija tehnPostupakOperacija = new TehnPostupakOperacija();
                     tehnPostupakOperacija.IDTehnPostupakOperacija = rdr.GetInt32(0);
-                    tehnPostupakOperacija.IDTehPostupak = rdr.GetInt32(0);
-                    tehnPostupakOperacija.IDOperacija = rdr.GetInt32(2);
-                    tehnPostupakOperacija.RbrOperacije = rdr.GetInt32(3);
+                    tehnPostupakOperacija.TehnoloskiPostupak = new TehnoloskiPostupak
+                    {
+                        IDTehPostupak = rdr.GetInt32(1),
+                        TipTehPostupak = rdr.GetString(5)
+                    };
+                    tehnPostupakOperacija.Operacija = new Operacija
+                    {
+                        IDOperacija = rdr.GetInt32(2),
+                        NazivOperacije = rdr.GetString(4)
+                    };
+                    tehnPostupakOperacija.RBrOperacije = rdr.GetInt32(3);
                     tehnPostupakOperacijaList.Add(tehnPostupakOperacija);
                 }
             }
@@ -69,11 +88,11 @@ namespace AUPS.SqlProviders
             {
                 sqlConnection.Open();
 
-                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_TEHN_POSTUPAK_OPERACIJA_BY_ID, sqlConnection);
+                NpgsqlCommand cmd = new NpgsqlCommand(CREATE_TEHN_POSTUPAK_OPERACIJA, sqlConnection);
 
-                cmd.Parameters.AddWithValue("@IDTehPostupak", NpgsqlDbType.Integer, tehnPostupakOperacijaNew.IDTehPostupak);
-                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, tehnPostupakOperacijaNew.IDOperacija);
-                cmd.Parameters.AddWithValue("@RbrOperacije", NpgsqlDbType.Integer, tehnPostupakOperacijaNew.RbrOperacije);
+                cmd.Parameters.AddWithValue("@IDTehPostupak", NpgsqlDbType.Integer, tehnPostupakOperacijaNew.TehnoloskiPostupak.IDTehPostupak);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, tehnPostupakOperacijaNew.Operacija.IDOperacija);
+                cmd.Parameters.AddWithValue("@RbrOperacije", NpgsqlDbType.Integer, tehnPostupakOperacijaNew.RBrOperacije);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -81,7 +100,7 @@ namespace AUPS.SqlProviders
             }
         }
 
-        public bool UpdateTehnPostupakOperacijaById(TehnPostupakOperacija tehnPostupakOperacija)
+        public bool UpdateTehnPostupakOperacija(TehnPostupakOperacija tehnPostupakOperacija)
         {
             using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
             {
@@ -90,9 +109,26 @@ namespace AUPS.SqlProviders
                 NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_TEHN_POSTUPAK_OPERACIJA_BY_ID, sqlConnection);
 
                 cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, tehnPostupakOperacija.IDTehnPostupakOperacija);
-                cmd.Parameters.AddWithValue("@IDTehPostupak", NpgsqlDbType.Integer, tehnPostupakOperacija.IDTehPostupak);
-                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, tehnPostupakOperacija.IDOperacija);
-                cmd.Parameters.AddWithValue("@RbrOperacije", NpgsqlDbType.Integer, tehnPostupakOperacija.RbrOperacije);
+                cmd.Parameters.AddWithValue("@IDOperacija", NpgsqlDbType.Integer, tehnPostupakOperacija.Operacija.IDOperacija);
+                cmd.Parameters.AddWithValue("@RBrOperacije", NpgsqlDbType.Integer, tehnPostupakOperacija.RBrOperacije);
+                cmd.Parameters.AddWithValue("@IDTehPostupak", NpgsqlDbType.Integer, tehnPostupakOperacija.TehnoloskiPostupak.IDTehPostupak);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                return rowsAffected == 1;
+            }
+        }
+
+        public bool UpdateRBrOperacijaFromTehnPostupakOperacija(TehnPostupakOperacija tehnPostupakOperacija)
+        {
+            using (NpgsqlConnection sqlConnection = ConnectionCreator.createConnection())
+            {
+                sqlConnection.Open();
+
+                NpgsqlCommand cmd = new NpgsqlCommand(UPDATE_RBROPERACIJE_FROM_TEHN_POSTUPAK_OPERACIJA_BY_ID, sqlConnection);
+
+                cmd.Parameters.AddWithValue("@Id", NpgsqlDbType.Integer, tehnPostupakOperacija.IDTehnPostupakOperacija);
+                cmd.Parameters.AddWithValue("@RBrOperacije", NpgsqlDbType.Integer, tehnPostupakOperacija.RBrOperacije);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

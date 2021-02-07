@@ -28,15 +28,8 @@ namespace AUPS.ViewModels.Dialogs
         private int _idOperacije;
         private int _idTehnoloskogPostupka;
         private ObservableCollection<Operacija> _operacijaList;
-        private int _selectedIndexOperacija;
         private ICommand _updateButtonCommand;
         private ICommand _createButtonCommand;
-
-        public int SelectedIndexOperacija
-        {
-            get { return _selectedIndexOperacija; }
-            set { _selectedIndexOperacija = value; }
-        }
 
         public List<string> NaziviOperacija
         {
@@ -53,13 +46,6 @@ namespace AUPS.ViewModels.Dialogs
         {
             get { return _idTehnoloskogPostupka; }
             set { _idTehnoloskogPostupka = value; }
-        }
-
-
-        public int IdOperacije
-        {
-            get { return _idOperacije; }
-            set { _idOperacije = value; }
         }
 
 
@@ -116,7 +102,6 @@ namespace AUPS.ViewModels.Dialogs
         {
             _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
             OperacijaList = operacijaList;
-            _selectedIndexOperacija = 0;
             this.mainContentViewModel = mainContentViewModel;
         }
 
@@ -129,10 +114,8 @@ namespace AUPS.ViewModels.Dialogs
             VremeIzrade = tehnoloskiPostupak.VremeIzrade.ToString();
             SerijaKom = tehnoloskiPostupak.SerijaKom.ToString();
             BrKom = tehnoloskiPostupak.BrKomada.ToString();
-            IdOperacije = tehnoloskiPostupak.Operacija.IDOperacija;
             OperacijaList = operacijaList;
             this.mainContentViewModel = mainContentViewModel;
-            _selectedIndexOperacija = operacijaList.IndexOf(operacijaList.First(x => x.IDOperacija == tehnoloskiPostupak.Operacija.IDOperacija));
         }
 
         public bool CanExecuteBtnCommand
@@ -180,8 +163,7 @@ namespace AUPS.ViewModels.Dialogs
                 SerijaKom = Int32.Parse(_serijaKom),
                 BrKomada = Int32.Parse(_brKom),
                 TipTehPostupak = _tipTehnoloskogPostupka,
-                VremeIzrade = Int32.Parse(_vremeIzrade),
-                Operacija = OperacijaList[SelectedIndexOperacija]
+                VremeIzrade = Int32.Parse(_vremeIzrade)
             };
             bool isUpdated = _tehnoloskiPostupakSqlProvider.UpdateTehnoloskiPostupakById(tehnoloskiPostupak);
             if (isUpdated)
@@ -207,8 +189,7 @@ namespace AUPS.ViewModels.Dialogs
                 SerijaKom = Int32.Parse(_serijaKom),
                 BrKomada = Int32.Parse(_brKom),
                 TipTehPostupak = _tipTehnoloskogPostupka,
-                VremeIzrade = Int32.Parse(_vremeIzrade),
-                Operacija = OperacijaList[SelectedIndexOperacija]
+                VremeIzrade = Int32.Parse(_vremeIzrade)
             };
             bool isCreated = _tehnoloskiPostupakSqlProvider.CreateTehnoloskiPostupakById(tehnoloskiPostupak);
             if (isCreated)

@@ -88,7 +88,7 @@ namespace AUPS.SqlProviders
                 cmd.Parameters.AddWithValue("@Ime", NpgsqlDbType.Varchar, user.Ime);
                 cmd.Parameters.AddWithValue("@Prezime", NpgsqlDbType.Varchar, user.Prezime);
                 cmd.Parameters.AddWithValue("@Username", NpgsqlDbType.Varchar, user.Username);
-                cmd.Parameters.AddWithValue("@ImagePath", NpgsqlDbType.Varchar, user.ImagePath);
+                cmd.Parameters.AddWithValue("@ImagePath", NpgsqlDbType.Varchar, user.ImagePath ?? " ");
 
                 int insertedRows = cmd.ExecuteNonQuery();
 
