@@ -6,9 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WPFLocalizeExtension.Engine;
 
 namespace AUPS
 {
@@ -18,6 +20,12 @@ namespace AUPS
     public partial class App : Application
     {
         private IKernel container;
+
+        public App()
+        {
+            LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+            LocalizeDictionary.Instance.Culture = new CultureInfo("fr-FR");
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -49,6 +57,7 @@ namespace AUPS
             container.Bind<ITrebovanjeSqlProvider>().To<TrebovanjeSqlProvider>();
             container.Bind<IUserSqlProvider>().To<UserSqlProvider>();
             container.Bind<ITehnPostupakOperacijaSqlProvider>().To<TehnPostupakOperacijaSqlProvider>();
+
 
         }
     }
