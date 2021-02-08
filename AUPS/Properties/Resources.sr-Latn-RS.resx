@@ -118,10 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Email_unos" xml:space="preserve">
-    <value />
+    <value>Unesite Vas email...</value>
   </data>
   <data name="Kreiranje_novog_naloga" xml:space="preserve">
-    <value>Kreiranje novog naloga</value>
+    <value>Novi korisnik? Kreiraj novi nalog.</value>
+  </data>
+  <data name="Lozinka_unos" xml:space="preserve">
+    <value>Unesite lozinku...</value>
   </data>
   <data name="Uloguj_se" xml:space="preserve">
     <value>Uloguj se</value>

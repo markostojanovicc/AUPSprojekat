@@ -5,34 +5,42 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AUPS.Controls"
              xmlns:helpers="clr-namespace:AUPS.Helpers"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+            lex:LocalizeDictionary.DesignCulture="en"
+            lex:LocalizeDictionary.OutputMissingKeys="True"
+            lex:ResxLocalizationProvider.DefaultAssembly="AUPS"
+            lex:ResxLocalizationProvider.DefaultDictionary="Resources"  
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="354" Margin="22,16,17,9" Width="478">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="85*"/>
-            <RowDefinition Height="57*"/>
-            <RowDefinition Height="71*"/>
-            <RowDefinition Height="71*"/>
-            <RowDefinition Height="70*"/>
+            <RowDefinition Height="85"/>
+            <RowDefinition Height="57"/>
+            <RowDefinition Height="71"/>
+            <RowDefinition Height="71"/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Text="Ulogujte se u sistem" VerticalAlignment="Top" Height="85" Width="226" FontSize="34" FontWeight="Bold" RenderTransformOrigin="0.744,0.343" Margin="126,0"/>
-        <Button Grid.Row="1" Content="Novi korisnik? Napravite nalog" HorizontalAlignment="Center" VerticalAlignment="Top" Width="182" Height="27" Background="Transparent" BorderBrush="White" Cursor="Hand" Command="{Binding RegistrationButtonCommand}" Margin="148,19,148,0"/>
+        <ComboBox Width="Auto" Height="30" HorizontalAlignment="Left" Grid.Row="0" ItemsSource="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=MergedAvailableCultures}"
+        SelectedItem="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=Culture}" DisplayMemberPath="NativeName" />
+
+        <TextBlock Grid.Row="0" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Text="{lex:Loc Uloguj_se}" VerticalAlignment="Top" Height="85" Width="226" FontSize="34" FontWeight="Bold" RenderTransformOrigin="0.744,0.343" Margin="126,0"/>
+        <Button Grid.Row="1" Content="{lex:Loc Kreiranje_novog_naloga}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="182" Height="27" Background="Transparent" BorderBrush="White" Cursor="Hand" Command="{Binding RegistrationButtonCommand}" Margin="148,19,148,0"/>
 
         <Grid Grid.Row="2" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" Height="40" Margin="20,16,20,15">
-            <TextBlock Height="40" Margin="5,2" Text="Unesite vaš email..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
+            <TextBlock Height="40" Margin="5,2" Text="{lex:Loc Email_unos}" FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ElementName=txtUserEntry, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <TextBox Height="40" Name="txtUserEntry" Background="Transparent" FontSize="25" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Grid Grid.Row="3" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" Height="40" Margin="20,15,20,16">
-            <TextBlock Height="40" Margin="5,2" Text="Unesite vašu lozinku..." FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
+            <TextBlock Height="40" Margin="5,2" Text="{lex:Loc Lozinka_unos}" FontSize="25" Foreground="{StaticResource brushWatermarkForeground}"
                        Visibility="{Binding ShowPasswordTextBlock, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <PasswordBox Height="40" x:Name="txtPasswordBox" helpers:PasswordBoxHelper.BindPassword="true" Background="Transparent"  FontSize="25" helpers:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <!--<controls:BindablePasswordBox Height="30" x:Name="txtUserEntry1" Background="Transparent" FontSize="25" Password="{Binding Password}"/>-->
         </Grid>
 
-        <Button IsEnabled="{Binding CanLogIn}" Style="{StaticResource changeBackgroundStyle}" Grid.Row="4" Content="Uloguj se" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="38" Command="{Binding LogInButtonCommand}" Margin="89,16"/>
+        <Button IsEnabled="{Binding CanLogIn}" Style="{StaticResource changeBackgroundStyle}" Grid.Row="4" Content="{lex:Loc Uloguj_se}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="38" Command="{Binding LogInButtonCommand}" Margin="89,16"/>
 
     </Grid>
 </UserControl>
