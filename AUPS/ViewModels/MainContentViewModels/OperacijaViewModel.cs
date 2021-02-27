@@ -40,6 +40,10 @@ namespace AUPS.ViewModels.MainContentViewModels
             OperacijaCollectionView = CollectionViewSource.GetDefaultView(OperacijaList);
 
             OperacijaCollectionView.Filter = FilterOperacija;
+
+            OperacijaCollectionView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(Operacija.OsnovnoVreme)));
+
+            OperacijaCollectionView.SortDescriptions.Add(new SortDescription(nameof(Operacija.IDOperacija), ListSortDirection.Descending));
         }
 
         private string _filter = string.Empty;
@@ -50,7 +54,7 @@ namespace AUPS.ViewModels.MainContentViewModels
             set 
             { 
                 _filter = value;
-                SetView();
+                OperacijaCollectionView.Refresh();
             }
         }
 
@@ -66,7 +70,7 @@ namespace AUPS.ViewModels.MainContentViewModels
         {
             if(obj is Operacija operacija)
             {
-                return operacija.NazivOperacije.Contains(Filter);
+                return operacija.NazivOperacije.ToLower().Contains(Filter.ToLower());
             }
             return false;
         }
