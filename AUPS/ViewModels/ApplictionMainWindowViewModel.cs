@@ -4,12 +4,9 @@ using AUPS.SqlProviders.Interfaces;
 using AUPS.ViewModels.MainContentViewModels;
 using ChatApp;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
+using System.Windows.Forms;
 
 namespace AUPS.ViewModels
 {
@@ -78,6 +75,8 @@ namespace AUPS.ViewModels
             _tehnoloskiPostupakSqlProvider = tehnoloskiPostupakSqlProvider;
             _trebovanjeSqlProvider = trebovanjeSqlProvider;
             this.tehnPostupakOperacijaSqlProvider = tehnPostupakOperacijaSqlProvider;
+                     
+            
         }
 
         public void Init()

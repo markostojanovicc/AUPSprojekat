@@ -10,7 +10,9 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using WPFLocalizeExtension.Engine;
+using Application = System.Windows.Application;
 
 namespace AUPS
 {
@@ -40,7 +42,23 @@ namespace AUPS
             Current.MainWindow = this.container.Get<ApplicationMainWindow>();
             Current.MainWindow.ResizeMode = ResizeMode.NoResize;
             (Current.MainWindow.DataContext as ApplictionMainWindowViewModel).Init();
+
+            Screen notPrimaryScreen = Screen.AllScreens.Where(x => !x.Primary).FirstOrDefault();
+            if (notPrimaryScreen != null)
+            {
+                SecondaryWindow secondaryWindow = new SecondaryWindow();
+                secondaryWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                secondaryWindow.WindowState = WindowState.Normal;
+                secondaryWindow.Left = notPrimaryScreen.WorkingArea.Left;
+                secondaryWindow.Top = notPrimaryScreen.WorkingArea.Top;
+                secondaryWindow.Width = notPrimaryScreen.WorkingArea.Width;
+                secondaryWindow.Height = notPrimaryScreen.WorkingArea.Height;
+                secondaryWindow.Show();
+                secondaryWindow.WindowState = WindowState.Maximized;
+            }
+
             Current.MainWindow.Show();
+            
         }
 
         private void ConfigureContainer()
