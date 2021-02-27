@@ -1,5 +1,6 @@
 drop table if exists operacija cascade;
 drop table if exists tehnoloskipostupak cascade;
+drop table if exists tehnpostupakoperacija cascade;
 drop table if exists predmetrada cascade;
 drop table if exists radninalog cascade;
 drop table if exists trebovanje cascade;
@@ -22,9 +23,16 @@ IDTehPostupak int PRIMARY KEY NOT NULL,
 TipTehPostupak varchar(50) NOT NULL,
 VremeIzrade numeric NOT NULL,
 SerijaKom numeric,
-BrKomada numeric NOT NULL,
+BrKomada numeric NOT NULL
+);
+
+CREATE TABLE tehnpostupakoperacija (
+IDtehnpostupakoperacija int PRIMARY KEY NOT NULL,
+IDTehPostupak int,
 IDOperacija int,
-CONSTRAINT fk_tehpostupak_operacija FOREIGN KEY (IDOperacija) REFERENCES operacija (idoperacija) ON DELETE CASCADE ON UPDATE CASCADE
+RbrOperacije int,
+CONSTRAINT fk_tpo_operacija FOREIGN KEY (IDOperacija) REFERENCES operacija (idoperacija) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_tpo_tehpostupak FOREIGN KEY (IDTehPostupak) REFERENCES tehnoloskipostupak (IDTehPostupak) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE predmetrada (
@@ -87,5 +95,5 @@ Prezime varchar(50) NOT NULL,
 Password varchar(50) NOT NULL,
 Username varchar (50) NOT NULL,
 Email varchar (50) NOT NULL,
-ImagePath varchar (50)
+ImagePath varchar (80)
 );
